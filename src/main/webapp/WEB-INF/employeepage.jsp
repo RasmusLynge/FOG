@@ -1,6 +1,6 @@
 <%-- 
-    Document   : saleslogin
-    Created on : 11-11-2018, 13:43:07
+    Document   : employeepage
+    Created on : 12-11-2018, 11:55:37
     Author     : Rasmu
 --%>
 
@@ -70,27 +70,9 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Medarbejder Login</h2>
-                <p>Indtast email og adgangskode</p>
-                <form name="login" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="login">
-                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Adresse"required>
-                    <br>
-                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Adgangskode"required>
-                    <br>
-                    <!--            <div class="forgot">
-                                        <a href="#">Forgot password?</a>
-                                    </div> -->
-                    <input type="submit" class="btn btn-primary" value="Log Ind">
-                </form>
+                <h2>Du er nu logget ind</h2>
+                <p>Lorem ipsum bla bla bla...</p>
             </div>
-
-            <% String error = (String) request.getAttribute("error");
-                if (error != null) {
-                    out.println("<h2>Error!!</h2>");
-                    out.println(error);
-                }
-            %>
 
 
             <nav class="navbar bottom navbar-dark bg-dark">
@@ -106,3 +88,4 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
+
