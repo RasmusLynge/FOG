@@ -10,5 +10,10 @@ package FunctionLayer;
  * @author Mathias
  */
 public class Calculator {
-    //add later
+
+    private static final int MINLENGTH = 240;
+    private static final int MINWIDTH = 240;
+    private static final int MAXLENGTH = 780;
+    private static final int MAXWIDTH = 750;
+    
 }
