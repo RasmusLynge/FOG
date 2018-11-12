@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10-11-2018, 11:00:25
+    Author     : Rasmus
+*/
+
+.navbar {
+    background-color:  #0C1F6B !important;
+}
+.navbar-brand {
+    color: #ffffff !important;
+}
+.collapse,
+.bg-primary,
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color:#0C1F6B;
+    border-color: #0C1F6B;
+}
+
+.card-link {
+    color: #004687;
+}
