@@ -30,7 +30,9 @@ public class CarportCalculator {
     private static final int SCREWSPERCOVER = 4; // the total amount of screw each cover
     private static final int BOTHSIDES = 2; // for each side of the carport
     private static final int TOTALCOVERS = 4; // the total amount of covers needed for the carport
-
+    private static final int BEAMS = 2; // total amount of beams in the scrukture
+    private static final int POSTSLENGTH = 300; // posts length
+    
     public HashMap<String, Integer> calculateAll(int length, int width) {
         HashMap<String, Integer> totalMap = new HashMap<>();
         HashMap<String, Integer> mapPosts = calculatePosts(length, width);
@@ -58,7 +60,7 @@ public class CarportCalculator {
         int lengthPosts = calcLengthPosts(restLength);
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts + widthPosts;
-
+        map.put("postsLength", POSTSLENGTH);
         map.put("totalPosts", totalPosts);
         return map;
 
@@ -68,6 +70,7 @@ public class CarportCalculator {
         HashMap<String, Integer> map = new HashMap<>();
         int toalBeamLength = length + ENTRANCEHANGOUT + ROOFHANGOUT;
         map.put("beamLength", toalBeamLength);
+        map.put("totalBeams", BEAMS);
         return map;
     }
 
