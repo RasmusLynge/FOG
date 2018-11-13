@@ -77,46 +77,50 @@
                     Ved bestilling medfølger standardbyggevejledning.</p>
 
                 <h6>Carport Bredde</h6>
-                <div class="form-group">
-                    <select class="form-control">
-                        <option class="hidden"  selected disabled>Vælg bredde</option>
-                        <option>240 cm</option>
-                        <option>270 cm</option>
-                        <option>300 cm</option>
-                    </select>
-                </div>
+                <form name="order" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="order">
+                    
+                    <div class="form-group" >
+                        <select class="form-control" name="width" >
+                            <option class="hidden"  selected disabled>Vælg bredde</option>
+                            <option>240 cm</option>
+                            <option>270 cm</option>
+                            <option>300 cm</option>
+                        </select>
+                    </div>
 
-                <h6>Carport Længde</h6>
-                <div class="form-group">
-                    <select class="form-control">
-                        <option class="hidden"  selected disabled>Vælg længde</option>
-                        <option>240 cm</option>
-                        <option>270 cm</option>
-                        <option>300 cm</option>
-                    </select>
-                </div>
+                    <h6>Carport Længde</h6>
+                    <div class="form-group">
+                        <select class="form-control" name="length" >
+                            <option class="hidden"  selected disabled>Vælg længde</option>
+                            <option>240 cm</option>
+                            <option>270 cm</option>
+                            <option>300 cm</option>
+                        </select>
+                    </div>
 
-                <br>
-                <h6>Kontakt information</h6>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Navn *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Postnummer og by *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Telefon nummer *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Evt. bemærkninger" value="" />
-                </div>
+                    <br>
+                    <h6>Kontakt information</h6>
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Navn *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Email *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="city" class="form-control" placeholder="Postnummer *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" maxlength="10" minlength="8" class="form-control" placeholder="Telefon nummer *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="evt" class="form-control" placeholder="Evt. bemærkninger" value=""  
+                    </div>
 
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Send forespørgsel</a>
-                </p>
+                    <p class="lead">
+                        <input type="submit" class="btn btn-primary" value="Send forespørgsel">
+                    </p>
+                </form>
             </div>
 
 

@@ -10,13 +10,13 @@ abstract class Command {
     private static HashMap<String, Command> commands;
 
     private static void initCommands() {
-        commands = new HashMap<>(); 
+        commands = new HashMap<>();
         commands.put("login", new Login());
         commands.put("register", new Register());
         commands.put("orderpage", new OrderPage());
         commands.put("employeelogin", new EmployeeLoginPage());
+        commands.put("order", new CreateOrder());
 
-        
     }
 
     static Command from(HttpServletRequest request) {
@@ -29,6 +29,5 @@ abstract class Command {
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
             throws GeneralException;
-
 
 }
