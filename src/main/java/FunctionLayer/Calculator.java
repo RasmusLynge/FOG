@@ -24,8 +24,7 @@ public class Calculator {
     private static final int ENTRANCEHANGOUT = 80; // the hang out at the entrance
     private static final int RAFTERSPACING = 60; // spacing between the middle of each rafter in cm. 
     private static final int COVERWIDTH = 2; // the covers around the rafters
-    private static final int TOTALBEAMS = 2; // total beams in the strukture
-    
+            
     public HashMap<String, Integer> calculateAll(int length, int width) {
         HashMap<String, Integer> totalMap = new HashMap<>();
         HashMap<String, Integer> mapPosts = calculatePosts(length, width);
@@ -37,20 +36,18 @@ public class Calculator {
         totalMap.putAll(mapBeams);
         totalMap.putAll(mapRafters);
         totalMap.putAll(mapPosts);
-        int hinges = hingesLFormed(totalMap.get("totalRafters"), TOTALBEAMS, totalMap.get("totalPosts"));
         return totalMap;
     }
-
-    public HashMap<String, Integer> sideCovers(int length, int width) {
+    public HashMap<String, Integer> sideCovers(int length, int width){
         HashMap<String, Integer> map = new HashMap<>();
         int sideCoverLength = length + ENTRANCEHANGOUT + ROOFHANGOUT;
         int sideCoverWidth = width + ROOFHANGOUT + COVERWIDTH * 2;
-
+        
         map.put("sideCoversWidth", sideCoverWidth);
         map.put("sideCoverLength", sideCoverLength);
         return map;
     }
-
+    
     public HashMap<String, Integer> calculatePosts(int length, int width) {
         HashMap<String, Integer> map = new HashMap<>();
         int restLength = length - TWOPOSTLENGTH;
@@ -59,14 +56,10 @@ public class Calculator {
         int widthPosts = calcWidthPosts(restWidth);
         int lengthPosts = calcLengthPosts(restLength);
         int totalPosts = MINPOSTS + 2 * lengthPosts + widthPosts;
-        
+
         map.put("totalPosts", totalPosts);
         return map;
 
-    }
-
-    public int hingesLFormed(int rafters, int beams, int posts) {
-        
     }
 
     public HashMap<String, Integer> beamLengthCalculator(int length) {
@@ -81,11 +74,12 @@ public class Calculator {
         int roofLength = length + ROOFHANGOUT + ENTRANCEHANGOUT;
         int rafterLength = width + ROOFHANGOUT;
 
-        int totalRafters = roofLength / RAFTERSPACING;
-        int newRafterSpacing = roofLength / totalRafters;
+        int rafterAmount = roofLength / RAFTERSPACING;
+        int newRafterSpacing = roofLength / rafterAmount;
 
+        
         map.put("rafterLength", rafterLength);
-        map.put("totalRafters", totalRafters);
+        map.put("rafterAmount", rafterAmount);
         map.put("newRafterSpacing", newRafterSpacing);
         return map;
     }
