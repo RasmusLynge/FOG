@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Mathias
  */
-public class Calculator {
+public class CarportCalculator {
 
 //    private static final int MINLENGTH = 240;
 //    private static final int MINWIDTH = 240;
@@ -20,12 +20,12 @@ public class Calculator {
     private static final int NEWPOSTLENGTH = 200; //how many centimeters to make a new post necessary
     private static final int TWOPOSTLENGTH = 200; //subtracted from side length because corner posts are shared
     private static final int MINPOSTS = 4; // minimum amounts of posts in a carport
-    private static final int ROOFHANGOUT = 40; // amount of centimeters the roof "hangs" out over the width and length of the carport.
-    private static final int ENTRANCEHANGOUT = 80; // the hang out at the entrance
+    private static final int ROOFHANGOUT = 70; // amount of centimeters the roof "hangs" out over the width and length of the carport.
+    private static final int ENTRANCEHANGOUT = 50; // the hang out at the entrance
     private static final int RAFTERSPACING = 60; // spacing between the middle of each rafter in cm. 
     private static final int COVERWIDTH = 2; // the covers around the rafters
     private static final int HINGESPERPOST = 2; // the total amount of hinges each posts
-    private static final int HINGESPRRAFTER = 2; // the total amount of hinges for each rafter
+    private static final int HINGESPRRAFTER = 4; // the total amount of hinges for each rafter
     private static final int SCREWSPERLHINGES = 4; // thetotal amount of screws each L formed hinge
     private static final int SCREWSPERCOVER = 4; // the total amount of screw each cover
     private static final int BOTHSIDES = 2; // for each side of the carport
@@ -49,28 +49,6 @@ public class Calculator {
         return totalMap;
     }
 
-    private int totalLHinges(int rafters, int posts) {
-        int totalLHinges = rafters * HINGESPRRAFTER;
-        totalLHinges += posts * HINGESPERPOST;
-        return totalLHinges;
-    }
-
-    private int totalScrews(int hinges) {
-        int totalScrews = hinges * SCREWSPERLHINGES;
-        totalScrews += TOTALCOVERS * SCREWSPERCOVER;
-        return totalScrews;
-    }
-
-    public HashMap<String, Integer> sideCovers(int length, int width) {
-        HashMap<String, Integer> map = new HashMap<>();
-        int sideCoverLength = length + ENTRANCEHANGOUT + ROOFHANGOUT;
-        int sideCoverWidth = width + ROOFHANGOUT + COVERWIDTH * BOTHSIDES;
-
-        map.put("sideCoversWidth", sideCoverWidth);
-        map.put("sideCoverLength", sideCoverLength);
-        return map;
-    }
-
     public HashMap<String, Integer> calculatePosts(int length, int width) {
         HashMap<String, Integer> map = new HashMap<>();
         int restLength = length - TWOPOSTLENGTH;
@@ -78,6 +56,7 @@ public class Calculator {
 
         int widthPosts = calcWidthPosts(restWidth);
         int lengthPosts = calcLengthPosts(restLength);
+        //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts + widthPosts;
 
         map.put("totalPosts", totalPosts);
@@ -106,6 +85,16 @@ public class Calculator {
         return map;
     }
 
+    public HashMap<String, Integer> sideCovers(int length, int width) {
+        HashMap<String, Integer> map = new HashMap<>();
+        int sideCoverLength = length + ENTRANCEHANGOUT + ROOFHANGOUT;
+        int sideCoverWidth = width + ROOFHANGOUT + COVERWIDTH * BOTHSIDES;
+
+        map.put("sideCoversWidth", sideCoverWidth);
+        map.put("sideCoverLength", sideCoverLength);
+        return map;
+    }
+
     private int calcWidthPosts(int restWidth) {
         int amount = restWidth / NEWPOSTLENGTH;
         return amount;
@@ -116,6 +105,18 @@ public class Calculator {
         int amount = restLength / NEWPOSTLENGTH;
         return amount;
 
+    }
+
+    private int totalLHinges(int rafters, int posts) {
+        int totalLHinges = rafters * HINGESPRRAFTER;
+        totalLHinges += posts * HINGESPERPOST;
+        return totalLHinges;
+    }
+
+    private int totalScrews(int hinges) {
+        int totalScrews = hinges * SCREWSPERLHINGES;
+        totalScrews += TOTALCOVERS * SCREWSPERCOVER;
+        return totalScrews;
     }
 
 }
