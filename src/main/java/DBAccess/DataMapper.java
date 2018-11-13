@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 /**
  * The purpose of UserMapper is to...
@@ -55,5 +56,23 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
+        public static HashMap<String,Double> getPrices() throws GeneralException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "select `name`, `price` from Material";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            HashMap<String,Double> map = new HashMap<>();
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                double price = rs.getDouble("Price");
+                map.put(name, price);
+            } 
+            return map;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+    }
+
 
 }

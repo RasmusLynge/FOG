@@ -21,10 +21,11 @@ public class Connector {
         singleton = con;
     }
 
-    public static Connection connection() throws ClassNotFoundException, SQLException {
+    public static synchronized Connection connection() throws ClassNotFoundException, SQLException {
         if ( singleton == null ) {
             Class.forName( "com.mysql.cj.jdbc.Driver" );
             singleton = DriverManager.getConnection( URL, USERNAME, PASSWORD );
+            
         }
         return singleton;
     }
