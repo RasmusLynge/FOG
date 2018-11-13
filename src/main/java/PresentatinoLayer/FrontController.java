@@ -38,7 +38,7 @@ public class FrontController extends HttpServlet {
         } catch ( GeneralException ex ) {
             request.setAttribute( "error", ex.getMessage() );
             ex.printStackTrace();
-            request.getRequestDispatcher( "employeelogin.jsp" ).forward( request, response );
+            request.getRequestDispatcher( "/WEB-INF/employeelogin.jsp" ).forward( request, response );
         }
     }
 

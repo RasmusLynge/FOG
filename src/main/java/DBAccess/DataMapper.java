@@ -18,7 +18,7 @@ public class DataMapper {
     public static void createUser(User user) throws GeneralException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());
@@ -36,15 +36,15 @@ public class DataMapper {
     public static User login(String email, String password) throws GeneralException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT id, role FROM user "
-                    + "WHERE email=? AND password=?";
+            String SQL = "SELECT User_Id, Role FROM User_Login "
+                    + "WHERE Email=? AND Password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                String role = rs.getString("role");
-                String id = rs.getString("id");
+                String role = rs.getString("Role");
+                String id = rs.getString("User_Id");
                 User user = new User(email, password, role);
                 user.setId(id);
                 return user;
