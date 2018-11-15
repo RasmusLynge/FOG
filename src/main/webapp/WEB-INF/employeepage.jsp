@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : employeepage
     Created on : 12-11-2018, 11:55:37
     Author     : Rasmu
@@ -71,7 +71,10 @@
 
             <div class="jumbotron">
                 <h2>Du er nu logget ind</h2>
-                <p>Lorem ipsum bla bla bla...</p>
+                <form action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="listorders">
+                    <input type="submit" value="Se alle ordrer">
+                </form>
             </div>
 
 

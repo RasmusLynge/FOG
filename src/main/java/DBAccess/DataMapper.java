@@ -1,12 +1,14 @@
 package DBAccess;
 
 import FunctionLayer.GeneralException;
+import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -74,21 +76,23 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
-
-    public static HashMap<String, Double> createOrder() throws GeneralException {
-        try {
+    
+    public static ArrayList<Order> getAllOrders() throws GeneralException {
+        ArrayList<Order> ol = new ArrayList<>();
+         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getRole());
-            ps.executeUpdate();
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            String id = ids.getString(1);
-            user.setId(id);
-        } catch (SQLException | ClassNotFoundException ex) {
+            String SQL = "SELECT * FROM `Order` "
+                       + "INNER JOIN `User_Info` "
+                       + "ON `Order`.Id_Order = User_Info.fk_Order_Id;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), rs.getString("evt"));
+                order.setId(String.valueOf(rs.getInt("Id_Order")));
+                ol.add(order);
+            }
+            return ol;
+        } catch ( ClassNotFoundException | SQLException ex ) {
             throw new GeneralException(ex.getMessage());
         }
     }

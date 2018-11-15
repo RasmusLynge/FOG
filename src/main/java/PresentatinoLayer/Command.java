@@ -16,6 +16,8 @@ abstract class Command {
         commands.put("orderpage", new OrderPage());
         commands.put("employeelogin", new EmployeeLoginPage());
         commands.put("order", new CreateOrder());
+        commands.put("listorders", new GetOrders());
+        commands.put("showOrderDetails", new GetOrderDetails());
 
     }
 
