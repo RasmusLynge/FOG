@@ -9,12 +9,6 @@ public class PriceCalculator {
     CarportCalculator carportcalculator = new CarportCalculator();
     final private static int CMTOMETER = 100;
             
-    public static void main(String[] args) throws GeneralException {
-        PriceCalculator p = new PriceCalculator();
-        double d = p.priceCalculator(250, 250);
-        System.out.println(d);
-    }
-
     public double priceCalculator(int length, int width) throws GeneralException {
         HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(length, width);
         HashMap<String, Double> mapPrice = db.getPrices();
