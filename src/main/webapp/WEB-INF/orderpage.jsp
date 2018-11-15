@@ -35,7 +35,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#" style="padding:0px;">
+                <a class="navbar-brand" href="/index.html" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 

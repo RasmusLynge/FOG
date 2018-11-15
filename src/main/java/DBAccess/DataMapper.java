@@ -56,23 +56,41 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
-        public static HashMap<String,Double> getPrices() throws GeneralException {
+
+    public static HashMap<String, Double> getPrices() throws GeneralException {
         try {
             Connection con = Connector.connection();
             String SQL = "select `name`, `price` from Material";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-            HashMap<String,Double> map = new HashMap<>();
+            HashMap<String, Double> map = new HashMap<>();
             while (rs.next()) {
                 String name = rs.getString("Name");
                 double price = rs.getDouble("Price");
                 map.put(name, price);
-            } 
+            }
             return map;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new GeneralException(ex.getMessage());
         }
     }
 
+    public static HashMap<String, Double> createOrder() throws GeneralException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            String id = ids.getString(1);
+            user.setId(id);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+    }
 
 }
