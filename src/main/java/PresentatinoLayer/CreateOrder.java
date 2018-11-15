@@ -6,6 +6,8 @@
 package PresentatinoLayer;
 
 import FunctionLayer.GeneralException;
+import FunctionLayer.LogicFacade;
+import FunctionLayer.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,19 +20,18 @@ public class CreateOrder extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
-        
-        String width = request.getParameter("width");
-        
+        LogicFacade lf = new LogicFacade();
+        String width = request.getParameter("widthnumber");
+        String length = request.getParameter("lengthnumber");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
         String evt = request.getParameter("evt");
         
-        System.out.println(" width: " + width + "name: " + name + " email: "+ email);
-        //HttpSession session = request.getSession();
-        
-       return "orderpage";
+        Order o = lf.makeOrder(Integer.parseInt(width), Integer.parseInt(length), name, email, zip, phone, evt);
+        request.getSession().setAttribute("order", o);
+       return "singleOrder";
     }
     
 }

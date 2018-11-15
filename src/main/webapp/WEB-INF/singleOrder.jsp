@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="FunctionLayer.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -69,10 +70,15 @@
                     </ul>
                 </div>
             </nav>
-            
+            <% Order o = (Order)request.getSession().getAttribute("order"); %>
             <div class="jumbotron">
                 <h2>Din ordre:</h2>
-                <p>Lorem ipsum bla bla bla...</p>
+                <p> Længde: <%=o.getLength()%> <br>
+                    Bredde: <%=o.getWidth()%> <br>
+                    Pris: <%=o.getPrice()%> <br>
+                
+                </p>
+                
             </div>
 
 

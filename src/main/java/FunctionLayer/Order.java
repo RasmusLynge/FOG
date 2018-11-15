@@ -11,7 +11,8 @@ package FunctionLayer;
  */
 public class Order {
     
-    private int width, length, price;
+    private int width, length;
+    private double price;
     private String id, name, email, zip, phone, evt;
 
     public Order(int width, int length, String name, String email, String zip, String phone, String evt) {
@@ -24,11 +25,11 @@ public class Order {
         this.evt = evt;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     

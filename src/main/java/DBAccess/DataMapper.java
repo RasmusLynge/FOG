@@ -78,7 +78,7 @@ public class DataMapper {
         }
     }
 
-    public static void createOrder(Order order) {
+    public void createOrder(Order order) {
         try {
             Connection con = Connector.connection();
             Date d = new Date();
