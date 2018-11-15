@@ -7,16 +7,23 @@ public class PriceCalculator {
 
     DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
+    final private static int CMTOMETER = 100;
+            
+    public static void main(String[] args) throws GeneralException {
+        PriceCalculator p = new PriceCalculator();
+        double d = p.priceCalculator(250, 250);
+        System.out.println(d);
+    }
 
     public double priceCalculator(int length, int width) throws GeneralException {
         HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(length, width);
         HashMap<String, Double> mapPrice = db.getPrices();
-        
-        double totalLengthOfBeams = mapCarport.get("beamLength") * mapCarport.get("totalBeams");
-        double totalLengthOfPosts = mapCarport.get("totalPosts") * mapCarport.get("postsLength");
-        double totalLengthOfRafters = mapCarport.get("rafterLength") * mapCarport.get("totalRafters");
-        double totalLengthOfCover = (mapCarport.get("sideCoverLength") + mapCarport.get("sideCoversWidth"));
 
+        double totalLengthOfBeams = (mapCarport.get("beamLength") * mapCarport.get("totalBeams"))/CMTOMETER;
+        double totalLengthOfPosts = (mapCarport.get("totalPosts") * mapCarport.get("postsLength"))/CMTOMETER;
+        double totalLengthOfRafters = (mapCarport.get("rafterLength") * mapCarport.get("totalRafters"))/CMTOMETER;
+        double totalLengthOfCover = (mapCarport.get("sideCoverLength") + mapCarport.get("sideCoversWidth"))/CMTOMETER;
+        
         double totalPriceForCarport = totalLengthOfRafters * mapPrice.get("Rafter");
         totalPriceForCarport += totalLengthOfBeams * mapPrice.get("Beam");
         totalPriceForCarport += totalLengthOfPosts * mapPrice.get("Post");
