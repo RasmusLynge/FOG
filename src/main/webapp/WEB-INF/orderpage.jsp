@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <input type="text" name="evt" class="form-control" placeholder="Evt. bemærkninger" value=""  
                     </div>
-
+                    <br>
                     <p class="lead">
                         <input type="submit" class="btn btn-primary" value="Send forespørgsel">
                     </p>
