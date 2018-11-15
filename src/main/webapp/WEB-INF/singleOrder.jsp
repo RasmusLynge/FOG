@@ -1,8 +1,9 @@
 <%-- 
-    Document   : orderpage
-    Created on : 10-11-2018, 17:22:36
-    Author     : Rasmu
+    Document   : singleOrder
+    Created on : 15-11-2018, 13:46:26
+    Author     : Mathias
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="/index.html" style="padding:0px;">
+                <a class="navbar-brand" href="#" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -68,65 +69,24 @@
                     </ul>
                 </div>
             </nav>
-
+            
             <div class="jumbotron">
-                <h2 class="display-4">QUICK-BYG TILBUD - carport med fladt tag</h2>
-                <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses dine specifikke ønsker. </p>
-                <br>
-                <p class="lead"> Tilbud og skitsetegning fremsendes med post hurtigst muligt.
-                    Ved bestilling medfølger standardbyggevejledning.</p>
-
-                <h6>Carport Bredde</h6>
-                <form name="order" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="order">
-                    
-                    
-                    <div class="form-group">
-                        <input type="number" name="widthnumber" class="form-control" placeholder="Vælg bredde min. 240cm max 720cm" value="" required min="240" max="720"/>
-                    </div>
-
-
-                    <h6>Carport Længde</h6>
-                    <div class="form-group">
-                        <input type="number" name="lengthnumber" class="form-control" placeholder="Vælg længde min. 240cm max 720cm" value="" required min="240" max="720"/>
-                    </div>
-                    
-
-                    <br>
-                    <h6>Kontakt information</h6>
-                    <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Navn *" value="" required/>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Email *" value="" required/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="city" class="form-control" placeholder="Postnummer *" value="" required/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="phone" maxlength="10" minlength="8" class="form-control" placeholder="Telefon nummer *" value="" required/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="evt" class="form-control" placeholder="Evt. bemærkninger" value=""  
-                    </div>
-
-                    <p class="lead">
-                        <input type="submit" class="btn btn-primary" value="Send forespørgsel">
-                    </p>
-                </form>
+                <h2>Din ordre:</h2>
+                <p>Lorem ipsum bla bla bla...</p>
             </div>
 
 
-
-        </div>
             <nav class="navbar bottom navbar-dark bg-dark">
                 <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
                 <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
                 </li>
             </nav>
 
+        </div>
+
         <script src="/js/jquery.min.js"></script>
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
+
