@@ -32,6 +32,7 @@ public class CarportCalculator {
     private static final int TOTALCOVERS = 4; // the total amount of covers needed for the carport
     private static final int BEAMS = 2; // total amount of beams in the scrukture
     private static final int POSTSLENGTH = 300; // posts length
+    private static final int SCREWSINABOX = 200; // screws in a box
     
     public HashMap<String, Integer> calculateAll(int length, int width) {
         HashMap<String, Integer> totalMap = new HashMap<>();
@@ -117,9 +118,12 @@ public class CarportCalculator {
     }
 
     private int totalScrews(int hinges) {
-        int totalScrews = hinges * SCREWSPERLHINGES;
-        totalScrews += TOTALCOVERS * SCREWSPERCOVER;
-        return totalScrews;
+        double totalScrews = hinges * SCREWSPERLHINGES;
+        totalScrews += TOTALCOVERS * SCREWSPERCOVER;  
+        double boxesOfScrews = totalScrews/SCREWSINABOX;
+        double boxesRoundedUp = Math.ceil(boxesOfScrews);
+        int boxes = (int) boxesRoundedUp;
+        return boxes;
     }
 
 }
