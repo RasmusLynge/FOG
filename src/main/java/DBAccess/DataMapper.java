@@ -104,7 +104,7 @@ public class DataMapper {
             ps2.setString(3, order.getEmail());    
             ps2.setString(4, order.getPhone());
             ps2.setString(5, order.getZip());
-            ids.next();
+            ps2.executeUpdate();
             
         } catch (Exception ex) {
             ex.printStackTrace();
