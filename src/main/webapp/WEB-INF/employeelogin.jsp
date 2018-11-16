@@ -74,7 +74,6 @@
                 <p>Indtast email og adgangskode</p>
                 <form name="login" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="login">
-                    
                     <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Adresse"required>
                     <br>
                     <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Adgangskode"required>

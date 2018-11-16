@@ -98,7 +98,4 @@ public class Order {
     public void setEvt(String evt) {
         this.evt = evt;
     }
-     
-    
-    
 }
