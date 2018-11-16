@@ -1,13 +1,16 @@
+
 package DBAccess;
 
 import FunctionLayer.GeneralException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -94,6 +97,41 @@ public class DataMapper {
             return ol;
         } catch ( ClassNotFoundException | SQLException ex ) {
             throw new GeneralException(ex.getMessage());
+        }
+    }
+    
+    public void createOrder(Order order) {
+        try {
+            Connection con = Connector.connection();
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(d);
+            String SQL = "INSERT INTO `Order`  VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, Integer.parseInt(order.getId()));
+            ps.setInt(2, order.getWidth());
+            ps.setInt(3, order.getLength());
+            ps.setInt(4, 1); // Fladt tage er sat til true
+            ps.setString(5, currentTime);
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            order.setId(id);
+
+            SQL = "INSERT INTO `User_Info` "
+                    + "VALUES (?, ?, ?, ?, ?);";
+            PreparedStatement ps2 = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps2.setId(1, id);
+            ps2.setString(2, order.getName());
+            ps2.setString(3, order.getEmail());    
+            ps2.setString(4, order.getPhone());
+            ps2.setString(5, order.getZip());
+            ps2.executeUpdate();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error");
         }
     }
 
