@@ -1,3 +1,4 @@
+
 package DBAccess;
 
 import FunctionLayer.GeneralException;
@@ -9,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -77,14 +80,34 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
-
+    
+    public static ArrayList<Order> getAllOrders() throws GeneralException {
+        ArrayList<Order> ol = new ArrayList<>();
+         try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM `Order` "
+                       + "INNER JOIN `User_Info` "
+                       + "ON `Order`.Id_Order = User_Info.fk_Order_Id;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
+                order.setId(String.valueOf(rs.getInt("Id_Order")));
+                ol.add(order);
+            }
+            return ol;
+        } catch ( ClassNotFoundException | SQLException ex ) {
+            throw new GeneralException(ex.getMessage());
+        }
+    }
+    
     public void createOrder(Order order) {
         try {
             Connection con = Connector.connection();
             Date d = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(d);
-            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`)  VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, order.getWidth());
             ps.setInt(2, order.getLength());
@@ -93,18 +116,19 @@ public class DataMapper {
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
-            String id = ids.getString(1);
-            order.setId(id);
+            int id = ids.getInt(1);
+            order.setId(""+id);
+            
 
-            String SQL2 = "INSERT INTO `User_Info` (`fk_Order_Id`, `Name`, `Email`, `Phone`, `Zip`)"
+            SQL = "INSERT INTO `User_Info` (`fk_Order_Id`, `Name`, `Email`, `Phone`, `Zip`) "
                     + "VALUES (?, ?, ?, ?, ?);";
-            PreparedStatement ps2 = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS);
-            ps2.setString(1, order.getId());
+            PreparedStatement ps2 = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps2.setInt(1, id);
             ps2.setString(2, order.getName());
             ps2.setString(3, order.getEmail());    
             ps2.setString(4, order.getPhone());
             ps2.setString(5, order.getZip());
-            ids.next();
+            ps2.executeUpdate();
             
         } catch (Exception ex) {
             ex.printStackTrace();

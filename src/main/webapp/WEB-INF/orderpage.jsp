@@ -101,7 +101,7 @@
                         <input type="email" name="email" class="form-control" placeholder="Email *" value="" required/>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="city" class="form-control" placeholder="Postnummer *" value="" required/>
+                        <input type="text" name="zip" class="form-control" placeholder="Postnummer *" value="" required/>
                     </div>
                     <div class="form-group">
                         <input type="text" name="phone" maxlength="10" minlength="8" class="form-control" placeholder="Telefon nummer *" value="" required/>
