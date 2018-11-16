@@ -73,6 +73,13 @@
                 <h2>Du er nu logget ind</h2>
                 <p>Lorem ipsum bla bla bla...</p>
             </div>
+            <div class="jumbotron">
+                <h2>Du er nu logget ind</h2>
+                <form action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="listorders">
+                    <input type="submit" value="Se alle ordrer">
+                </form>
+            </div>
 
 
             <nav class="navbar bottom navbar-dark bg-dark">

@@ -22,7 +22,7 @@ public class PriceCalculator {
 
         double totalPrice = priceForCarportSekelton(totalLengthOfRafters, mapPrice, totalLengthOfBeams, totalLengthOfPosts, totalLengthOfCover, mapCarport);
         //totalPrice = priceForRoof();
-        
+        System.out.println(mapCarport.keySet());
         return totalPrice;
     }
 
