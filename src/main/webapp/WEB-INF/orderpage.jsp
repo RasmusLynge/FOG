@@ -76,6 +76,12 @@
                 <p class="lead"> Tilbud og skitsetegning fremsendes med post hurtigst muligt.
                     Ved bestilling medfølger standardbyggevejledning.</p>
 
+                <% String error = (String) request.getAttribute("error");
+                if (error != null) {
+                    out.println("<h2>Fejl!</h2>");
+                    out.println(error);
+                }
+                %>
                 <h6>Carport Bredde</h6>
                 <form name="order" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="order">
@@ -90,6 +96,11 @@
                     <div class="form-group">
                         <input type="number" name="lengthnumber" class="form-control" placeholder="Vælg længde min. 240cm max 720cm" value="" required min="240" max="720"/>
                     </div>
+                    
+                    <h6>Indre eller ydre mål</h6>
+                    <p class="lead">Som udgangspunkt bestiller du de indre mål på din carport. Carportens ydre mål er større end hvad du indtaster.
+                    Hvis du i stedet ønsker at bestille på de ydre mål, skal du markere det i boksen herunder:</p>
+                    <input type="checkbox" name="measurements" value="outermeasurements">Jeg vil gerne bestille med de indtastede værdier som ydre mål<br>
                     
 
                     <br>
@@ -115,7 +126,7 @@
                     </p>
                 </form>
             </div>
-
+            
 
 
         </div>

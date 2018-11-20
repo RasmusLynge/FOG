@@ -6,6 +6,7 @@
 package PresentatinoLayer;
 
 import FunctionLayer.GeneralException;
+import FunctionLayer.MakeOrderException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +40,10 @@ public class FrontController extends HttpServlet {
             request.setAttribute( "error", ex.getMessage() );
             ex.printStackTrace();
             request.getRequestDispatcher( "/WEB-INF/employeelogin.jsp" ).forward( request, response );
+        } catch (MakeOrderException e){
+            request.setAttribute( "error", e.getMessage() );
+            e.printStackTrace();
+            request.getRequestDispatcher( "/WEB-INF/orderpage.jsp" ).forward( request, response );
         }
     }
 

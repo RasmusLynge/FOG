@@ -70,15 +70,21 @@
                     </ul>
                 </div>
             </nav>
-            <% Order o = (Order)request.getSession().getAttribute("order"); %>
+            <% Order o = (Order) request.getSession().getAttribute("order");%>
             <div class="jumbotron">
                 <h2>Din ordre:</h2>
+
+                <h6>Indre mål:</h6>
                 <p> Længde: <%=o.getLength()%> <br>
                     Bredde: <%=o.getWidth()%> <br>
-                    Pris: <%=o.getPrice()%> <br>
-                
                 </p>
-                
+                <h6>Ydre mål:</h6>
+                <p> Længde: <%=o.getLength() + 85%> <br>
+                    Bredde: <%=o.getWidth() + 70%> <br>
+                    <br>
+                </p>
+                <b>Pris: <%=o.getPrice()%></b> <br>
+
             </div>
 
 

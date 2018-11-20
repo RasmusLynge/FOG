@@ -1,6 +1,7 @@
 package PresentatinoLayer;
 
 import FunctionLayer.GeneralException;
+import FunctionLayer.MakeOrderException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws GeneralException;
+            throws GeneralException,MakeOrderException;
 
 }
