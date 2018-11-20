@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class LogicFacade {
 
+    
+
     PriceCalculator p = new PriceCalculator();
     DataMapper dm = new  DataMapper();
     
@@ -42,6 +44,11 @@ public class LogicFacade {
     
     public static Order getOrderByID(int orderid) throws GeneralException {
         Order o = DataMapper.getOrderByID(orderid);
+        return o;
+    }
+    
+    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+        Order o = DataMapper.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
         return o;
     }
 }

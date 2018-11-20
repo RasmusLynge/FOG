@@ -73,37 +73,39 @@ Order o = (Order) request.getAttribute("order");
             </nav>
 
             <div class="jumbotron">
-                <h1>Ordre detaljer for id: <%out.println(o.getId());%></h1>
+                <%String id = o.getId();%>
+                <h1>Ordre detaljer for id: <%= id %></h1>
                 <form action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="editorderdetails">
+                    <input type="hidden" name="orderID" value=<%=id%>>
                     <ol>
                     <li>
-                        Bredde: <input type="text" placeholder="<%out.println(o.getWidth());%> cm.">
+                        Bredde: <input type="number" name="width" min="240" max="720" placeholder="<%out.println(o.getWidth());%>" required> cm.
                     </li>
                     <li>
-                        Længde: <input type="text" placeholder="<%out.println(o.getLength());%> cm.">
+                        Længde: <input type="number" name="length" min="240" max="720" placeholder="<%out.println(o.getLength());%>" required> cm.
                     </li>                 
                     <li>
                         Tag:
                         <select name="roof">
-                            <option value="flat_roof" <%if (o.isFlat_roof()) out.println("selected"); %>>Fladt tag</option>
-                            <option value="roofwithrise" <%if (!o.isFlat_roof()) out.println("selected"); %>>Tag med rejsning</option>
+                            <option value="1" <%if (o.isFlat_roof()) out.println("selected"); %>>Fladt tag</option>
+                            <option value="0" <%if (!o.isFlat_roof()) out.println("selected"); %>>Tag med rejsning</option>
                         </select>
                     </li>
                     <li>
                         Bestillingsdato: <%out.println(o.getOrderdate());%>
                     </li>
                     <li>
-                        <input type="radio" name="State" value="request" <%if ("Forespørgsel".equals(o.getState())) out.println("checked"); %>> Forespørgsel<br>
-                        <input type="radio" name="State" value="awaiting_salesman" <%if ("Afventer sælger".equals(o.getState())) out.println("checked"); %>> Afventer sælger<br>
-                        <input type="radio" name="State" value="paid" <%if ("Betalt".equals(o.getState())) out.println("checked"); %>> Betalt<br>
-                        <input type="radio" name="State" value="shipped" <%if ("Fragtet".equals(o.getState())) out.println("checked"); %>> Fragtet<br>
-                        <input type="State" name="gender" value="cancelled" <%if ("Afsluttet uden salg".equals(o.getState())) out.println("checked"); %>> Afsluttet uden salg<br>
+                        <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) out.println("checked"); %>> Forespørgsel<br>
+                        <input type="radio" name="State" value="Afventer sælger" <%if ("Afventer sælger".equals(o.getState())) out.println("checked"); %>> Afventer sælger<br>
+                        <input type="radio" name="State" value="Betalt" <%if ("Betalt".equals(o.getState())) out.println("checked"); %>> Betalt<br>
+                        <input type="radio" name="State" value="Fragtet" <%if ("Fragtet".equals(o.getState())) out.println("checked"); %>> Fragtet<br>
+                        <input type="radio" name="State" value="Afsluttet uden salg" <%if ("Afsluttet uden salg".equals(o.getState())) out.println("checked"); %>> Afsluttet uden salg<br>
                     </li>
                 </ol>
+                    <input type="submit" value="Gem ændringer">
                 </form>
             </div>
-
-<%out.println(o.getState());%>
 
         </div>
         <nav class="navbar bottom navbar-dark bg-dark">
