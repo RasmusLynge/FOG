@@ -9,10 +9,8 @@ package PresentatinoLayer;
 import FunctionLayer.GeneralException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
-import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,9 +20,9 @@ public class GetOrderDetails extends Command {
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
+        int orderid = Integer.parseInt(request.getParameter("orderID")); 
+        Order o = LogicFacade.getOrderByID(orderid);
+        request.setAttribute("order", o);
         return "showorderdetails";
     }
 }

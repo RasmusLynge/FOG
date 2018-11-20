@@ -9,6 +9,7 @@ import DBAccess.DataMapper;
 import java.util.ArrayList;
 
 public class LogicFacade {
+
     PriceCalculator p = new PriceCalculator();
     DataMapper dm = new  DataMapper();
     
@@ -36,6 +37,11 @@ public class LogicFacade {
         o.setPrice(p.priceCalculator(length, width));
         System.out.println("order -------------------------------------" +o);
         dm.createOrder(o);
+        return o;
+    }
+    
+    public static Order getOrderByID(int orderid) throws GeneralException {
+        Order o = DataMapper.getOrderByID(orderid);
         return o;
     }
 }

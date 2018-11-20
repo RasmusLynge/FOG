@@ -1,4 +1,3 @@
-
 package DBAccess;
 
 import FunctionLayer.GeneralException;
@@ -80,14 +79,14 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
-    
+
     public static ArrayList<Order> getAllOrders() throws GeneralException {
         ArrayList<Order> ol = new ArrayList<>();
-         try {
+        try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM `Order` "
-                       + "INNER JOIN `User_Info` "
-                       + "ON `Order`.Id_Order = User_Info.fk_Order_Id;";
+                    + "INNER JOIN `User_Info` "
+                    + "ON `Order`.Id_Order = User_Info.fk_Order_Id;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -96,12 +95,40 @@ public class DataMapper {
                 ol.add(order);
             }
             return ol;
-        } catch ( ClassNotFoundException | SQLException ex ) {
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new GeneralException(ex.getMessage());
         }
     }
-    
-    public void createOrder(Order order) {
+
+    public static Order getOrderByID(int orderid) throws GeneralException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM `Order` "
+                    + "INNER JOIN `User_Info` "
+                    + "ON `Order`.Id_Order = User_Info.fk_Order_Id "
+                    + "WHERE `Order`.Id_Order = " + orderid + ";";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
+                if (rs.getInt("Flat_Roof") == 1) {
+                    order.setFlat_roof(true);
+                }
+                else {
+                    order.setFlat_roof(false);
+                }
+                order.setState(rs.getString("State"));
+                order.setOrderdate(rs.getDate("Date").toString());
+                order.setId(String.valueOf(orderid));
+                return order;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+        return null;
+    }
+
+    public void createOrder(Order order) throws GeneralException {
         try {
             Connection con = Connector.connection();
             Date d = new Date();
@@ -117,22 +144,20 @@ public class DataMapper {
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             int id = ids.getInt(1);
-            order.setId(""+id);
-            
+            order.setId("" + id);
 
             SQL = "INSERT INTO `User_Info` (`fk_Order_Id`, `Name`, `Email`, `Phone`, `Zip`) "
                     + "VALUES (?, ?, ?, ?, ?);";
             PreparedStatement ps2 = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps2.setInt(1, id);
             ps2.setString(2, order.getName());
-            ps2.setString(3, order.getEmail());    
+            ps2.setString(3, order.getEmail());
             ps2.setString(4, order.getPhone());
             ps2.setString(5, order.getZip());
             ps2.executeUpdate();
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Error");
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
         }
     }
 
