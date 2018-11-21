@@ -19,7 +19,7 @@ abstract class Command {
         commands.put("order", new CreateOrder());
         commands.put("listorders", new GetOrders());
         commands.put("showOrderDetails", new GetOrderDetails());
-
+        commands.put("editorderdetails", new EditOrder());
     }
 
     static Command from(HttpServletRequest request) {
