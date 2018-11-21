@@ -46,14 +46,17 @@ public class SVGUtilCarport {
         res += beam(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerFrameYPos);
         res += beam(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerLayerBottom);
 //        res += post(height, width, xPos, yPos);
+
         System.out.println("toatlrafter" + mapCarport.get("totalRafters"));
         System.out.println("rafterspacing --------- " + mapCarport.get("newRafterSpacing"));
+        
         for (int i = 0; i < mapCarport.get("totalRafters"); i++) {
             System.out.println("rafter in loop" + i);
             System.out.println("rafterspacing in loop " + rafterSpaceing);
             res += rafter(outerFrameHeight, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS);
             rafterSpaceing += mapCarport.get("newRafterSpacing");
         }
+        
         return res;
     }
 
