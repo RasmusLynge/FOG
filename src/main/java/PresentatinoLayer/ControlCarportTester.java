@@ -5,7 +5,8 @@
  */
 package PresentatinoLayer;
 
-import FunctionLayer.SVGUtilCarport;
+import FunctionLayer.SVGUtilCarportSide;
+import FunctionLayer.SVGUtilCarportTop;
 import java.io.IOException;
 //import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Control", urlPatterns = {"/Control"})
 public class ControlCarportTester extends HttpServlet {
 
-    SVGUtilCarport utilCarport = new SVGUtilCarport();
+    SVGUtilCarportTop utilCarportTop = new SVGUtilCarportTop();
+    SVGUtilCarportSide utilCarportSide = new SVGUtilCarportSide();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,9 @@ public class ControlCarportTester extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
 
-            
-            String carport = "<SVG width=\"1000\" height=\"1000\">" + utilCarport.caport() + "</SVG>";
+            String carport = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide() + "</SVG>";
             request.setAttribute("carport", carport);
-            
+
         } catch (NumberFormatException ex) {
             System.out.println("erorororororoororo");
             request.setAttribute("error", "Input must be numeric values");
