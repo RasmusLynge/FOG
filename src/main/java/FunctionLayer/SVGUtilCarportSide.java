@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class SVGUtilCarportSide {
 
-    int width = 300;
-    int height = 300;
+    int width = 720;
+    int height = 720;
     private static final int OUTERFRAMEXPOS = 100;
     private static final int OUTERFRAMEYPOS = 100;
     private static final int HANGOUTONESIDE = 35;
@@ -33,14 +33,75 @@ public class SVGUtilCarportSide {
     private static final int LINESPACINGINNERLAYER = 10;
     private static final int TEXTSPACINGOUTERLAYER = 40;
     private static final int TEXTSPACINGINNERLAYER = 15;
+    private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
     HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
+//skriv i calc tilføj til hashmap
+    private static final int POSTHEIGHT = 200;
+    private static final int CENTEROFPOSTMEASSURE = 7;
 
-    public String caportFromSide(){
-        String res = "";
+    public String caportFromSide() {
+        int outerFrameHeight = height + HANGOUTONESIDE * BOTHSIDES;
+        int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
+        int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
+        int innerFrameYPos = OUTERFRAMEYPOS + HANGOUTONESIDE;
+        int innerLayerBottomYPos = innerFrameYPos + height - WOODWIDTH;
+        int innerLayerEntranceCornorYPosForPost = innerLayerBottomYPos - EXTRAPOSTSPACING;
+        int innerLayerEntranceCornorXPosForPost = innerFrameXPos + width - POSTWIDTH;
+        int rafterSpaceing = OUTERFRAMEXPOS;
+
+        int postYPos = OUTERFRAMEYPOS + WOODWIDTH;
+        int postSpacing = OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGOUTERLAYER;
         
+        String res = "";
+        //Beam
+        res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, OUTERFRAMEYPOS);
+        //Post
+        res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
+        res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + width - POSTWIDTH, postYPos);
+
+        //carport with 6 posts
+        if (mapCarport.get("totalPosts") > MINIMUMPOSTS && mapCarport.get("totalPosts") < MAXPOSTS) {
+            res += square(POSTHEIGHT, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, postYPos);
+        }
+        //carport with 8 posts
+        if (mapCarport.get("totalPosts") >= MAXPOSTS) {
+
+            res += square(POSTHEIGHT, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
+            res += square(POSTHEIGHT, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
+
+        }
+        //rafter
+        for (int i = 0; i < mapCarport.get("totalRafters"); i++) {
+            res += square(WOODWIDTH, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - WOODWIDTH);
+            rafterSpaceing += mapCarport.get("newRafterSpacing");
+        }
+        res += square(WOODWIDTH, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - WOODWIDTH);
+
+        //Post spacing lines with 4 posts
+        if (mapCarport.get("totalPosts") == MINIMUMPOSTS) {
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE,  OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width + innerFrameXPos - CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+        }
+        //Post spacing lines with 6 posts
+        if (mapCarport.get("totalPosts") > MINIMUMPOSTS && mapCarport.get("totalPosts") < MAXPOSTS) {
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width / POSTPOSITIONTWO + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+        }
+        //Post spacing lines with 8 posts
+        if (mapCarport.get("totalPosts") >= MAXPOSTS) {
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width / POSTPOSITIONTHREE + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+        }
+        //Post height lines
+        res += line(OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + WOODWIDTH, OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH);
+
+        //Post spacing text
+        res += text(innerFrameXPos +CENTEROFPOSTMEASSURE,OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, postSpacing);
+        
+        //Post height text
+        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH, POSTHEIGHT);
         return res;
+
     }
+
     private String background() {
         String res = "<rect x=\"0\" y=\"0\" height=\"1000\" width=\"1000\"\n"
                 + "              style=\"stroke:#000000; fill: #f9f9f9\"/>";
