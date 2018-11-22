@@ -14,8 +14,8 @@ import static javafx.beans.binding.Bindings.length;
  */
 public class SVGUtilCarportTop {
 
-    int width = 300;
-    int height = 300;
+    int width = 430;
+    int height = 430;
     private static final int OUTERFRAMEXPOS = 100;
     private static final int OUTERFRAMEYPOS = 100;
     private static final int HANGOUTONESIDE = 35;
@@ -34,6 +34,7 @@ public class SVGUtilCarportTop {
     private static final int LINESPACINGINNERLAYER = 10;
     private static final int TEXTSPACINGOUTERLAYER = 40;
     private static final int TEXTSPACINGINNERLAYER = 15;
+    private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
     HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
 
@@ -52,17 +53,18 @@ public class SVGUtilCarportTop {
         res = linesSVG(res, outerFrameWidth, innerFrameXPos, innerFrameYPos, outerFrameHeight);
         res = beamsSVG(res, outerFrameWidth, innerFrameYPos, innerLayerBottomYPos);
         res = postsSVG(res, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost);
-        res = raftersSVG(res, outerFrameHeight, rafterSpaceing);
+        res = raftersSVG(res, outerFrameHeight, rafterSpaceing, outerFrameWidth);
 
         return res;
     }
 
-    private String raftersSVG(String res, int outerFrameHeight, int rafterSpaceing) {
+    private String raftersSVG(String res, int outerFrameHeight, int rafterSpaceing, int outerFrameWidth) {
         //rafter
-        for (int i = 0; i < mapCarport.get("totalRafters") + EXTRARAFTER; i++) {
+        for (int i = 0; i < mapCarport.get("totalRafters"); i++) {
             res += square(outerFrameHeight, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS);
             rafterSpaceing += mapCarport.get("newRafterSpacing");
         }
+        res += square(outerFrameHeight, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS);
         return res;
     }
 
@@ -124,7 +126,7 @@ public class SVGUtilCarportTop {
         res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS - TEXTSPACINGOUTERLAYER, outerFrameWidth);
         res += text(innerFrameXPos, OUTERFRAMEYPOS - TEXTSPACINGINNERLAYER, width);
         //rafter text
-        res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS + outerFrameHeight + 30, mapCarport.get("newRafterSpacing"));
+        res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS + outerFrameHeight + TEXTBOTTOMLAYER, mapCarport.get("newRafterSpacing"));
         //height text
         res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, innerFrameYPos + height, height);
         res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGOUTERLAYER, OUTERFRAMEXPOS + outerFrameHeight, outerFrameHeight);
