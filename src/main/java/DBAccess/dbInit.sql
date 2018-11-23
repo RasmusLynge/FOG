@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
   `Width` INT(11) NOT NULL,
   `Flat_Roof` TINYINT(1) NULL DEFAULT NULL,
   `Date` DATETIME NULL,
-  `Is_Shipped` TINYINT(1) NULL,
+  `State` VARCHAR(20) NOT NULL default 'Forespørgsel',
   PRIMARY KEY (`Id_Order`),
   INDEX `fk_Order_User1_idx` (`fk_User_Id` ASC),
   CONSTRAINT `fk_Order_User`

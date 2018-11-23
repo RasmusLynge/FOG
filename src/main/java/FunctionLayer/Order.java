@@ -13,8 +13,9 @@ public class Order {
     
     private int width, length;
     private double price;
-    private String id, name, email, zip, phone, evt;
-
+    private String id, name, email, zip, phone, evt, orderdate, state;
+    private boolean flat_roof;
+         
     public Order(int width, int length, String name, String email, String zip, String phone, String evt) {
         this.width = width;
         this.length = length;
@@ -98,4 +99,30 @@ public class Order {
     public void setEvt(String evt) {
         this.evt = evt;
     }
+
+    public boolean isFlat_roof() {
+        return flat_roof;
+    }
+
+    public void setFlat_roof(boolean flat_roof) {
+        this.flat_roof = flat_roof;
+    }
+
+    public String getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    
 }

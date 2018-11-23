@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +10,9 @@ import DBAccess.DataMapper;
 import java.util.ArrayList;
 
 public class LogicFacade {
+
+    
+
     PriceCalculator p = new PriceCalculator();
     DataMapper dm = new  DataMapper();
     
@@ -36,6 +40,16 @@ public class LogicFacade {
         o.setPrice(p.priceCalculator(length, width));
         System.out.println("order -------------------------------------" +o);
         dm.createOrder(o);
+        return o;
+    }
+    
+    public static Order getOrderByID(int orderid) throws GeneralException {
+        Order o = DataMapper.getOrderByID(orderid);
+        return o;
+    }
+    
+    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+        Order o = DataMapper.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
         return o;
     }
 }

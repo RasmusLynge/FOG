@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,6 +79,34 @@ public class DataMapper {
         }
     }
 
+    public static Order getOrderByID(int orderid) throws GeneralException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM `Order` "
+                    + "INNER JOIN `User_Info` "
+                    + "ON `Order`.Id_Order = User_Info.fk_Order_Id "
+                    + "WHERE `Order`.Id_Order = " + orderid + ";";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
+                if (rs.getInt("Flat_Roof") == 1) {
+                    order.setFlat_roof(true);
+                }
+                else {
+                    order.setFlat_roof(false);
+                }
+                order.setState(rs.getString("State"));
+                order.setOrderdate(rs.getDate("Date").toString());
+                order.setId(String.valueOf(orderid));
+                return order;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+        return null;
+    }
+    
     public static ArrayList<Order> getAllOrders() throws GeneralException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
@@ -134,7 +161,7 @@ public class DataMapper {
         }
     }
 
-    public boolean EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
         try {
             Connection con = Connector.connection();
             String SQL = "Update `Order`\n"
@@ -147,7 +174,9 @@ public class DataMapper {
             ps.setString(4, state);
             ps.setInt(5, orderId);
             ps.executeUpdate();
-            return true; 
+            
+            Order o = getOrderByID(orderId);
+            return o;
             
         } catch (ClassNotFoundException | SQLException ex) {
             throw new GeneralException(ex.getMessage());
@@ -155,3 +184,4 @@ public class DataMapper {
     }
 
 }
+
