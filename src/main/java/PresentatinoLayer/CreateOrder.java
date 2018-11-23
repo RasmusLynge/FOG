@@ -9,6 +9,8 @@ package PresentatinoLayer;
 import FunctionLayer.GeneralException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
+import FunctionLayer.SVGUtilCarportSide;
+import FunctionLayer.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,16 +24,26 @@ public class CreateOrder extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
         LogicFacade lf = new LogicFacade();
-        String width = request.getParameter("widthnumber");
-        String length = request.getParameter("lengthnumber");
+        SVGUtilCarportTop svgStringTop = new SVGUtilCarportTop();
+        SVGUtilCarportSide svgStringSide = new SVGUtilCarportSide();
+        
+        int width = Integer.parseInt(request.getParameter("widthnumber"));
+        int length = Integer.parseInt(request.getParameter("lengthnumber"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
         String evt = request.getParameter("evt");
         
-        Order o = lf.makeOrder(Integer.parseInt(width), Integer.parseInt(length), name, email, zip, phone, evt);
+        
+        Order o = lf.makeOrder(width, length, name, email, zip, phone, evt);
+        String svgTop = svgStringTop.printCarportTop(width, length);
+        String svgSide = svgStringSide.printCarportSide(width, length);
+        
+        request.getSession().setAttribute("svgside", svgSide);
+        request.getSession().setAttribute("svgtop", svgTop);
         request.getSession().setAttribute("order", o);
+        
        return "singleOrder";
     }
     
