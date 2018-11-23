@@ -7,8 +7,10 @@ package PresentatinoLayer;
 
 import FunctionLayer.GeneralException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Order;
 import FunctionLayer.MakeOrderException;
+import FunctionLayer.Order;
+import FunctionLayer.SVGUtilCarportSide;
+import FunctionLayer.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,27 +22,41 @@ import javax.servlet.http.HttpSession;
 public class CreateOrder extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException,MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
         LogicFacade lf = new LogicFacade();
-        String measurementtype = request.getParameter("measurements");
-        Order o;
-
-        String width = request.getParameter("widthnumber");
-        String length = request.getParameter("lengthnumber");
+        SVGUtilCarportTop svgStringTop = new SVGUtilCarportTop();
+        SVGUtilCarportSide svgStringSide = new SVGUtilCarportSide();
+        
+        int width = Integer.parseInt(request.getParameter("widthnumber"));
+        int length = Integer.parseInt(request.getParameter("lengthnumber"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
         String evt = request.getParameter("evt");
+        String measurementtype = request.getParameter("measurements");
+
+
         System.out.println(measurementtype);
-        
-        if("outermeasurements".equals(measurementtype) & (Integer.parseInt(length)<325 || Integer.parseInt(width)<310)) throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
-        if ("outermeasurements".equals(measurementtype)) {
-            o = lf.makeOrder(Integer.parseInt(width) - 70, Integer.parseInt(length) - 85, name, email, zip, phone, evt);
-        } else {
-            o = lf.makeOrder(Integer.parseInt(width), Integer.parseInt(length), name, email, zip, phone, evt);
+        Order o;
+
+        if ("outermeasurements".equals(measurementtype) && (length < 325 || width < 310)) {
+            throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
         }
+        if ("outermeasurements".equals(measurementtype)) {
+            o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt);
+        } else {
+            o = lf.makeOrder(width, length, name, email, zip, phone, evt);
+        }
+        String svgTop = svgStringTop.printCarportTop(length, width);
+        String svgSide = svgStringSide.printCarportSide(length, width);
+        
+        request.getSession().setAttribute("svgside", svgSide);
+        request.getSession().setAttribute("svgtop", svgTop);
         request.getSession().setAttribute("order", o);
-        return "singleOrder";
+        
+       return "singleOrder";
+
     }
+
 }

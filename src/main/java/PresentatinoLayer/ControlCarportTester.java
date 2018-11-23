@@ -39,7 +39,7 @@ public class ControlCarportTester extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
 
-            String carport = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide() + "</SVG>";
+            String carport = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide(400, 450) + "</SVG>";
             request.setAttribute("carport", carport);
 
         } catch (NumberFormatException ex) {
@@ -89,3 +89,4 @@ public class ControlCarportTester extends HttpServlet {
     }// </editor-fold>
 
 }
+

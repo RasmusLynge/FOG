@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : orderpage
     Created on : 10-11-2018, 17:22:36
@@ -127,7 +126,6 @@
                     </p>
                 </form>
             </div>
-            
 
 
         </div>

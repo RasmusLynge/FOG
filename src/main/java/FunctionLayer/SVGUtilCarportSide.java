@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class SVGUtilCarportSide {
 
-    int width = 720;
-    int height = 720;
+//    int width = 720;
+//    int height = 720;
     private static final int OUTERFRAMEXPOS = 100;
     private static final int OUTERFRAMEYPOS = 100;
     private static final int HANGOUTONESIDE = 35;
@@ -32,24 +32,29 @@ public class SVGUtilCarportSide {
     private static final int TEXTSPACINGINNERLAYER = 15;
     private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
-    HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
 //skriv i calc tilføj til hashmap
     private static final int POSTHEIGHT = 200;
     private static final int CENTEROFPOSTMEASSURE = 7;
+    
+    public String printCarportSide(int width, int height) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(width, height) + "</SVG>";
+        return res;
+    }
 
-    public String caportFromSide() {
+    public String caportFromSide(int width, int height) {
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;
 
         int postYPos = OUTERFRAMEYPOS + WOODWIDTH;
         int postSpacing = OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGOUTERLAYER;
+        HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, innerFrameXPos, postYPos);
-        res = raftersSvg(res, rafterSpaceing, outerFrameWidth);
+        res = postsSVG(res, width, innerFrameXPos, postYPos, mapCarport);
+        res = raftersSvg(res, rafterSpaceing, outerFrameWidth, mapCarport);
 
-        res = linesSVG(res, innerFrameXPos);
+        res = linesSVG(res, width, innerFrameXPos, mapCarport);
 
         res = textSVG(res, innerFrameXPos, postSpacing);
         return res;
@@ -64,7 +69,7 @@ public class SVGUtilCarportSide {
         return res;
     }
 
-    private String linesSVG(String res, int innerFrameXPos) {
+    private String linesSVG(String res, int width, int innerFrameXPos, HashMap<String, Integer> mapCarport) {
         //Post spacing lines with 4 posts
         if (mapCarport.get("totalPosts") == MINIMUMPOSTS) {
             res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width + innerFrameXPos - CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
@@ -82,7 +87,7 @@ public class SVGUtilCarportSide {
         return res;
     }
 
-    private String raftersSvg(String res, int rafterSpaceing, int outerFrameWidth) {
+    private String raftersSvg(String res, int rafterSpaceing, int outerFrameWidth, HashMap<String, Integer> mapCarport) {
         //rafter
         for (int i = 0; i < mapCarport.get("totalRafters"); i++) {
             res += square(WOODWIDTH, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - WOODWIDTH);
@@ -92,7 +97,7 @@ public class SVGUtilCarportSide {
         return res;
     }
 
-    private String postsSVG(String res, int innerFrameXPos, int postYPos) {
+    private String postsSVG(String res, int width, int innerFrameXPos, int postYPos, HashMap<String, Integer> mapCarport) {
         //Post
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + width - POSTWIDTH, postYPos);
@@ -145,3 +150,4 @@ public class SVGUtilCarportSide {
         return res;
     }
 }
+

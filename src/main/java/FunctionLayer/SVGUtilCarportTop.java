@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer;
 
 import java.util.HashMap;
@@ -14,8 +9,8 @@ import static javafx.beans.binding.Bindings.length;
  */
 public class SVGUtilCarportTop {
 
-    int width = 430;
-    int height = 430;
+//    int width = 430;
+//    int height = 430;
     private static final int OUTERFRAMEXPOS = 100;
     private static final int OUTERFRAMEYPOS = 100;
     private static final int HANGOUTONESIDE = 35;
@@ -24,7 +19,6 @@ public class SVGUtilCarportTop {
     private static final int WOODWIDTH = 5;
     private static final int POSTWIDTH = 15;
     private static final int EXTRAPOSTSPACING = 10;
-    private static final int EXTRARAFTER = 1;
     private static final int MINIMUMPOSTS = 4;
     private static final int MAXPOSTS = 8;
     private static final double POSTPOSITIONONEHALF = 1.5;
@@ -36,9 +30,13 @@ public class SVGUtilCarportTop {
     private static final int TEXTSPACINGINNERLAYER = 15;
     private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
-    HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
+    
+    public String printCarportTop(int width, int height) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(width, height) + "</SVG>";
+        return res;
+    }
 
-    public String caportFromAbove() {
+    public String caportFromAbove(int width, int height) {
         int outerFrameHeight = height + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
@@ -47,18 +45,21 @@ public class SVGUtilCarportTop {
         int innerLayerEntranceCornorYPosForPost = innerLayerBottomYPos - EXTRAPOSTSPACING;
         int innerLayerEntranceCornorXPosForPost = innerFrameXPos + width - POSTWIDTH;
         int rafterSpaceing = OUTERFRAMEXPOS;
-
-        String res = framesSVG(outerFrameHeight, outerFrameWidth, innerFrameXPos, innerFrameYPos);
-        res = textSVG(res, outerFrameWidth, innerFrameXPos, outerFrameHeight, innerFrameYPos);
-        res = linesSVG(res, outerFrameWidth, innerFrameXPos, innerFrameYPos, outerFrameHeight);
+        HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(width, height);
+        
+        
+        
+        String res = framesSVG(width, height, outerFrameHeight, outerFrameWidth, innerFrameXPos, innerFrameYPos);
+        res = textSVG(res, width, height, outerFrameWidth, innerFrameXPos, outerFrameHeight, innerFrameYPos, mapCarport);
+        res = linesSVG(res, width, height, outerFrameWidth, innerFrameXPos, innerFrameYPos, outerFrameHeight, mapCarport);
         res = beamsSVG(res, outerFrameWidth, innerFrameYPos, innerLayerBottomYPos);
-        res = postsSVG(res, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost);
-        res = raftersSVG(res, outerFrameHeight, rafterSpaceing, outerFrameWidth);
+        res = postsSVG(res, width, height, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, mapCarport);
+        res = raftersSVG(res, width, height, outerFrameHeight, rafterSpaceing, outerFrameWidth, mapCarport);
 
         return res;
     }
 
-    private String raftersSVG(String res, int outerFrameHeight, int rafterSpaceing, int outerFrameWidth) {
+    private String raftersSVG(String res, int width, int height, int outerFrameHeight, int rafterSpaceing, int outerFrameWidth, HashMap<String, Integer> mapCarport) {
         //rafter
         for (int i = 0; i < mapCarport.get("totalRafters"); i++) {
             res += square(outerFrameHeight, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS);
@@ -68,7 +69,7 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String postsSVG(String res, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost) {
+    private String postsSVG(String res, int width, int height, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, HashMap<String, Integer> mapCarport) {
         //post
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerFrameYPos);
@@ -98,7 +99,7 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String linesSVG(String res, int outerFrameWidth, int innerFrameXPos, int innerFrameYPos, int outerFrameHeight) {
+    private String linesSVG(String res, int width, int height, int outerFrameWidth, int innerFrameXPos, int innerFrameYPos, int outerFrameHeight, HashMap<String, Integer> mapCarport) {
         //width lines
         res += line(OUTERFRAMEXPOS, OUTERFRAMEYPOS - LINESPACINGOUTERLAYER, outerFrameWidth + OUTERFRAMEXPOS, OUTERFRAMEYPOS - LINESPACINGOUTERLAYER);
         res += line(innerFrameXPos, OUTERFRAMEYPOS - LINESPACINGINNERLAYER, width + innerFrameXPos, OUTERFRAMEYPOS - LINESPACINGINNERLAYER);
@@ -110,7 +111,7 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String framesSVG(int outerFrameHeight, int outerFrameWidth, int innerFrameXPos, int innerFrameYPos) {
+    private String framesSVG(int width, int height, int outerFrameHeight, int outerFrameWidth, int innerFrameXPos, int innerFrameYPos) {
         //outer inner background
         String res = "";
         res += background();
@@ -121,7 +122,7 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String textSVG(String res, int outerFrameWidth, int innerFrameXPos, int outerFrameHeight, int innerFrameYPos) {
+    private String textSVG(String res, int width, int height, int outerFrameWidth, int innerFrameXPos, int outerFrameHeight, int innerFrameYPos, HashMap<String, Integer> mapCarport) {
         //width text
         res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS - TEXTSPACINGOUTERLAYER, outerFrameWidth);
         res += text(innerFrameXPos, OUTERFRAMEYPOS - TEXTSPACINGINNERLAYER, width);
@@ -161,3 +162,4 @@ public class SVGUtilCarportTop {
         return res;
     }
 }
+

@@ -84,6 +84,24 @@
                     <br>
                 </p>
                 <b>Pris: <%=o.getPrice()%></b> <br>
+                    Vejledende Pris: <%=o.getPrice()%> dkk <br>
+
+                </p>
+
+            </div>
+            <div class="jumbotron">
+                <h2>Skitse af Carport:</h2>
+                <p> Her er en skitse af carporten set fra toppen 
+                <p> Bilen skal her køre ind fra højre side
+                    <% String svgTop = (String) request.getSession().getAttribute("svgtop");%>
+                    <%= svgTop%>
+                </p>
+                
+                <p> Her er en skitse af carporten set fra siden 
+                <p> Bilen skal her køre ind fra højre side
+                    <% String svgSide = (String) request.getSession().getAttribute("svgside");%>
+                    <%= svgSide%>
+                </p>
 
             </div>
 
