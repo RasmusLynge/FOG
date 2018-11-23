@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 /**
  The purpose of Connector is to...
-
  @author Rasmus
  */
 public class Connector {
