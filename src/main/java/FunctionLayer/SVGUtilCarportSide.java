@@ -35,7 +35,7 @@ public class SVGUtilCarportSide {
 //skriv i calc tilføj til hashmap
     private static final int POSTHEIGHT = 200;
     private static final int CENTEROFPOSTMEASSURE = 7;
-    
+
     public String printCarportSide(int width, int height) {
         String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(width, height) + "</SVG>";
         return res;
@@ -150,4 +150,3 @@ public class SVGUtilCarportSide {
         return res;
     }
 }
-
