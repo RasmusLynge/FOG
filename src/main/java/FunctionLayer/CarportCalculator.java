@@ -5,8 +5,6 @@
  */
 package FunctionLayer;
 
-import java.util.HashMap;
-
 /**
  *
  * @author Mathias
@@ -23,40 +21,26 @@ public class CarportCalculator {
     private static final int ROOFHANGOUTTWOSIDES = 70; // amount of centimeters the roof "hangs" out over the width and length of the carport.
     private static final int ENTRANCEHANGOUT = 65; // the hang out at the entrance
     private static final int RAFTERSPACING = 60; // spacing between the middle of each rafter in cm. 
-    private static final int COVERWIDTH = 2; // the covers around the rafters
     private static final int HINGESPERPOST = 2; // the total amount of hinges each posts
-    private static final int HINGESPRRAFTER = 4; // the total amount of hinges for each rafter
+    private static final int HINGESPERRAFTER = 4; // the total amount of hinges for each rafter
     private static final int SCREWSPERLHINGES = 4; // thetotal amount of screws each L formed hinge
-    private static final int SCREWSPERCOVER = 4; // the total amount of screw each cover
     private static final int BOTHSIDES = 2; // for each side of the carport
-    private static final int TOTALCOVERS = 4; // the total amount of covers needed for the carport
     private static final int BEAMS = 2; // total amount of beams in the scrukture
     private static final int POSTSLENGTH = 300; // posts length
     private static final int SCREWSINABOX = 200; // screws in a box
    
 
-    public HashMap<String, Integer> calculateAll(int length, int width) {
-        HashMap<String, Integer> totalMap = new HashMap<>();
-        HashMap<String, Integer> mapPosts = calculatePosts(length, width);
-        HashMap<String, Integer> mapRafters = calculateRafters(length, width);
-        HashMap<String, Integer> mapBeams = beamLengthCalculator(length);
-        HashMap<String, Integer> mapCovers = sideCovers(length, width);
-
-        totalMap.put("length", length);
-        totalMap.put("width", width);
-        totalMap.putAll(mapCovers);
-        totalMap.putAll(mapBeams);
-        totalMap.putAll(mapRafters);
-        totalMap.putAll(mapPosts);
-        int lHinges = totalLHinges(totalMap.get("totalRafters"), totalMap.get("totalPosts"));
-        int screws = totalScrews(lHinges);
-        totalMap.put("totalLHinges", lHinges);
-        totalMap.put("totalScrews", screws);
-        return totalMap;
+    public void calculateAll(int length, int width) {
+        Carport c = new Carport(length, width, false, false);
+        
+        calculatePosts(length, width, c);
+        calculateRafters(length, width, c);
+        beamLengthCalculator(length, c);
+        int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER,c);
+        totalScrews(lHinges,c);
     }
 
-    private HashMap<String, Integer> calculatePosts(int length, int width) {
-        HashMap<String, Integer> map = new HashMap<>();
+    private void calculatePosts(int length, int width, Carport carport) {
         int restLength = length - TWOPOSTLENGTH;
         int restWidth = width - TWOPOSTLENGTH;
 
@@ -64,45 +48,25 @@ public class CarportCalculator {
         int lengthPosts = calcLengthPosts(restLength);
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts ;
-        System.out.println("totalPosts------------"+totalPosts);
-        map.put("postsLength", POSTSLENGTH);
-        map.put("totalPosts", totalPosts);
-        return map;
-
+        carport.setPostLength(POSTSLENGTH);
+        carport.setPost(width);
     }
 
-    private HashMap<String, Integer> beamLengthCalculator(int length) {
-        HashMap<String, Integer> map = new HashMap<>();
-        int toalBeamLength = length + ENTRANCEHANGOUT + ROOFHANGOUTTWOSIDES;
-        map.put("beamLength", toalBeamLength);
-        map.put("totalBeams", BEAMS);
-        return map;
-    }
-
-    private HashMap<String, Integer> calculateRafters(int length, int width) {
-        HashMap<String, Integer> map = new HashMap<>();
-        System.out.println("length " + length);
+    private void calculateRafters(int length, int width, Carport carport) {
         int roofLength = length + ROOFHANGOUTTWOSIDES + ENTRANCEHANGOUT;
-        System.out.println("roofLength " + roofLength);
         int rafterLength = width + ROOFHANGOUTTWOSIDES;
         int totalRafters = roofLength / RAFTERSPACING;
-        System.out.println("totalrafterss-------------" + totalRafters);
         int newRafterSpacing = roofLength / totalRafters;
         
-        map.put("rafterLength", rafterLength);
-        map.put("totalRafters", totalRafters);
-        map.put("newRafterSpacing", newRafterSpacing);
-        return map;
+        carport.setRafter(totalRafters);
+        carport.setRafterLength(rafterLength);
+        carport.setRafterSpacing(newRafterSpacing);
     }
-
-    private HashMap<String, Integer> sideCovers(int length, int width) {
-        HashMap<String, Integer> map = new HashMap<>();
-        int sideCoverLength = length + ENTRANCEHANGOUT + ROOFHANGOUTTWOSIDES;
-        int sideCoverWidth = width + ROOFHANGOUTTWOSIDES + COVERWIDTH * BOTHSIDES;
-
-        map.put("sideCoversWidth", sideCoverWidth);
-        map.put("sideCoverLength", sideCoverLength);
-        return map;
+    
+    private void beamLengthCalculator(int length, Carport carport) {
+        int toalBeamLength = length + ENTRANCEHANGOUT + ROOFHANGOUTTWOSIDES;
+        carport.setBeamLength(toalBeamLength);
+        carport.setBeam(BEAMS);
     }
 
     private int calcWidthPosts(int restWidth) {
@@ -117,19 +81,20 @@ public class CarportCalculator {
 
     }
 
-    private int totalLHinges(int rafters, int posts) {
-        int totalLHinges = rafters * HINGESPRRAFTER;
+    private int totalLHinges(int rafters, int posts, Carport c) {
+        int totalLHinges = rafters * HINGESPERRAFTER;
         totalLHinges += posts * HINGESPERPOST;
+        c.setHinges(totalLHinges);
         return totalLHinges;
     }
 
-    private int totalScrews(int hinges) {
-        double totalScrews = hinges * SCREWSPERLHINGES;
-        totalScrews += TOTALCOVERS * SCREWSPERCOVER;
+    private void totalScrews(int hinges, Carport c) {
+        int totalScrews = hinges * SCREWSPERLHINGES;
         double boxesOfScrews = totalScrews / SCREWSINABOX;
         double boxesRoundedUp = Math.ceil(boxesOfScrews);
         int boxes = (int) boxesRoundedUp;
-        return boxes;
+        c.setScrewBoxes(boxes);
+        c.setScrews(totalScrews);
     }
 
 }
