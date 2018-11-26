@@ -62,7 +62,7 @@ public class Carport {
         this.post = post;
     }
 
-    public int getPostrafterLength() {
+    public int getRafterLength() {
         return rafterLength;
     }
 

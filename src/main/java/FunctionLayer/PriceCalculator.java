@@ -11,8 +11,8 @@ public class PriceCalculator {
     RoofCalculator roofCalculator = new RoofCalculator();
     final private static int CMTOMETER = 100;
 
-    public double priceCalculator(int length, int width) throws GeneralException {
-        Carport c = carportcalculator.calculateAll(length, width);
+    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException {
+        Carport c = carportcalculator.calculateAll(length, width, false, false);
         HashMap<String, Double> mapPrice = db.getPrices();
 
         double totalLengthOfBeams = c.getBeam()*c.getBeamLength() / CMTOMETER;
