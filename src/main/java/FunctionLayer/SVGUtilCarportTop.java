@@ -37,7 +37,7 @@ public class SVGUtilCarportTop {
     }
 
     public String caportFromAbove(int width, int height, boolean roof, boolean shed) {
-        Carport c = new Carport(width, height, false, false);
+        Carport c = new CarportCalculator().calculateAll(height, width, roof, shed);
         int outerFrameHeight = height + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;

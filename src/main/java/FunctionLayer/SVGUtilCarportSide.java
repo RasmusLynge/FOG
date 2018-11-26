@@ -41,7 +41,8 @@ public class SVGUtilCarportSide {
     }
 
     public String caportFromSide(int width, int height, boolean roof, boolean shed) {
-        Carport c = new Carport(width, height, false, false);
+        Carport c = new CarportCalculator().calculateAll(height, width, roof, shed);
+        
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;

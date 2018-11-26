@@ -17,6 +17,7 @@
 //        
 //        //Act
 //        double res = priceCalculator.priceCalculator(240, 240);
+//        double res = priceCalculator.priceCalculator(240, 240,false ,false);
 //        
 //        //Assert
 //        double expected = 1078.4;
