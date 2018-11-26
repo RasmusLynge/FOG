@@ -12,28 +12,25 @@ public class PriceCalculator {
     final private static int CMTOMETER = 100;
 
     public double priceCalculator(int length, int width) throws GeneralException {
-        HashMap<String, Integer> mapCarport = carportcalculator.calculateAll(length, width);
-        HashMap<String, Integer> roofCalculator = this.roofCalculator.roofs(length, width);
+        Carport c = carportcalculator.calculateAll(length, width);
         HashMap<String, Double> mapPrice = db.getPrices();
 
-        double totalLengthOfBeams = (mapCarport.get("beamLength") * mapCarport.get("totalBeams")) / CMTOMETER;
-        double totalLengthOfPosts = (mapCarport.get("totalPosts") * mapCarport.get("postsLength")) / CMTOMETER;
-        double totalLengthOfRafters = (mapCarport.get("rafterLength") * mapCarport.get("totalRafters")) / CMTOMETER;
-        double totalLengthOfCover = (mapCarport.get("sideCoverLength") + mapCarport.get("sideCoversWidth")) / CMTOMETER;
+        double totalLengthOfBeams = c.getBeam()*c.getBeamLength() / CMTOMETER;
+        double totalLengthOfPosts = c.getPost()*c.getPostLength() / CMTOMETER;
+        double totalLengthOfRafters = c.getRafter() * c.getRafterLength() / CMTOMETER;
+        double totalLHinges = c.getHinges();
+        double totalScrewBoxes = c.getScrewBoxes();
 
-        double totalPrice = priceForCarportSekelton(totalLengthOfRafters, mapPrice, totalLengthOfBeams, totalLengthOfPosts, totalLengthOfCover, mapCarport);
-        //totalPrice = priceForRoof();
-        System.out.println(mapCarport.keySet());
+        double totalPrice = priceForCarportSekelton(totalLengthOfRafters, mapPrice, totalLengthOfBeams, totalLengthOfPosts, totalLHinges, totalScrewBoxes);
         return totalPrice;
     }
 
-    private double priceForCarportSekelton(double totalLengthOfRafters, HashMap<String, Double> mapPrice, double totalLengthOfBeams, double totalLengthOfPosts, double totalLengthOfCover, HashMap<String, Integer> mapCarport) {
+    private double priceForCarportSekelton(double totalLengthOfRafters, HashMap<String, Double> mapPrice, double totalLengthOfBeams, double totalLengthOfPosts, double totalLHinges, double totalScrewBoxes) {
         double totalPriceForCarportSkeleton = totalLengthOfRafters * mapPrice.get("Rafter");
         totalPriceForCarportSkeleton += totalLengthOfBeams * mapPrice.get("Beam");
         totalPriceForCarportSkeleton += totalLengthOfPosts * mapPrice.get("Post");
-        totalPriceForCarportSkeleton += totalLengthOfCover * mapPrice.get("Cover");
-        totalPriceForCarportSkeleton += mapCarport.get("totalLHinges") * mapPrice.get("Hinge");
-        totalPriceForCarportSkeleton += mapCarport.get("totalScrews") * mapPrice.get("Screws (200)");
+        totalPriceForCarportSkeleton += totalLHinges * mapPrice.get("Hinge");
+        totalPriceForCarportSkeleton += totalScrewBoxes* mapPrice.get("Screws (200)");
         return totalPriceForCarportSkeleton;
     }
 }

@@ -7,7 +7,7 @@ package FunctionLayer;
 public class Carport {
 
     int width, length, rafter,
-    beam, post, postrafterLength, beamLength,
+    beam, post, rafterLength, beamLength,
     postLength, screws, screwBoxes, hinges;
     
     double rafterSpacing;
@@ -63,11 +63,11 @@ public class Carport {
     }
 
     public int getPostrafterLength() {
-        return postrafterLength;
+        return rafterLength;
     }
 
     public void setRafterLength(int postrafterLength) {
-        this.postrafterLength = postrafterLength;
+        this.rafterLength = postrafterLength;
     }
 
     public int getBeamLength() {

@@ -30,7 +30,7 @@ public class CarportCalculator {
     private static final int SCREWSINABOX = 200; // screws in a box
    
 
-    public void calculateAll(int length, int width) {
+    public Carport calculateAll(int length, int width, boolean roof, boolean shed) {
         Carport c = new Carport(length, width, false, false);
         
         calculatePosts(length, width, c);
@@ -38,6 +38,7 @@ public class CarportCalculator {
         beamLengthCalculator(length, c);
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER,c);
         totalScrews(lHinges,c);
+        return c;
     }
 
     private void calculatePosts(int length, int width, Carport carport) {

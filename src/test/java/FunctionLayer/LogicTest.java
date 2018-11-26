@@ -27,15 +27,10 @@ public class LogicTest {
     @Test
     public void rafterTotalTest(){
         //Arrange
-        CarportCalculator carportCalculator = new CarportCalculator();
         
         //act
-        HashMap<String, Integer> hmap = carportCalculator.calculateAll(240, 240);
         
         //Assert
-        int expected = 6;
-        int actual = hmap.get("totalRafters");
-        Assert.assertEquals(expected, actual);
     }
 
 }
