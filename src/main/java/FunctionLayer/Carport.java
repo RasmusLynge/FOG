@@ -12,7 +12,14 @@ public class Carport {
     
     double rafterSpacing;
     boolean roof, shed;
-
+    
+    public Carport(int width, int length, boolean roof, boolean shed) {
+        this.width = width;
+        this.length = length;
+        this.roof = roof;
+        this.shed = shed;
+    }
+    
     public int getScrewBoxes() {
         return screwBoxes;
     }
@@ -126,10 +133,4 @@ public class Carport {
         this.shed = shed;
     }
 
-    public Carport(int width, int length, boolean roof, boolean shed) {
-        this.width = width;
-        this.length = length;
-        this.roof = roof;
-        this.shed = shed;
-    }
 }

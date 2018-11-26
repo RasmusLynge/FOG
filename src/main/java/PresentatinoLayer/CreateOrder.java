@@ -48,8 +48,8 @@ public class CreateOrder extends Command {
         } else {
             o = lf.makeOrder(width, length, name, email, zip, phone, evt);
         }
-        String svgTop = svgStringTop.printCarportTop(length, width);
-        String svgSide = svgStringSide.printCarportSide(length, width);
+        String svgTop = svgStringTop.printCarportTop(length, width,false,false);
+        String svgSide = svgStringSide.printCarportSide(length, width,false, false);
         
         request.getSession().setAttribute("svgside", svgSide);
         request.getSession().setAttribute("svgtop", svgTop);
