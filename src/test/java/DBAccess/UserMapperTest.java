@@ -19,9 +19,9 @@ import org.junit.Before;
 ////    (4,'someone@nowhere.com','sesam','customer');
 //
 //    private static Connection testConnection;
-//    private static String USER = "jeger@admin.com";
-//    private static String USERPW = "123";
-//    private static String DBNAME = "FOG";
+//    private static String USER = "datamatiker2";
+//    private static String USERPW = "gimig12";
+//    private static String DBNAME = "FOG_USER_TEST";
 //    private static String HOST = "188.166.16.16";
 //
 //    @Before
@@ -38,9 +38,9 @@ import org.junit.Before;
 //            }
 //            // reset test database
 //            try ( Statement stmt = testConnection.createStatement() ) {
-//                stmt.execute( "drop table if exists Users" );
-//                stmt.execute( "create table Users like UsersTest" );
-//                stmt.execute( "insert into Users select * from UsersTest" );
+//                stmt.execute( "drop table if exists User_Login" );
+//                stmt.execute( "create table User_Login like User_Login" );
+//                stmt.execute( "insert into User_Login select * from UsersTest" );
 //            }
 //
 //        } catch ( ClassNotFoundException | SQLException ex ) {
@@ -60,6 +60,8 @@ import org.junit.Before;
 //        // Can we log in
 //        User user = DataMapper.login( "jens@somewhere.com", "jensen" );
 //        assertTrue( user != null );
+//        
+//        
 //    }
 //
 //    @Test( expected = GeneralException.class )
