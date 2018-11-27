@@ -18,7 +18,7 @@ public class PriceCalculator {
         double totalLengthOfBeams = c.getBeam()*c.getBeamLength() / CMTOMETER;
         double totalLengthOfPosts = c.getPost()*c.getPostLength() / CMTOMETER;
         double totalLengthOfRafters = c.getRafter() * c.getRafterLength() / CMTOMETER;
-        double totalLHinges = c.getHinges();
+        double totalLHinges = c.getLHinges();
         double totalScrewBoxes = c.getScrewBoxes();
 
         double totalPrice = priceForCarportSekelton(totalLengthOfRafters, mapPrice, totalLengthOfBeams, totalLengthOfPosts, totalLHinges, totalScrewBoxes);
