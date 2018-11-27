@@ -1,8 +1,5 @@
 package FunctionLayer;
 
-import java.util.HashMap;
-import static javafx.beans.binding.Bindings.length;
-
 /**
  *
  * @author Magnus
@@ -31,43 +28,54 @@ public class SVGUtilCarportTop {
     private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
 
-    public String printCarportTop(int width, int height, boolean roof, boolean shed) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(width, height, roof, shed) + "</SVG>";
+    public String printCarportTop(int length, int width, boolean roof, boolean shed) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed) + "</SVG>";
         return res;
     }
 
-    public String caportFromAbove(int width, int height, boolean roof, boolean shed) {
-        Carport c = new CarportCalculator().calculateAll(height, width, roof, shed);
-        int outerFrameHeight = height + HANGOUTONESIDE * BOTHSIDES;
-        int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
+    public String caportFromAbove(int length, int width, boolean roof, boolean shed) {
+        Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
+        int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
+        int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int innerFrameYPos = OUTERFRAMEYPOS + HANGOUTONESIDE;
-        int innerLayerBottomYPos = innerFrameYPos + height - WOODWIDTH;
+        int innerLayerBottomYPos = innerFrameYPos + width - WOODWIDTH;
         int innerLayerEntranceCornorYPosForPost = innerLayerBottomYPos - EXTRAPOSTSPACING;
-        int innerLayerEntranceCornorXPosForPost = innerFrameXPos + width - POSTWIDTH;
-        int rafterSpaceing = OUTERFRAMEXPOS;
+        int innerLayerEntranceCornorXPosForPost = innerFrameXPos + length - POSTWIDTH;
+        double rafterSpacing = OUTERFRAMEXPOS;
 
-        String res = framesSVG(width, height, outerFrameHeight, outerFrameWidth, innerFrameXPos, innerFrameYPos);
-        res = textSVG(res, width, height, outerFrameWidth, innerFrameXPos, outerFrameHeight, innerFrameYPos, c);
-        res = linesSVG(res, width, height, outerFrameWidth, innerFrameXPos, innerFrameYPos, outerFrameHeight, c);
-        res = beamsSVG(res, outerFrameWidth, innerFrameYPos, innerLayerBottomYPos);
-        res = postsSVG(res, width, height, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
-        res = raftersSVG(res, width, height, outerFrameHeight, rafterSpaceing, outerFrameWidth, c);
+        String res = framesSVG(length, width, outerFrameWidth, outerFrameLength, innerFrameXPos, innerFrameYPos);
+        res = textSVG(res, length, width, outerFrameLength, innerFrameXPos, outerFrameWidth, innerFrameYPos, c);
+        res = linesSVG(res, length, width, outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, c);
+        res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
+        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
+        res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
+        if(roof == true) {
+            res = roofbeamSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
+            
+        }
 
         return res;
     }
+    
+    private String roofbeamSVG(String res, int outerFrameWidth, int innerFrameYPos, int innerLayerBottomYPos) {
+        res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerFrameYPos + outerFrameWidth/BOTHSIDES);
+        
+        return res;
+    }
 
-    private String raftersSVG(String res, int width, int height, int outerFrameHeight, int rafterSpaceing, int outerFrameWidth, Carport c) {
+    private String raftersSVG(String res, int outerFrameWidth, double rafterSpacing, int outerFrameLength, Carport c) {
         //rafter
         for (int i = 0; i < c.getRafter(); i++) {
-            res += square(outerFrameHeight, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS);
-            rafterSpaceing += c.getRafterSpacing();
+            res += square(outerFrameWidth, WOODWIDTH, (int) rafterSpacing, OUTERFRAMEYPOS);
+            rafterSpacing += c.getRafterSpacing();
         }
-        res += square(outerFrameHeight, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS);
+        res += square(outerFrameWidth, WOODWIDTH, OUTERFRAMEXPOS + outerFrameLength - WOODWIDTH, OUTERFRAMEYPOS);
+        
         return res;
     }
 
-    private String postsSVG(String res, int width, int height, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c) {
+    private String postsSVG(String res, int width, int length, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c) {
         //post
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerFrameYPos);
@@ -105,7 +113,7 @@ public class SVGUtilCarportTop {
         res += line(OUTERFRAMEXPOS - LINESPACINGINNERLAYER, innerFrameYPos, OUTERFRAMEXPOS - LINESPACINGINNERLAYER, innerFrameYPos + height);
         res += line(OUTERFRAMEXPOS - LINESPACINGOUTERLAYER, OUTERFRAMEYPOS, OUTERFRAMEXPOS - LINESPACINGOUTERLAYER, OUTERFRAMEYPOS + outerFrameHeight);
         //rafter line
-        res += line(OUTERFRAMEXPOS, OUTERFRAMEYPOS + outerFrameHeight + LINESPACINGINNERLAYER, (int) (c.getRafterSpacing()  + OUTERFRAMEXPOS), OUTERFRAMEYPOS + outerFrameHeight + 10);
+        res += line(OUTERFRAMEXPOS, OUTERFRAMEYPOS + outerFrameHeight + LINESPACINGINNERLAYER, (int) (c.getRafterSpacing() + OUTERFRAMEXPOS), OUTERFRAMEYPOS + outerFrameHeight + 10);
         return res;
     }
 
@@ -159,4 +167,5 @@ public class SVGUtilCarportTop {
         String res = "<text transform=\"translate(" + xPos + "," + yPos + ")rotate(270)\" fill=\"red\">" + messurement + "cm</text>";
         return res;
     }
+
 }

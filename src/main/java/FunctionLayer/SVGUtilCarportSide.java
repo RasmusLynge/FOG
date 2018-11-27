@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package FunctionLayer;
+
 import FunctionLayer.Carport;
 
 /**
@@ -35,15 +36,15 @@ public class SVGUtilCarportSide {
     private static final int POSTHEIGHT = 200;
     private static final int CENTEROFPOSTMEASSURE = 7;
 
-    public String printCarportSide(int width, int height, boolean roof, boolean shed) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(width, height, roof, shed) + "</SVG>";
+    public String printCarportSide(int lenght, int width, boolean roof, boolean shed) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed) + "</SVG>";
         return res;
     }
 
-    public String caportFromSide(int width, int height, boolean roof, boolean shed) {
-        Carport c = new CarportCalculator().calculateAll(height, width, roof, shed);
-        
-        int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
+    public String caportFromSide(int length, int width, boolean roof, boolean shed) {
+        Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
+
+        int outerFrameWidth = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;
 
@@ -51,34 +52,36 @@ public class SVGUtilCarportSide {
         int postSpacing = OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGOUTERLAYER;
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, width, innerFrameXPos, postYPos, c);
+        res = postsSVG(res, length, innerFrameXPos, postYPos, c);
         res = raftersSvg(res, rafterSpaceing, outerFrameWidth, c);
-        res = linesSVG(res, width, innerFrameXPos, c);
-        res = textSVG(res, innerFrameXPos, postSpacing);
+        res = linesSVG(res, length, innerFrameXPos, c);
         return res;
 
     }
 
-    private String textSVG(String res, int innerFrameXPos, int postSpacing) {
+    private String textSVG(String res, int innerFrameXPos, int messurement) {
         //Post spacing text
-        res += text(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, postSpacing);
+        res += text(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, messurement);
         //Post height text
         res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH, POSTHEIGHT);
         return res;
     }
 
-    private String linesSVG(String res, int width, int innerFrameXPos, Carport c) {
+    private String linesSVG(String res, int length, int innerFrameXPos, Carport c) {
         //Post spacing lines with 4 posts
         if (c.getPost() == MINIMUMPOSTS) {
-            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width + innerFrameXPos - CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length + innerFrameXPos - CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res = textSVG(res, innerFrameXPos, length);
         }
         //Post spacing lines with 6 posts
         if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
-            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width / POSTPOSITIONTWO + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length / POSTPOSITIONTWO + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res = textSVG(res, innerFrameXPos, length/POSTPOSITIONTWO);
         }
         //Post spacing lines with 8 posts
         if (c.getPost() >= MAXPOSTS) {
-            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, width / POSTPOSITIONTHREE + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length / POSTPOSITIONTHREE + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
+            res = textSVG(res, innerFrameXPos, length/3);
         }
         //Post height lines
         res += line(OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + WOODWIDTH, OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH);
@@ -95,19 +98,19 @@ public class SVGUtilCarportSide {
         return res;
     }
 
-    private String postsSVG(String res, int width, int innerFrameXPos, int postYPos, Carport c) {
+    private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c) {
         //Post
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
-        res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + width - POSTWIDTH, postYPos);
+        res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + length - POSTWIDTH, postYPos);
         //carport with 6 posts
         if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
-            res += square(POSTHEIGHT, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, postYPos);
+            res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
         }
         //carport with 8 posts
         if (c.getPost() >= MAXPOSTS) {
 
-            res += square(POSTHEIGHT, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
-            res += square(POSTHEIGHT, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
+            res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
+            res += square(POSTHEIGHT, POSTWIDTH, (int) (length / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
 
         }
         return res;

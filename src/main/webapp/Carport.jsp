@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-            <%= request.getAttribute("carport") %>
+            <%= request.getAttribute("carporttop") %>
+            <%= request.getAttribute("carportside") %>
              
     </body>
 </html>

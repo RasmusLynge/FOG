@@ -38,9 +38,11 @@ public class ControlCarportTester extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-
-            //String carport = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide(400, 450,false,false) + "</SVG>";
-            // request.setAttribute("carport", carport);
+            String carportTop = "<SVG width=\"1000\" height=\"1000\">" + utilCarportTop.caportFromAbove(400, 450, true, true) + "</SVG>";
+            request.setAttribute("carporttop", carportTop);
+            String carportSide = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide(400, 450, false, false) + "</SVG>";
+            request.setAttribute("carportside", carportSide);
+            
         } catch (NumberFormatException ex) {
             System.out.println("erorororororoororo");
             request.setAttribute("error", "Input must be numeric values");

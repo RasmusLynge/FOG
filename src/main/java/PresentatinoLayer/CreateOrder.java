@@ -26,7 +26,7 @@ public class CreateOrder extends Command {
         LogicFacade lf = new LogicFacade();
         SVGUtilCarportTop svgStringTop = new SVGUtilCarportTop();
         SVGUtilCarportSide svgStringSide = new SVGUtilCarportSide();
-        
+
         int width = Integer.parseInt(request.getParameter("widthnumber"));
         int length = Integer.parseInt(request.getParameter("lengthnumber"));
         String name = request.getParameter("name");
@@ -35,7 +35,6 @@ public class CreateOrder extends Command {
         String phone = request.getParameter("phone");
         String evt = request.getParameter("evt");
         String measurementtype = request.getParameter("measurements");
-
 
         System.out.println(measurementtype);
         Order o;
@@ -48,14 +47,14 @@ public class CreateOrder extends Command {
         } else {
             o = lf.makeOrder(width, length, name, email, zip, phone, evt);
         }
-        String svgTop = svgStringTop.printCarportTop(length, width,false,false);
-        String svgSide = svgStringSide.printCarportSide(length, width,false, false);
-        
+        String svgTop = svgStringTop.printCarportTop(length, width, false, false);
+        String svgSide = svgStringSide.printCarportSide(length, width, false, false);
+
         request.getSession().setAttribute("svgside", svgSide);
         request.getSession().setAttribute("svgtop", svgTop);
         request.getSession().setAttribute("order", o);
-        
-       return "singleOrder";
+
+        return "singleOrder";
 
     }
 

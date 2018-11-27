@@ -35,7 +35,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="/index.html" style="padding:0px;">
+                <a class="navbar-brand" href="/FOG/" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -46,21 +46,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hjem</a>
+                            <a class="nav-link" href="/FOG/">Hjem</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Fladt Tag</a>
-                                <a class="dropdown-item" href="#">Tag Med Rejsning</a>
+                                <a class="dropdown-item" href="#">Med skur</a>
+                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Info om FOG's carport design</a>
+                                <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/om-fog/">Om FOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/FOG/employeelogin.jsp">login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
@@ -77,16 +80,16 @@
                     Ved bestilling medfølger standardbyggevejledning.</p>
 
                 <% String error = (String) request.getAttribute("error");
-                if (error != null) {
-                    out.println("<h2>Fejl!</h2>");
-                    out.println(error);
-                }
+                    if (error != null) {
+                        out.println("<h2>Fejl!</h2>");
+                        out.println(error);
+                    }
                 %>
                 <h6>Carport Bredde</h6>
                 <form name="order" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="order">
-                    
-                    
+
+
                     <div class="form-group">
                         <input type="number" name="widthnumber" class="form-control" placeholder="Vælg bredde min. 240cm max 720cm" value="" required min="240" max="720"/>
                     </div>
@@ -96,12 +99,12 @@
                     <div class="form-group">
                         <input type="number" name="lengthnumber" class="form-control" placeholder="Vælg længde min. 240cm max 720cm" value="" required min="240" max="720"/>
                     </div>
-                    
+
                     <h6>Indre eller ydre mål</h6>
                     <p class="lead">Som udgangspunkt bestiller du de indre mål på din carport. Carportens ydre mål er større end hvad du indtaster.
-                    Hvis du i stedet ønsker at bestille på de ydre mål, skal du markere det i boksen herunder:</p>
+                        Hvis du i stedet ønsker at bestille på de ydre mål, skal du markere det i boksen herunder:</p>
                     <input type="checkbox" name="measurements" value="outermeasurements">Jeg vil gerne bestille med de indtastede værdier som ydre mål<br>
-                    
+
 
                     <br>
                     <h6>Kontakt information</h6>
@@ -129,14 +132,14 @@
 
 
         </div>
-            <nav class="navbar bottom navbar-dark bg-dark">
-                <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
-                <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
-                </li>
-            </nav>
+        <nav class="navbar bottom navbar-dark bg-dark">
+            <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
+            <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
+        </li>
+    </nav>
 
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/popper.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-    </body>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
 </html>

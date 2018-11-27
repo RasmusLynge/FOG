@@ -22,6 +22,7 @@ public class Login extends Command {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         session.setAttribute("role", user.getRole());
+        
 
         
         if (user.getRole().equals("employee")) {

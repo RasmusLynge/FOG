@@ -38,10 +38,6 @@ public class CarportCalculator {
         beamLengthCalculator(length, c);
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER,c);
         totalScrews(lHinges,c);
-        System.out.println("Rafter "+c.getRafter());
-        System.out.println("Post "+ c.getPost());
-        System.out.println("Beam "+ c.getBeam());
-        System.out.println("RafterSpacing " + c.getRafterSpacing());
         return c;
     }
 

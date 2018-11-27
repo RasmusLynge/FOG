@@ -73,66 +73,66 @@
             </nav>
 
             <div class="jumbotron">
-                <% 
-            User user = (User) session.getAttribute("user");
-            if ("customers".equals(user.getRole())) {
-        %>
-        <table>
-            <thead>
-                <th>Her kan du se dine tidligere ordrer</th>
-            </thead>
-            <tbody>
-                <td>
-                    <%
-                        if (user != null) { 
-                            ArrayList<Order> orderlist = new ArrayList<>();
-                            orderlist = (ArrayList<Order>)request.getSession().getAttribute("ordersByUserID");
-                            for (int i = 0; i < orderlist.size(); i++) { 
-                            String orderID = orderlist.get(i).getId();
-                    %>
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="vieworder">
-                                <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
-                                View order details concerning order ID: <%out.println(orderID);%><input type="submit" value="View order details">
-                            </form>
-                    <%
+                <%
+                    User user = (User) session.getAttribute("user");
+                    if ("customers".equals(user.getRole())) {
+                %>
+                <table>
+                    <thead>
+                    <th>Her kan du se dine tidligere ordrer</th>
+                    </thead>
+                    <tbody>
+                    <td>
+                        <%
+                            if (user != null) {
+                                ArrayList<Order> orderlist = new ArrayList<>();
+                                orderlist = (ArrayList<Order>) request.getSession().getAttribute("ordersByUserID");
+                                for (int i = 0; i < orderlist.size(); i++) {
+                                    String orderID = orderlist.get(i).getId();
+                        %>
+                        <form action="FrontController" method="POST">
+                            <input type="hidden" name="command" value="vieworder">
+                            <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
+                            View order details concerning order ID: <%out.println(orderID);%><input type="submit" value="View order details">
+                        </form>
+                        <%
+                                }
                             }
-                        }
-                    %>       
-                </td>
-            </tbody>
-        </table>
-        <%       
-            } else if ("employee".equals(user.getRole())) {
-        %>
-        <table>
-            <thead>
-                <th>Her kan du se alle ordre i systemmet</th>
-            </thead>
-            <tr>
-                <td>
-                    <%
-                        if (user != null) { 
-                            ArrayList<Order> orderlist = new ArrayList<>();
-                            orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
-                            for (int i = 0; i < orderlist.size(); i++) { 
-                            String orderID = orderlist.get(i).getId();
-                    %>
+                        %>       
+                    </td>
+                    </tbody>
+                </table>
+                <%
+                } else if ("employee".equals(user.getRole())) {
+                %>
+                <table>
+                    <thead>
+                    <th>Her kan du se alle ordre i systemmet</th>
+                    </thead>
+                    <tr>
+                        <td>
+                            <%
+                                if (user != null) {
+                                    ArrayList<Order> orderlist = new ArrayList<>();
+                                    orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                                    for (int i = 0; i < orderlist.size(); i++) {
+                                        String orderID = orderlist.get(i).getId();
+                            %>
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="showOrderDetails">
                                 <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
                                 Order ID: <%out.println(orderID);%><input type="submit" value="Se ordre detaljer">  
                             </form>
-                    <%
-                            }
-                        }
-                    %>       
-                </td>
-            </tr>
-        </table>
-        <%
-            }
-        %>
+                            <%
+                                    }
+                                }
+                            %>       
+                        </td>
+                    </tr>
+                </table>
+                <%
+                    }
+                %>
             </div>
 
 
