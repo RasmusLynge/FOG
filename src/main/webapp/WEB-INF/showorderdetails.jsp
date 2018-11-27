@@ -4,6 +4,7 @@
     Author     : Simon
 --%>
 
+<%@page import="FunctionLayer.User"%>
 <%@page import="FunctionLayer.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,9 +28,9 @@
         <link rel="stylesheet" type="text/css" media="all" href="CSS/main.css">
     </head>
     <body>
-<%
-Order o = (Order) request.getAttribute("order");
-%>
+        <%
+            Order o = (Order) request.getAttribute("order");
+        %>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -38,7 +39,7 @@ Order o = (Order) request.getAttribute("order");
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="/index.html" style="padding:0px;">
+                <a class="navbar-brand" href="/FOG/" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -49,17 +50,17 @@ Order o = (Order) request.getAttribute("order");
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hjem</a>
+                            <a class="nav-link" href="/FOG/">Hjem</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Fladt Tag</a>
-                                <a class="dropdown-item" href="#">Tag Med Rejsning</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Info om FOG's carport design</a>
+                                <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -68,54 +69,76 @@ Order o = (Order) request.getAttribute("order");
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
                         </li>
+                        <li class="nav-item">
+                            <% User user = (User) session.getAttribute("user");
+                                if (user == null) {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
+                                } else {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                                }%>                         
+                        </li>
                     </ul>
                 </div>
             </nav>
 
             <div class="jumbotron">
                 <%String id = o.getId();%>
-                <h1>Ordre detaljer for id: <%= id %></h1>
+                <h1>Ordre detaljer for id: <%= id%></h1>
                 <form action="FrontController" method="POST">
                     <input type="hidden" name="command" value="editorderdetails">
                     <input type="hidden" name="orderID" value=<%=id%>>
                     <ol>
-                    <li>
-                        Bredde: <input type="number" name="width" min="240" max="720" placeholder="<%out.println(o.getWidth());%>" required> cm.
-                    </li>
-                    <li>
-                        Længde: <input type="number" name="length" min="240" max="720" placeholder="<%out.println(o.getLength());%>" required> cm.
-                    </li>                 
-                    <li>
-                        Tag:
-                        <select name="roof">
-                            <option value="1" <%if (o.isFlat_roof()) out.println("selected"); %>>Fladt tag</option>
-                            <option value="0" <%if (!o.isFlat_roof()) out.println("selected"); %>>Tag med rejsning</option>
-                        </select>
-                    </li>
-                    <li>
-                        Bestillingsdato: <%out.println(o.getOrderdate());%>
-                    </li>
-                    <li>
-                        <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) out.println("checked"); %>> Forespørgsel<br>
-                        <input type="radio" name="State" value="Afventer sælger" <%if ("Afventer sælger".equals(o.getState())) out.println("checked"); %>> Afventer sælger<br>
-                        <input type="radio" name="State" value="Betalt" <%if ("Betalt".equals(o.getState())) out.println("checked"); %>> Betalt<br>
-                        <input type="radio" name="State" value="Fragtet" <%if ("Fragtet".equals(o.getState())) out.println("checked"); %>> Fragtet<br>
-                        <input type="radio" name="State" value="Afsluttet uden salg" <%if ("Afsluttet uden salg".equals(o.getState())) out.println("checked"); %>> Afsluttet uden salg<br>
-                    </li>
-                </ol>
+                        <li>
+                            Bredde: <input type="number" name="width" min="240" max="720" placeholder="<%out.println(o.getWidth());%>" required> cm.
+                        </li>
+                        <li>
+                            Længde: <input type="number" name="length" min="240" max="720" placeholder="<%out.println(o.getLength());%>" required> cm.
+                        </li>                 
+                        <li>
+                            Tag:
+                            <select name="roof">
+                                    <option value="1" <%if (o.isFlat_roof()) {
+                                        out.println("selected");
+                                    } %>>Fladt tag</option>
+                                        <option value="0" <%if (!o.isFlat_roof()) {
+                                        out.println("selected");
+                                    } %>>Tag med rejsning</option>
+                            </select>
+                        </li>
+                        <li>
+                            Bestillingsdato: <%out.println(o.getOrderdate());%>
+                        </li>
+                        <li>
+                               <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) {
+                                    out.println("checked");
+                                } %>> Forespørgsel<br>
+                                   <input type="radio" name="State" value="Afventer sælger" <%if ("Afventer sælger".equals(o.getState())) {
+                                    out.println("checked");
+                                } %>> Afventer sælger<br>
+                                   <input type="radio" name="State" value="Betalt" <%if ("Betalt".equals(o.getState())) {
+                                    out.println("checked");
+                                } %>> Betalt<br>
+                                   <input type="radio" name="State" value="Fragtet" <%if ("Fragtet".equals(o.getState())) {
+                                    out.println("checked");
+                                } %>> Fragtet<br>
+                                   <input type="radio" name="State" value="Afsluttet uden salg" <%if ("Afsluttet uden salg".equals(o.getState())) {
+                                    out.println("checked");
+                                }%>> Afsluttet uden salg<br>
+                        </li>
+                    </ol>
                     <input type="submit" value="Gem ændringer">
                 </form>
             </div>
 
+            <nav class="navbar bottom navbar-dark bg-dark">
+                <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
+                <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
+                </li>
+            </nav>
         </div>
-        <nav class="navbar bottom navbar-dark bg-dark">
-            <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
-            <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
-        </li>
-    </nav>
 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</body>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
 </html>

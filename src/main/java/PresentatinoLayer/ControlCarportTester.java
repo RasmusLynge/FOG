@@ -21,6 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Control", urlPatterns = {"/Control"})
 public class ControlCarportTester extends HttpServlet {
+    
+     private static final int length = 500;
+     private static final int width = 300;
+     private static final int SHEDlength = 170;
+     private static final int SHEDwidth = 300;
+     int canvasX = length+300;
+     int canvasY = width+300;
+     
 
     SVGUtilCarportTop utilCarportTop = new SVGUtilCarportTop();
     SVGUtilCarportSide utilCarportSide = new SVGUtilCarportSide();
@@ -38,9 +46,9 @@ public class ControlCarportTester extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String carportTop = "<SVG width=\"1000\" height=\"1000\">" + utilCarportTop.caportFromAbove(400, 450, true, true) + "</SVG>";
+            String carportTop = "<SVG width=\""+canvasX+"\" height=\""+canvasY+"\">" + utilCarportTop.caportFromAbove(length, width, true, true, SHEDlength, SHEDwidth) + "</SVG>";
             request.setAttribute("carporttop", carportTop);
-            String carportSide = "<SVG width=\"1000\" height=\"1000\">" + utilCarportSide.caportFromSide(400, 450, false, false) + "</SVG>";
+            String carportSide = "<SVG width=\""+canvasX+"\" height=\""+canvasY+"\">" + utilCarportSide.caportFromSide(length, width, true, true, SHEDlength) + "</SVG>";
             request.setAttribute("carportside", carportSide);
             
         } catch (NumberFormatException ex) {

@@ -1,3 +1,4 @@
+<%@page import="FunctionLayer.User"%>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -28,7 +29,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#" style="padding:0px;">
+                <a class="navbar-brand" href="/FOG/" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -39,20 +40,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hjem</a>
+                            <a class="nav-link" href="/FOG/">Hjem</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <form name="orderpage" action="FrontController" method="POST">
-                                    <input class="dropdown-item" type="hidden" name="command" value="orderpage">
-                                    <input class="dropdown-item" type="submit" value="Fladt tag">
-                                </form>
-                                <a class="dropdown-item" href="#">Tag Med Rejsning</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Info om FOG's carport design</a>
+                                <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -61,12 +59,20 @@
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
                         </li>
+                        <li class="nav-item">
+                            <% User user = (User) session.getAttribute("user");
+                                if (user == null) {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
+                                } else {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                                }%>                         
+                        </li>
                     </ul>
                 </div>
             </nav>
             <div class="jumbotron">
-                <h1 class="display-4">KÃ˜B DIN NYE CARPORT HOS FOG</h1>
-                <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning pÃ¥ en carport indenfor vores standardprogram - i de mÃ¥l du Ã¸nsker.
+                <h1 class="display-4">KØB DIN NYE CARPORT HOS FOG</h1>
+                <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram - i de mål du ønsker.
                     Tilbud og skitsetegning fremsendes med post hurtigst muligt. </p>
 
                 <!-- Dette er den tidligere knap her:
@@ -87,9 +93,9 @@
                     <div class="card mb-4">
                         <div class="card-body text-center">
                             <h5 class="card-title"> STANDARD MODELLER</h5>
-                            <p class="card-text">Leveres som Byg-selv sÃ¦t - usamlet og ubehandlet!
+                            <p class="card-text">Leveres som Byg-selv sæt - usamlet og ubehandlet!
                                 Altid kvalitetsmaterialer.
-                                UdfÃ¸rlig byggevejledning til carport og spÃ¦r medfÃ¸lger.
+                                Udførlig byggevejledning til carport og spær medfølger.
 
                                 Levering i hele Danmark inden for ca. 10 hverdage.</p>
                             <a href="https://www.johannesfog.dk/byggecenter/sog/?searchterm=carporte" class="card-link">Se Standart modeller</a>
@@ -109,7 +115,7 @@
                     <div class="card mb-4">
                         <div class="card-body text-center">
                             <h5 class="card-title">Card</h5>
-                            <p class="card-text">Det her bliver kaldt et "card". det er en mindre tekstboks, som du kan sÃ¦tte in pÃ¥ en rÃ¦kke/colonne</p>
+                            <p class="card-text">Det her bliver kaldt et "card". det er en mindre tekstboks, som du kan sætte ind på en række/colonne</p>
                             <a href="#" class="card-link">Det her er bare et link</a>
                         </div>
                     </div>
@@ -119,11 +125,11 @@
                     <h1 class="display-4">Medarbejder hos fog?</h1>
                     <p class="lead">Her kan du logge ind som medarbejder </p>
 
-                <form name="orderpage" action="FrontController" method="POST">
-                    <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
-                    <br>
-                    <input class="btn btn-primary btn-lg" type="submit" value="Login">
-                </form>
+                    <form name="orderpage" action="FrontController" method="POST">
+                        <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
+                        <br>
+                        <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
+                    </form>
                     </p>
                 </div>
 

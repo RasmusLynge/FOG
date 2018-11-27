@@ -1,6 +1,5 @@
 <%@page import="FunctionLayer.User"%>
-<!DOCTYPE html>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -9,7 +8,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Bootstrap 4 Starter Template</title>
+        <title>FOG Carporte</title>
 
         <title>Bootstrap 4 Layout</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -71,45 +70,78 @@
                     </ul>
                 </div>
             </nav>
-
             <div class="jumbotron">
-                <h2>TEST SIDEN!</h2>
-                <%= request.getAttribute("carporttop")%>
-                <%= request.getAttribute("carportside")%>
+                <h1 class="display-4">KØB DIN NYE CARPORT HOS FOG</h1>
+                <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram - i de mål du ønsker.
+                    Tilbud og skitsetegning fremsendes med post hurtigst muligt. </p>
+
+                <!-- Dette er den tidligere knap her:
+                <p class="lead"> 
+                     <a class="btn btn-primary btn-lg" href="#" role="button">Bestil et tilbud her</a>
+                 </p>
+                -->
+
+                <form name="orderpage" action="FrontController" method="POST">
+                    <input class="btn btn-primary btn-lg" type="hidden" name="command" value="orderpage">
+                    <br>
+                    <input class="btn btn-primary btn-lg" type="submit" value="Bestil et tilbud her">
+                </form>
+
             </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"> STANDARD MODELLER</h5>
+                            <p class="card-text">Leveres som Byg-selv sæt - usamlet og ubehandlet!
+                                Altid kvalitetsmaterialer.
+                                Udførlig byggevejledning til carport og spær medfølger.
 
-            <div class="jumbotron">
-                <div class="col-md-12 register-right">
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Uden skur</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Med skur</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        </div>
-                        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row register-form">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="VÃ¦lg bredde pÃ¥ skur *" value="" />
-                                        <input type="number" class="form-control" placeholder="VÃ¦lg lÃ¦ngde pÃ¥ skur *" value="" />
-                                    </div>
-                                </div>
-                            </div>
+                                Levering i hele Danmark inden for ca. 10 hverdage.</p>
+                            <a href="https://www.johannesfog.dk/byggecenter/sog/?searchterm=carporte" class="card-link">Se Standart modeller</a>
                         </div>
                     </div>
                 </div>
-            </div>
-                <nav class="navbar bottom navbar-dark bg-dark">
-                    <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
-                    <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
-                    </li>
-                </nav>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Bla Bla</h5>
+                            <p class="card-text">lorem ipsum bla bla bla...</p>
+                            <a href="#" class="card-link">link</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Card</h5>
+                            <p class="card-text">Det her bliver kaldt et "card". det er en mindre tekstboks, som du kan sætte ind på en række/colonne</p>
+                            <a href="#" class="card-link">Det her er bare et link</a>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="jumbotron">
+                    <h1 class="display-4">Medarbejder hos fog?</h1>
+                    <p class="lead">Her kan du logge ind som medarbejder </p>
+
+                    <form name="orderpage" action="FrontController" method="POST">
+                        <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
+                        <br>
+                        <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
+                    </form>
+                    </p>
+                </div>
+
+            </div>
+
+            <nav class="navbar bottom navbar-dark bg-dark">
+                <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
+                <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
+                </li>
+            </nav>
+
+        </div>
 
         <script src="/js/jquery.min.js"></script>
         <script src="/js/popper.min.js"></script>

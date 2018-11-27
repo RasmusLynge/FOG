@@ -4,6 +4,7 @@
     Author     : Rasmu
 --%>
 
+<%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -35,7 +36,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#" style="padding:0px;">
+                <a class="navbar-brand" href="/FOG/" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -46,17 +47,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hjem</a>
+                            <a class="nav-link" href="/FOG/">Hjem</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Fladt Tag</a>
-                                <a class="dropdown-item" href="#">Tag Med Rejsning</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Info om FOG's carport design</a>
+                                <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -64,6 +65,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
+                        </li>
+                        <li class="nav-item">
+                            <% User user = (User) session.getAttribute("user");
+                                if (user == null) {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
+                                } else {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                                }%>                         
                         </li>
                     </ul>
                 </div>

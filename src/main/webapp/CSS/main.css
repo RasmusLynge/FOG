@@ -28,3 +28,9 @@ and open the template in the editor.
 .card-link {
     color: #004687;
 }
+
+
+.nav-link active {
+    border-color: #0C1F6B !important;
+    color:#0C1F6B !important;
+}

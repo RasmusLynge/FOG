@@ -29,11 +29,11 @@ public class SVGUtilCarportTop {
     CarportCalculator carportcalculator = new CarportCalculator();
 
     public String printCarportTop(int length, int width, boolean roof, boolean shed) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed) + "</SVG>";
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed, 100, width) + "</SVG>";
         return res;
     }
 
-    public String caportFromAbove(int length, int width, boolean roof, boolean shed) {
+    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
@@ -50,17 +50,21 @@ public class SVGUtilCarportTop {
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
         res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
-        if(roof == true) {
-            res = roofbeamSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
-            
+        if (roof == true) {
+            res = roofbeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
+
+        }
+        
+        if (shed == true) {
+            res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }
 
         return res;
     }
-    
-    private String roofbeamSVG(String res, int outerFrameWidth, int innerFrameYPos, int innerLayerBottomYPos) {
-        res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerFrameYPos + outerFrameWidth/BOTHSIDES);
-        
+
+    private String roofbeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
+        res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, outerFrameYPos + outerFrameWidth / BOTHSIDES);
+
         return res;
     }
 
@@ -71,7 +75,7 @@ public class SVGUtilCarportTop {
             rafterSpacing += c.getRafterSpacing();
         }
         res += square(outerFrameWidth, WOODWIDTH, OUTERFRAMEXPOS + outerFrameLength - WOODWIDTH, OUTERFRAMEYPOS);
-        
+
         return res;
     }
 
@@ -120,7 +124,6 @@ public class SVGUtilCarportTop {
     private String framesSVG(int width, int height, int outerFrameHeight, int outerFrameWidth, int innerFrameXPos, int innerFrameYPos) {
         //outer inner background
         String res = "";
-        res += background();
         //outerframe
         res += square(outerFrameHeight, outerFrameWidth, OUTERFRAMEXPOS, OUTERFRAMEYPOS);
         //innerframe
@@ -140,12 +143,11 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String background() {
-        String res = "<rect x=\"0\" y=\"0\" height=\"1000\" width=\"1000\"\n"
-                + "              style=\"stroke:#000000; fill: #f9f9f9\"/>";
-        return res;
-    }
-
+//    private String background() {
+//        String res = "<rect x=\"0\" y=\"0\" height=\"1000\" width=\"1000\"\n"
+//                + "              style=\"stroke:#000000; fill: #f9f9f9\"/>";
+//        return res;
+//    }
     private String square(int height, int width, int xPos, int yPos) {
         String res = "<rect x=\"" + xPos + "\" y=\"" + yPos + "\" height=\"" + height + "\" width=\"" + width + "\"\n"
                 + "              style=\"stroke:#000000; fill: #efede8\"/>";
@@ -165,6 +167,12 @@ public class SVGUtilCarportTop {
 
     private String textRotated(int xPos, int yPos, int messurement) {
         String res = "<text transform=\"translate(" + xPos + "," + yPos + ")rotate(270)\" fill=\"red\">" + messurement + "cm</text>";
+        return res;
+    }
+
+    private String transSquare(int height, int width, int xPos, int yPos) {
+        String res = "<rect x=\"" + xPos + "\" y=\"" + yPos + "\" height=\"" + height + "\" width=\"" + width + "\"\n"
+                + "              style=\"stroke:#000000; fill: #c6c6c6\" fill-opacity=\"0.6\"/>";
         return res;
     }
 

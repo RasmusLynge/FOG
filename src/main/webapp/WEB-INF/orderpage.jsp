@@ -4,6 +4,7 @@
     Author     : Rasmu
 --%>
 
+<%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -53,7 +54,7 @@
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Med skur</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
                                 <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
@@ -63,10 +64,15 @@
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/om-fog/">Om FOG</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/FOG/employeelogin.jsp">login</a>
+                            <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
+                            <% User user = (User) session.getAttribute("user");
+                                if (user == null) {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
+                                } else {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                                }%>                         
                         </li>
                     </ul>
                 </div>
@@ -137,6 +143,7 @@
             <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
         </li>
     </nav>
+    </div>
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
