@@ -10,7 +10,7 @@ public class Carport {
             beam, post, rafterLength, beamLength,
             postLength, screws, screwBoxes, lHinges,
             outerWidth, outerLength, roofBeams,
-            flatHinges;
+            flatHinges, roofTiles;
 
     public int getFlatHinges() {
         return flatHinges;

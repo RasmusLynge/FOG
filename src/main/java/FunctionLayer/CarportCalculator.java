@@ -4,30 +4,12 @@
  * and open the template in the editor.
  */
 package FunctionLayer;
-
+import static FunctionLayer.Rules.*;
 /**
  *
  * @author Mathias
  */
 public class CarportCalculator {
-
-//    private static final int MINLENGTH = 240;
-//    private static final int MINWIDTH = 240;
-//    private static final int MAXLENGTH = 780;
-//    private static final int MAXWIDTH = 750;
-    private static final int NEWPOSTLENGTH = 200; //how many centimeters to make a new post necessary
-    private static final int TWOPOSTLENGTH = 200; //subtracted from side length because corner posts are shared
-    private static final int MINPOSTS = 4; // minimum amounts of posts in a carport
-    private static final int ROOFHANGOUTTWOSIDES = 70; // amount of centimeters the roof "hangs" out over the width and length of the carport.
-    private static final int ENTRANCEHANGOUT = 65; // the hang out at the entrance
-    private static final int RAFTERSPACING = 60; // spacing between the middle of each rafter in cm. 
-    private static final int HINGESPERPOST = 2; // the total amount of hinges each posts
-    private static final int HINGESPERRAFTER = 4; // the total amount of hinges for each rafter
-    private static final int SCREWSPERLHINGES = 4; // thetotal amount of screws each L formed hinge
-    private static final int BOTHSIDES = 2; // for each side of the carport
-    private static final int BEAMS = 2; // total amount of beams in the scrukture
-    private static final int POSTSLENGTH = 300; // posts length
-    private static final int SCREWSINABOX = 200; // screws in a box
 
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) {
         Carport c = new Carport(length, width, false, false);

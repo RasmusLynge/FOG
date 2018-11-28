@@ -3,13 +3,13 @@ package FunctionLayer;
 
 import DBAccess.DataMapper;
 import java.util.HashMap;
-
+import static FunctionLayer.Rules.*;
 public class PriceCalculator {
 
     DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
     RoofCalculator roofCalculator = new RoofCalculator();
-    final private static int CMTOMETER = 100;
+//    final private static int CMTOMETER = 100;
 
     public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException {
         Carport c = carportcalculator.calculateAll(length, width, false, false);

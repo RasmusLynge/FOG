@@ -1,15 +1,9 @@
 package FunctionLayer;
 
 import DBAccess.DataMapper;
-
+import static FunctionLayer.Rules.*;
 public class RoofCalculator {
 
-    private static final int OVERLAP = 20;
-    private static final int PLASTMOLENGTHLONG = 600;
-    private static final int PLASTMOLENGTHSMALL = 360;
-    private static final int PLASTMOWIDTH = 120;
-    private static final int BOTHSIDES = 2;
-    private static final int ROOFBEAMSPACING = 45;
     DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
 
@@ -69,9 +63,8 @@ public class RoofCalculator {
         c.setRoofRafter(roofRafter);
         
         
-        
         int roofBeams = (int) (roofRafterLength/ROOFBEAMSPACING);
         c.setRoofBeams(roofBeams);
-        
+        System.out.println("roofBeams " + c.getRoofBeams());
     }
 }
