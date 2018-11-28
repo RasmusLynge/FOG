@@ -141,9 +141,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <br>
-                                            <input type="number" name="shedWidth" class="form-control" placeholder="Vælg bredde på skur *"  min="240" max="720" />
+                                            <input type="number" name="shedWidth" class="form-control" placeholder="Vælg bredde på skur *"  min="150" max="720" />
                                             <br>
-                                            <input type="number" name="shedLength" class="form-control" placeholder="Vælg længde på skur *"  min="240" max="520"/>
+                                            <input type="number" name="shedLength" class="form-control" placeholder="Vælg længde på skur *"  min="150" max="520"/>
                                         </div>
                                     </div>
                                 </div>
