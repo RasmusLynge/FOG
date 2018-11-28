@@ -28,8 +28,8 @@ public class SVGUtilCarportTop {
     private static final int TEXTBOTTOMLAYER = 30;
     CarportCalculator carportcalculator = new CarportCalculator();
 
-    public String printCarportTop(int length, int width, boolean roof, boolean shed) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed, 100, width) + "</SVG>";
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
         return res;
     }
 

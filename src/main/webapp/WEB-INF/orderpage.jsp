@@ -79,7 +79,7 @@
             </nav>
 
             <div class="jumbotron">
-                <h2 class="display-4">QUICK-BYG TILBUD - carport med fladt tag</h2>
+                <h2 class="display-4">QUICK-BYG - Design din egen carport: </h2>
                 <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses dine specifikke ønsker. </p>
                 <br>
                 <p class="lead"> Tilbud og skitsetegning fremsendes med post hurtigst muligt.
@@ -91,9 +91,18 @@
                         out.println(error);
                     }
                 %>
-                <h6>Carport Bredde</h6>
+                <h6>Valg af tag</h6>
                 <form name="order" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="order">
+                    <div class="form-group">
+                        <select class="form-control" name="roof" required>
+                            <option class="hidden" value="1">Fladt tag med plastik</option>
+                            <option value="2">Vinklet tag med plastik</option>
+                            <option value="3">Vinklet tag med tegl</option>
+                        </select>
+                    </div>
+
+                    <h6>Carport Bredde</h6>
 
 
                     <div class="form-group">
@@ -110,7 +119,37 @@
                     <p class="lead">Som udgangspunkt bestiller du de indre mål på din carport. Carportens ydre mål er større end hvad du indtaster.
                         Hvis du i stedet ønsker at bestille på de ydre mål, skal du markere det i boksen herunder:</p>
                     <input type="checkbox" name="measurements" value="outermeasurements">Jeg vil gerne bestille med de indtastede værdier som ydre mål<br>
+                    <br>
 
+                    <h6>Valg af skur: </h6>
+                    <p class="lead">Du kan vælge at have et skur, som en del af din carport herunder: </p>
+
+                    <div class="col-md-12 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Uden skur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Med skur</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            </div>
+                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row register-form">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <br>
+                                            <input type="number" name="shedWidth" class="form-control" placeholder="Vælg bredde på skur *"  min="240" max="720" />
+                                            <br>
+                                            <input type="number" name="shedLength" class="form-control" placeholder="Vælg længde på skur *"  min="240" max="520"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <br>
                     <h6>Kontakt information</h6>
@@ -143,10 +182,10 @@
             <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
         </li>
     </nav>
-    </div>
+</div>
 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

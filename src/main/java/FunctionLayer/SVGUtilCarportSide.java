@@ -36,8 +36,8 @@ public class SVGUtilCarportSide {
     private static final int POSTHEIGHT = 200;
     private static final int CENTEROFPOSTMEASSURE = 7;
 
-    public String printCarportSide(int lenght, int width, boolean roof, boolean shed) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed, 100) + "</SVG>";
+    public String printCarportSide(int lenght, int width, boolean roof, boolean shed, int shedLength) {
+        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 

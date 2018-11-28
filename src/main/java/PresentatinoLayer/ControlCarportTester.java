@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thomas
+ * @author Magnus
  */
 @WebServlet(name = "Control", urlPatterns = {"/Control"})
 public class ControlCarportTester extends HttpServlet {

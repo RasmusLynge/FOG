@@ -10,6 +10,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
+    //Test negativ positiv grænseværdier lav ikke mere end en test pr. metode. 
+
 //public class UserMapperTest {
 ////    Test date in the UsersTest table
 ////    INSERT INTO `UsersTest` VALUES 
