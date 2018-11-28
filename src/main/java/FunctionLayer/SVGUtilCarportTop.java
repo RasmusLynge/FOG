@@ -1,12 +1,12 @@
 package FunctionLayer;
+
 import static FunctionLayer.Rules.*;
+
 /**
  *
  * @author Magnus
  */
 public class SVGUtilCarportTop {
-
-    CarportCalculator carportcalculator = new CarportCalculator();
 
     public String printCarportTop(int length, int width, boolean roof, boolean shed) {
         String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed) + "</SVG>";
@@ -30,17 +30,17 @@ public class SVGUtilCarportTop {
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
         res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
-        if(roof == true) {
+        if (roof == true) {
             res = roofbeamSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
-            
+
         }
 
         return res;
     }
-    
+
     private String roofbeamSVG(String res, int outerFrameWidth, int innerFrameYPos, int innerLayerBottomYPos) {
-        res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerFrameYPos + outerFrameWidth/BOTHSIDES);
-        
+        res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, innerFrameYPos + outerFrameWidth / BOTHSIDES);
+
         return res;
     }
 
@@ -51,7 +51,7 @@ public class SVGUtilCarportTop {
             rafterSpacing += c.getRafterSpacing();
         }
         res += square(outerFrameWidth, WOODWIDTH, OUTERFRAMEXPOS + outerFrameLength - WOODWIDTH, OUTERFRAMEYPOS);
-        
+
         return res;
     }
 

@@ -14,7 +14,6 @@ import static FunctionLayer.Rules.*;
  */
 public class SVGUtilCarportSide {
 
-    CarportCalculator carportcalculator = new CarportCalculator();
 
     public String printCarportSide(int lenght, int width, boolean roof, boolean shed) {
         String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed) + "</SVG>";

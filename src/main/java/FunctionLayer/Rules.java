@@ -26,7 +26,8 @@ public class Rules {
     public static final int PLASTMOLENGTHSMALL = 360;
     public static final int PLASTMOWIDTH = 120;
     public static final int ROOFBEAMSPACING = 45;
-
+    public static final int TILESWIDTH = 30;
+    public static final int OVERLAPTILES = 5;
     //svgSide
     public static final int OUTERFRAMEXPOS = 100;
     public static final int OUTERFRAMEYPOS = 100;
@@ -45,7 +46,6 @@ public class Rules {
     public static final int POSTHEIGHT = 200;
     public static final int CENTEROFPOSTMEASSURE = 7;
 
-    
     //svgTop
     public static final int EXTRAPOSTSPACING = 10;
     public static final int TEXTSPACINGOUTERLAYER = 40;
