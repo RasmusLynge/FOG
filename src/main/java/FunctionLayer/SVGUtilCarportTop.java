@@ -34,10 +34,13 @@ public class SVGUtilCarportTop {
         res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
-            res = roofbeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
+            res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
                 
+            //Middle beam
+            res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
+            //Beams to carry tiles
+            res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
-
         if (shed == true) {
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }
@@ -45,7 +48,26 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String roofbeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
+    private String roofBeamSVG(int outerFrameWidth, Carport c, String res, int outerFrameLength) {
+        //height, width, xPos, yPos
+        int roofBeamSVGSPacing = (outerFrameWidth / BOTHSIDES) / c.getRoofBeams();
+        int yPosSpacingTop = OUTERFRAMEYPOS;
+        //Hardcode top roofBeam
+        res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, OUTERFRAMEYPOS);
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, yPosSpacingTop);
+            yPosSpacingTop += roofBeamSVGSPacing;
+        }
+        //Hardcode bottom roofBeam
+        int yPosSPacingBot = outerFrameWidth + OUTERFRAMEYPOS - WOODWIDTH;
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, yPosSPacingBot);
+            yPosSPacingBot -= roofBeamSVGSPacing;
+        }
+        return res;
+    }
+
+    private String roofMiddleBeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
         res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, outerFrameYPos + outerFrameWidth / BOTHSIDES);
 
         return res;
