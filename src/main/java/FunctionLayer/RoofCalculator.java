@@ -11,9 +11,8 @@ public class RoofCalculator {
     public RoofCalculator(Carport c) {
         this.c = c;
     }
-    
-    public void flatRoof(){
-        System.out.println("FlatRoof calculator");
+
+    public void flatRoof() {
         flatRoofPlastmo();
         flatRoofScrews();
     }
@@ -28,15 +27,15 @@ public class RoofCalculator {
         int counterPlastmoSmall = 0;
         int counterPlastmoLong = 0;
         int counterPlastmoWidth = (int) Math.ceil(c.getOuterWidth() / (double) (PLASTMOWIDTH - OVERLAP));
-        
+
 //If the outerlength is shorter than the length of the small plastmo plate there is 1 small for each counterWidth
         if (c.getOuterLength() <= PLASTMOLENGTHSMALL) {
             counterPlastmoSmall += counterPlastmoWidth;
-            
+
 //Otherwise a big plate is used,
         } else {
-            counterPlastmoLong += Math.ceil(((double)c.getOuterLength() / (double)PLASTMOLENGTHLONG)) * counterPlastmoWidth;
-            
+            counterPlastmoLong += Math.ceil(((double) c.getOuterLength() / (double) PLASTMOLENGTHLONG)) * counterPlastmoWidth;
+
 //If the long plate isnt long enough, the rest is calculated together with the amount of small plates needed 
             if (c.getOuterLength() > PLASTMOLENGTHLONG) {
                 int restWithOverlap = c.getOuterLength() - PLASTMOLENGTHLONG + OVERLAP;
