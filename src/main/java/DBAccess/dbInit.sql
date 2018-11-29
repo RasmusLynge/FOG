@@ -109,4 +109,8 @@ VALUES
 (3, 'Post', '12.70', 'meter'),
 (4, 'Cover', '9.50', 'meter'),
 (5, 'Screws', '75.00', 'box'),
-(6, 'Hinge', '17.00', 'stk');
+(6, 'Hinge', '17.00', 'stk'),
+(NULL, 'Tile', '20.00', 'perSingle'),
+(NULL, 'PlastmoLong', '175.00', 'perSingle'),
+(NULL, 'PlastmoSmall', '100.00', 'perSingle'),
+(NULL, 'FlatHinge', '20.00', 'perSingle');

@@ -6,20 +6,110 @@ package FunctionLayer;
  */
 public class Carport {
 
-    int width, length, rafter,
-    beam, post, rafterLength, beamLength,
-    postLength, screws, screwBoxes, hinges;
-    
-    double rafterSpacing;
+    int width, length, rafter,roofRafter, roofPost,
+            beam, post, rafterLength, beamLength,
+            postLength, screws, screwBoxes, lHinges,
+            outerWidth, outerLength, roofBeams,
+            flatHinges, roofTiles, plastmoSmall, plastmoLong;
+
+    public int getPlastmoSmall() {
+        return plastmoSmall;
+    }
+
+    public void setPlastmoSmall(int plastmoSmall) {
+        this.plastmoSmall = plastmoSmall;
+    }
+
+    public int getPlastmoLong() {
+        return plastmoLong;
+    }
+
+    public void setPlastmoLong(int plastmoLong) {
+        this.plastmoLong = plastmoLong;
+    }
+
+    public int getRoofTiles() {
+        return roofTiles;
+    }
+
+    public void setRoofTiles(int roofTiles) {
+        this.roofTiles = roofTiles;
+    }
+
+    public int getFlatHinges() {
+        return flatHinges;
+    }
+
+    public void setFlatHinges(int flatHinges) {
+        this.flatHinges = flatHinges;
+    }
+
+    double rafterSpacing,roofRafterLength, roofPostHeight;
     boolean roof, shed;
-    
+
     public Carport(int width, int length, boolean roof, boolean shed) {
         this.width = width;
         this.length = length;
         this.roof = roof;
         this.shed = shed;
     }
-    
+
+    public int getRoofBeams() {
+        return roofBeams;
+    }
+
+    public void setRoofBeams(int roofBeams) {
+        this.roofBeams = roofBeams;
+    }
+
+    public int getRoofRafter() {
+        return roofRafter;
+    }
+
+    public void setRoofRafter(int roofRafter) {
+        this.roofRafter = roofRafter;
+    }
+
+    public int getRoofPost() {
+        return roofPost;
+    }
+
+    public void setRoofPost(int roofPost) {
+        this.roofPost = roofPost;
+    }
+
+    public double getRoofRafterLength() {
+        return roofRafterLength;
+    }
+
+    public void setRoofRafterLength(double roofRafterLength) {
+        this.roofRafterLength = roofRafterLength;
+    }
+
+    public double getRoofPostHeight() {
+        return roofPostHeight;
+    }
+
+    public void setRoofPostHeight(double roofPostHeight) {
+        this.roofPostHeight = roofPostHeight;
+    }
+
+    public int getOuterWidth() {
+        return outerWidth;
+    }
+
+    public void setOuterWidth(int outerWidth) {
+        this.outerWidth = outerWidth;
+    }
+
+    public int getOuterLength() {
+        return outerLength;
+    }
+
+    public void setOuterLength(int outerLength) {
+        this.outerLength = outerLength;
+    }
+
     public int getScrewBoxes() {
         return screwBoxes;
     }
@@ -28,7 +118,6 @@ public class Carport {
         this.screwBoxes = screwBoxes;
     }
 
-    
     public int getWidth() {
         return width;
     }
@@ -101,12 +190,12 @@ public class Carport {
         this.screws = screws;
     }
 
-    public int getHinges() {
-        return hinges;
+    public int getLHinges() {
+        return lHinges;
     }
 
-    public void setHinges(int hinges) {
-        this.hinges = hinges;
+    public void setLHinges(int lHinges) {
+        this.lHinges = lHinges;
     }
 
     public double getRafterSpacing() {

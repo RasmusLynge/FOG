@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import FunctionLayer.Carport;
+import static FunctionLayer.Rules.*;
 
 /**
  *
@@ -13,28 +14,6 @@ import FunctionLayer.Carport;
  */
 public class SVGUtilCarportSide {
 
-//    int width = 720;
-//    int height = 720;
-    private static final int OUTERFRAMEXPOS = 100;
-    private static final int OUTERFRAMEYPOS = 100;
-    private static final int HANGOUTONESIDE = 35;
-    private static final int ENTRANCEHANGOUT = 65;
-    private static final int BOTHSIDES = 2;
-    private static final int WOODWIDTH = 5;
-    private static final int POSTWIDTH = 15;
-    private static final int MINIMUMPOSTS = 4;
-    private static final int MAXPOSTS = 8;
-    private static final double POSTPOSITIONONEHALF = 1.5;
-    private static final int POSTPOSITIONTWO = 2;
-    private static final int POSTPOSITIONTHREE = 3;
-    private static final int LINESPACINGOUTERLAYER = 35;
-    private static final int LINESPACINGINNERLAYER = 10;
-    private static final int TEXTSPACINGINNERLAYER = 15;
-    private static final int TEXTBOTTOMLAYER = 30;
-    CarportCalculator carportcalculator = new CarportCalculator();
-//skriv i calc tilføj til hashmap
-    private static final int POSTHEIGHT = 200;
-    private static final int CENTEROFPOSTMEASSURE = 7;
 
     public String printCarportSide(int lenght, int width, boolean roof, boolean shed, int shedLength) {
         String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed, shedLength) + "</SVG>";
