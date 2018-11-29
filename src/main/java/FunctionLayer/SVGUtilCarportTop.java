@@ -35,7 +35,7 @@ public class SVGUtilCarportTop {
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
             res = roofbeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
-
+                
         }
 
         if (shed == true) {
