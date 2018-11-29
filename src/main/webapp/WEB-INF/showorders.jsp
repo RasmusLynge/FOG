@@ -133,6 +133,63 @@
                 <%
                     }
                 %>
+
+            </div>
+            <div class="jumbotron">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Se detaljer for ordren</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <%
+                            if (user != null) {
+                                ArrayList<Order> orderlist = new ArrayList<>();
+                                orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                                for (int i = 0; i < orderlist.size(); i++) {
+                                    String orderID = orderlist.get(i).getId();
+                        %>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><%out.print(orderID);%></th>
+                            <td><%orderlist.get(i).getOrderdate();%> her skal der stå dato</td>
+                            <td><%orderlist.get(i).getState();%></td>
+                            <td>
+                    <form action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="showOrderDetails">
+                        <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
+                        <input type="submit" value="Se ordre detaljer">  
+                    </form> 
+                    </td>
+                    </tr>
+                    <%
+                            }
+                        }
+                    %>       
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
 

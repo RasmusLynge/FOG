@@ -120,6 +120,8 @@ public class DataMapper {
             while (rs.next()) {
                 Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
                 order.setId(String.valueOf(rs.getInt("Id_Order")));
+                order.setOrderdate(rs.getString("Date"));
+                order.setState(rs.getString("State"));
                 ol.add(order);
             }
             return ol;
