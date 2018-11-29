@@ -38,7 +38,7 @@
 
         <div class="container">
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#" style="padding:0px;">
+                <a class="navbar-brand" href="/FOG/" style="padding:0px;">
                     <img src="logo.png" style="height:100%;">
                 </a>
 
@@ -49,17 +49,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hjem</a>
+                            <a class="nav-link" href="/FOG/">Hjem</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Fladt Tag</a>
-                                <a class="dropdown-item" href="#">Tag Med Rejsning</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Info om FOG's carport design</a>
+                                <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -68,13 +68,20 @@
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.johannesfog.dk/byggecenter/find-butik/kontakt/">Kontakt</a>
                         </li>
+                        <li class="nav-item">
+                            <% User user = (User) session.getAttribute("user");
+                                if (user == null) {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
+                                } else {
+                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                                }%>                         
+                        </li>
                     </ul>
                 </div>
             </nav>
 
             <div class="jumbotron">
                 <%
-                    User user = (User) session.getAttribute("user");
                     if ("customers".equals(user.getRole())) {
                 %>
                 <table>
@@ -102,94 +109,57 @@
                     </td>
                     </tbody>
                 </table>
+
                 <%
                 } else if ("employee".equals(user.getRole())) {
                 %>
-                <table>
-                    <thead>
-                    <th>Her kan du se alle ordre i systemmet</th>
-                    </thead>
-                    <tr>
-                        <td>
-                            <%
-                                if (user != null) {
-                                    ArrayList<Order> orderlist = new ArrayList<>();
-                                    orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
-                                    for (int i = 0; i < orderlist.size(); i++) {
-                                        String orderID = orderlist.get(i).getId();
-                            %>
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="showOrderDetails">
-                                <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
-                                Order ID: <%out.println(orderID);%><input type="submit" value="Se ordre detaljer">  
-                            </form>
-                            <%
-                                    }
-                                }
-                            %>       
-                        </td>
-                    </tr>
-                </table>
-                <%
-                    }
-                %>
 
-            </div>
-            <div class="jumbotron">
+                <h1 class="display-4">Her er alle tidligere ordre: </h1>
+                <br>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Order ID</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Dato</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Se detaljer for ordren</th>
+                            <th scope="col"> </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <%
-                            if (user != null) {
-                                ArrayList<Order> orderlist = new ArrayList<>();
-                                orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
-                                for (int i = 0; i < orderlist.size(); i++) {
-                                    String orderID = orderlist.get(i).getId();
-                        %>
+
+                    <%
+                        if (user.getRole().equals("employee")) {
+                            ArrayList<Order> orderlist = new ArrayList<>();
+                            orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                            for (int i = 0; i < orderlist.size(); i++) {
+                                String orderID = orderlist.get(i).getId();
+                                String orderDate = orderlist.get(i).getOrderdate();
+                                String orderState = orderlist.get(i).getState();
+                    %>
                     <tbody>
                         <tr>
                             <th scope="row"><%out.print(orderID);%></th>
-                            <td><%orderlist.get(i).getOrderdate();%> her skal der stå dato</td>
-                            <td><%orderlist.get(i).getState();%></td>
+                            <td><%out.print(orderDate);%> </td>
+                            <td> <%out.print(orderState);%> </td>
                             <td>
-                    <form action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="showOrderDetails">
-                        <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
-                        <input type="submit" value="Se ordre detaljer">  
-                    </form> 
-                    </td>
-                    </tr>
-                    <%
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="showOrderDetails">
+                                    <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Se ordre detaljer">  
+                                </form> 
+                            </td>
+                        </tr>
+                        <%
+                                }
                             }
-                        }
-                    %>       
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                        %>       
                     </tbody>
-                </table>
+                </table>                
+
+
+                <%
+                    }
+                %>
+
             </div>
 
 
