@@ -14,9 +14,10 @@ import static FunctionLayer.Rules.*;
  */
 public class SVGUtilCarportSide {
 
-
-    public String printCarportSide(int lenght, int width, boolean roof, boolean shed, int shedLength) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed, shedLength) + "</SVG>";
+    public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) {
+        int canvasX = length + 300;
+        int canvasY = POSTHEIGHT + 300;
+        String res = "<SVG width=\""+ canvasX +"\" height=\""+ canvasY +"\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 
@@ -42,7 +43,7 @@ public class SVGUtilCarportSide {
     }
 
     private String shedLinesSVG(String res, int shedLength, int innerFrameXPos, int startYPos) {
-        for (int i = 0; i < shedLength; i+=10) {
+        for (int i = 0; i < shedLength; i += 10) {
             res += shedLine(innerFrameXPos + i, startYPos, innerFrameXPos + i, startYPos + POSTHEIGHT);
         }
         return res;

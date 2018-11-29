@@ -8,8 +8,11 @@ import static FunctionLayer.Rules.*;
  */
 public class SVGUtilCarportTop {
 
-public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
+        int canvasX = length + 300;
+        int canvasY = width + 300;
+        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+
         return res;
     }
 
@@ -34,7 +37,7 @@ public String printCarportTop(int length, int width, boolean roof, boolean shed,
             res = roofbeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
 
         }
-        
+
         if (shed == true) {
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }
