@@ -49,4 +49,9 @@ public class Rules {
     //svgTop
     public static final int EXTRAPOSTSPACING = 10;
     public static final int TEXTSPACINGOUTERLAYER = 40;
+    
+    //roofCover
+    public static final int PLANKOVERLAP = 1;
+    public static final int PLANKWIDTH = 10;
+    public static final int PLANKSWITHONEOVERLAP = 2;
 }

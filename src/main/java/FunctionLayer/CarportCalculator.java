@@ -14,16 +14,19 @@ public class CarportCalculator {
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) {
         Carport c = new Carport(length, width, false, false);
         RoofCalculator rc = new RoofCalculator(c);
+        CoverCalculator cc = new CoverCalculator(c);
         outerMessurement(length, width, c);
         calculatePosts(length, width, c);
         beamLengthCalculator(length, roof, c);
-
+        cc.setRoofCover();
+        
         //skal laves til i JSP
         int degree = 90;
         if (roof == true) {
             System.out.println("true med rejst tag");
             calculateRafters(length, width, roof, c);
             rc.topRoof(width, length, degree);
+            
         } else {
             System.out.println("false med flat tag");
             calculateRafters(length, width, roof, c);
