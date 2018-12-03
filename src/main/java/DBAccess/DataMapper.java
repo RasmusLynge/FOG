@@ -1,5 +1,6 @@
 package DBAccess;
 
+import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Entity.User;
@@ -185,6 +186,23 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
-
+ public static ArrayList<Material> getMaterials() throws GeneralException {
+        ArrayList<Material> ml = new ArrayList<>();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT `Name`, `Length` FROM `Material`";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                int length = rs.getInt("Length");
+                int amount = 0;
+                ml.add(new Material(name, length, amount));
+            }
+            return ml;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+    }
 }
 
