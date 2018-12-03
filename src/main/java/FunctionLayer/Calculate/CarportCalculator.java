@@ -34,7 +34,7 @@ public class CarportCalculator {
             rc.flatRoof();
         }
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
-        totalScrews(lHinges, c);
+        totalScrews(lHinges+c.getFlatHinges(), c);
         screwBoxes(c);
         return c;
     }

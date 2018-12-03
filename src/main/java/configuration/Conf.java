@@ -22,7 +22,7 @@ import logger.Logging;
 public class Conf {
 
     public static final boolean PRODUCTION = false;
-    public static final String LOGFILEPATH = "/var/log/tomcat8/demoApp.log";
+    public static final String LOGFILEPATH = "/var/log/tomc at8/demoApp.log";
     private static Logger logger;
 
     public static Logger getLogger() {
