@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 
-package PresentatinoLayer;
+package PresentatinoLayer.Commands;
 
-import FunctionLayer.GeneralException;
+import PresentatinoLayer.Commands.Command;
+import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Order;
+import FunctionLayer.Entity.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

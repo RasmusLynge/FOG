@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Calculate;
 
 import DBAccess.DataMapper;
-import static FunctionLayer.Rules.*;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 /**
  *
  * @author Mathias
@@ -34,6 +35,7 @@ public class CoverCalculator {
         double amount = (double) restWidth / (double)(PLANKWIDTH - (BOTHSIDES * PLANKOVERLAP));
         result += Math.ceil(amount);
         
+        //TODO tilføj hvis taget er højere end de brædder de får leveret (480) så find ud ad hvor mange ekstra der skal bruges 
         return result;
     }
 }

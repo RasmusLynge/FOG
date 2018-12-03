@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package PresentatinoLayer.SVG;
 
-import FunctionLayer.Carport;
-import static FunctionLayer.Rules.*;
+import FunctionLayer.Calculate.CarportCalculator;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 
 /**
- *
+ * Skal rykkes til presentation
  * @author Magnus
  */
 public class SVGUtilCarportSide {
 
-
-    public String printCarportSide(int lenght, int width, boolean roof, boolean shed, int shedLength) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromSide(lenght, width, roof, shed, shedLength) + "</SVG>";
+    public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) {
+        int canvasX = length + 300;
+        int canvasY = POSTHEIGHT + 300;
+        String res = "<SVG width=\""+ canvasX +"\" height=\""+ canvasY +"\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 
@@ -42,7 +44,7 @@ public class SVGUtilCarportSide {
     }
 
     private String shedLinesSVG(String res, int shedLength, int innerFrameXPos, int startYPos) {
-        for (int i = 0; i < shedLength; i+=10) {
+        for (int i = 0; i < shedLength; i += 10) {
             res += shedLine(innerFrameXPos + i, startYPos, innerFrameXPos + i, startYPos + POSTHEIGHT);
         }
         return res;

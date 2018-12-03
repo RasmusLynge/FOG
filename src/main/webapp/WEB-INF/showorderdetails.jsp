@@ -4,8 +4,8 @@
     Author     : Simon
 --%>
 
-<%@page import="FunctionLayer.User"%>
-<%@page import="FunctionLayer.Order"%>
+<%@page import="FunctionLayer.Entity.User"%>
+<%@page import="FunctionLayer.Entity.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -81,53 +81,71 @@
                 </div>
             </nav>
 
+            <%String id = o.getId();%>
             <div class="jumbotron">
-                <%String id = o.getId();%>
-                <h1>Ordre detaljer for id: <%= id%></h1>
-                <form action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="editorderdetails">
-                    <input type="hidden" name="orderID" value=<%=id%>>
-                    <ol>
-                        <li>
-                            Bredde: <input type="number" name="width" min="240" max="720" placeholder="<%out.println(o.getWidth());%>" required> cm.
-                        </li>
-                        <li>
-                            Længde: <input type="number" name="length" min="240" max="720" placeholder="<%out.println(o.getLength());%>" required> cm.
-                        </li>                 
-                        <li>
-                            Tag:
-                            <select name="roof">
-                                    <option value="1" <%if (o.isFlat_roof()) {
-                                        out.println("selected");
-                                    } %>>Fladt tag</option>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h3>Ordre detaljer for ordre id: <%= id%></h3>
+
+                        <ol>
+                            <p><strong>Navn: </strong> <%=o.getName() %></p>
+                            <p><strong>Email: </strong> <%=o.getEmail() %></p>
+                            <p><strong>Telefonnummer: </strong> <%=o.getPhone() %></p>                           
+                            <p><strong>Postnummer: </strong> <%=o.getZip() %></p>
+
+
+                        </ol>
+
+
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h3>Redigering for ordre: <%= id%></h3>
+                        <form action="FrontController" method="POST">
+                            <input type="hidden" name="command" value="editorderdetails">
+                            <input type="hidden" name="orderID" value=<%=id%>>
+                            <ol>
+                                <li>
+                                    <strong>Bredde: </strong> <input type="number" name="width" min="240" max="720" placeholder="<%out.println(o.getWidth());%>" required> cm.
+                                </li>
+                                <li>
+                                    <strong>Længde: </strong> <input type="number" name="length" min="240" max="720" placeholder="<%out.println(o.getLength());%>" required> cm.
+                                </li>                 
+                                <li>
+                                    <strong>Tag: </strong>
+                                    <select name="roof">
+                                        <option value="1" <%if (o.isFlat_roof()) {
+                                                out.println("selected");
+                                            } %>>Fladt tag</option>
                                         <option value="0" <%if (!o.isFlat_roof()) {
-                                        out.println("selected");
-                                    } %>>Tag med rejsning</option>
-                            </select>
-                        </li>
-                        <li>
-                            Bestillingsdato: <%out.println(o.getOrderdate());%>
-                        </li>
-                        <li>
-                               <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) {
-                                    out.println("checked");
-                                } %>> Forespørgsel<br>
-                                   <input type="radio" name="State" value="Afventer sælger" <%if ("Afventer sælger".equals(o.getState())) {
-                                    out.println("checked");
-                                } %>> Afventer sælger<br>
-                                   <input type="radio" name="State" value="Betalt" <%if ("Betalt".equals(o.getState())) {
-                                    out.println("checked");
-                                } %>> Betalt<br>
-                                   <input type="radio" name="State" value="Fragtet" <%if ("Fragtet".equals(o.getState())) {
-                                    out.println("checked");
-                                } %>> Fragtet<br>
-                                   <input type="radio" name="State" value="Afsluttet uden salg" <%if ("Afsluttet uden salg".equals(o.getState())) {
-                                    out.println("checked");
-                                }%>> Afsluttet uden salg<br>
-                        </li>
-                    </ol>
-                    <input type="submit" value="Gem ændringer">
-                </form>
+                                                out.println("selected");
+                                            } %>>Tag med rejsning</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <strong>Bestillingsdato: </strong> <%out.println(o.getOrderdate());%>
+                                </li>
+                                <li>
+                                    <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) {
+                                            out.println("checked");
+                                        } %>> Forespørgsel<br>
+                                    <input type="radio" name="State" value="Afventer sælger" <%if ("Afventer sælger".equals(o.getState())) {
+                                            out.println("checked");
+                                        } %>> Afventer sælger<br>
+                                    <input type="radio" name="State" value="Betalt" <%if ("Betalt".equals(o.getState())) {
+                                            out.println("checked");
+                                        } %>> Betalt<br>
+                                    <input type="radio" name="State" value="Fragtet" <%if ("Fragtet".equals(o.getState())) {
+                                            out.println("checked");
+                                        } %>> Fragtet<br>
+                                    <input type="radio" name="State" value="Afsluttet uden salg" <%if ("Afsluttet uden salg".equals(o.getState())) {
+                                            out.println("checked");
+                                        }%>> Afsluttet uden salg<br>
+                                </li>
+                            </ol>
+                            <input class="btn btn-primary btn-md" type="submit" value="Gem ændringer">
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <nav class="navbar bottom navbar-dark bg-dark">

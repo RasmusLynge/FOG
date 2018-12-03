@@ -1,7 +1,8 @@
-package FunctionLayer;
+package FunctionLayer.Calculate;
 
+import FunctionLayer.Entity.Carport;
 import DBAccess.DataMapper;
-import static FunctionLayer.Rules.*;
+import static FunctionLayer.Rule.Rules.*;
 
 public class RoofCalculator {
 
@@ -54,14 +55,21 @@ public class RoofCalculator {
         c.setRoofPostHeight(roofPostHeight);
         c.setRoofPost(roofPost);
 
+        //length each side
         double roofRafterLength = Math.sqrt((roofPostHeight * roofPostHeight) + (c.getOuterWidth() / 2) * (c.getOuterWidth() / 2));
         int roofRafter = c.getRafter() * BOTHSIDES;
-        c.setRoofRafterLength(roofRafterLength);
+        c.setRoofRafterLength((int)roofRafterLength);
+        
+        //each side
         c.setRoofRafter(roofRafter);
-
+        System.out.println("RafterLength---------------" + c.getRoofRafterLength());
+        System.out.println("Rafters " + c.getRoofRafter());
+        
+        //pr side
         int roofBeams = (int) (roofRafterLength / ROOFBEAMSPACING);
         c.setRoofBeams(roofBeams);
-
+        System.out.println("RoofBeams "+ c.getRoofBeams());
+                
         int roofTiles = (int) ((c.getRoofRafter() - 1) * (c.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
         c.setRoofTiles(roofTiles);
 

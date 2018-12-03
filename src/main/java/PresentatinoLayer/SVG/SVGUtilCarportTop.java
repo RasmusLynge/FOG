@@ -1,15 +1,20 @@
-package FunctionLayer;
+package PresentatinoLayer.SVG;
 
-import static FunctionLayer.Rules.*;
+import FunctionLayer.Calculate.CarportCalculator;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 
 /**
- *
+ * Skal rykkes til presentation
  * @author Magnus
  */
 public class SVGUtilCarportTop {
 
-public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
-        String res = "<SVG width=\"1000\" height=\"1000\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
+        int canvasX = length + 300;
+        int canvasY = width + 300;
+        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+
         return res;
     }
 
@@ -31,10 +36,13 @@ public String printCarportTop(int length, int width, boolean roof, boolean shed,
         res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
-            res = roofbeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
-
+            res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
+                
+            //Middle beam
+            res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
+            //Beams to carry tiles
+            res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
-        
         if (shed == true) {
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }
@@ -42,7 +50,26 @@ public String printCarportTop(int length, int width, boolean roof, boolean shed,
         return res;
     }
 
-    private String roofbeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
+    private String roofBeamSVG(int outerFrameWidth, Carport c, String res, int outerFrameLength) {
+        //height, width, xPos, yPos
+        int roofBeamSVGSPacing = (outerFrameWidth / BOTHSIDES) / c.getRoofBeams();
+        int yPosSpacingTop = OUTERFRAMEYPOS;
+        //Hardcode top roofBeam
+        res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, OUTERFRAMEYPOS);
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, yPosSpacingTop);
+            yPosSpacingTop += roofBeamSVGSPacing;
+        }
+        //Hardcode bottom roofBeam
+        int yPosSPacingBot = outerFrameWidth + OUTERFRAMEYPOS - WOODWIDTH;
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, yPosSPacingBot);
+            yPosSPacingBot -= roofBeamSVGSPacing;
+        }
+        return res;
+    }
+
+    private String roofMiddleBeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
         res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, outerFrameYPos + outerFrameWidth / BOTHSIDES);
 
         return res;

@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Entity;
 
 /**
  *
  * @author Mathias
  */
-public class MakeOrderException extends Exception {
-
-    public MakeOrderException(String msg) {
-        super(msg);
-        System.out.println(msg);
-    }
+public class Material {
     
-    
-
 }

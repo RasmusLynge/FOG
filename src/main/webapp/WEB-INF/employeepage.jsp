@@ -1,5 +1,5 @@
 
-<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.Entity.User"%>
 <%-- 
     Document   : employeepage
     Created on : 12-11-2018, 11:55:37
@@ -83,7 +83,7 @@
                 <h2>Du er nu logget ind</h2>
                 <form action="FrontController" method="POST">
                     <input type="hidden" name="command" value="listorders">
-                    <input type="submit" value="Se alle ordrer">
+                    <input class="btn btn-primary btn-md"type="submit" value="Se alle ordrer">
                 </form>
             </div>
 
