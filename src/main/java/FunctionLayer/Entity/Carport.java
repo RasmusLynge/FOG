@@ -10,8 +10,24 @@ public class Carport {
             beam, post, rafterLength, beamLength,
             postLength, screws, screwBoxes, lHinges,
             outerWidth, outerLength, roofBeams,
-            flatHinges, roofTiles, plastmoSmall, plastmoLong;
+            flatHinges, roofTiles, plastmoSmall, plastmoLong,
+            coverPlanks, coverPlankLength;
 
+    public int getCoverPlanks() {
+        return coverPlanks;
+    }
+
+    public void setCoverPlanks(int coverPlanks) {
+        this.coverPlanks = coverPlanks;
+    }
+
+    public int getCoverPlankLength() {
+        return coverPlankLength;
+    }
+
+    public void setCoverPlankLength(int coverPlankLength) {
+        this.coverPlankLength = coverPlankLength;
+    }
     public int getPlastmoSmall() {
         return plastmoSmall;
     }
