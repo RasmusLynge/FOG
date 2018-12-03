@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
-import static FunctionLayer.Rules.*;
+package FunctionLayer.Calculate;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 /**
  *
  * @author Mathias

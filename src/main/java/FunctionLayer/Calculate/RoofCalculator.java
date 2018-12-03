@@ -1,7 +1,8 @@
-package FunctionLayer;
+package FunctionLayer.Calculate;
 
+import FunctionLayer.Entity.Carport;
 import DBAccess.DataMapper;
-import static FunctionLayer.Rules.*;
+import static FunctionLayer.Rule.Rules.*;
 
 public class RoofCalculator {
 

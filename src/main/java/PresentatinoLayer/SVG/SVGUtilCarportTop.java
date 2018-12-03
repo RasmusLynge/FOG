@@ -1,9 +1,11 @@
-package FunctionLayer;
+package PresentatinoLayer.SVG;
 
-import static FunctionLayer.Rules.*;
+import FunctionLayer.Calculate.CarportCalculator;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 
 /**
- *
+ * Skal rykkes til presentation
  * @author Magnus
  */
 public class SVGUtilCarportTop {

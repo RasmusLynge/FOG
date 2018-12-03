@@ -1,5 +1,5 @@
 
-<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.Entity.User"%>
 <%-- 
     Document   : employeepage
     Created on : 12-11-2018, 11:55:37

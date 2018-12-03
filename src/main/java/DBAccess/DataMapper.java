@@ -1,8 +1,8 @@
 package DBAccess;
 
-import FunctionLayer.GeneralException;
-import FunctionLayer.Order;
-import FunctionLayer.User;
+import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Entity.Order;
+import FunctionLayer.Entity.User;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
@@ -55,7 +55,7 @@ public class DataMapper {
                 user.setId(id);
                 return user;
             } else {
-                throw new GeneralException("Could not validate user");
+                throw new GeneralException("Forkert email eller adgangskode");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new GeneralException(ex.getMessage());

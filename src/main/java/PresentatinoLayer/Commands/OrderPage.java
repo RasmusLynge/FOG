@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentatinoLayer;
+package PresentatinoLayer.Commands;
 
-import FunctionLayer.GeneralException;
+import PresentatinoLayer.Commands.Command;
+import FunctionLayer.Exception.GeneralException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

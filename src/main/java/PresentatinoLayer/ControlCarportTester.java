@@ -5,8 +5,8 @@
  */
 package PresentatinoLayer;
 
-import FunctionLayer.SVGUtilCarportSide;
-import FunctionLayer.SVGUtilCarportTop;
+import PresentatinoLayer.SVG.SVGUtilCarportSide;
+import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import java.io.IOException;
 //import java.io.PrintWriter;
 import javax.servlet.ServletException;
