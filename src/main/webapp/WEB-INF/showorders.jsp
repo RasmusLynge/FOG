@@ -81,35 +81,15 @@
             </nav>
 
             <div class="jumbotron">
-                <%
-                    if ("customers".equals(user.getRole())) {
+                <% if (user != null) {
+                        if ("customers".equals(user.getRole())) {
                 %>
                 <table>
                     <thead>
-                    <th>Her kan du se dine tidligere ordrer</th>
+                    <th>Dette er ikke implementeret endnu</th>
                     </thead>
                     <tbody>
-                    <td>
-                        <%
-                            if (user != null) {
-                                ArrayList<Order> orderlist = new ArrayList<>();
-                                orderlist = (ArrayList<Order>) request.getSession().getAttribute("ordersByUserID");
-                                for (int i = 0; i < orderlist.size(); i++) {
-                                    String orderID = orderlist.get(i).getId();
-                        %>
-                        <form action="FrontController" method="POST">
-                            <input type="hidden" name="command" value="vieworder">
-                            <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
-                            View order details concerning order ID: <%out.println(orderID);%><input type="submit" value="View order details">
-                        </form>
-                        <%
-                                }
-                            }
-                        %>       
-                    </td>
-                    </tbody>
                 </table>
-
                 <%
                 } else if ("employee".equals(user.getRole())) {
                 %>
@@ -128,12 +108,13 @@
 
                     <%
                         if (user.getRole().equals("employee")) {
-                            ArrayList<Order> orderlist = new ArrayList<>();
-                            orderlist = (ArrayList<Order>) session.getAttribute("getAllOrders");
-                            for (int i = 0; i < orderlist.size(); i++) {
-                                String orderID = orderlist.get(i).getId();
-                                String orderDate = orderlist.get(i).getOrderdate();
-                                String orderState = orderlist.get(i).getState();
+                            ArrayList<Order> orderList = new ArrayList<>();
+                            if (!orderList.isEmpty()) {
+                                orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                                for (int i = 0; i < orderList.size(); i++) {
+                                    String orderID = orderList.get(i).getId();
+                                    String orderDate = orderList.get(i).getOrderdate();
+                                    String orderState = orderList.get(i).getState();
                     %>
                     <tbody>
                         <tr>
@@ -149,6 +130,8 @@
                             </td>
                         </tr>
                         <%
+                                        }
+                                    }
                                 }
                             }
                         %>       

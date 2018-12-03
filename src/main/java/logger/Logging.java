@@ -29,10 +29,13 @@ public class Logging {
     
     static final Logger LOGGER = Conf.getLogger();
     
+    
     public static void main(String[] args) throws IOException {
        Logging ld = new Logging();
        ld.run();
     }
+    
+    
     public void run() throws IOException{
         //Just log a message.
         addHandlers();
