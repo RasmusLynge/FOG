@@ -8,7 +8,9 @@ package PresentatinoLayer.Commands;
 import PresentatinoLayer.Commands.Command;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.Exception.MakeOrderException;
+import configuration.Conf;
 import java.io.IOException;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +40,8 @@ public class FrontController extends HttpServlet {
             String view = action.execute( request, response );
             request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
         } catch ( GeneralException ex ) {
+            Conf.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
             request.setAttribute( "error", ex.getMessage() );
-            
             ex.printStackTrace();
             request.getRequestDispatcher( "/WEB-INF/employeelogin.jsp" ).forward( request, response );
         } catch (MakeOrderException e){
