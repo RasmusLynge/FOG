@@ -14,11 +14,23 @@ public class Material {
     String name; 
     int length;
     int amount;
+    double price;
 
-    public Material(String name, int length, int amount) {
+    public Material(String name, int length, int amount, double price) {
         this.name = name;
         this.length = length;
         this.amount = amount;
+        this.price = price;
+    }
+
+   
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public Carport getC() {

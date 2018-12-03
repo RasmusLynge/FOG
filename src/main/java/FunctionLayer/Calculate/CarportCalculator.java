@@ -5,15 +5,18 @@
  */
 package FunctionLayer.Calculate;
 import FunctionLayer.Entity.Carport;
+import FunctionLayer.Entity.Material;
+import FunctionLayer.Exception.GeneralException;
 import static FunctionLayer.Rule.Rules.*;
+import java.util.ArrayList;
 /**
  *
  * @author Mathias
  */
 public class CarportCalculator {
 
-    public Carport calculateAll(int length, int width, boolean roof, boolean shed) {
-        Carport c = new Carport(length, width, false, false);
+    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws GeneralException {
+        Carport c = new Carport(length, width, roof, false);
         RoofCalculator rc = new RoofCalculator(c);
         CoverCalculator cc = new CoverCalculator(c);
         outerMessurement(length, width, c);
@@ -33,9 +36,11 @@ public class CarportCalculator {
             calculateRafters(length, width, roof, c);
             rc.flatRoof();
         }
+        System.out.println("BEAM!!--------------------------- " + c.getBeam());
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
         totalScrews(lHinges+c.getFlatHinges(), c);
         screwBoxes(c);
+        
         return c;
     }
 
