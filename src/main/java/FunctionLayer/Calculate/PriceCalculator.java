@@ -36,8 +36,6 @@ public class PriceCalculator {
         totalPrice += (c.getRoofPost() / CMTOMETER) * mapPrice.get("Post");
         totalPrice += (c.getRoofRafter() / CMTOMETER) * mapPrice.get("Rafter");
         totalPrice += c.getRoofTiles() * mapPrice.get("Tile");
-        System.out.println("cccccccccoverplanks   ===== "+ c.getCoverPlanks());
-        System.out.println("cccccccccoverplanksprice   ===== "+ mapPrice.get("Plank19x100"));
         totalPrice += c.getCoverPlanks() * mapPrice.get("Plank19x100");
         
         System.out.println("price for plast small +++++++++" + mapPrice.get("PlastmoSmall"));

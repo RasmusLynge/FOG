@@ -35,6 +35,7 @@ public class CoverCalculator {
         double amount = (double) restWidth / (double)(PLANKWIDTH - (BOTHSIDES * PLANKOVERLAP));
         result += Math.ceil(amount);
         
+        //TODO tilføj hvis taget er højere end de brædder de får leveret (480) så find ud ad hvor mange ekstra der skal bruges 
         return result;
     }
 }
