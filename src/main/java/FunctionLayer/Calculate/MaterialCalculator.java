@@ -10,15 +10,18 @@ import FunctionLayer.Entity.Material;
 import FunctionLayer.Entity.Carport;
 import java.util.ArrayList;
 import DBAccess.DataMapper;
+import FunctionLayer.Exception.GeneralException;
+
 /**
  *
  * @author Magnus
  */
 public class MaterialCalculator {
 
-    public List<Material> materialList(int length, Carport c) {
+    public void materialList(Carport c) throws GeneralException {
         DataMapper dm = new DataMapper();
-        dm.
+        ArrayList<Material> list = dm.getMaterials();
+
         int counterRafterLong = 0;
         int counterRafterSmall = 0;
 
@@ -42,13 +45,18 @@ public class MaterialCalculator {
             c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * 2);
         }
         
-        
-        c.getRoofRafter();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == 480) {
+                list.get(i).setAmount(i);
+            }
+        }
+         for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == 600) {
+                list.get(i).setAmount(i);
+            }
+        }
 
-        /*
-
-         */
-        return list;
+        c.setList(list);
     }
 
 }
