@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentatinoLayer;
+package PresentatinoLayer.Commands;
 
-import FunctionLayer.GeneralException;
-import FunctionLayer.MakeOrderException;
+import PresentatinoLayer.Commands.Command;
+import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +39,7 @@ public class FrontController extends HttpServlet {
             request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
         } catch ( GeneralException ex ) {
             request.setAttribute( "error", ex.getMessage() );
+            
             ex.printStackTrace();
             request.getRequestDispatcher( "/WEB-INF/employeelogin.jsp" ).forward( request, response );
         } catch (MakeOrderException e){

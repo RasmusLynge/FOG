@@ -4,7 +4,7 @@
     Author     : Rasmu
 --%>
 
-<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -80,6 +80,17 @@
 
             <div class="jumbotron">
                 <h2>Medarbejder Login</h2>
+
+                <% String error = (String) request.getAttribute("error");
+                    if (error != null) {
+                        out.println("<font size=\"3\" color=\"red\">Kunne ikke logge ind</font>");
+                        out.println("<br>");
+                        out.println("<font size=\"3\" color=\"red\">" + error + "</font>");
+                        out.println("<br>");
+                        out.println("<br>");
+                    }
+                %>
+
                 <p>Indtast email og adgangskode</p>
                 <form name="login" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="login">
@@ -94,12 +105,6 @@
                 </form>
             </div>
 
-            <% String error = (String) request.getAttribute("error");
-                if (error != null) {
-                    out.println("<h2>Error!!</h2>");
-                    out.println(error);
-                }
-            %>
 
 
             <nav class="navbar bottom navbar-dark bg-dark">

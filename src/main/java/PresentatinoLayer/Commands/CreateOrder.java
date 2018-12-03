@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentatinoLayer;
+package PresentatinoLayer.Commands;
 
-import FunctionLayer.GeneralException;
+import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.MakeOrderException;
-import FunctionLayer.Order;
-import FunctionLayer.SVGUtilCarportSide;
-import FunctionLayer.SVGUtilCarportTop;
+import FunctionLayer.Exception.MakeOrderException;
+import FunctionLayer.Entity.Order;
+import PresentatinoLayer.SVG.SVGUtilCarportSide;
+import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

@@ -1,8 +1,9 @@
-package PresentatinoLayer;
+package PresentatinoLayer.Commands;
 
+import PresentatinoLayer.Commands.Command;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.GeneralException;
-import FunctionLayer.User;
+import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

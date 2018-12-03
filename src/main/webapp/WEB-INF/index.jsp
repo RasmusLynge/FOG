@@ -1,4 +1,4 @@
-<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.Entity.User"%>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>

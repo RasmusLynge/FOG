@@ -5,6 +5,10 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Calculate.PriceCalculator;
+import FunctionLayer.Entity.User;
+import FunctionLayer.Entity.Order;
 import DBAccess.DataMapper;
 import java.util.ArrayList;
 

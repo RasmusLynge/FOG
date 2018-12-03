@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package PresentatinoLayer.SVG;
 
-import FunctionLayer.Carport;
-import static FunctionLayer.Rules.*;
+import FunctionLayer.Calculate.CarportCalculator;
+import FunctionLayer.Entity.Carport;
+import static FunctionLayer.Rule.Rules.*;
 
 /**
- *
+ * Skal rykkes til presentation
  * @author Magnus
  */
 public class SVGUtilCarportSide {
