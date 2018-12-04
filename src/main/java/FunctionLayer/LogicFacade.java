@@ -37,7 +37,7 @@ public class LogicFacade {
 
     public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt) throws GeneralException{
         Order o = new Order(width, length, name, email, zip, phone, evt);
-        o.setPrice(p.priceCalculator(length, width, false, false));
+        o.setPrice(p.priceCalculator(length, width, true, false));
         dm.createOrder(o);
         return o;
     }
