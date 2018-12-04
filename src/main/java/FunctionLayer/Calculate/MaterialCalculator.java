@@ -225,10 +225,16 @@ public class MaterialCalculator {
                 list.get(i).setAmount(c.getPlanks() + c.getCoverPlanks());
             }
             if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 240) {
-                list.get(i).setAmount(c.getPlanks() + c.getCoverStabilizerPlankSmall());
+                list.get(i).setAmount(c.getCoverStabilizerPlankSmall());
             }
             if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 360) {
-                list.get(i).setAmount(c.getPlanks() + c.getCoverStabilizerPlanksLong());
+                list.get(i).setAmount(c.getCoverStabilizerPlanksLong());
+            }
+            if (list.get(i).getName().equals("Dørhåndtag") && list.get(i).getLength() == 0) {
+                list.get(i).setAmount(c.getDoorKnob());
+            }
+            if (list.get(i).getName().equals("Dør hængsel") && list.get(i).getLength() == 0) {
+                list.get(i).setAmount(c.getDoorHinge());
             }
         }
     }

@@ -14,7 +14,24 @@ public class Carport {
             outerWidth, outerLength, roofBeams,
             flatHinges, roofTiles, plastmoSmall, plastmoLong,
             coverPlanks, coverPlankLength, shedLength, planks,
-            coverStabilizerPlanksLong,coverStabilizerPlankSmall;
+            coverStabilizerPlanksLong,coverStabilizerPlankSmall,
+            doorHinge, doorKnob;
+
+    public int getDoorHinge() {
+        return doorHinge;
+    }
+
+    public void setDoorHinge(int doorHinge) {
+        this.doorHinge = doorHinge;
+    }
+
+    public int getDoorKnob() {
+        return doorKnob;
+    }
+
+    public void setDoorKnob(int doorKnob) {
+        this.doorKnob = doorKnob;
+    }
 
     public int getCoverStabilizerPlanksLong() {
         return coverStabilizerPlanksLong;

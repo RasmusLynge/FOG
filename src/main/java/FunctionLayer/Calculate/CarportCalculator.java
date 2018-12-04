@@ -40,6 +40,8 @@ public class CarportCalculator {
         }
         if (shed) {
             coverStabilizerPlanks(length, width, c);
+            c.setDoorHinge(2);
+            c.setDoorKnob(1);
         }
         System.out.println("BEAM!!--------------------------- " + c.getBeam());
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
@@ -139,7 +141,7 @@ public class CarportCalculator {
         int counterStabilizerLong = 0;
         stabilizerWidth(width, counterStabilizerSmall, counterStabilizerLong, c);
         stabilizerLength(length, counterStabilizerSmall, counterStabilizerLong, c);
-
+        
     }
 
     private void stabilizerLength(int length, int counterStabilizerSmall, int counterStabilizerLong, Carport c) {
