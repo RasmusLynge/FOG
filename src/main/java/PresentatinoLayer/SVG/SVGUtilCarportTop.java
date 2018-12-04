@@ -2,6 +2,7 @@ package PresentatinoLayer.SVG;
 
 import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Entity.Carport;
+import FunctionLayer.Exception.GeneralException;
 import static FunctionLayer.Rule.Rules.*;
 
 /**
@@ -10,7 +11,7 @@ import static FunctionLayer.Rule.Rules.*;
  */
 public class SVGUtilCarportTop {
 
-    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException {
         int canvasX = length + 300;
         int canvasY = width + 300;
         String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
@@ -18,7 +19,7 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) {
+    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;

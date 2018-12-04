@@ -5,15 +5,18 @@
  */
 package FunctionLayer.Calculate;
 import FunctionLayer.Entity.Carport;
+import FunctionLayer.Entity.Material;
+import FunctionLayer.Exception.GeneralException;
 import static FunctionLayer.Rule.Rules.*;
+import java.util.ArrayList;
 /**
  *
  * @author Mathias
  */
 public class CarportCalculator {
 
-    public Carport calculateAll(int length, int width, boolean roof, boolean shed) {
-        Carport c = new Carport(length, width, false, false);
+    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws GeneralException {
+        Carport c = new Carport(length, width, roof, false);
         RoofCalculator rc = new RoofCalculator(c);
         CoverCalculator cc = new CoverCalculator(c);
         outerMessurement(length, width, c);
@@ -33,9 +36,12 @@ public class CarportCalculator {
             calculateRafters(length, width, roof, c);
             rc.flatRoof();
         }
+        System.out.println("BEAM!!--------------------------- " + c.getBeam());
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
-        totalScrews(lHinges, c);
+        totalScrews((lHinges+c.getFlatHinges()), c);
+        System.out.println("total hinges " + (lHinges + c.getFlatHinges()));
         screwBoxes(c);
+        
         return c;
     }
 
@@ -107,13 +113,15 @@ public class CarportCalculator {
     }
 
     private void totalScrews(int hinges, Carport c) {
+        System.out.println("screwland ------------------------");
         int totalScrews = hinges * SCREWSPERLHINGES;
+        System.out.println("Screwland citizens  ------------------------" + (c.getScrews() + totalScrews));
         c.setScrews(c.getScrews() + totalScrews);
     }
 
     private void screwBoxes(Carport c) {
-        double boxesOfScrews = c.getScrews() / SCREWSINABOX;
-        double boxesRoundedUp = Math.ceil(boxesOfScrews);
+        double boxesOfScrews = (double) c.getScrews() / SCREWSINABOX;
+        double boxesRoundedUp = (double) Math.ceil(boxesOfScrews);
         int boxes = (int) boxesRoundedUp;
         c.setScrewBoxes(boxes);
     }

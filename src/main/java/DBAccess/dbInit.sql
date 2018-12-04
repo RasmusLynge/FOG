@@ -49,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
   `Flat_Roof` TINYINT(1) NULL DEFAULT NULL,
   `Date` DATETIME NULL,
   `State` VARCHAR(20) NOT NULL default 'Forespørgsel',
-  `Is_Shipped` TINYINT(1) NULL,
   PRIMARY KEY (`Id_Order`),
   INDEX `fk_Order_User1_idx` (`fk_User_Id` ASC),
   CONSTRAINT `fk_Order_User`
@@ -85,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `FOG`.`Material` (
   `Material_Id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
   `Price` DOUBLE NOT NULL,
+  `Length` DOUBLE NOT NULL,  
   `Price_Type` VARCHAR(45) NULL,
   PRIMARY KEY (`Material_Id`))
 ENGINE = InnoDB
