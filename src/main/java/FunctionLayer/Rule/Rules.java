@@ -54,4 +54,8 @@ public class Rules {
     public static final int PLANKOVERLAP = 1;
     public static final int PLANKWIDTH = 10;
     public static final int PLANKSWITHONEOVERLAP = 2;
+    public static final int PLANKSFROMONEPIECE = 2;
+    public static final int ROOFTRIANGLEDIVIDE = 2;
+    public static final int PLANKLENGTH = 480;
+    
 }

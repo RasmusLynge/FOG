@@ -5,6 +5,7 @@
  */
 package PresentatinoLayer.Commands;
 
+import FunctionLayer.Entity.Carport;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Exception.MakeOrderException;
@@ -13,7 +14,6 @@ import PresentatinoLayer.SVG.SVGUtilCarportSide;
 import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -68,6 +68,8 @@ public class CreateOrder extends Command {
         } else {
             o = lf.makeOrder(width, length, name, email, zip, phone, evt);
         }
+            Carport c = o.getCarport();
+            c.setShedLength(shedLength);
         String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, shedWidth);
         String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
 
