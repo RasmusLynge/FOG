@@ -13,7 +13,6 @@ import DBAccess.DataMapper;
 import FunctionLayer.Exception.GeneralException;
 import static FunctionLayer.Rule.Rules.*;
 
-
 /**
  *
  * @author Magnus
@@ -23,7 +22,6 @@ public class MaterialCalculator {
     public ArrayList<Material> materialList(Carport c) throws GeneralException {
         DataMapper dm = new DataMapper();
         ArrayList<Material> list = dm.getMaterials();
-        
 
         System.out.println("c get beam " + c.getBeamLength());
         rafter(c, list);
@@ -56,7 +54,9 @@ public class MaterialCalculator {
                     currentLength = 480 - restLength;
                 }
             }
-            c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * 2);
+            if (!(c.getRafterLength() <= 480 && c.getRafterLength() <= 600)) {
+                c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * 2);
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
@@ -94,19 +94,21 @@ public class MaterialCalculator {
                     currentLength = 480 - restLength;
                 }
             }
-            c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * BOTHSIDES);
+            if (!(c.getRoofRafterLength() <= 480 && c.getRoofRafterLength() <= 600)) {
+                c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * BOTHSIDES);
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == 480) {
-                 list.get(i).setAmount(counterRafterSmall);
+                list.get(i).setAmount(counterRafterSmall);
                 list.get(i).setAmount(counterRafterSmall + list.get(i).getAmount());
-                list.get(i).setAmount(counterRafterSmall *BOTHSIDES + list.get(i).getAmount());
+                list.get(i).setAmount(counterRafterSmall * BOTHSIDES + list.get(i).getAmount());
             }
         }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == 600) {
-                list.get(i).setAmount(counterRafterLong *BOTHSIDES+ list.get(i).getAmount());
+                list.get(i).setAmount(counterRafterLong * BOTHSIDES + list.get(i).getAmount());
             }
         }
     }
@@ -134,19 +136,21 @@ public class MaterialCalculator {
             }
             System.out.println("counterBeamSmall  " + counterBeamSmall);
             System.out.println("counterbeamLong  " + counterBeamLong);
-            c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * BOTHSIDES);
+            if (!(c.getBeamLength() <= 480 && c.getBeamLength() <= 600)) {
+                c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * BOTHSIDES);
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == 480) {
                 System.out.println("sæt bjælker --------------- kort");
-                list.get(i).setAmount(counterBeamSmall*BOTHSIDES);
+                list.get(i).setAmount(counterBeamSmall * BOTHSIDES);
             }
         }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == 600) {
                 System.out.println("sæt bjælker --------------- lang");
-                list.get(i).setAmount(counterBeamLong*BOTHSIDES);
+                list.get(i).setAmount(counterBeamLong * BOTHSIDES);
             }
         }
     }
@@ -172,26 +176,28 @@ public class MaterialCalculator {
                     currentLength = 480 - restLength;
                 }
             }
-            c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * 2);
+            if (!(c.getBeamLength() <= 480 && c.getBeamLength() <= 600)) {
+                c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * 2);
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == 480) {
-                list.get(i).setAmount(counterBeamSmall* + list.get(i).getAmount());
+                list.get(i).setAmount(counterBeamSmall * +list.get(i).getAmount());
             }
         }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == 600) {
-                list.get(i).setAmount(counterBeamLong*2 + list.get(i).getAmount());
+                list.get(i).setAmount(counterBeamLong * 2 + list.get(i).getAmount());
             }
         }
     }
 
     private void addRest(Carport c, ArrayList<Material> list) {
-        System.out.println(" roof tiles amount ++"+c.getRoofTiles());
-        System.out.println(" roof rafter amount ++"+c.getRoofRafter());
-        System.out.println(" roof beams amount ++"+c.getRoofBeams());
-        System.out.println(" beams amount  ++ "+ c.getBeam()    );
+        System.out.println(" roof tiles amount ++" + c.getRoofTiles());
+        System.out.println(" roof rafter amount ++" + c.getRoofRafter());
+        System.out.println(" roof beams amount ++" + c.getRoofBeams());
+        System.out.println(" beams amount  ++ " + c.getBeam());
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("Plastmo Ecolite blåtonet") && list.get(i).getLength() == 600) {
                 list.get(i).setAmount(c.getPlastmoLong());
@@ -208,7 +214,7 @@ public class MaterialCalculator {
             if (list.get(i).getName().equals("FladtBeslag") && list.get(i).getLength() == 0) {
                 list.get(i).setAmount(c.getFlatHinges());
             }
-            if (list.get(i).getName().equals("Tegl")){
+            if (list.get(i).getName().equals("Tegl")) {
                 System.out.println("tegl tilføj til pris++");
                 list.get(i).setAmount(c.getRoofTiles());
             }
@@ -216,7 +222,13 @@ public class MaterialCalculator {
                 list.get(i).setAmount(c.getLHinges());
             }
             if (list.get(i).getName().equals("25x150	mm.	trykimp. Bræt") && list.get(i).getLength() == 480) {
-                list.get(i).setAmount(c.getPlanks()+c.getCoverPlanks());
+                list.get(i).setAmount(c.getPlanks() + c.getCoverPlanks());
+            }
+            if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 240) {
+                list.get(i).setAmount(c.getPlanks() + c.getCoverStabilizerPlankSmall());
+            }
+            if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 360) {
+                list.get(i).setAmount(c.getPlanks() + c.getCoverStabilizerPlanksLong());
             }
         }
     }
