@@ -7,6 +7,8 @@ package FunctionLayer.Calculate;
 
 import DBAccess.DataMapper;
 import FunctionLayer.Entity.Carport;
+import FunctionLayer.Entity.Material;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,5 +17,15 @@ import FunctionLayer.Entity.Carport;
 public class ShedCalc {
     Carport c; 
     DataMapper db = new DataMapper();
+
+    public ShedCalc(Carport c) {
+        this.c = c;
+    }
+    public void setPlanksForShed(Carport c){
+        int shedWidth = c.getWidth();
+        int shedHeight = c.getPostLength();
+        ArrayList<Material> = c.getList();
+        
+    }
     
 }

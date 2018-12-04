@@ -22,11 +22,23 @@ public class CoverCalculator {
     public void setRoofCover(){
         int width = c.getWidth();
         int roofHeight = (int) c.getRoofPostHeight();
-        int amountOfPlanks = calcAmountofPlanks(width, roofHeight);
+        int amountOfPlanks = calcPlankRoofCover(width, roofHeight);
         c.setCoverPlanks(amountOfPlanks);
     }
 
-    private int calcAmountofPlanks(int width, int height) {
+    private int calcPlankRoofCover(int width, int height) {
+        int result = 0;
+        result += PLANKSWITHONEOVERLAP;
+        
+        int restWidth = width - PLANKSWITHONEOVERLAP * (PLANKWIDTH -PLANKOVERLAP); 
+        
+        double amount = (double) restWidth / (double)(PLANKWIDTH - (BOTHSIDES * PLANKOVERLAP));
+        result += Math.ceil(amount);
+        
+        //TODO tilføj hvis taget er højere end de brædder de får leveret (480) så find ud ad hvor mange ekstra der skal bruges 
+        return result;
+    }
+    private int calcPlankShedCover(int width, int height) {
         int result = 0;
         result += PLANKSWITHONEOVERLAP;
         
