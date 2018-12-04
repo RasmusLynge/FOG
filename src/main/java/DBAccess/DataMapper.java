@@ -190,14 +190,15 @@ public class DataMapper {
         ArrayList<Material> ml = new ArrayList<>();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT `Name`, `Length` FROM `Material`";
+            String SQL = "SELECT `Name`, `Length`, `Price` FROM `Material`";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("Name");
                 int length = rs.getInt("Length");
                 int amount = 0;
-                ml.add(new Material(name, length, amount));
+                double price = rs.getDouble("Price");
+                ml.add(new Material(name, length, amount, price));
             }
             return ml;
         } catch (ClassNotFoundException | SQLException ex) {

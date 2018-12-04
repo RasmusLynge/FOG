@@ -1,18 +1,19 @@
 package FunctionLayer.Calculate;
 
-import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Entity.Carport;
 import DBAccess.DataMapper;
+import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.GeneralException;
 import java.util.HashMap;
 import static FunctionLayer.Rule.Rules.*;
+import java.util.ArrayList;
 
 public class PriceCalculator {
 
     DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
 
-    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException {
+    public double priceCalculator2(int length, int width, boolean roof, boolean shed) throws GeneralException {
         Carport c = carportcalculator.calculateAll(length, width, false, false);
         HashMap<String, Double> mapPrice = db.getPrices();
         System.out.println("keys .. ++++" + mapPrice.keySet());
@@ -52,5 +53,21 @@ public class PriceCalculator {
         totalPriceForCarportSkeleton += totalLHinges * mapPrice.get("Hinge");
         totalPriceForCarportSkeleton += totalScrewBoxes * mapPrice.get("Screws (200)");
         return totalPriceForCarportSkeleton;
+    }
+    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException{
+        double result = 0;
+        MaterialCalculator mc = new MaterialCalculator();
+        
+        Carport c = carportcalculator.calculateAll(length, width, roof, shed);
+        c.setList(mc.materialList(c));
+        HashMap<String, Double> mapPrice = db.getPrices();
+        
+        ArrayList<Material> list = c.getList();
+        for (int i = 0; i<list.size(); i++){
+            System.out.println("price "+ list.get(i).getPrice()+" amount "+ list.get(i).getAmount()+" name " + list.get(i).getName() + " length = "+list.get(i).getLength()+ "\n");
+            result += list.get(i).getAmount() * list.get(i).getPrice();
+        }
+        
+        return result;
     }
 }
