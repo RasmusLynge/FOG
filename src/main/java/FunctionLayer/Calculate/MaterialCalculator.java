@@ -212,6 +212,9 @@ public class MaterialCalculator {
             if (list.get(i).getName().equals("LBeslag") && list.get(i).getLength() == 0) {
                 list.get(i).setAmount(c.getLHinges());
             }
+            if (list.get(i).getName().equals("25x150	mm.	trykimp. Bræt") && list.get(i).getLength() == 480) {
+                list.get(i).setAmount(c.getPlanks()+c.getCoverPlanks());
+            }
         }
     }
 

@@ -12,6 +12,7 @@ public class PriceCalculator {
 
     DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
+    Carport c; 
 
     public double priceCalculator2(int length, int width, boolean roof, boolean shed) throws GeneralException {
         Carport c = carportcalculator.calculateAll(length, width, false, false);
@@ -65,7 +66,10 @@ public class PriceCalculator {
             System.out.println("price "+ list.get(i).getPrice()+" amount "+ list.get(i).getAmount()+" name " + list.get(i).getName() + " length = "+list.get(i).getLength()+ "\n");
             result += list.get(i).getAmount() * list.get(i).getPrice();
         }
-        
+        this.c = c;
         return result;
+    }
+    public Carport getCarport(){
+        return this.c;
     }
 }

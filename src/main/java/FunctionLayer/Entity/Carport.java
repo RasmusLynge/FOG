@@ -13,9 +13,26 @@ public class Carport {
             postLength, screws, screwBoxes, lHinges,
             outerWidth, outerLength, roofBeams,
             flatHinges, roofTiles, plastmoSmall, plastmoLong,
-            coverPlanks, coverPlankLength;
+            coverPlanks, coverPlankLength, shedLength, planks;
         ArrayList<Material> list;
 
+    public int getPlanks() {
+        return planks;
+    }
+
+    public void setPlanks(int planks) {
+        this.planks = planks;
+    }
+
+    public int getShedLength() {
+        return shedLength;
+    }
+
+    public void setShedLength(int shedLength) {
+        this.shedLength = shedLength;
+    }
+
+        
     public int getlHinges() {
         return lHinges;
     }

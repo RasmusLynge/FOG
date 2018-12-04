@@ -7,7 +7,9 @@ package FunctionLayer.Calculate;
 
 import DBAccess.DataMapper;
 import FunctionLayer.Entity.Carport;
+import FunctionLayer.Entity.Material;
 import static FunctionLayer.Rule.Rules.*;
+import java.util.ArrayList;
 /**
  *
  * @author Mathias
@@ -19,11 +21,20 @@ public class CoverCalculator {
     public CoverCalculator(Carport c) {
         this.c = c;
     }
+    public void setShedCover(){
+        int width = c.getWidth();
+        int shedLength = c.getShedLength();
+        
+        int amountOfPlanks = 0;
+        amountOfPlanks +=calcPlankShedCover(width)*BOTHSIDES/PLANKSFROMONEPIECE;
+        amountOfPlanks += calcPlankShedCover(shedLength)*BOTHSIDES/PLANKSFROMONEPIECE;
+        c.setPlanks(c.getPlanks()+amountOfPlanks);
+    }
     public void setRoofCover(){
         int width = c.getWidth();
         int roofHeight = (int) c.getRoofPostHeight();
-        int amountOfPlanks = calcPlankRoofCover(width, roofHeight);
-        c.setCoverPlanks(amountOfPlanks);
+        int amountOfPlanks = calcPlankRoofCover(width, roofHeight)*BOTHSIDES;
+        c.setCoverPlanks(c.getCoverPlanks()+amountOfPlanks);
     }
 
     private int calcPlankRoofCover(int width, int height) {
@@ -36,9 +47,12 @@ public class CoverCalculator {
         result += Math.ceil(amount);
         
         //TODO tilføj hvis taget er højere end de brædder de får leveret (480) så find ud ad hvor mange ekstra der skal bruges 
+        if (height >0 &&PLANKLENGTH/height >= 2) result /= 2;
         return result;
     }
-    private int calcPlankShedCover(int width, int height) {
+    private int calcPlankShedCover(int width) {
+        
+        
         int result = 0;
         result += PLANKSWITHONEOVERLAP;
         
