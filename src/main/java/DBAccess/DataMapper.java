@@ -93,8 +93,7 @@ public class DataMapper {
                 Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
                 if (rs.getInt("Flat_Roof") == 1) {
                     order.setFlat_roof(true);
-                }
-                else {
+                } else {
                     order.setFlat_roof(false);
                 }
                 order.setState(rs.getString("State"));
@@ -107,7 +106,7 @@ public class DataMapper {
         }
         return null;
     }
-    
+
     public static ArrayList<Order> getAllOrders() throws GeneralException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
@@ -116,6 +115,30 @@ public class DataMapper {
                     + "INNER JOIN `User_Info` "
                     + "ON `Order`.Id_Order = User_Info.fk_Order_Id;";
             PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
+                order.setId(String.valueOf(rs.getInt("Id_Order")));
+                order.setOrderdate(rs.getString("Date"));
+                order.setState(rs.getString("State"));
+                ol.add(order);
+            }
+            return ol;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new GeneralException(ex.getMessage());
+        }
+    }
+
+    public static ArrayList<Order> getSpecificOrders(String state) throws GeneralException {
+        ArrayList<Order> ol = new ArrayList<>();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "select * \n"
+                    + "FROM `Order`\n"
+                    + "INNER JOIN `User_Info` ON `Order`.Id_Order = User_Info.fk_Order_Id\n"
+                    + "WHERE `State` =?;";
+           PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, state);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
@@ -177,14 +200,13 @@ public class DataMapper {
             ps.setString(4, state);
             ps.setInt(5, orderId);
             ps.executeUpdate();
-            
+
             Order o = getOrderByID(orderId);
             return o;
-            
+
         } catch (ClassNotFoundException | SQLException ex) {
             throw new GeneralException(ex.getMessage());
         }
     }
 
 }
-

@@ -154,8 +154,9 @@
                 <%
                 } else if ("employee".equals(user.getRole())) {
                 %>
+                <% String state = (String) request.getAttribute("state");%>
 
-                <h1 class="display-4">Her er alle tidligere ordre: </h1>
+                <h1 class="display-4">Her er alle <%=state%> : </h1>
                 <br>
                 <table class="table">
                     <thead>
@@ -218,3 +219,4 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
+

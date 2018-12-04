@@ -27,16 +27,18 @@ public class GetOrders extends Command {
         ArrayList<Order> ol = new ArrayList();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if ("customer".equals(user.getRole())) {
-            ol = LogicFacade.getOrdersByUserID(user.getId());
-            if (ol.isEmpty()) {
-                System.out.println("Tom liste");
-            }
-            else {
-                session.setAttribute("ordersByUserID", ol);
-            }
-        } 
-        else if ("employee".equals(user.getRole())) {
+//        if ("customer".equals(user.getRole())) {
+//            ol = LogicFacade.getOrdersByUserID(user.getId());
+//            if (ol.isEmpty()) {
+//                System.out.println("Tom liste");
+//            }
+//            else {
+//                session.setAttribute("ordersByUserID", ol);
+//            }
+//        } 
+//        else
+            
+            if ("employee".equals(user.getRole())) {
             ol = LogicFacade.getAllOrders();
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
