@@ -60,8 +60,6 @@ public class PriceCalculator {
         
         Carport c = carportcalculator.calculateAll(length, width, roof, shed);
         c.setList(mc.materialList(c));
-        HashMap<String, Double> mapPrice = db.getPrices();
-        
         ArrayList<Material> list = c.getList();
         for (int i = 0; i<list.size(); i++){
             System.out.println("price "+ list.get(i).getPrice()+" amount "+ list.get(i).getAmount()+" name " + list.get(i).getName() + " length = "+list.get(i).getLength()+ "\n");

@@ -38,7 +38,8 @@ public class CarportCalculator {
         }
         System.out.println("BEAM!!--------------------------- " + c.getBeam());
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
-        totalScrews(lHinges+c.getFlatHinges(), c);
+        totalScrews((lHinges+c.getFlatHinges()), c);
+        System.out.println("total hinges " + (lHinges + c.getFlatHinges()));
         screwBoxes(c);
         
         return c;
@@ -112,13 +113,15 @@ public class CarportCalculator {
     }
 
     private void totalScrews(int hinges, Carport c) {
+        System.out.println("screwland ------------------------");
         int totalScrews = hinges * SCREWSPERLHINGES;
+        System.out.println("Screwland citizens  ------------------------" + (c.getScrews() + totalScrews));
         c.setScrews(c.getScrews() + totalScrews);
     }
 
     private void screwBoxes(Carport c) {
-        double boxesOfScrews = c.getScrews() / SCREWSINABOX;
-        double boxesRoundedUp = Math.ceil(boxesOfScrews);
+        double boxesOfScrews = (double) c.getScrews() / SCREWSINABOX;
+        double boxesRoundedUp = (double) Math.ceil(boxesOfScrews);
         int boxes = (int) boxesRoundedUp;
         c.setScrewBoxes(boxes);
     }
