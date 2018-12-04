@@ -108,9 +108,8 @@
                     <input type="hidden" name="command" value="order">
                     <div class="form-group">
                         <select class="form-control" name="roof" required>
-                            <option class="hidden" value="1">Fladt tag med plastik</option>
-                            <option value="2">Vinklet tag med plastik</option>
-                            <option value="3">Vinklet tag med tegl</option>
+                            <option class="hidden" value="0">Fladt tag med plastik</option>
+                            <option value="1">Vinklet tag med tegl</option>
                         </select>
                     </div>
 
@@ -153,9 +152,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <br>
-                                            <input type="number" name="shedWidth" class="form-control" placeholder="Vælg bredde på skur *"  min="150" max="720" />
-                                            <br>
-                                            <input type="number" name="shedLength" class="form-control" placeholder="Vælg længde på skur *"  min="150" max="520"/>
+                                            <input type="number" name="shedLength" class="form-control" placeholder="Vælg længde på skur *"  min="100" max="520"/>
                                         </div>
                                     </div>
                                 </div>

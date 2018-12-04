@@ -24,8 +24,8 @@ public class ShedCalc {
     public void setPlanksForShed(Carport c){
         int shedWidth = c.getWidth();
         int shedHeight = c.getPostLength();
-        ArrayList<Material> = c.getList();
-        
+//        ArrayList<Material> = c.getList();
+
     }
     
 }
