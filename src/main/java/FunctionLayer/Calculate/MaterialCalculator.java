@@ -21,7 +21,7 @@ public class MaterialCalculator {
     public void materialList(Carport c) throws GeneralException {
         DataMapper dm = new DataMapper();
         ArrayList<Material> list = dm.getMaterials();
-
+        
         rafter(c, list);
         roofRafter(c, list);
         beam(c, list);
@@ -91,7 +91,7 @@ public class MaterialCalculator {
         
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == 480) {
-                list.get(i).setAmount(counterRafterSmall);
+                 list.get(i).setAmount(counterRafterSmall);
             }
         }
         for (int i = 0; i < list.size(); i++) {
