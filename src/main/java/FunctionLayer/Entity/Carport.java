@@ -1,5 +1,7 @@
 package FunctionLayer.Entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Magnus
@@ -12,7 +14,23 @@ public class Carport {
             outerWidth, outerLength, roofBeams,
             flatHinges, roofTiles, plastmoSmall, plastmoLong,
             coverPlanks, coverPlankLength;
+        ArrayList<Material> list;
 
+    public int getlHinges() {
+        return lHinges;
+    }
+
+    public void setlHinges(int lHinges) {
+        this.lHinges = lHinges;
+    }
+
+    public ArrayList<Material> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Material> list) {
+        this.list = list;
+    }
     public int getCoverPlanks() {
         return coverPlanks;
     }
