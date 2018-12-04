@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Calculate;
 
 import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Calculate.PriceCalculator;
