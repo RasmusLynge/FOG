@@ -7,6 +7,7 @@ import static FunctionLayer.Rule.Rules.*;
 
 /**
  * Skal rykkes til presentation
+ *
  * @author Magnus
  */
 public class SVGUtilCarportTop {
@@ -38,15 +39,16 @@ public class SVGUtilCarportTop {
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
-                
+
             //Middle beam
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
             //Beams to carry tiles
             res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
         if (shed == true) {
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + c.getShedLength()+100 ), innerFrameYPos);
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
-        }
+        }System.out.println("-----------------------------------------       shed l  "+c.getShedLength());
 
         return res;
     }
