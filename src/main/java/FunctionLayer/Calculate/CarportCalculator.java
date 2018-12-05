@@ -8,6 +8,7 @@ package FunctionLayer.Calculate;
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
 import java.util.ArrayList;
 
@@ -17,7 +18,10 @@ import java.util.ArrayList;
  */
 public class CarportCalculator {
 
-    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws GeneralException {
+    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws GeneralException, MakeOrderException {
+        if (length < 240 || length > 720 || width < 240 || width > 720) {
+            throw new MakeOrderException("Measurements contain values below or above the limit values");
+        }
         Carport c = new Carport(length, width, roof, false);
         RoofCalculator rc = new RoofCalculator(c);
         CoverCalculator cc = new CoverCalculator(c);
@@ -39,7 +43,10 @@ public class CarportCalculator {
             rc.flatRoof();
         }
         if (shed) {
+            shedPosts(length, width, c);
             coverStabilizerPlanks(length, width, c);
+            c.setDoorHinge(2);
+            c.setDoorKnob(1);
         }
         System.out.println("BEAM!!--------------------------- " + c.getBeam());
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
@@ -58,16 +65,13 @@ public class CarportCalculator {
     private void calculatePosts(int length, int width, Carport carport, boolean shed) {
         int restLength = length - TWOPOSTLENGTH;
         int restWidth = width - TWOPOSTLENGTH;
-
         // int widthPosts = calcWidthPosts(restWidth);
         int lengthPosts = calcLengthPosts(restLength);
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts;
-        if (shed) {
-            totalPosts += 3;
-        }
         carport.setPostLength(POSTSLENGTH);
         carport.setPost(totalPosts);
+        System.out.println("ssssssssssss  "+carport.getPost());
     }
 
     private void calculateRafters(int length, int width, boolean roof, Carport carport) {
@@ -195,5 +199,9 @@ public class CarportCalculator {
             c.setFlatHinges(c.getFlatHinges() + counterStabilizerSmall);
         }
         c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
+    }
+
+    private void shedPosts(int length, int width, Carport c) {
+        
     }
 }
