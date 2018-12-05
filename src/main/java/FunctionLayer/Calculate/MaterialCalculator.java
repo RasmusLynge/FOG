@@ -215,7 +215,6 @@ public class MaterialCalculator {
                 list.get(i).setAmount(c.getFlatHinges());
             }
             if (list.get(i).getName().equals("Tegl")) {
-                System.out.println("tegl tilføj til pris++");
                 list.get(i).setAmount(c.getRoofTiles());
             }
             if (list.get(i).getName().equals("LBeslag") && list.get(i).getLength() == 0) {

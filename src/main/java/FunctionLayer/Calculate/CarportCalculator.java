@@ -39,6 +39,7 @@ public class CarportCalculator {
             rc.flatRoof();
         }
         if (shed) {
+            shedPosts(length, width, c);
             coverStabilizerPlanks(length, width, c);
             c.setDoorHinge(2);
             c.setDoorKnob(1);
@@ -60,16 +61,13 @@ public class CarportCalculator {
     private void calculatePosts(int length, int width, Carport carport, boolean shed) {
         int restLength = length - TWOPOSTLENGTH;
         int restWidth = width - TWOPOSTLENGTH;
-
         // int widthPosts = calcWidthPosts(restWidth);
         int lengthPosts = calcLengthPosts(restLength);
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts;
-        if (shed) {
-            totalPosts += 3;
-        }
         carport.setPostLength(POSTSLENGTH);
         carport.setPost(totalPosts);
+        System.out.println("ssssssssssss  "+carport.getPost());
     }
 
     private void calculateRafters(int length, int width, boolean roof, Carport carport) {
@@ -197,5 +195,9 @@ public class CarportCalculator {
             c.setFlatHinges(c.getFlatHinges() + counterStabilizerSmall);
         }
         c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
+    }
+
+    private void shedPosts(int length, int width, Carport c) {
+        
     }
 }
