@@ -4,6 +4,7 @@ import FunctionLayer.Entity.Carport;
 import DBAccess.DataMapper;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
 import java.util.HashMap;
 import static FunctionLayer.Rule.Rules.*;
 import java.util.ArrayList;
@@ -14,21 +15,6 @@ public class PriceCalculator {
     CarportCalculator carportcalculator = new CarportCalculator();
     Carport c; 
 
-    public double priceCalculator2(int length, int width, boolean roof, boolean shed) throws GeneralException {
-        Carport c = carportcalculator.calculateAll(length, width, false, false);
-        HashMap<String, Double> mapPrice = db.getPrices();
-        System.out.println("keys .. ++++" + mapPrice.keySet());
-
-        double totalLengthOfBeams = c.getBeam() * c.getBeamLength() / CMTOMETER;
-        double totalLengthOfPosts = c.getPost() * c.getPostLength() / CMTOMETER;
-        double totalLengthOfRafters = c.getRafter() * c.getRafterLength() / CMTOMETER;
-        double totalLHinges = c.getLHinges();
-        double totalScrewBoxes = c.getScrewBoxes();
-
-        double totalPrice = priceForRoofs(c, mapPrice);
-        totalPrice += priceForCarportSkeleton(totalLengthOfRafters, mapPrice, totalLengthOfBeams, totalLengthOfPosts, totalLHinges, totalScrewBoxes);
-        return totalPrice;
-    }
 
     private double priceForRoofs(Carport c, HashMap<String, Double> mapPrice) {
         double totalPrice = c.getPlastmoSmall() * mapPrice.get("PlastmoSmall") + c.getPlastmoLong() * mapPrice.get("PlastmoLong");
@@ -55,7 +41,7 @@ public class PriceCalculator {
         totalPriceForCarportSkeleton += totalScrewBoxes * mapPrice.get("Screws (200)");
         return totalPriceForCarportSkeleton;
     }
-    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException{
+    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException, MakeOrderException{
         double result = 0;
         MaterialCalculator mc = new MaterialCalculator();
         

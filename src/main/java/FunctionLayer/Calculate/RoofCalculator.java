@@ -68,7 +68,7 @@ public class RoofCalculator {
         System.out.println("RafterLength---------------" + c.getRoofRafterLength());
         System.out.println("Rafters " + c.getRoofRafter());
 
-        //pr side
+        //pr sides
         int roofBeams = (int) (roofRafterLength / ROOFBEAMSPACING);
         c.setRoofBeams(roofBeams);
         System.out.println("RoofBeams " + c.getRoofBeams());

@@ -64,9 +64,9 @@ public class CreateOrder extends Command {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
         }
         if ("outermeasurements".equals(measurementtype)) {
-            o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt);
+            o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt, isShed, highRoof);
         } else {
-            o = lf.makeOrder(width, length, name, email, zip, phone, evt);
+            o = lf.makeOrder(width, length, name, email, zip, phone, evt, isShed, highRoof);
         }
             Carport c = o.getCarport();
             c.setShedLength(shedLength);
