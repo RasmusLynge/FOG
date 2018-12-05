@@ -6,6 +6,7 @@
 package PresentatinoLayer;
 
 import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
 import PresentatinoLayer.SVG.SVGUtilCarportSide;
 import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class ControlCarportTester extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, GeneralException {
+            throws ServletException, IOException, GeneralException, MakeOrderException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String carportTop = "<SVG width=\""+canvasX+"\" height=\""+canvasY+"\">" + utilCarportTop.caportFromAbove(length, width, true, true, SHEDlength, SHEDwidth) + "</SVG>";
@@ -77,6 +78,8 @@ public class ControlCarportTester extends HttpServlet {
              processRequest(request, response);
          } catch (GeneralException ex) {
              Logger.getLogger(ControlCarportTester.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (MakeOrderException ex) {
+             Logger.getLogger(ControlCarportTester.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
 
@@ -94,6 +97,8 @@ public class ControlCarportTester extends HttpServlet {
          try {
              processRequest(request, response);
          } catch (GeneralException ex) {
+             Logger.getLogger(ControlCarportTester.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (MakeOrderException ex) {
              Logger.getLogger(ControlCarportTester.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
