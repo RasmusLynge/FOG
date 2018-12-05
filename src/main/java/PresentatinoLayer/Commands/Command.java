@@ -24,6 +24,8 @@ abstract class Command {
         commands.put("showOrderDetails", new GetOrderDetails());
         commands.put("editorderdetails", new EditOrder());
         commands.put("logout", new LogOut());
+        commands.put("listspecificorders", new GetSpecificOrders());
+        commands.put("getemployeepage", new GetEmployeePage());
     }
 
     static Command from(HttpServletRequest request) {

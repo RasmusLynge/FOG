@@ -24,14 +24,12 @@ public class Login extends Command {
         session.setAttribute("user", user);
         session.setAttribute("role", user.getRole());
         
-
-        
         if (user.getRole().equals("employee")) {
 
             return "employeepage";
+        } else {
+            throw new GeneralException("Du har ikke rettigheder til at logge ind her");
         }
-
-        return "employeelogin";
     }
 
 }
