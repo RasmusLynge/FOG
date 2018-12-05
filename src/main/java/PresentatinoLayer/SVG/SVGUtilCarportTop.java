@@ -36,7 +36,6 @@ public class SVGUtilCarportTop {
         res = textSVG(res, length, width, outerFrameLength, innerFrameXPos, outerFrameWidth, innerFrameYPos, c);
         res = linesSVG(res, length, width, outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, c);
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
-        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
@@ -46,8 +45,11 @@ public class SVGUtilCarportTop {
             //Beams to carry tiles
             res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
+        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         if (shed == true) {
-            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + c.getShedLength()+100 ), innerFrameYPos);
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerFrameYPos);
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), (innerFrameYPos + DOORWIDTH));
+            res += square(POSTWIDTH, POSTWIDTH,(innerFrameXPos + shedLength - POSTWIDTH) , innerLayerEntranceCornorYPosForPost);
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }System.out.println("-----------------------------------------       shed l  "+c.getShedLength());
 
