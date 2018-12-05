@@ -154,8 +154,9 @@
                 <%
                 } else if ("employee".equals(user.getRole())) {
                 %>
+                <% String state = (String) request.getAttribute("state");%>
 
-                <h1 class="display-4">Her er alle tidligere ordre: </h1>
+                <h1 class="display-5">Her er alle ordre med status "<%=state%>" : </h1>
                 <br>
                 <table class="table">
                     <thead>
@@ -169,7 +170,7 @@
 
                     <%
                         ArrayList<Order> orderList = new ArrayList<>();
-                            orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                            orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
                         if (orderList != null) {
                             for (int i = 0; i < orderList.size(); i++) {
                                 String orderID = orderList.get(i).getId();
@@ -218,3 +219,4 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
+

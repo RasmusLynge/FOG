@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
@@ -58,7 +58,6 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
-                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
@@ -73,9 +72,71 @@
                             <% User user = (User) session.getAttribute("user");
                                 if (user == null) {
                                     out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
-                                } else {
+                                } else if (user.getRole().equalsIgnoreCase("employee")) {%>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/FOG/FrontController?command=getemployeepage">Gå til medarbejder siden</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+
+                            <%} else {
                                     out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+
                                 }%>                         
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listorders">
+                                <input class="btn btn-primary btn-md"type="submit" value="Se alle ordrer">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="forespørgsel" />
+                                <input class="btn btn-primary btn-md"type="submit" value="Se Forespørgsler">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listspecificorders">
+                                <input class="btn btn-primary btn-md"type="submit" value="Se afventende ordre ">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listspecificorders">
+                                <input class="btn btn-primary btn-md"type="submit" value="Se betalte ordre">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listspecificorders">
+                                <input class="btn btn-primary btn-md"type="submit" value="Se fragtede ordre">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="listspecificorders">
+                                <input class="btn btn-primary btn-md"type="submit" value="Se ordre afsluttet uden salg">
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -88,11 +149,12 @@
                         <h3>Ordre detaljer for ordre id: <%= id%></h3>
 
                         <ol>
-                            <p><strong>Navn: </strong> <%=o.getName() %></p>
-                            <p><strong>Email: </strong> <%=o.getEmail() %></p>
-                            <p><strong>Telefonnummer: </strong> <%=o.getPhone() %></p>                           
-                            <p><strong>Postnummer: </strong> <%=o.getZip() %></p>
-
+                            <p><strong>Navn: </strong> <%=o.getName()%></p>
+                            <p><strong>Email: </strong> <%=o.getEmail()%></p>
+                            <p><strong>Telefonnummer: </strong> <%=o.getPhone()%></p>                           
+                            <p><strong>Postnummer: </strong> <%=o.getZip()%></p>
+                            <p><strong>Ordre Dato: </strong> <%=o.getOrderdate()%></p>
+                            <p><strong>Pris: </strong> ikke implementeret </p>
 
                         </ol>
 
@@ -122,9 +184,8 @@
                                     </select>
                                 </li>
                                 <li>
-                                    <strong>Bestillingsdato: </strong> <%out.println(o.getOrderdate());%>
-                                </li>
-                                <li>
+                                    <strong>Ordre Stadie: </strong>
+                                    <br>
                                     <input type="radio" name="State" value="Forespørgsel" <%if ("Forespørgsel".equals(o.getState())) {
                                             out.println("checked");
                                         } %>> Forespørgsel<br>
@@ -146,6 +207,31 @@
                         </form>
                     </div>
                 </div>
+            </div>
+
+            <div class="jumbotron">
+                <h3>Materiale Liste</h3>
+
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Beskrivelse ID</th>
+                            <th scope="col">Længde</th>
+                            <th scope="col">Antal</th>
+                            <th scope="col">Enhed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> bla bla </td>
+                            <td> bla bla </td>
+                            <td> bla bla </td>
+                            <td> bla bla </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
 
             <nav class="navbar bottom navbar-dark bg-dark">

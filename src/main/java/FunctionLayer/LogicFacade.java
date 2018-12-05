@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 public class LogicFacade {
 
+    public static ArrayList<Order> getSpecificOrders(String state) throws GeneralException {
+        return DataMapper.getSpecificOrders(state);
+    }
+
     PriceCalculator p = new PriceCalculator();
     DataMapper dm = new DataMapper();
 
@@ -36,7 +40,9 @@ public class LogicFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt, boolean shed, boolean highRoof) throws GeneralException, MakeOrderException{
+
         Order o = new Order(width, length, name, email, zip, phone, evt);
         o.setPrice(p.priceCalculator(length, width, shed, highRoof));
         o.setCarport(p.getCarport());
@@ -49,7 +55,7 @@ public class LogicFacade {
         return o;
     }
 
-    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+    public static Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws GeneralException {
         Order o = DataMapper.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
         return o;
     }
