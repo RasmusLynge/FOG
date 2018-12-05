@@ -33,20 +33,22 @@ public class GetSpecificOrders extends Command {
         String state = "";
 
         state = request.getParameter("state");
+        System.out.println("TESSST : " + state);
+        if (state.equalsIgnoreCase("ForespÃ¸rgsel")) {
+            state = "Forespørgsel";
+        }
+        if (state.equalsIgnoreCase("Afventer sÃ¦lger")) {
+            state = "Afventer sælger";
+        }
         request.setAttribute("state", state);
-        System.out.println("TESSST : "+ state);
-        
-        
+        System.out.println("NEW TESSST : " + state);
+
         if ("employee".equals(user.getRole())) {
             ol = LogicFacade.getSpecificOrders(state);
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
+                session.setAttribute("getSpecificOrders", ol);
             } else {
-//                switch(state){
-//                    case "Se Forespørgsler":
-//                        state = "Forespørgsel";
-//                        break;
-//                            }
                 session.setAttribute("getSpecificOrders", ol);
             }
         }

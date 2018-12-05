@@ -156,7 +156,7 @@
                 %>
                 <% String state = (String) request.getAttribute("state");%>
 
-                <h1 class="display-4">Her er alle <%=state%> : </h1>
+                <h1 class="display-5">Her er alle ordre med status "<%=state%>" : </h1>
                 <br>
                 <table class="table">
                     <thead>
