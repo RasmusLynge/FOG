@@ -15,6 +15,7 @@ public class Order {
     private double price;
     private String id, name, email, zip, phone, evt, orderdate, state;
     private boolean flat_roof;
+    Carport carport;
          
     public Order(int width, int length, String name, String email, String zip, String phone, String evt) {
         this.width = width;
@@ -24,6 +25,14 @@ public class Order {
         this.zip = zip;
         this.phone = phone;
         this.evt = evt;
+    }
+
+    public Carport getCarport() {
+        return carport;
+    }
+
+    public void setCarport(Carport c) {
+        this.carport = c;
     }
 
     public double getPrice() {

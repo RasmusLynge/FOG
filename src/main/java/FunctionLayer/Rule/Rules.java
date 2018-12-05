@@ -16,6 +16,10 @@ public class Rules {
     public static final int BEAMS = 2; // total amount of beams in the scrukture
     public static final int POSTSLENGTH = 300; // posts length
     public static final int SCREWSINABOX = 200; // screws in a box
+    public static final int STABILIZERPLANKSLONG = 360;
+    public static final int STABILIZERPLANKSSMALL = 240;
+    public static final int STABILIZERPLANKPRWALL = 2;
+    public static final int LHINGEPRSTABILIZER = 2;
 
     //priceCalc
     public static final int CMTOMETER = 100;
@@ -49,9 +53,20 @@ public class Rules {
     //svgTop
     public static final int EXTRAPOSTSPACING = 10;
     public static final int TEXTSPACINGOUTERLAYER = 40;
-    
+
     //roofCover
     public static final int PLANKOVERLAP = 1;
     public static final int PLANKWIDTH = 10;
     public static final int PLANKSWITHONEOVERLAP = 2;
+    public static final int PLANKSFROMONEPIECE = 2;
+    public static final int ROOFTRIANGLEDIVIDE = 2;
+    public static final int PLANKLENGTH = 480;
+    public static final int RAFTERSMALL = 480;
+    public static final int RAFTERLONG = 600;
+    public static final int BEAMSMALL = 480;
+    public static final int BEAMLONG = 600;
+    
+    
+    
+
 }

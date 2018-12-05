@@ -54,22 +54,25 @@ public class RoofCalculator {
         int roofPost = c.getRafter();
         c.setRoofPostHeight(roofPostHeight);
         c.setRoofPost(roofPost);
+        if (roofPostHeight < 0) {
+            c.setRoofPostHeight(roofPostHeight * -1);
+        }
 
         //length each side
         double roofRafterLength = Math.sqrt((roofPostHeight * roofPostHeight) + (c.getOuterWidth() / 2) * (c.getOuterWidth() / 2));
         int roofRafter = c.getRafter() * BOTHSIDES;
-        c.setRoofRafterLength((int)roofRafterLength);
-        
+        c.setRoofRafterLength((int) roofRafterLength);
+
         //each side
         c.setRoofRafter(roofRafter);
         System.out.println("RafterLength---------------" + c.getRoofRafterLength());
         System.out.println("Rafters " + c.getRoofRafter());
-        
-        //pr side
+
+        //pr sides
         int roofBeams = (int) (roofRafterLength / ROOFBEAMSPACING);
         c.setRoofBeams(roofBeams);
-        System.out.println("RoofBeams "+ c.getRoofBeams());
-                
+        System.out.println("RoofBeams " + c.getRoofBeams());
+
         int roofTiles = (int) ((c.getRoofRafter() - 1) * (c.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
         c.setRoofTiles(roofTiles);
 
