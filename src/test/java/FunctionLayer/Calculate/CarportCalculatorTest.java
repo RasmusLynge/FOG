@@ -1,13 +1,10 @@
 package FunctionLayer.Calculate;
-
-import FunctionLayer.Calculate.CarportCalculator;
-import FunctionLayer.Calculate.PriceCalculator;
-import FunctionLayer.Calculate.RoofCalculator;
+ 
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.Exception.MakeOrderException;
 import org.junit.Assert;
-import static org.junit.Assert.fail;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,7 +15,14 @@ import org.junit.rules.ExpectedException;
  */
 public class CarportCalculatorTest {
     //Arrange
-
+    @Rule
+    public ExpectedException exceptionRule; 
+    
+    @Before
+    public void setUp() {
+        exceptionRule = ExpectedException.none();
+    }
+    
     CarportCalculator cc = new CarportCalculator();
     PriceCalculator pc = new PriceCalculator();
     int length = 240;
@@ -59,12 +63,13 @@ public class CarportCalculatorTest {
 
     @Test
     public void RaftersTest() throws GeneralException {
-        //act
+        //Arrange
         Carport result = cc.calculateAll(length, width, roof, shed);
-        //Assert
         if (roof) {
+            //act
             int expectedRafters = 6 + 1;
             int actualRafters = result.getRafter();
+            //Assert
             Assert.assertEquals(expectedRafters, actualRafters);
 
             int expectedRafterSpacing = 62;
@@ -135,32 +140,51 @@ public class CarportCalculatorTest {
         int actualTotalScrewBoxes = (int) result.getScrewBoxes();
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
     }
-    
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
-    @Test
-    public void TestLimitsException() throws GeneralException {
+    @Test(expected = MakeOrderException.class)
+    public void TestLowerLimitLenghtException() throws GeneralException {
         //act
         //Længden og bredden skal være mellem 240 og 720
-        Carport result = cc.calculateAll(200, 200, roof, shed);
+        Carport result = cc.calculateAll(200, width, roof, shed);
         //Assert
-        exceptionRule.expect(MakeOrderException.class);
         
-       
     }
     
-    @Test
-    public void TestRightInputException() throws GeneralException {
+    @Test(expected = MakeOrderException.class)
+    public void TestLowerLimitWidthException() throws GeneralException {
         //act
-        Carport result = cc.calculateAll(200, 200, roof, shed);
+        //Længden og bredden skal være mellem 240 og 720
+        Carport result = cc.calculateAll(length, 200, roof, shed);
         //Assert
-        exceptionRule.expect(NumberFormatException.class);
-        String s = Integer.toString(result.getWidth());
-        //Bliver til 200a hvilket bør give NumberFormatException
-        s = s + "a";
-        Integer.parseInt(s);
+        
     }
+    @Test(expected = MakeOrderException.class)
+    public void TestUpperLimitLenghtException() throws GeneralException {
+        //act
+        //Længden og bredden skal være mellem 240 og 720
+        Carport result = cc.calculateAll(800, width, roof, shed);
+        //Assert
+        
+    }
+    @Test(expected = MakeOrderException.class)
+    public void TestUpperLimitWidthException() throws GeneralException {
+        //act
+        //Længden og bredden skal være mellem 240 og 720
+        Carport result = cc.calculateAll(length, 800, roof, shed);
+        //Assert
+        
+    }
+//    @Test
+//    public void TestRightInputException() throws GeneralException {
+//        //act
+//        Carport result = cc.calculateAll(200, 200, roof, shed);
+//        //Assert
+//        exceptionRule.expect(NumberFormatException.class);
+//        String s = Integer.toString(result.getWidth());
+//        //Bliver til 200a hvilket bør give NumberFormatException
+//        s = s + "a";
+//        Integer.parseInt(s);
+//    }
 
     //    @Test
 //    public void priceTest() throws GeneralException{
