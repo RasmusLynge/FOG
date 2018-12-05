@@ -35,9 +35,9 @@ public class LogicFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt) throws GeneralException{
+    public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt, boolean shed, boolean highRoof) throws GeneralException{
         Order o = new Order(width, length, name, email, zip, phone, evt);
-        o.setPrice(p.priceCalculator(length, width, true, true));
+        o.setPrice(p.priceCalculator(length, width, shed, highRoof));
         o.setCarport(p.getCarport());
         dm.createOrder(o);
         return o;
