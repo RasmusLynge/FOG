@@ -26,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Control", urlPatterns = {"/Control"})
 public class ControlCarportTester extends HttpServlet {
     
-     private static final int length = 500;
-     private static final int width = 300;
+     private static final int length = 720;
+     private static final int width = 720;
      private static final int SHEDlength = 170;
-     private static final int SHEDwidth = 300;
+     private static final int SHEDwidth = width;
      int canvasX = length+300;
      int canvasY = width+300;
      
