@@ -51,7 +51,7 @@ public class LogicFacade {
         return o;
     }
 
-    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+    public static Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws GeneralException {
         Order o = DataMapper.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
         return o;
     }

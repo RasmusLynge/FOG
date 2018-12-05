@@ -170,8 +170,8 @@
 
                     <%
                         ArrayList<Order> orderList = new ArrayList<>();
+                            orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
                         if (orderList != null) {
-                            orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
                             for (int i = 0; i < orderList.size(); i++) {
                                 String orderID = orderList.get(i).getId();
                                 String orderDate = orderList.get(i).getOrderdate();

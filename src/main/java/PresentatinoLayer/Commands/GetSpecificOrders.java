@@ -30,11 +30,11 @@ public class GetSpecificOrders extends Command {
         User user = (User) session.getAttribute("user");
         ArrayList<Order> ol = new ArrayList();
 
-        String state = "forespørgsel";
-        request.setAttribute("state", state);
+        String state = "";
 
-        String test = request.getParameter("state");
-        System.out.println("TESSST : "+ test);
+        state = request.getParameter("state");
+        request.setAttribute("state", state);
+        System.out.println("TESSST : "+ state);
         
         
         if ("employee".equals(user.getRole())) {
@@ -42,7 +42,12 @@ public class GetSpecificOrders extends Command {
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
             } else {
-                session.setAttribute("getAllOrders", ol);
+//                switch(state){
+//                    case "Se Forespørgsler":
+//                        state = "Forespørgsel";
+//                        break;
+//                            }
+                session.setAttribute("getSpecificOrders", ol);
             }
         }
         return "showspecificorders";

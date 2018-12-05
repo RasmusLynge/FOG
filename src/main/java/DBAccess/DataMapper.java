@@ -209,6 +209,7 @@ public class DataMapper {
             throw new GeneralException(ex.getMessage());
         }
     }
+    
  public static ArrayList<Material> getMaterials() throws GeneralException {
         ArrayList<Material> ml = new ArrayList<>();
         try {

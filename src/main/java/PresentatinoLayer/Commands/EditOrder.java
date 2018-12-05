@@ -25,6 +25,12 @@ public class EditOrder extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int roof = Integer.parseInt(request.getParameter("roof"));
         String state = request.getParameter("State");
+        if (state.equalsIgnoreCase("ForespÃ¸rgsel")) {
+            state = "Forespørgsel";
+        }
+        if (state.equalsIgnoreCase("Afventer sÃ¦lger")) {
+            state = "Afventer sælger";
+        }
         try {
             Order o = LogicFacade.EditOrder(id, width, length, roof, state);
             request.setAttribute("order", o);
