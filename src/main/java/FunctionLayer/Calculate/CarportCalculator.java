@@ -69,9 +69,12 @@ public class CarportCalculator {
         int lengthPosts = calcLengthPosts(restLength);
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts;
+        int postSpacing = length / ((totalPosts / BOTHSIDES) - 1);
+        System.out.println("postspacing ---------------------------    " + postSpacing);
+        carport.setPostSpacing(postSpacing);
         carport.setPostLength(POSTSLENGTH);
         carport.setPost(totalPosts);
-        System.out.println("ssssssssssss  "+carport.getPost());
+        System.out.println("ssssssssssss  " + carport.getPost());
     }
 
     private void calculateRafters(int length, int width, boolean roof, Carport carport) {
@@ -202,6 +205,10 @@ public class CarportCalculator {
     }
 
     private void shedPosts(int length, int width, Carport c) {
-        
+        if (c.getShedLength() == c.getPostSpacing() + POSTWIDTH) {
+            c.setPost(c.getPost() + 1);
+        } else {
+            c.setPost(c.getPost() + 3);
+        }
     }
 }
