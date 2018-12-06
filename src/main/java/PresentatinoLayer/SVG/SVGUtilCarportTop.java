@@ -45,7 +45,7 @@ public class SVGUtilCarportTop {
             //Beams to carry tiles
             res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
-        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c, shedLength);
+        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c, shedLength, shed);
         if (shed == true) {
             res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerFrameYPos);
             res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), (innerFrameYPos + DOORWIDTH));
@@ -94,31 +94,50 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String postsSVG(String res, int width, int length, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c, int shedLength) {
+    private String postsSVG(String res, int width, int length, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c, int shedLength, boolean shed) {
         //post
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerLayerEntranceCornorYPosForPost);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost);
-        //carport with 6 posts
-        if ((width / POSTPOSITIONTWO + innerFrameXPos) < 100 || (width / POSTPOSITIONTWO + innerFrameXPos) < 100) {
+
+        System.out.println("if first stament " + (int) (width / POSTPOSITIONTWO + innerFrameXPos));
+        System.out.println("if second statement " + (int) (shedLength - POSTWIDTH));
+        if (shed) {
+            
+            //carport with 8 posts
+            if (c.getPost() >= MAXPOSTS && (shedLength + POSTWIDTH < width / POSTPOSITIONTHREE)) {
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
+            }
+            
+            System.out.println("1 : " + (shedLength + POSTWIDTH) + " 2 : " + ((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()));
+            if (c.getPost() >= MAXPOSTS && shedLength + POSTWIDTH > (int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()) {
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
+            }
+
+            if (shedLength + POSTWIDTH < width / POSTPOSITIONONEHALF) {
+                res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerLayerEntranceCornorYPosForPost);
+            }
+
+        } else {
+//                carport with 6 posts
             if (c.getPost() > MINIMUMPOSTS && c.getPost() < 8) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerFrameYPos);
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
             }
-        }
-        //carport with 8 posts
-        if (c.getPost() >= MAXPOSTS) {
+//                carport with 8 posts
+            if (c.getPost() >= MAXPOSTS) {
 
-            if (!((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) <= shedLength - 100)) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
-            }
-            if (!((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) <= shedLength - 100)) {
                 res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerFrameYPos);
                 res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerLayerEntranceCornorYPosForPost);
             }
         }
+
         return res;
     }
 

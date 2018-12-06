@@ -19,17 +19,12 @@ public class PriceCalculator {
     private double priceForRoofs(Carport c, HashMap<String, Double> mapPrice) {
         double totalPrice = c.getPlastmoSmall() * mapPrice.get("PlastmoSmall") + c.getPlastmoLong() * mapPrice.get("PlastmoLong");
         totalPrice += (c.getFlatHinges() / CMTOMETER) * mapPrice.get("FlatHinge");
-        System.out.println("Plastmo pris " + c.getPlastmoSmall() * mapPrice.get("PlastmoSmall") + c.getPlastmoLong() * mapPrice.get("PlastmoLong"));
         totalPrice += (c.getRoofBeams() / CMTOMETER) * mapPrice.get("Rafter");
         totalPrice += (c.getRoofPost() / CMTOMETER) * mapPrice.get("Post");
         totalPrice += (c.getRoofRafter() / CMTOMETER) * mapPrice.get("Rafter");
         totalPrice += c.getRoofTiles() * mapPrice.get("Tile");
         totalPrice += c.getCoverPlanks() * mapPrice.get("Plank19x100");
         
-        System.out.println("price for plast small +++++++++" + mapPrice.get("PlastmoSmall"));
-        System.out.println("price for plast long +++++++++" + mapPrice.get("PlastmoLong"));
-        System.out.println("number of plast long +++++++++" + c.getPlastmoLong());
-        System.out.println("number of plast small +++++++++" + c.getPlastmoSmall());
         return totalPrice;
     }
 
