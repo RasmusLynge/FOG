@@ -100,14 +100,14 @@ public class MaterialCalculator {
         }
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == RAFTERSMALL) {
+            if (list.get(i).getName().equals("45x195spærtræubh.") && list.get(i).getLength() == RAFTERSMALL) {
                 list.get(i).setAmount(counterRafterSmall);
                 list.get(i).setAmount(counterRafterSmall + list.get(i).getAmount());
                 list.get(i).setAmount(counterRafterSmall * BOTHSIDES + list.get(i).getAmount());
             }
         }
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == RAFTERLONG) {
+            if (list.get(i).getName().equals("45x195spærtræubh.") && list.get(i).getLength() == RAFTERLONG) {
                 list.get(i).setAmount(counterRafterLong * BOTHSIDES + list.get(i).getAmount());
             }
         }

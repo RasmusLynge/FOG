@@ -36,7 +36,6 @@ public class SVGUtilCarportTop {
         res = textSVG(res, length, width, outerFrameLength, innerFrameXPos, outerFrameWidth, innerFrameYPos, c);
         res = linesSVG(res, length, width, outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, c);
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
-        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
         if (roof == true) {
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
@@ -46,10 +45,15 @@ public class SVGUtilCarportTop {
             //Beams to carry tiles
             res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
+        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c, shedLength);
         if (shed == true) {
-            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + c.getShedLength()+100 ), innerFrameYPos);
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerFrameYPos);
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), (innerFrameYPos + DOORWIDTH));
+            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerLayerEntranceCornorYPosForPost);
+            res += line(innerFrameXPos + shedLength, (innerFrameYPos + POSTWIDTH), innerFrameXPos + shedLength - DOORWIDTH + POSTWIDTH, innerFrameYPos - POSTWIDTH + DOORWIDTH);
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
-        }System.out.println("-----------------------------------------       shed l  "+c.getShedLength());
+        }
+        System.out.println("-----------------------------------------       shed l  " + c.getShedLength());
 
         return res;
     }
@@ -90,25 +94,30 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-    private String postsSVG(String res, int width, int length, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c) {
+    private String postsSVG(String res, int width, int length, int innerFrameXPos, int innerFrameYPos, int innerLayerEntranceCornorXPosForPost, int innerLayerEntranceCornorYPosForPost, Carport c, int shedLength) {
         //post
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerFrameYPos);
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerLayerEntranceCornorYPosForPost);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost);
         //carport with 6 posts
-        if (c.getPost() > MINIMUMPOSTS && c.getPost() < 8) {
-            res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerFrameYPos);
-            res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
+        if ((width / POSTPOSITIONTWO + innerFrameXPos) < 100 || (width / POSTPOSITIONTWO + innerFrameXPos) < 100) {
+            if (c.getPost() > MINIMUMPOSTS && c.getPost() < 8) {
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTWO + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
+            }
         }
         //carport with 8 posts
         if (c.getPost() >= MAXPOSTS) {
 
-            res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
-            res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
-            res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerFrameYPos);
-            res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerLayerEntranceCornorYPosForPost);
-
+            if (!((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) <= shedLength - 100)) {
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
+            }
+            if (!((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) <= shedLength - 100)) {
+                res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerFrameYPos);
+                res += square(POSTWIDTH, POSTWIDTH, (int) (width / POSTPOSITIONONEHALF + innerFrameXPos), innerLayerEntranceCornorYPosForPost);
+            }
         }
         return res;
     }
@@ -144,13 +153,13 @@ public class SVGUtilCarportTop {
 
     private String textSVG(String res, int width, int height, int outerFrameWidth, int innerFrameXPos, int outerFrameHeight, int innerFrameYPos, Carport c) {
         //width text
-        res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS - TEXTSPACINGOUTERLAYER, outerFrameWidth);
-        res += text(innerFrameXPos, OUTERFRAMEYPOS - TEXTSPACINGINNERLAYER, width);
+        res += text((OUTERFRAMEXPOS + outerFrameWidth) / 2, OUTERFRAMEYPOS - TEXTSPACINGOUTERLAYER, outerFrameWidth);
+        res += text((OUTERFRAMEXPOS + outerFrameWidth) / 2, OUTERFRAMEYPOS - TEXTSPACINGINNERLAYER, width);
         //rafter text
-        res += text(OUTERFRAMEXPOS, OUTERFRAMEYPOS + outerFrameHeight + TEXTBOTTOMLAYER, (int) c.getRafterSpacing());
+        res += text(TEXTBOTTOMLAYER + (OUTERFRAMEXPOS + (int) c.getRafterSpacing()) / 2, OUTERFRAMEYPOS + outerFrameHeight + TEXTBOTTOMLAYER, (int) c.getRafterSpacing());
         //height text
-        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, innerFrameYPos + height, height);
-        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGOUTERLAYER, OUTERFRAMEXPOS + outerFrameHeight, outerFrameHeight);
+        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, innerFrameYPos + height / 2, height);
+        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGOUTERLAYER, OUTERFRAMEXPOS + outerFrameHeight / 2, outerFrameHeight);
         return res;
     }
 
