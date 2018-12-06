@@ -6,10 +6,13 @@
 
 package PresentatinoLayer.Commands;
 
+import FunctionLayer.Entity.Material;
 import PresentatinoLayer.Commands.Command;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Entity.Order;
+import FunctionLayer.Exception.MakeOrderException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,10 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 public class GetOrderDetails extends Command {
     
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
+        LogicFacade lf = new LogicFacade();
         int orderid = Integer.parseInt(request.getParameter("orderID")); 
-        Order o = LogicFacade.getOrderByID(orderid);
+        Order o = lf.getOrderByID(orderid);
+        ArrayList<Material> materialList = o.getCarport().getList();
         request.setAttribute("order", o);
+        request.setAttribute("materiallist", materialList);
         return "showorderdetails";
     }
 }

@@ -7,6 +7,7 @@ package PresentatinoLayer.Commands;
 
 import PresentatinoLayer.Commands.Command;
 import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
 import configuration.Conf;
 import java.io.IOException;
@@ -39,19 +40,19 @@ public class FrontController extends HttpServlet {
             Command action = Command.from(request);
             String view = action.execute(request, response);
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
-        } catch (GeneralException loginEx) {
-            Conf.getLogger().log(Level.SEVERE, loginEx.getMessage(), loginEx);
-            request.setAttribute("error", loginEx.getMessage());
-            loginEx.printStackTrace();
+        } catch (GeneralException Ex) {
+            Conf.getLogger().log(Level.SEVERE, Ex.getMessage(), Ex);
+            request.setAttribute("error", Ex.getMessage());
+            Ex.printStackTrace();
             request.getRequestDispatcher("/WEB-INF/employeelogin.jsp").forward(request, response);
         } catch (MakeOrderException MakeOrderEx) {
             request.setAttribute("error", MakeOrderEx.getMessage());
             MakeOrderEx.printStackTrace();
             request.getRequestDispatcher("/WEB-INF/orderpage.jsp").forward(request, response);
-//        } catch (GeneralException GeneralEx) {
-//            request.setAttribute("error", GeneralEx.getMessage());
-//            GeneralEx.printStackTrace();
-//            request.getRequestDispatcher("/WEB-INF/errorpage.jsp").forward(request, response);
+        } catch (LoginException LoginlEx) {
+            request.setAttribute("error", LoginlEx.getMessage());
+            LoginlEx.printStackTrace();
+            request.getRequestDispatcher("/WEB-INF/errorpage.jsp").forward(request, response);
         }
     }
 

@@ -160,12 +160,15 @@ public class DataMapper {
             Date d = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(d);
-            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`)  VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`, `Shed`, `ShedLength`)  VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, order.getWidth());
             ps.setInt(2, order.getLength());
-            ps.setInt(3, 1); // Fladt tage er sat til true
+            ps.setInt(3, order.isFlat_roof() ? 1 : 0); // Fladt tage er sat til true
             ps.setString(4, currentTime);
+            ps.setInt(5, order.isShed() ? 1 : 0);
+            ps.setInt(6, order.getShedLength());
+            
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -188,7 +191,7 @@ public class DataMapper {
         }
     }
 
-    public static Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+    public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
         try {
             Connection con = Connector.connection();
             String SQL = "Update `Order`\n"

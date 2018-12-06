@@ -4,6 +4,8 @@
     Author     : Simon
 --%>
 
+<%@page import="FunctionLayer.Entity.Material"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page import="FunctionLayer.Entity.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -110,31 +112,35 @@
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="forespørgsel" />
+                                <input type="hidden" name="state" class="form-control"  value="Forespørgsel" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se Forespørgsler">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Afventer sælger" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se afventende ordre ">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Betalt" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se betalte ordre">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Fragtet" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se fragtede ordre">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Afsluttet uden salg" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se ordre afsluttet uden salg">
                             </form>
                         </li>
@@ -154,7 +160,7 @@
                             <p><strong>Telefonnummer: </strong> <%=o.getPhone()%></p>                           
                             <p><strong>Postnummer: </strong> <%=o.getZip()%></p>
                             <p><strong>Ordre Dato: </strong> <%=o.getOrderdate()%></p>
-                            <p><strong>Pris: </strong> ikke implementeret </p>
+                            <p><strong>Pris: </strong> <%=o.getPrice()%> </p>
 
                         </ol>
 
@@ -208,7 +214,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="jumbotron">
                 <h3>Materiale Liste</h3>
 
@@ -222,14 +227,26 @@
                             <th scope="col">Enhed</th>
                         </tr>
                     </thead>
+                    <%   ArrayList<Material> materialList = (ArrayList<Material>) request.getAttribute("materiallist");
+                        if (materialList != null) {
+                            for (int i = 0; i < materialList.size(); i++) {
+                                if (materialList.get(i).getAmount() != 0){
+                                String name = materialList.get(i).getName();
+                                int length = materialList.get(i).getLength();
+                                int amount = materialList.get(i).getAmount();
+                                double price = materialList.get(i).getPrice();
+                                        
+                    %>
                     <tbody>
                         <tr>
-                            <td> bla bla </td>
-                            <td> bla bla </td>
-                            <td> bla bla </td>
-                            <td> bla bla </td>
+                            <td> <%= name %> </td>
+                            <td> <%= length %> </td>
+                            <td> <%= amount %> </td>
+                            <td> <%= price %> </td>
                         </tr>
                     </tbody>
+                    <% } }
+                        }%>
                 </table>
 
             </div>
