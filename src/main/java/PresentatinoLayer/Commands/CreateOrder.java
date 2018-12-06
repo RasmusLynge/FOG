@@ -79,7 +79,5 @@ public class CreateOrder extends Command {
         request.getSession().setAttribute("order", o);
 
         return "singleOrder";
-
     }
-
 }
