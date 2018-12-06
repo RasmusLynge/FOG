@@ -13,6 +13,7 @@ import static FunctionLayer.Rule.Rules.*;
 
 /**
  * Skal rykkes til presentation
+ *
  * @author Magnus
  */
 public class SVGUtilCarportSide {
@@ -20,7 +21,7 @@ public class SVGUtilCarportSide {
     public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) throws GeneralException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = POSTHEIGHT + 300;
-        String res = "<SVG width=\""+ canvasX +"\" height=\""+ canvasY +"\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
+        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 
@@ -34,7 +35,7 @@ public class SVGUtilCarportSide {
         int roofHeight = 48;
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, length, innerFrameXPos, postYPos, c);
+        res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed);
         res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, c);
         res = linesSVG(res, length, innerFrameXPos, c);
         if (shed == true) {
@@ -59,9 +60,9 @@ public class SVGUtilCarportSide {
 
     private String textSVG(String res, int innerFrameXPos, int messurement) {
         //Post spacing text
-        res += text(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, messurement);
+        res += text(innerFrameXPos + CENTEROFPOSTMEASSURE + TEXTBOTTOMLAYER, OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, messurement);
         //Post height text
-        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH, POSTHEIGHT);
+        res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, OUTERFRAMEYPOS + TEXTSPACINGINNERLAYER + POSTHEIGHT / 2, POSTHEIGHT);
         return res;
     }
 
@@ -110,14 +111,20 @@ public class SVGUtilCarportSide {
         }
     }
 
-    private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c) {
+    private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c, boolean shed) {
         //Post
-        res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
+        if (!shed) {
+            res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
+        }
+
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + length - POSTWIDTH, postYPos);
         //carport with 6 posts
-        if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
-            res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
+        if ((length / POSTPOSITIONTWO + innerFrameXPos) < 100) {
+            if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
+                res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
+            }
         }
+
         //carport with 8 posts
         if (c.getPost() >= MAXPOSTS) {
 

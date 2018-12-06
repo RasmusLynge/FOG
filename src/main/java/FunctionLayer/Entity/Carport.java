@@ -15,7 +15,23 @@ public class Carport {
             flatHinges, roofTiles, plastmoSmall, plastmoLong,
             coverPlanks, coverPlankLength, shedLength, planks,
             coverStabilizerPlanksLong,coverStabilizerPlankSmall,
-            doorHinge, doorKnob;
+            doorHinge, doorKnob, shedPost, postSpacing;
+
+    public int getPostSpacing() {
+        return postSpacing;
+    }
+
+    public void setPostSpacing(int postSpacing) {
+        this.postSpacing = postSpacing;
+    }
+
+    public int getShedPost() {
+        return shedPost;
+    }
+
+    public void setShedPost(int shedPost) {
+        this.shedPost = shedPost;
+    }
 
     public int getDoorHinge() {
         return doorHinge;
