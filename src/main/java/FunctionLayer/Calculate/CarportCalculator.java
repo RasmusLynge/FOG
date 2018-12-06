@@ -170,6 +170,8 @@ public class CarportCalculator {
                 }
             }
         }
+        c.setCoverStabilizerPlankSmall(counterStabilizerSmall);
+        c.setCoverStabilizerPlanksLong(counterStabilizerLong);
         if (!(length <= STABILIZERPLANKSSMALL && length <= STABILIZERPLANKSLONG)) {
             c.setFlatHinges(c.getFlatHinges() + counterStabilizerSmall);
         }
