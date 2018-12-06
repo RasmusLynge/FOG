@@ -5,10 +5,10 @@
  */
 package FunctionLayer.Calculate;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import FunctionLayer.Entity.Carport;
+import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,48 +17,35 @@ import static org.junit.Assert.*;
  * @author Simon
  */
 public class CoverCalculatorTest {
-    
-    public CoverCalculatorTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+    //Arrange
+    CarportCalculator cc = new CarportCalculator();
+    int length = 240;
+    int width = 240;
+    //false means flat roof
+    boolean roof = true;
+    //false means no shed
+    boolean shed = true;
 
-    /**
-     * Test of setShedCover method, of class CoverCalculator.
-     */
     @Test
-    public void testSetShedCover() {
-        System.out.println("setShedCover");
-        CoverCalculator instance = null;
-        instance.setShedCover();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setRoofCover method, of class CoverCalculator.
-     */
-    @Test
-    public void testSetRoofCover() {
-        System.out.println("setRoofCover");
-        CoverCalculator instance = null;
-        instance.setRoofCover();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void TestShedCover() throws GeneralException, MakeOrderException {
+        //act
+        Carport result = new Carport(length, width, roof, shed);
+        int shedLength = 100;
+        result.setShedLength(shedLength);
+        result = cc.calculateAll(length, width, roof, shed); 
+        //Assert
+        int expectedPlanks = 4;
+        int actualPlanks = (int) result.getPlanks();
+        Assert.assertEquals(expectedPlanks, actualPlanks);
     }
     
+    @Test
+    public void TestRoofCover() throws GeneralException, MakeOrderException {
+        //act
+        Carport result = cc.calculateAll(length, width, roof, shed); 
+        //Assert
+        int expectedCoverPlanks = 60;
+        int actualCoverPlanks = (int) result.getCoverPlanks();
+        Assert.assertEquals(expectedCoverPlanks, actualCoverPlanks);
+    }
 }

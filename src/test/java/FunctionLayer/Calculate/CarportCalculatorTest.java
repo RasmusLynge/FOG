@@ -33,7 +33,7 @@ public class CarportCalculatorTest {
     boolean shed = false;
 
     @Test
-    public void PostsTest() throws GeneralException {
+    public void PostsTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -48,7 +48,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void OuterMessurementTest() throws GeneralException {
+    public void OuterMessurementTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -62,7 +62,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void RaftersTest() throws GeneralException {
+    public void RaftersTest() throws GeneralException, MakeOrderException {
         //Arrange
         Carport result = cc.calculateAll(length, width, roof, shed);
         if (roof) {
@@ -91,7 +91,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void BeamLengthTest() throws GeneralException {
+    public void BeamLengthTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -111,7 +111,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void TotalLHingesTest() throws GeneralException {
+    public void TotalLHingesTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -121,7 +121,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void TotalScrewsTest() throws GeneralException {
+    public void TotalScrewsTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -132,7 +132,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void TotalScrewBoxesTest() throws GeneralException {
+    public void TotalScrewBoxesTest() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -142,37 +142,33 @@ public class CarportCalculatorTest {
     }
 
     @Test(expected = MakeOrderException.class)
-    public void TestLowerLimitLenghtException() throws GeneralException {
+    public void TestLowerLimitLenghtException() throws GeneralException, MakeOrderException {
         //act
-        //Længden og bredden skal være mellem 240 og 720
+        //Længden skal være over eller = 240 
         Carport result = cc.calculateAll(200, width, roof, shed);
         //Assert
-        
     }
     
     @Test(expected = MakeOrderException.class)
-    public void TestLowerLimitWidthException() throws GeneralException {
+    public void TestLowerLimitWidthException() throws GeneralException, MakeOrderException {
         //act
-        //Længden og bredden skal være mellem 240 og 720
+        //Bredden skal være over eller = 240 
         Carport result = cc.calculateAll(length, 200, roof, shed);
         //Assert
-        
     }
     @Test(expected = MakeOrderException.class)
-    public void TestUpperLimitLenghtException() throws GeneralException {
+    public void TestUpperLimitLenghtException() throws GeneralException, MakeOrderException {
         //act
-        //Længden og bredden skal være mellem 240 og 720
+        //Længden skal være under eller = 720
         Carport result = cc.calculateAll(800, width, roof, shed);
         //Assert
-        
     }
     @Test(expected = MakeOrderException.class)
-    public void TestUpperLimitWidthException() throws GeneralException {
+    public void TestUpperLimitWidthException() throws GeneralException, MakeOrderException {
         //act
-        //Længden og bredden skal være mellem 240 og 720
+        //Bredden skal være under eller = 720
         Carport result = cc.calculateAll(length, 800, roof, shed);
         //Assert
-        
     }
 //    @Test
 //    public void TestRightInputException() throws GeneralException {

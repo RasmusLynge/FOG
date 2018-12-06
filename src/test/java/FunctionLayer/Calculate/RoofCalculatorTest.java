@@ -9,6 +9,7 @@ import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Calculate.PriceCalculator;
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.MakeOrderException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -23,9 +24,7 @@ import static org.junit.Assert.*;
  */
 public class RoofCalculatorTest {
     //Arrange
-    
     CarportCalculator cc = new CarportCalculator();
-    PriceCalculator pc = new PriceCalculator();
     int length = 240;
     int width = 240;
     //false means flat roof
@@ -34,7 +33,7 @@ public class RoofCalculatorTest {
     boolean shed = false;
 
     @Test
-    public void TestFlatRoof() throws GeneralException {
+    public void TestFlatRoof() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -48,8 +47,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void TestTopRoofPost() throws GeneralException {
-        int degree = 90;
+    public void TestTopRoofPost() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Assert
@@ -63,7 +61,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void TestTopRoofRafter() throws GeneralException {
+    public void TestTopRoofRafter() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Assert
@@ -77,7 +75,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void TestTopRoofBeamsPrSide() throws GeneralException {
+    public void TestTopRoofBeamsPrSide() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Assert
@@ -87,7 +85,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void TestTopRoofTiles() throws GeneralException {
+    public void TestTopRoofTiles() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Assert
@@ -97,7 +95,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void TestTopFlatHinges() throws GeneralException {
+    public void TestTopFlatHinges() throws GeneralException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Assert
