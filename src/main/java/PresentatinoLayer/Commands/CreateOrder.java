@@ -46,16 +46,13 @@ public class CreateOrder extends Command {
         }
 
         boolean isShed;
-        int shedWidth = 0;
         int shedLength = 0;
-        String shedWidthString = (request.getParameter("shedWidth"));
         String shedLengthString = (request.getParameter("shedLength"));
 
         if(/*shedWidthString.isEmpty() &&*/ shedLengthString.isEmpty()) {
             isShed = false;
         } else {
             isShed = true;
-            shedWidth = Integer.parseInt(shedWidthString);
             shedLength = Integer.parseInt(shedLengthString);
         }
 
