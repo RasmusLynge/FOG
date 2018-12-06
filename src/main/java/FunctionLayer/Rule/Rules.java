@@ -49,11 +49,12 @@ public class Rules {
     public static final int TEXTBOTTOMLAYER = 30;
     public static final int POSTHEIGHT = 210;
     public static final int CENTEROFPOSTMEASSURE = 7;
-
+    
     //svgTop
     public static final int EXTRAPOSTSPACING = 10;
     public static final int TEXTSPACINGOUTERLAYER = 40;
-
+    public static final int DOORWIDTH = 90;
+    
     //roofCover
     public static final int PLANKOVERLAP = 1;
     public static final int PLANKWIDTH = 10;
