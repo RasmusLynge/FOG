@@ -38,11 +38,8 @@ public class CreateOrder extends Command {
 
         boolean highRoof;
         int roof = Integer.parseInt(request.getParameter("roof"));
-<<<<<<< HEAD
+
         if (roof == 0) {
-=======
-        if( roof == 0) {
->>>>>>> developer
             highRoof = false;
         } else {
             highRoof = true;
@@ -53,10 +50,7 @@ public class CreateOrder extends Command {
         int shedLength = 0;
         String shedWidthString = (request.getParameter("shedWidth"));
         String shedLengthString = (request.getParameter("shedLength"));
-<<<<<<< HEAD
 
-=======
->>>>>>> developer
         if(/*shedWidthString.isEmpty() &&*/ shedLengthString.isEmpty()) {
             isShed = false;
         } else {
