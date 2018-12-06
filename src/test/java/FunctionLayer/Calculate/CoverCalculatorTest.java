@@ -34,7 +34,7 @@ public class CoverCalculatorTest {
         result.setShedLength(shedLength);
         result = cc.calculateAll(length, width, roof, shed); 
         //Assert
-        int expectedPlanks = 4;
+        int expectedPlanks = 0;
         int actualPlanks = (int) result.getPlanks();
         Assert.assertEquals(expectedPlanks, actualPlanks);
     }

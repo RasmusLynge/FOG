@@ -73,8 +73,6 @@ public class CreateOrder extends Command {
             Carport c = o.getCarport();
             c.setShedLength(shedLength);
         String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
-
-
         String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
 
         request.getSession().setAttribute("svgside", svgSide);

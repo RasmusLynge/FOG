@@ -46,7 +46,7 @@ public class MaterialCalculatorTest {
         //Assert
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Plastmo Ecolite blåtonet") && l.get(i).getLength() == PLASTMOLENGTHLONG) {
-                int expectedPlastmoLongAmount = 0;
+                int expectedPlastmoLongAmount = 4;
                 int actualPlastmoLongAmount = l.get(i).getAmount();
                 Assert.assertEquals(expectedPlastmoLongAmount, actualPlastmoLongAmount);
             }
@@ -62,7 +62,7 @@ public class MaterialCalculatorTest {
         //Assert
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Plastmo Ecolite blåtonet") && l.get(i).getLength() == PLASTMOLENGTHSMALL) {
-                int expectedPlastmoSmallAmount = 8;
+                int expectedPlastmoSmallAmount = 0;
                 int actualPlastmoSmallAmount = l.get(i).getAmount();
                 Assert.assertEquals(expectedPlastmoSmallAmount, actualPlastmoSmallAmount);
             }
@@ -78,9 +78,25 @@ public class MaterialCalculatorTest {
         //Assert
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("97x97	mm.	trykimp. Stolpe")) {
-                int expectedPostAmount = 0;
+                int expectedPostAmount = 4;
                 int actualPostAmount = l.get(i).getAmount();
                 Assert.assertEquals(expectedPostAmount, actualPostAmount);
+            }
+        }
+    }
+    
+    @Test
+    public void testScrewBoxesAmount() throws GeneralException, MakeOrderException {
+        //act
+        Carport result = cc.calculateAll(length, width, roof, shed);
+        result.setList(mc.materialList(result));
+        ArrayList<Material> l = result.getList();
+        //Assert
+        for (int i = 0; i < l.size(); i++) {
+            if (l.get(i).getName().equals("Skruer 200 stk.")) {
+                int expectedScrewBoxesAmount = 2;
+                int actualScrewBoxesAmount = l.get(i).getAmount();
+                Assert.assertEquals(expectedScrewBoxesAmount, actualScrewBoxesAmount);
             }
         }
     }
