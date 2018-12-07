@@ -51,11 +51,11 @@ public class CreateOrder extends Command {
         //String shedWidthString = (request.getParameter("shedWidth"));
         String shedLengthString = (request.getParameter("shedLength"));
 
-        if(/*shedWidthString.isEmpty() &&*/ shedLengthString.isEmpty()) {
+        if (/*shedWidthString.isEmpty() &&*/shedLengthString.isEmpty()) {
             isShed = false;
         } else {
             isShed = true;
-        //    shedWidth = Integer.parseInt(shedWidthString);
+            //    shedWidth = Integer.parseInt(shedWidthString);
             shedLength = Integer.parseInt(shedLengthString);
         }
 
@@ -65,13 +65,12 @@ public class CreateOrder extends Command {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
         }
         if ("outermeasurements".equals(measurementtype)) {
-            o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt, isShed, highRoof);
+            o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt, isShed, highRoof, shedLength);
         } else {
-            o = lf.makeOrder(width, length, name, email, zip, phone, evt, isShed, highRoof);
+            o = lf.makeOrder(width, length, name, email, zip, phone, evt, isShed, highRoof, shedLength);
         }
- 
-            Carport c = o.getCarport();
-            c.setShedLength(shedLength);
+        Carport c = o.getCarport();
+        c.setShedLength(shedLength);
         String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
         String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
 

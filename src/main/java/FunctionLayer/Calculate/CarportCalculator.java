@@ -26,12 +26,13 @@ public class CarportCalculator {
         RoofCalculator rc = new RoofCalculator(c);
         CoverCalculator cc = new CoverCalculator(c);
         outerMessurement(length, width, c);
-        calculatePosts(length, width, c, shed);
+        calculatePosts(length, width, c);
         beamLengthCalculator(length, roof, c);
         cc.setRoofCover();
 
         //skal laves til i JSP
         int degree = 90;
+
         if (roof == true) {
             System.out.println("true med rejst tag");
             calculateRafters(length, width, roof, c);
@@ -42,16 +43,16 @@ public class CarportCalculator {
             calculateRafters(length, width, roof, c);
             rc.flatRoof();
         }
+
         if (shed) {
-            shedPosts(length, width, c);
+            shedPosts(c);
             coverStabilizerPlanks(length, width, c);
             c.setDoorHinge(2);
             c.setDoorKnob(1);
         }
-        System.out.println("BEAM!!--------------------------- " + c.getBeam());
+
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
         totalScrews((lHinges + c.getFlatHinges()), c);
-        System.out.println("total hinges " + (lHinges + c.getFlatHinges()));
         screwBoxes(c);
 
         return c;
@@ -62,7 +63,7 @@ public class CarportCalculator {
         carport.setOuterWidth(width + ROOFHANGOUTTWOSIDES);
     }
 
-    private void calculatePosts(int length, int width, Carport carport, boolean shed) {
+    private void calculatePosts(int length, int width, Carport carport) {
         int restLength = length - TWOPOSTLENGTH;
         int restWidth = width - TWOPOSTLENGTH;
         // int widthPosts = calcWidthPosts(restWidth);
@@ -70,23 +71,19 @@ public class CarportCalculator {
         //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts;
         int postSpacing = length / ((totalPosts / BOTHSIDES) - 1);
-        System.out.println("postspacing ---------------------------    " + postSpacing);
         carport.setPostSpacing(postSpacing);
         carport.setPostLength(POSTSLENGTH);
         carport.setPost(totalPosts);
-        System.out.println("ssssssssssss  " + carport.getPost());
     }
 
     private void calculateRafters(int length, int width, boolean roof, Carport carport) {
         int roofLength = length + ROOFHANGOUTTWOSIDES + ENTRANCEHANGOUT;
         int rafterLength = width + ROOFHANGOUTTWOSIDES;
 
-        if (roof == true) {
+        if (roof) {
             int totalRafters = carport.getPost() / BOTHSIDES;
             int newRafterSpacing = length / (carport.getPost() / BOTHSIDES);
-            System.out.println("SPACING " + newRafterSpacing);
             carport.setRafter(totalRafters + 1);
-            System.out.println("TOTAL RAFTER " + carport.getRafter());
             carport.setRafterSpacing(newRafterSpacing);
         } else {
             int totalRafters = roofLength / RAFTERSPACING;
@@ -128,9 +125,7 @@ public class CarportCalculator {
     }
 
     private void totalScrews(int hinges, Carport c) {
-        System.out.println("screwland ------------------------");
         int totalScrews = hinges * SCREWSPERLHINGES;
-        System.out.println("Screwland citizens  ------------------------" + (c.getScrews() + totalScrews));
         c.setScrews(c.getScrews() + totalScrews);
     }
 
@@ -206,11 +201,7 @@ public class CarportCalculator {
         c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
     }
 
-    private void shedPosts(int length, int width, Carport c) {
-        if (c.getShedLength() == c.getPostSpacing() + POSTWIDTH) {
-            c.setPost(c.getPost() + 1);
-        } else {
-            c.setPost(c.getPost() + 3);
-        }
+    private void shedPosts(Carport c) {
+        c.setPost(c.getPost() + 3);
     }
 }
