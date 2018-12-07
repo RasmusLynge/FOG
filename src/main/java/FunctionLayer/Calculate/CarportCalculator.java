@@ -32,6 +32,7 @@ public class CarportCalculator {
 
         //skal laves til i JSP
         int degree = 90;
+
         if (roof == true) {
             System.out.println("true med rejst tag");
             calculateRafters(length, width, roof, c);
@@ -42,17 +43,18 @@ public class CarportCalculator {
             calculateRafters(length, width, roof, c);
             rc.flatRoof();
         }
+
         if (shed) {
-            shedPosts(length, width, c);
+            shedPosts(c);
             coverStabilizerPlanks(length, width, c);
             c.setDoorHinge(2);
             c.setDoorKnob(1);
         }
+
         int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
         totalScrews((lHinges + c.getFlatHinges()), c);
         screwBoxes(c);
 
-        System.out.println("Posts!   " + c.getPost());
         return c;
     }
 
@@ -78,7 +80,7 @@ public class CarportCalculator {
         int roofLength = length + ROOFHANGOUTTWOSIDES + ENTRANCEHANGOUT;
         int rafterLength = width + ROOFHANGOUTTWOSIDES;
 
-        if (roof == true) {
+        if (roof) {
             int totalRafters = carport.getPost() / BOTHSIDES;
             int newRafterSpacing = length / (carport.getPost() / BOTHSIDES);
             carport.setRafter(totalRafters + 1);
@@ -199,7 +201,7 @@ public class CarportCalculator {
         c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
     }
 
-    private void shedPosts(int length, int width, Carport c) {
-            c.setPost(c.getPost() + 3);
+    private void shedPosts(Carport c) {
+        c.setPost(c.getPost() + 3);
     }
 }
