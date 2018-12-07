@@ -11,10 +11,10 @@ package FunctionLayer.Entity;
  */
 public class Order {
     
-    private int width, length;
+    private int width, length, shedLength;
     private double price;
     private String id, name, email, zip, phone, evt, orderdate, state;
-    private boolean flat_roof;
+    private boolean flat_roof, shed;
     Carport carport;
          
     public Order(int width, int length, String name, String email, String zip, String phone, String evt) {
@@ -26,6 +26,24 @@ public class Order {
         this.phone = phone;
         this.evt = evt;
     }
+
+    public int getShedLength() {
+        return shedLength;
+    }
+
+    public void setShedLength(int shedLength) {
+        this.shedLength = shedLength;
+    }
+    
+
+    public boolean isShed() {
+        return shed;
+    }
+
+    public void setShed(boolean shed) {
+        this.shed = shed;
+    }
+    
 
     public Carport getCarport() {
         return carport;
