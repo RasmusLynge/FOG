@@ -35,7 +35,7 @@ public class SVGUtilCarportSide {
         int roofHeight = 48;
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed);
+        res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed, shedLength);
         res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, c);
         res = linesSVG(res, length, innerFrameXPos, c);
         if (shed == true) {
@@ -111,7 +111,7 @@ public class SVGUtilCarportSide {
         }
     }
 
-    private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c, boolean shed) {
+    private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c, boolean shed, int shedLength) {
         //Post
         if (!shed) {
             res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
@@ -119,18 +119,18 @@ public class SVGUtilCarportSide {
 
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + length - POSTWIDTH, postYPos);
         //carport with 6 posts
-        if ((length / POSTPOSITIONTWO + innerFrameXPos) < 100) {
-            if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
-                res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
-            }
+        if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
+            // res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
         }
 
         //carport with 8 posts
         if (c.getPost() >= MAXPOSTS) {
-
-            res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
-            res += square(POSTHEIGHT, POSTWIDTH, (int) (length / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
-
+            if (shedLength < length / POSTPOSITIONTHREE) {
+                res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
+            }
+            if (shedLength < length / POSTPOSITIONONEHALF) {
+                res += square(POSTHEIGHT, POSTWIDTH, (int) (length / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
+            }
         }
         return res;
     }

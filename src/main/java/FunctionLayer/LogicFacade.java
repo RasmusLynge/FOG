@@ -40,23 +40,30 @@ public class LogicFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-    public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt, boolean shed, boolean highRoof) throws GeneralException, MakeOrderException{
+    public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt, boolean shed, boolean highRoof, int shedLength) throws GeneralException, MakeOrderException {
 
         Order o = new Order(width, length, name, email, zip, phone, evt);
         o.setPrice(p.priceCalculator(length, width, shed, highRoof));
         o.setCarport(p.getCarport());
+        o.setShed(shed);
+        o.setShedLength(shedLength);
+        o.setFlat_roof(highRoof);
         dm.createOrder(o);
         return o;
     }
 
-    public static Order getOrderByID(int orderid) throws GeneralException {
+    public Order getOrderByID(int orderid) throws GeneralException, MakeOrderException {
         Order o = DataMapper.getOrderByID(orderid);
+
+        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
+        o.setCarport(p.getCarport());
         return o;
     }
 
-    public static Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws GeneralException {
-        Order o = DataMapper.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
+    public Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws GeneralException, MakeOrderException {
+        Order o = dm.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
+        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
+        o.setCarport(p.getCarport());
         return o;
     }
 }

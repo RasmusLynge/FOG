@@ -23,7 +23,6 @@ public class MaterialCalculator {
         DataMapper dm = new DataMapper();
         ArrayList<Material> list = dm.getMaterials();
 
-        System.out.println("c get beam " + c.getBeamLength());
         rafter(c, list);
         roofRafter(c, list);
         beam(c, list);
@@ -133,8 +132,6 @@ public class MaterialCalculator {
                     currentLength = BEAMSMALL - restLength;
                 }
             }
-            System.out.println("counterBeamSmall  " + counterBeamSmall);
-            System.out.println("counterbeamLong  " + counterBeamLong);
             if (!(c.getBeamLength() <= BEAMSMALL && c.getBeamLength() <= BEAMLONG)) {
                 c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * BOTHSIDES);
             }
@@ -142,13 +139,11 @@ public class MaterialCalculator {
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == BEAMSMALL) {
-                System.out.println("sæt bjælker --------------- kort");
                 list.get(i).setAmount(counterBeamSmall * BOTHSIDES);
             }
         }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == BEAMLONG) {
-                System.out.println("sæt bjælker --------------- lang");
                 list.get(i).setAmount(counterBeamLong * BOTHSIDES);
             }
         }

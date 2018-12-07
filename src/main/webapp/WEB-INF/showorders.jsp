@@ -92,6 +92,7 @@
                 </div>
             </nav>
 
+
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
@@ -109,31 +110,35 @@
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="forespørgsel" />
+                                <input type="hidden" name="state" class="form-control"  value="Forespørgsel" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se Forespørgsler">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Afventer sælger" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se afventende ordre ">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Betalt" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se betalte ordre">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Fragtet" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se fragtede ordre">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="listspecificorders">
+                                <input type="hidden" name="state" class="form-control"  value="Afsluttet uden salg" > 
                                 <input class="btn btn-primary btn-md"type="submit" value="Se ordre afsluttet uden salg">
                             </form>
                         </li>
@@ -169,7 +174,7 @@
 
                     <%
                         ArrayList<Order> orderList = new ArrayList<>();
-                            orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                        orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
                         if (orderList != null) {
                             for (int i = 0; i < orderList.size(); i++) {
                                 String orderID = orderList.get(i).getId();
