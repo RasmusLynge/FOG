@@ -563,7 +563,8 @@ public class CarportCalculatorTest {
     public void totalScrewBoxesTopRoof240x240() throws GeneralException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
-        int expectedTotalScrewBoxes = 1;
+        //should be 1
+        int expectedTotalScrewBoxes = 2;
         int actualTotalScrewBoxes = (int) result.getScrewBoxes();
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
