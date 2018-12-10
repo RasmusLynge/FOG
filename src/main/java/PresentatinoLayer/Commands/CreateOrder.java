@@ -38,6 +38,7 @@ public class CreateOrder extends Command {
 
         boolean highRoof;
         int roof = Integer.parseInt(request.getParameter("roof"));
+
         if (roof == 0) {
             highRoof = false;
         } else {
@@ -49,6 +50,7 @@ public class CreateOrder extends Command {
         int shedLength = 0;
         //String shedWidthString = (request.getParameter("shedWidth"));
         String shedLengthString = (request.getParameter("shedLength"));
+
         if (/*shedWidthString.isEmpty() &&*/shedLengthString.isEmpty()) {
             isShed = false;
         } else {
@@ -67,11 +69,9 @@ public class CreateOrder extends Command {
         } else {
             o = lf.makeOrder(width, length, name, email, zip, phone, evt, isShed, highRoof, shedLength);
         }
-
         Carport c = o.getCarport();
         c.setShedLength(shedLength);
         String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
-
         String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
 
         request.getSession().setAttribute("svgside", svgSide);
@@ -79,7 +79,5 @@ public class CreateOrder extends Command {
         request.getSession().setAttribute("order", o);
 
         return "singleOrder";
-
     }
-
 }

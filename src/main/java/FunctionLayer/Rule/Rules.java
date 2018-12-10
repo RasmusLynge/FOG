@@ -47,7 +47,7 @@ public class Rules {
     public static final int LINESPACINGINNERLAYER = 10;
     public static final int TEXTSPACINGINNERLAYER = 15;
     public static final int TEXTBOTTOMLAYER = 30;
-    public static final int POSTHEIGHT = 200;
+    public static final int POSTHEIGHT = 210;
     public static final int CENTEROFPOSTMEASSURE = 7;
     
     //svgTop
