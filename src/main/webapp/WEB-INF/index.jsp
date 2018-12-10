@@ -117,42 +117,44 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Bla Bla</h5>
-                            <p class="card-text">lorem ipsum bla bla bla...</p>
-                            <a href="#" class="card-link">link</a>
+                            <h5 class="card-title">FOG BOLIG & DESIGNHUS</h5>
+                            <p class="card-text">Shop lækkert design og udstyr til boligen.
+                                Vælg mellem de bedste brands inden for designerlamper, køkkenudstyr, bad og VVS, maling, værktøj, boligindretning og eksklusive havemøbler.</p>
+                            <a href="https://www.johannesfog.dk/designhus/" class="card-link">Se bolig og designhus her</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Card</h5>
-                            <p class="card-text">Det her bliver kaldt et "card". det er en mindre tekstboks, som du kan sætte ind på en række/colonne</p>
-                            <a href="#" class="card-link">Det her er bare et link</a>
+                            <h5 class="card-title">FOG TRÆLAST & BYGGECENTER</h5>
+                            <p class="card-text">Køb træ, byggematerialer og alt det du behøver til hus og have inden for f.eks. maling, bad og VVS, beslag, elartikler og lamper samt haveredskaber, grill og havemøbler. Hos os får du kvalitet og den rådgivning, du har brug for.</p>
+                            <a href="https://www.johannesfog.dk/byggecenter/" class="card-link">Se tilbudsavisen her</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="jumbotron">
-                    <h1 class="display-4">Medarbejder hos fog?</h1>
-                    <p class="lead">Her kan du logge ind som medarbejder </p>
-
-                    <form name="orderpage" action="FrontController" method="POST">
-                        <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
-                        <br>
-                        <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
-                    </form>
-                    </p>
-                </div>
-
             </div>
+
+            <div class="jumbotron">
+
+                <h1 class="display-4">Medarbejder hos fog?</h1>
+                <p class="lead">Her kan du logge ind som medarbejder </p>
+
+                <form name="orderpage" action="FrontController" method="POST">
+                    <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
+                    <br>
+                    <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
+                </form>
+                </p>
+            </div>
+
+
 
             <nav class="navbar bottom navbar-dark bg-dark">
                 <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
                 <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
                 </li>
             </nav>
-
         </div>
 
         <script src="/js/jquery.min.js"></script>
