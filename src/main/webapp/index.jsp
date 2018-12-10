@@ -133,27 +133,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="jumbotron">
-                    <h1 class="display-4">Medarbejder hos fog?</h1>
-                    <p class="lead">Her kan du logge ind som medarbejder </p>
-
-                    <form name="orderpage" action="FrontController" method="POST">
-                        <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
-                        <br>
-                        <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
-                    </form>
-                    </p>
-                </div>
-
             </div>
+
+            <div class="jumbotron">
+
+                <h1 class="display-4">Medarbejder hos fog?</h1>
+                <p class="lead">Her kan du logge ind som medarbejder </p>
+
+                <form name="orderpage" action="FrontController" method="POST">
+                    <input class="btn btn-primary btn-lg" type="hidden" name="command" value="employeelogin">
+                    <br>
+                    <input class="btn btn-primary btn-lg" type="submit" value="Log ind">
+                </form>
+                </p>
+            </div>
+
+
 
             <nav class="navbar bottom navbar-dark bg-dark">
                 <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
                 <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
                 </li>
             </nav>
-
         </div>
 
         <script src="/js/jquery.min.js"></script>

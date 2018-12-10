@@ -21,7 +21,7 @@ public class SVGUtilCarportSide {
     public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) throws GeneralException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = POSTHEIGHT + 300;
-        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 "+canvasX+ " " + canvasY +"\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 

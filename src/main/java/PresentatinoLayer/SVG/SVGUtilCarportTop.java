@@ -16,8 +16,8 @@ public class SVGUtilCarportTop {
     public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = width + 300;
-        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
-
+       // String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
         return res;
     }
 
@@ -104,13 +104,13 @@ public class SVGUtilCarportTop {
         System.out.println("if first stament " + (int) (width / POSTPOSITIONTWO + innerFrameXPos));
         System.out.println("if second statement " + (int) (shedLength - POSTWIDTH));
         if (shed) {
-            
+
             //carport with 8 posts
             if (c.getPost() >= MAXPOSTS && (shedLength + POSTWIDTH < width / POSTPOSITIONTHREE)) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
             }
-            
+
             System.out.println("1 : " + (shedLength + POSTWIDTH) + " 2 : " + ((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()));
             if (c.getPost() >= MAXPOSTS && shedLength + POSTWIDTH > (int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);

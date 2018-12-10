@@ -9,7 +9,7 @@ import PresentatinoLayer.Commands.Command;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
-import configuration.Conf;
+import logging.Logging;
 import java.io.IOException;
 import java.util.logging.Level;
 import javax.servlet.ServletException;
@@ -41,7 +41,7 @@ public class FrontController extends HttpServlet {
             String view = action.execute(request, response);
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
         } catch (GeneralException Ex) {
-            Conf.getLogger().log(Level.SEVERE, Ex.getMessage(), Ex);
+            Logging.getLogger().log(Level.SEVERE, Ex.getMessage(), Ex);
             request.setAttribute("error", Ex.getMessage());
             Ex.printStackTrace();
             request.getRequestDispatcher("/WEB-INF/employeelogin.jsp").forward(request, response);

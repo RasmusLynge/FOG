@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configuration;
+package logging;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,11 +18,12 @@ import java.util.logging.Logger;
  *
  * @author tha
  */
-public class Conf {
+public class Logging {
 
     public static final boolean PRODUCTION = false;
-    public static final String LOG_FILE_PATH = "/var/log/tomcat8/demoApp.log";
-    public static final String LOG_FILE_PATH_DEVELOP = "/home/thomas/loggingdemo.log";
+    public static final String LOG_FILE_PATH = "/var/log/tomcat8/Fog.log";
+    public static final String LOG_FILE_PATH_DEVELOP = "C:\\Users\\Rasmu\\Documents\\Datamatiker_2sem\\Modul_2_SQL\\FOG\\FOGLog.log";
+    public static final String LOG_FILE_PATH_STACK = "C:\\Users\\Rasmu\\Documents\\Datamatiker_2sem\\Modul_2_SQL\\FOG\\FOGStack.txt";
     private static Logger logger;
     private static Logger loggerST;
     
@@ -30,9 +31,9 @@ public class Conf {
     public static Logger getLogger() {
         if (logger == null) {
             logger = Logger.getLogger("");
-            if (configuration.Conf.PRODUCTION) {
+            if (logging.Logging.PRODUCTION) {
                 try {
-                    FileHandler handler = new FileHandler(configuration.Conf.LOG_FILE_PATH);
+                    FileHandler handler = new FileHandler(logging.Logging.LOG_FILE_PATH);
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                 } catch (IOException ex) {
@@ -40,11 +41,12 @@ public class Conf {
                 }
             } else {
                 try {
-                    FileHandler handler = new FileHandler("Logging-Demo-log.%u.%g.txt"); // see: http://tutorials.jenkov.com/java-logging/handlers.html
+                    FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP); // see: http://tutorials.jenkov.com/java-logging/handlers.html
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
+                    getLoggerWithStackTrace();
                 } catch (IOException ex) {
-                    Logger.getLogger(Conf.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Logging.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
         }
@@ -55,7 +57,7 @@ public class Conf {
         if (loggerST == null) {
             loggerST = Logger.getLogger("Stack Trace Logger");
             try {
-                    FileHandler handler = new FileHandler("loggingDemo-log.%u.%g.txt");
+                    FileHandler handler = new FileHandler(LOG_FILE_PATH_STACK);
                     handler.setFormatter(new StackTraceFormatter());
                     logger.addHandler(handler);
                 } catch (IOException ex) {
