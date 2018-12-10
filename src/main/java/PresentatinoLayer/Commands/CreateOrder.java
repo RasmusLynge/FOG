@@ -6,7 +6,7 @@
 package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Exception.MakeOrderException;
 import FunctionLayer.Entity.Order;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateOrder extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
         LogicFacade lf = new LogicFacade();
         SVGUtilCarportTop svgStringTop = new SVGUtilCarportTop();
         SVGUtilCarportSide svgStringSide = new SVGUtilCarportSide();
@@ -60,6 +60,9 @@ public class CreateOrder extends Command {
 
         if ("outermeasurements".equals(measurementtype) && (length < 325 || width < 310)) {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
+        }
+        if(shedLength > length) {
+            throw new MakeOrderException("Skurret kan ikke være større end carporten");
         }
         if ("outermeasurements".equals(measurementtype)) {
             o = lf.makeOrder(width - 70, length - 85, name, email, zip, phone, evt, isShed, highRoof, shedLength);

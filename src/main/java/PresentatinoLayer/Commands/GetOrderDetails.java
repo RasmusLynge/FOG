@@ -8,7 +8,7 @@ package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Material;
 import PresentatinoLayer.Commands.Command;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Exception.MakeOrderException;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetOrderDetails extends Command {
     
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
         LogicFacade lf = new LogicFacade();
         int orderid = Integer.parseInt(request.getParameter("orderID")); 
         Order o = lf.getOrderByID(orderid);

@@ -8,7 +8,7 @@ package FunctionLayer.Calculate;
 import static FunctionLayer.Calculate.CoverCalculatorTest.roof;
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Entity.Material;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.PLANKLENGTH;
 import static FunctionLayer.Rule.Rules.PLASTMOLENGTHLONG;
@@ -43,7 +43,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void plastmoLongAmountFlatRoof240x240() throws GeneralException, MakeOrderException {
+    public void plastmoLongAmountFlatRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -60,7 +60,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoLongAmountFlatRoof480x480() throws GeneralException, MakeOrderException {
+    public void plastmoLongAmountFlatRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -80,7 +80,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoLongAmountFlatRoof720x720() throws GeneralException, MakeOrderException {
+    public void plastmoLongAmountFlatRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -100,7 +100,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoLongAmountTopRoof() throws GeneralException, MakeOrderException {
+    public void plastmoLongAmountTopRoof() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -117,7 +117,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void plastmoSmallAmountFlatRoof240x240() throws GeneralException, MakeOrderException {
+    public void plastmoSmallAmountFlatRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -134,7 +134,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoSmallAmountFlatRoof480x480() throws GeneralException, MakeOrderException {
+    public void plastmoSmallAmountFlatRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -154,7 +154,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoSmallAmountFlatRoof720x720() throws GeneralException, MakeOrderException {
+    public void plastmoSmallAmountFlatRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -174,7 +174,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void plastmoSmallAmountTopRoof() throws GeneralException, MakeOrderException {
+    public void plastmoSmallAmountTopRoof() throws DMException, MakeOrderException {
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
         ArrayList<Material> l = result.getList();
@@ -190,7 +190,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void flatHingesAmount240x240() throws GeneralException, MakeOrderException {
+    public void flatHingesAmount240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -206,7 +206,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountTopRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -222,7 +222,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountWithShed240x240() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountWithShed240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, true);
         result.setList(mc.materialList(result));
@@ -238,7 +238,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmount480x480() throws GeneralException, MakeOrderException {
+    public void flatHingesAmount480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -257,7 +257,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountTopRoof480x480() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -276,7 +276,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountWithShed480x480() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountWithShed480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -295,7 +295,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmount720x720() throws GeneralException, MakeOrderException {
+    public void flatHingesAmount720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -314,7 +314,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -333,7 +333,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void flatHingesAmountWithShed720x720() throws GeneralException, MakeOrderException {
+    public void flatHingesAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -352,7 +352,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void flatRoofTilesAmount() throws GeneralException, MakeOrderException {
+    public void flatRoofTilesAmount() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -369,7 +369,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void topRoofTilesAmount240x240() throws GeneralException, MakeOrderException {
+    public void topRoofTilesAmount240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -385,7 +385,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void topRoofTilesAmount480x480() throws GeneralException, MakeOrderException {
+    public void topRoofTilesAmount480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -404,7 +404,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void topRoofTilesAmount720x720() throws GeneralException, MakeOrderException {
+    public void topRoofTilesAmount720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -423,7 +423,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void planksAmount240x240() throws GeneralException, MakeOrderException {
+    public void planksAmount240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -439,7 +439,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void planksAmount480x480() throws GeneralException, MakeOrderException {
+    public void planksAmount480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -458,7 +458,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void planksAmount720x720() throws GeneralException, MakeOrderException {
+    public void planksAmount720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -477,7 +477,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void coverStabilizerPlankSmallAmount() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlankSmallAmount() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -494,7 +494,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void coverStabilizerPlankSmallAmountWithShed240x240() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlankSmallAmountWithShed240x240() throws DMException, MakeOrderException {
         //act
         Carport result = cc.calculateAll(length, width, roof, true);
         result.setList(mc.materialList(result));
@@ -510,7 +510,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void coverStabilizerPlankSmallAmountWithShed720x720() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlankSmallAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -529,7 +529,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void coverStabilizerPlanksLongAmount() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlanksLongAmount() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -546,7 +546,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void coverStabilizerPlanksLongAmountWithShed240x240() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlanksLongAmountWithShed240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, true);
         result.setList(mc.materialList(result));
@@ -562,7 +562,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void coverStabilizerPlanksLongAmountWithShed480x480() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlanksLongAmountWithShed480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -581,7 +581,7 @@ public class MaterialCalculatorTest {
     }
     
     @Test
-    public void coverStabilizerPlanksLongAmountWithShed720x720() throws GeneralException, MakeOrderException {
+    public void coverStabilizerPlanksLongAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -600,7 +600,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void doorKnobAmount() throws GeneralException, MakeOrderException {
+    public void doorKnobAmount() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));
@@ -616,7 +616,7 @@ public class MaterialCalculatorTest {
     }
 
     @Test
-    public void testDoorHingeAmount() throws GeneralException, MakeOrderException {
+    public void testDoorHingeAmount() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         result.setList(mc.materialList(result));

@@ -7,7 +7,7 @@ package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Entity.User;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import FunctionLayer.LogicFacade;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class GetSpecificOrders extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         ArrayList<Order> ol = new ArrayList();

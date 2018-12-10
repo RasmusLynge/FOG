@@ -147,17 +147,8 @@
             </nav>
 
             <div class="jumbotron">
-                <% if (user != null) {
-                        if ("customer".equals(user.getRole())) {
-                %>
-                <table>
-                    <thead>
-                    <th>Dette er ikke implementeret endnu</th>
-                    </thead>
-                    <tbody>
-                </table>
                 <%
-                } else if ("employee".equals(user.getRole())) {
+                    if (user != null && "employee".equals(user.getRole())) {
                 %>
 
                 <h1 class="display-4">Her er alle tidligere ordre: </h1>
@@ -195,7 +186,6 @@
                             </td>
                         </tr>
                         <%
-                                    }
                                 }
                             }
                         %>       
