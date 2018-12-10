@@ -161,6 +161,7 @@
                             <p><strong>Postnummer: </strong> <%=o.getZip()%></p>
                             <p><strong>Ordre Dato: </strong> <%=o.getOrderdate()%></p>
                             <p><strong>Pris: </strong> <%=o.getPrice()%> </p>
+                            <p><strong>Eventuelt: </strong> IKKE IMPLEMENTERET </p>
 
                         </ol>
 
