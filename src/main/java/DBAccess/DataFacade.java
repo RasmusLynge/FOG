@@ -13,6 +13,7 @@ import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Dette skal bruges til at lave lavere kobling 
@@ -25,24 +26,16 @@ public class DataFacade {
     public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         return dm.getSpecificOrders(state);
     }
-
-
+    
     public User login(String email, String password) throws LoginException {
         return dm.login(email, password);
     }
 
-//    public static User createUser(String email, String password) throws DMException {
-//        User user = new User(email, password, "customer");
-//        DataMapper.createUser(user);
-//        return user;
-//    }
-
     public ArrayList<Order> getAllOrders() throws DMException {
         return dm.getAllOrders();
     }
-
-//    public static ArrayList<Order> getOrdersByUserID(String id) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        public HashMap<String, Double> getPrices() throws DMException{
+//        return dm.getPrices();
 //    }
 
     public void makeOrder(Order o) throws DMException, MakeOrderException {
@@ -50,8 +43,8 @@ public class DataFacade {
     }
 
     public Order getOrderByID(int orderid) throws DMException, MakeOrderException {
-        Order o = dm.getOrderByID(orderid);
-        return o;
+        return dm.getOrderByID(orderid);
+        
     }
 
     public Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {

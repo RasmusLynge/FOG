@@ -23,24 +23,6 @@ import java.util.HashMap;
  */
 public class DataMapper {
 
-//    public static void createUser(User user) throws DMException {
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
-//            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-//            ps.setString(1, user.getEmail());
-//            ps.setString(2, user.getPassword());
-//            ps.setString(3, user.getRole());
-//            ps.executeUpdate();
-//            ResultSet ids = ps.getGeneratedKeys();
-//            ids.next();
-//            String id = ids.getString(1);
-//            user.setId(id);
-//        } catch (SQLException | ClassNotFoundException ex) {
-//            throw new DMException(ex.getMessage());
-//        }
-//    }
-
     public static User login(String email, String password) throws LoginException {
         try {
             Connection con = Connector.connection();
@@ -61,24 +43,6 @@ public class DataMapper {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginException(ex.getMessage());
-        }
-    }
-
-    public HashMap<String, Double> getPrices() throws DMException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "select `name`, `price` from Material";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            HashMap<String, Double> map = new HashMap<>();
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                double price = rs.getDouble("Price");
-                map.put(name, price);
-            }
-            return map;
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new DMException(ex.getMessage());
         }
     }
 
