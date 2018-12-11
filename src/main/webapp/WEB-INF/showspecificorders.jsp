@@ -147,19 +147,13 @@
             </nav>
 
             <div class="jumbotron">
-                <% if (user != null) {
-                        if ("customer".equals(user.getRole())) {
-                %>
-                <table>
-                    <thead>
-                    <th>Dette er ikke implementeret endnu</th>
-                    </thead>
-                    <tbody>
-                </table>
                 <%
-                } else if ("employee".equals(user.getRole())) {
+                    if (user != null && "employee".equals(user.getRole())) {
+                        String state = (String) request.getAttribute("state");
+                        ArrayList<Order> orderList = new ArrayList<>();
+                        orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
+                        if (orderList != null && !orderList.isEmpty()) {
                 %>
-                <% String state = (String) request.getAttribute("state");%>
 
                 <h1 class="display-5">Her er alle ordre med status "<%=state%>" : </h1>
                 <br>
@@ -174,13 +168,10 @@
                     </thead>
 
                     <%
-                        ArrayList<Order> orderList = new ArrayList<>();
-                        orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
-                        if (orderList != null) {
-                            for (int i = 0; i < orderList.size(); i++) {
-                                String orderID = orderList.get(i).getId();
-                                String orderDate = orderList.get(i).getOrderdate();
-                                String orderState = orderList.get(i).getState();
+                        for (int i = 0; i < orderList.size(); i++) {
+                            String orderID = orderList.get(i).getId();
+                            String orderDate = orderList.get(i).getOrderdate();
+                            String orderState = orderList.get(i).getState();
                     %>
                     <tbody>
                         <tr>
@@ -196,8 +187,11 @@
                             </td>
                         </tr>
                         <%
-                                    }
-                                }
+                            }
+                        } else if (orderList.isEmpty()){
+                        %>
+                        <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
+                        <%
                             }
                         %>       
                     </tbody>

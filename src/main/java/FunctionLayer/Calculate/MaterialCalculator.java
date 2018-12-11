@@ -10,7 +10,7 @@ import FunctionLayer.Entity.Material;
 import FunctionLayer.Entity.Carport;
 import java.util.ArrayList;
 import DBAccess.DataMapper;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import static FunctionLayer.Rule.Rules.*;
 
 /**
@@ -19,7 +19,7 @@ import static FunctionLayer.Rule.Rules.*;
  */
 public class MaterialCalculator {
 
-    public ArrayList<Material> materialList(Carport c) throws GeneralException {
+    public ArrayList<Material> materialList(Carport c) throws DMException {
         DataMapper dm = new DataMapper();
         ArrayList<Material> list = dm.getMaterials();
 

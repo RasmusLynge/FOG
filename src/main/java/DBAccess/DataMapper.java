@@ -1,9 +1,10 @@
 package DBAccess;
 
 import FunctionLayer.Entity.Material;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Entity.User;
+import FunctionLayer.Exception.LoginException;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
@@ -22,25 +23,25 @@ import java.util.HashMap;
  */
 public class DataMapper {
 
-    public static void createUser(User user) throws GeneralException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getRole());
-            ps.executeUpdate();
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            String id = ids.getString(1);
-            user.setId(id);
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new GeneralException(ex.getMessage());
-        }
-    }
+//    public static void createUser(User user) throws DMException {
+//        try {
+//            Connection con = Connector.connection();
+//            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
+//            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+//            ps.setString(1, user.getEmail());
+//            ps.setString(2, user.getPassword());
+//            ps.setString(3, user.getRole());
+//            ps.executeUpdate();
+//            ResultSet ids = ps.getGeneratedKeys();
+//            ids.next();
+//            String id = ids.getString(1);
+//            user.setId(id);
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            throw new DMException(ex.getMessage());
+//        }
+//    }
 
-    public static User login(String email, String password) throws GeneralException {
+    public static User login(String email, String password) throws LoginException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT User_Id, Role FROM User_Login "
@@ -56,14 +57,14 @@ public class DataMapper {
                 user.setId(id);
                 return user;
             } else {
-                throw new GeneralException("Forkert email eller adgangskode");
+                throw new LoginException("Forkert email eller adgangskode");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new LoginException(ex.getMessage());
         }
     }
 
-    public static HashMap<String, Double> getPrices() throws GeneralException {
+    public static HashMap<String, Double> getPrices() throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "select `name`, `price` from Material";
@@ -77,11 +78,11 @@ public class DataMapper {
             }
             return map;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
     }
 
-    public static Order getOrderByID(int orderid) throws GeneralException {
+    public static Order getOrderByID(int orderid) throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM `Order` "
@@ -91,7 +92,7 @@ public class DataMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), "evt");
+                Order order = new Order(rs.getInt("width"), rs.getInt("length"), rs.getString("name"), rs.getString("email"), rs.getString("zip"), rs.getString("phone"), rs.getString("evt"));
                 if (rs.getInt("Flat_Roof") == 1) {
                     order.setFlat_roof(true);
                 } else {
@@ -103,12 +104,12 @@ public class DataMapper {
                 return order;
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
         return null;
     }
 
-    public static ArrayList<Order> getAllOrders() throws GeneralException {
+    public static ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -126,11 +127,11 @@ public class DataMapper {
             }
             return ol;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
     }
 
-    public static ArrayList<Order> getSpecificOrders(String state) throws GeneralException {
+    public static ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -150,7 +151,7 @@ public class DataMapper {
             }
             return ol;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
     }
 
@@ -160,7 +161,7 @@ public class DataMapper {
             Date d = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(d);
-            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`, `Shed`, `ShedLength`)  VALUES (?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`, `Shed`, `ShedLength`, `Evt`)  VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, order.getWidth());
             ps.setInt(2, order.getLength());
@@ -168,6 +169,7 @@ public class DataMapper {
             ps.setString(4, currentTime);
             ps.setInt(5, order.isShed() ? 1 : 0);
             ps.setInt(6, order.getShedLength());
+            ps.setString(7, order.getEvt());
             
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
@@ -191,7 +193,7 @@ public class DataMapper {
         }
     }
 
-    public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws GeneralException {
+    public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "Update `Order`\n"
@@ -209,11 +211,11 @@ public class DataMapper {
             return o;
 
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
     }
     
- public static ArrayList<Material> getMaterials() throws GeneralException {
+ public static ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -229,7 +231,7 @@ public class DataMapper {
             }
             return ml;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new GeneralException(ex.getMessage());
+            throw new DMException(ex.getMessage());
         }
     }
 }

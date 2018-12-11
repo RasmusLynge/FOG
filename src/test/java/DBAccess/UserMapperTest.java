@@ -1,6 +1,6 @@
 package DBAccess;
 
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Entity.User;
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,7 +1,7 @@
 package PresentatinoLayer.Commands;
 
 import PresentatinoLayer.Commands.CreateOrder;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("login", new Login());
-        commands.put("register", new Register());
+//        commands.put("register", new Register());
         commands.put("orderpage", new OrderPage());
         commands.put("employeelogin", new EmployeeLoginPage());
         commands.put("order", new CreateOrder());
@@ -38,5 +38,5 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws GeneralException, MakeOrderException, LoginException;
+            throws DMException, MakeOrderException, LoginException;
 }

@@ -2,7 +2,7 @@ package PresentatinoLayer.SVG;
 
 import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
 
@@ -13,15 +13,15 @@ import static FunctionLayer.Rule.Rules.*;
  */
 public class SVGUtilCarportTop {
 
-    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException, MakeOrderException {
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = width + 300;
-        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
-
+       // String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
         return res;
     }
 
-    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException, MakeOrderException {
+    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;

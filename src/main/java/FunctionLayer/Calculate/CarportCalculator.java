@@ -7,7 +7,7 @@ package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Entity.Material;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class CarportCalculator {
 
-    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws GeneralException, MakeOrderException {
+    public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
         if (length < 240 || length > 720 || width < 240 || width > 720) {
             throw new MakeOrderException("Measurements contain values below or above the limit values");
         }
