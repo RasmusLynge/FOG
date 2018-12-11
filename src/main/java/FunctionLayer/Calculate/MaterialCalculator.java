@@ -10,38 +10,39 @@ import static FunctionLayer.Rule.Rules.*;
 public class MaterialCalculator {
 
     /**
-     *
-     * @param c
+     * This method makes a list of the materials in our database. 
+     * it calls other methods that lookst at a specific material and calculates howmany we should use of it.
+     * @param carport this is the carport that we need to get the specific materials for
      * @return
      * @throws DMException
      */
-    public ArrayList<Material> materialList(Carport c) throws DMException {
-        DataFacade df = new DataFacade();
+    public ArrayList<Material> materialList(Carport carport) throws DMException {
+        DataFacade df = new DataFacade(); // BURDE DENNE HER IKKE KALDE LOGIC FACADEN??
         ArrayList<Material> list = df.getMaterials();
 
-        rafter(c, list);
-        roofRafter(c, list);
-        beam(c, list);
-        roofBeam(c, list);
-        addRest(c, list);
-        c.setList(list);
+        rafter(carport, list);
+        roofRafter(carport, list);
+        beam(carport, list);
+        roofBeam(carport, list);
+        addRest(carport, list);
+        carport.setList(list);
         return list;
     }
 
-    private void rafter(Carport c, ArrayList<Material> list) {
+    private void rafter(Carport carport, ArrayList<Material> list) {
         int counterRafterLong = 0;
         int counterRafterSmall = 0;
 
-        if (c.getRafterLength() <= RAFTERSMALL) {
-            counterRafterSmall += c.getRafter();
-        } else if (c.getRafterLength() <= RAFTERLONG) {
-            counterRafterLong += c.getRafter();
-        } else if (c.getRafterLength() > RAFTERLONG) {
-            int restLength = c.getRafterLength() - RAFTERLONG;
-            counterRafterLong += c.getRafter();
+        if (carport.getRafterLength() <= RAFTERSMALL) {
+            counterRafterSmall += carport.getRafter();
+        } else if (carport.getRafterLength() <= RAFTERLONG) {
+            counterRafterLong += carport.getRafter();
+        } else if (carport.getRafterLength() > RAFTERLONG) {
+            int restLength = carport.getRafterLength() - RAFTERLONG;
+            counterRafterLong += carport.getRafter();
             counterRafterSmall += MINIMUMHAVEONEPEICE;
             int currentLength = RAFTERSMALL;
-            for (int i = 0; i < c.getRafter(); i++) {
+            for (int i = 0; i < carport.getRafter(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
@@ -49,8 +50,8 @@ public class MaterialCalculator {
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
-            if (!(c.getRafterLength() <= RAFTERSMALL && c.getRafterLength() <= RAFTERLONG)) {
-                c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * BOTHSIDES);
+            if (!(carport.getRafterLength() <= RAFTERSMALL && carport.getRafterLength() <= RAFTERLONG)) {
+                carport.setFlatHinges(carport.getFlatHinges() + counterRafterSmall * BOTHSIDES);
             }
         }
 
@@ -68,20 +69,20 @@ public class MaterialCalculator {
         }
     }
 
-    private void roofRafter(Carport c, ArrayList<Material> list) {
+    private void roofRafter(Carport carport, ArrayList<Material> list) {
         int counterRafterLong = 0;
         int counterRafterSmall = 0;
 
-        if (c.getRoofRafterLength() <= RAFTERSMALL) {
-            counterRafterSmall += c.getRoofRafter();
-        } else if (c.getRoofRafterLength() <= RAFTERLONG) {
-            counterRafterLong += c.getRoofRafter();
-        } else if (c.getRoofRafterLength() > RAFTERLONG) {
-            int restLength = (int) (c.getRoofRafterLength() - RAFTERLONG);
-            counterRafterLong += c.getRoofRafter();
+        if (carport.getRoofRafterLength() <= RAFTERSMALL) {
+            counterRafterSmall += carport.getRoofRafter();
+        } else if (carport.getRoofRafterLength() <= RAFTERLONG) {
+            counterRafterLong += carport.getRoofRafter();
+        } else if (carport.getRoofRafterLength() > RAFTERLONG) {
+            int restLength = (int) (carport.getRoofRafterLength() - RAFTERLONG);
+            counterRafterLong += carport.getRoofRafter();
             counterRafterSmall += MINIMUMHAVEONEPEICE;
             int currentLength = RAFTERSMALL;
-            for (int i = 0; i < c.getRoofRafter(); i++) {
+            for (int i = 0; i < carport.getRoofRafter(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
@@ -89,8 +90,8 @@ public class MaterialCalculator {
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
-            if (!(c.getRoofRafterLength() <= RAFTERSMALL && c.getRoofRafterLength() <= RAFTERLONG)) {
-                c.setFlatHinges(c.getFlatHinges() + counterRafterSmall * BOTHSIDES);
+            if (!(carport.getRoofRafterLength() <= RAFTERSMALL && carport.getRoofRafterLength() <= RAFTERLONG)) {
+                carport.setFlatHinges(carport.getFlatHinges() + counterRafterSmall * BOTHSIDES);
             }
         }
 
@@ -108,19 +109,19 @@ public class MaterialCalculator {
         }
     }
 
-    private void beam(Carport c, ArrayList<Material> list) {
+    private void beam(Carport carport, ArrayList<Material> list) {
         int counterBeamLong = 0;
         int counterBeamSmall = 0;
-        if (c.getBeamLength() <= BEAMSMALL) {
-            counterBeamSmall += c.getBeam();
-        } else if (c.getBeamLength() <= BEAMLONG) {
-            counterBeamLong += c.getBeam();
-        } else if (c.getBeamLength() > BEAMLONG) {
-            int restLength = (int) (c.getBeamLength() - BEAMLONG);
-            counterBeamLong += c.getBeam();
+        if (carport.getBeamLength() <= BEAMSMALL) {
+            counterBeamSmall += carport.getBeam();
+        } else if (carport.getBeamLength() <= BEAMLONG) {
+            counterBeamLong += carport.getBeam();
+        } else if (carport.getBeamLength() > BEAMLONG) {
+            int restLength = (int) (carport.getBeamLength() - BEAMLONG);
+            counterBeamLong += carport.getBeam();
             counterBeamSmall += MINIMUMHAVEONEPEICE;
             int currentLength = BEAMSMALL;
-            for (int i = 0; i < c.getBeam(); i++) {
+            for (int i = 0; i < carport.getBeam(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
@@ -128,8 +129,8 @@ public class MaterialCalculator {
                     currentLength = BEAMSMALL - restLength;
                 }
             }
-            if (!(c.getBeamLength() <= BEAMSMALL && c.getBeamLength() <= BEAMLONG)) {
-                c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * BOTHSIDES);
+            if (!(carport.getBeamLength() <= BEAMSMALL && carport.getBeamLength() <= BEAMLONG)) {
+                carport.setFlatHinges(carport.getFlatHinges() + counterBeamSmall * BOTHSIDES);
             }
         }
 
@@ -145,20 +146,20 @@ public class MaterialCalculator {
         }
     }
 
-    private void roofBeam(Carport c, ArrayList<Material> list) {
+    private void roofBeam(Carport carport, ArrayList<Material> list) {
         int counterBeamLong = 0;
         int counterBeamSmall = 0;
 
-        if (c.getBeamLength() <= BEAMSMALL) {
-            counterBeamSmall += c.getRoofBeams();
-        } else if (c.getBeamLength() <= BEAMLONG) {
-            counterBeamLong += c.getRoofBeams();
-        } else if (c.getBeamLength() > BEAMLONG) {
-            int restLength = (int) (c.getBeamLength() - BEAMLONG);
-            counterBeamLong += c.getRoofBeams();
+        if (carport.getBeamLength() <= BEAMSMALL) {
+            counterBeamSmall += carport.getRoofBeams();
+        } else if (carport.getBeamLength() <= BEAMLONG) {
+            counterBeamLong += carport.getRoofBeams();
+        } else if (carport.getBeamLength() > BEAMLONG) {
+            int restLength = (int) (carport.getBeamLength() - BEAMLONG);
+            counterBeamLong += carport.getRoofBeams();
             counterBeamSmall += MINIMUMHAVEONEPEICE;
             int currentLength = BEAMSMALL;
-            for (int i = 0; i < c.getRoofBeams(); i++) {
+            for (int i = 0; i < carport.getRoofBeams(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
@@ -166,8 +167,8 @@ public class MaterialCalculator {
                     currentLength = BEAMSMALL - restLength;
                 }
             }
-            if (!(c.getBeamLength() <= BEAMSMALL && c.getBeamLength() <= BEAMLONG)) {
-                c.setFlatHinges(c.getFlatHinges() + counterBeamSmall * 2);
+            if (!(carport.getBeamLength() <= BEAMSMALL && carport.getBeamLength() <= BEAMLONG)) {
+                carport.setFlatHinges(carport.getFlatHinges() + counterBeamSmall * 2);
             }
         }
 
@@ -183,43 +184,43 @@ public class MaterialCalculator {
         }
     }
 
-    private void addRest(Carport c, ArrayList<Material> list) {
+    private void addRest(Carport carport, ArrayList<Material> list) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("Plastmo Ecolite blåtonet") && list.get(i).getLength() == PLASTMOLENGTHLONG) {
-                list.get(i).setAmount(c.getPlastmoLong());
+                list.get(i).setAmount(carport.getPlastmoLong());
             }
             if (list.get(i).getName().equals("Plastmo Ecolite blåtonet") && list.get(i).getLength() == PLASTMOLENGTHSMALL) {
-                list.get(i).setAmount(c.getPlastmoSmall());
+                list.get(i).setAmount(carport.getPlastmoSmall());
             }
             if (list.get(i).getName().equals("97x97	mm.	trykimp. Stolpe")) {
-                list.get(i).setAmount(c.getPost());
+                list.get(i).setAmount(carport.getPost());
             }
             if (list.get(i).getName().equals("Skruer 200 stk.")) {
-                list.get(i).setAmount(c.getScrewBoxes());
+                list.get(i).setAmount(carport.getScrewBoxes());
             }
             if (list.get(i).getName().equals("FladtBeslag")) {
-                list.get(i).setAmount(c.getFlatHinges());
+                list.get(i).setAmount(carport.getFlatHinges());
             }
             if (list.get(i).getName().equals("Tegl")) {
-                list.get(i).setAmount(c.getRoofTiles());
+                list.get(i).setAmount(carport.getRoofTiles());
             }
             if (list.get(i).getName().equals("LBeslag")) {
-                list.get(i).setAmount(c.getLHinges());
+                list.get(i).setAmount(carport.getLHinges());
             }
             if (list.get(i).getName().equals("25x150	mm.	trykimp. Bræt") && list.get(i).getLength() == PLANKLENGTH) {
-                list.get(i).setAmount(c.getPlanks() + c.getCoverPlanks());
+                list.get(i).setAmount(carport.getPlanks() + carport.getCoverPlanks());
             }
             if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 240) {
-                list.get(i).setAmount(c.getCoverStabilizerPlankSmall());
+                list.get(i).setAmount(carport.getCoverStabilizerPlankSmall());
             }
             if (list.get(i).getName().equals("45x95 Reglar ubh.") && list.get(i).getLength() == 360) {
-                list.get(i).setAmount(c.getCoverStabilizerPlanksLong());
+                list.get(i).setAmount(carport.getCoverStabilizerPlanksLong());
             }
             if (list.get(i).getName().equals("Dørhåndtag")) {
-                list.get(i).setAmount(c.getDoorKnob());
+                list.get(i).setAmount(carport.getDoorKnob());
             }
             if (list.get(i).getName().equals("Dør hængsel")) {
-                list.get(i).setAmount(c.getDoorHinge());
+                list.get(i).setAmount(carport.getDoorHinge());
             }
         }
     }
