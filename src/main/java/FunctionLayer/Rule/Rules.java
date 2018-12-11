@@ -1,7 +1,6 @@
 package FunctionLayer.Rule;
 
 public class Rules {
-
     //carportCalc
     public static final int NEWPOSTLENGTH = 200; //how many centimeters to make a new post necessary
     public static final int TWOPOSTLENGTH = 200; //subtracted from side length because corner posts are shared

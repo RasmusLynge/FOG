@@ -65,9 +65,8 @@ public class LogicFacade {
      * @throws MakeOrderException
      */
     public Order makeOrder(int width, int length, String name, String email, String zip, String phone, String evt, boolean shed, boolean highRoof, int shedLength) throws DMException, MakeOrderException {
-
         Order o = new Order(width, length, name, email, zip, phone, evt);
-        o.setPrice(p.priceCalculator(length, width, shed, highRoof));
+        o.setPrice(p.priceCalculator(length, width, highRoof, shed));
         o.setCarport(p.getCarport());
         o.setShed(shed);
         o.setShedLength(shedLength);
