@@ -1,9 +1,3 @@
-<%-- 
-    Document   : showorders
-    Created on : 15-11-2018, 17:10:18
-    Author     : Simon
---%>
-
 <%@page import="FunctionLayer.Entity.Order"%>
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page import="java.util.ArrayList"%>
@@ -190,10 +184,10 @@
                             }
                         } else if (orderList.isEmpty()){
                         %>
-                        <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
-                        <%
-                            }
-                        %>       
+                    <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
+                    <%
+                        }
+                    %>       
                     </tbody>
                 </table>                
 

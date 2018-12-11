@@ -2,20 +2,25 @@ package FunctionLayer.Entity;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Magnus
- */
 public class Carport {
 
-    int width, length, rafter,roofRafter, roofPost,
+    int width, length, rafter, roofRafter, roofPost,
             beam, post, rafterLength, beamLength,
             postLength, screws, screwBoxes, lHinges,
             outerWidth, outerLength, roofBeams,
             flatHinges, roofTiles, plastmoSmall, plastmoLong,
             coverPlanks, coverPlankLength, shedLength, planks,
-            coverStabilizerPlanksLong,coverStabilizerPlankSmall,
+            coverStabilizerPlanksLong, coverStabilizerPlankSmall,
             doorHinge, doorKnob, shedPost, postSpacing;
+    double rafterSpacing, roofRafterLength, roofPostHeight;
+    boolean roof, shed;
+
+    public Carport(int width, int length, boolean roof, boolean shed) {
+        this.width = width;
+        this.length = length;
+        this.roof = roof;
+        this.shed = shed;
+    }
 
     public int getPostSpacing() {
         return postSpacing;
@@ -64,7 +69,7 @@ public class Carport {
     public void setCoverStabilizerPlankSmall(int coverStabilizerPlankSmall) {
         this.coverStabilizerPlankSmall = coverStabilizerPlankSmall;
     }
-        ArrayList<Material> list;
+    ArrayList<Material> list;
 
     public int getPlanks() {
         return planks;
@@ -82,7 +87,6 @@ public class Carport {
         this.shedLength = shedLength;
     }
 
-        
     public int getlHinges() {
         return lHinges;
     }
@@ -98,6 +102,7 @@ public class Carport {
     public void setList(ArrayList<Material> list) {
         this.list = list;
     }
+
     public int getCoverPlanks() {
         return coverPlanks;
     }
@@ -113,6 +118,7 @@ public class Carport {
     public void setCoverPlankLength(int coverPlankLength) {
         this.coverPlankLength = coverPlankLength;
     }
+
     public int getPlastmoSmall() {
         return plastmoSmall;
     }
@@ -143,16 +149,6 @@ public class Carport {
 
     public void setFlatHinges(int flatHinges) {
         this.flatHinges = flatHinges;
-    }
-
-    double rafterSpacing,roofRafterLength, roofPostHeight;
-    boolean roof, shed;
-
-    public Carport(int width, int length, boolean roof, boolean shed) {
-        this.width = width;
-        this.length = length;
-        this.roof = roof;
-        this.shed = shed;
     }
 
     public int getRoofBeams() {

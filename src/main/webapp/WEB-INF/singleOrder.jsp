@@ -1,10 +1,3 @@
-<%-- 
-    Document   : singleOrder
-    Created on : 15-11-2018, 13:46:26
-    Author     : Mathias
---%>
-
-
 <%@page import="FunctionLayer.Entity.Order"%>
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : showorderdetails
-    Created on : 15-11-2018, 16:07:03
-    Author     : Simon
---%>
-
 <%@page import="FunctionLayer.Entity.Material"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="FunctionLayer.Entity.User"%>

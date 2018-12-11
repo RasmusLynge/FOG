@@ -1,61 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
-import java.util.ArrayList;
 
-/**
- *
- * @author Mathias
- */
 public class CarportCalculator {
 
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
-        if (length < 240 || length > 720 || width < 240 || width > 720) {
+        if (length < MINLENGTH || length > MAXLENGTH || width < MINLENGTH || width > MAXLENGTH) {
             throw new MakeOrderException("Measurements contain values below or above the limit values");
         }
-        Carport c = new Carport(length, width, roof, false);
-        RoofCalculator rc = new RoofCalculator(c);
-        CoverCalculator cc = new CoverCalculator(c);
-        outerMessurement(length, width, c);
-        calculatePosts(length, width, c);
-        beamLengthCalculator(length, roof, c);
-        cc.setRoofCover();
-
-        //skal laves til i JSP
-        int degree = 90;
+        Carport carport = new Carport(length, width, roof, false);
+        RoofCalculator roofCalc = new RoofCalculator(carport);
+        CoverCalculator coverCalc = new CoverCalculator(carport);
+        outerMessurement(length, width, carport);
+        calculatePosts(length, carport);
+        beamLengthCalculator(length, roof, carport);
+        coverCalc.setRoofCover();
 
         if (roof) {
-            System.out.println("true med rejst tag");
-            calculateRafters(length, width, roof, c);
-            rc.topRoof(width, length, degree);
+            calculateRafters(length, width, roof, carport);
+            roofCalc.topRoof(width, length, DEGREE);
 
         } else {
-            System.out.println("false med flat tag");
-            calculateRafters(length, width, roof, c);
-            rc.flatRoof();
+            calculateRafters(length, width, roof, carport);
+            roofCalc.flatRoof();
         }
 
         if (shed) {
-            shedPosts(c);
-            coverStabilizerPlanks(length, width, c);
-            c.setDoorHinge(2);
-            c.setDoorKnob(1);
+            shedPosts(carport);
+            coverStabilizerPlanks(length, width, carport);
+            carport.setDoorHinge(DOORHINGES);
+            carport.setDoorKnob(DOORKNOB);
         }
 
-        int lHinges = totalLHinges(c.getRafter(), HINGESPERRAFTER, c);
-        totalScrews((lHinges + c.getFlatHinges()), c);
-        screwBoxes(c);
+        int lHinges = totalLHinges(carport.getRafter(), HINGESPERRAFTER, carport);
+        totalScrews((lHinges + carport.getFlatHinges()), carport);
+        screwBoxes(carport);
 
-        return c;
+        return carport;
     }
 
     private void outerMessurement(int length, int width, Carport carport) {
@@ -63,14 +47,11 @@ public class CarportCalculator {
         carport.setOuterWidth(width + ROOFHANGOUTTWOSIDES);
     }
 
-    private void calculatePosts(int length, int width, Carport carport) {
+    private void calculatePosts(int length, Carport carport) {
         int restLength = length - TWOPOSTLENGTH;
-        int restWidth = width - TWOPOSTLENGTH;
-        // int widthPosts = calcWidthPosts(restWidth);
         int lengthPosts = calcLengthPosts(restLength);
-        //widthposts til skur
         int totalPosts = MINPOSTS + BOTHSIDES * lengthPosts;
-        int postSpacing = length / ((totalPosts / BOTHSIDES) - 1);
+        int postSpacing = length / ((totalPosts / BOTHSIDES) - SPACINGCONVERTEDTOAMOUNT);
         carport.setPostSpacing(postSpacing);
         carport.setPostLength(POSTSLENGTH);
         carport.setPost(totalPosts);
@@ -83,7 +64,7 @@ public class CarportCalculator {
         if (roof) {
             int totalRafters = carport.getPost() / BOTHSIDES;
             int newRafterSpacing = length / (carport.getPost() / BOTHSIDES);
-            carport.setRafter(totalRafters + 1);
+            carport.setRafter(totalRafters + SPACINGCONVERTEDTOAMOUNT);
             carport.setRafterSpacing(newRafterSpacing);
         } else {
             int totalRafters = roofLength / RAFTERSPACING;
@@ -99,52 +80,45 @@ public class CarportCalculator {
         int toalBeamLength = length + ENTRANCEHANGOUT + ROOFHANGOUTTWOSIDES;
         carport.setBeamLength(toalBeamLength);
         if (roof) {
-            carport.setBeam(BEAMS + 1);
+            carport.setBeam(BEAMS + MIDDLEROOFBEAM);
         } else {
             carport.setBeam(BEAMS);
         }
     }
 
-    private int calcWidthPosts(int restWidth) {
-        int amount = restWidth / NEWPOSTLENGTH;
-        return amount;
-
-    }
-
     private int calcLengthPosts(int restLength) {
         int amount = restLength / NEWPOSTLENGTH;
         return amount;
-
     }
 
-    private int totalLHinges(int rafters, int posts, Carport c) {
+    private int totalLHinges(int rafters, int posts, Carport carport) {
         int totalLHinges = rafters * HINGESPERRAFTER;
         totalLHinges += posts * HINGESPERPOST;
-        c.setLHinges(totalLHinges);
+        carport.setLHinges(totalLHinges);
         return totalLHinges;
     }
 
-    private void totalScrews(int hinges, Carport c) {
+    private void totalScrews(int hinges, Carport carport) {
         int totalScrews = hinges * SCREWSPERLHINGES;
-        c.setScrews(c.getScrews() + totalScrews);
+        carport.setScrews(carport.getScrews() + totalScrews);
     }
 
-    private void screwBoxes(Carport c) {
-        double boxesOfScrews = (double) c.getScrews() / SCREWSINABOX;
+    private void screwBoxes(Carport carport) {
+        double boxesOfScrews = (double) carport.getScrews() / SCREWSINABOX;
         double boxesRoundedUp = (double) Math.ceil(boxesOfScrews);
         int boxes = (int) boxesRoundedUp;
-        c.setScrewBoxes(boxes);
+        carport.setScrewBoxes(boxes);
     }
 
-    private void coverStabilizerPlanks(int length, int width, Carport c) {
+    private void coverStabilizerPlanks(int length, int width, Carport carport) {
         int counterStabilizerSmall = 0;
         int counterStabilizerLong = 0;
-        stabilizerWidth(width, counterStabilizerSmall, counterStabilizerLong, c);
-        stabilizerLength(length, counterStabilizerSmall, counterStabilizerLong, c);
+        stabilizerPlanksWidth(width, counterStabilizerSmall, counterStabilizerLong, carport);
+        stabilizerPlanksLength(length, counterStabilizerSmall, counterStabilizerLong, carport);
 
     }
 
-    private void stabilizerLength(int length, int counterStabilizerSmall, int counterStabilizerLong, Carport c) {
+    private void stabilizerPlanksLength(int length, int counterStabilizerSmall, int counterStabilizerLong, Carport carport) {
         if (length <= STABILIZERPLANKSSMALL) {
             counterStabilizerSmall += BOTHSIDES * STABILIZERPLANKPRWALL;
         } else if (length <= STABILIZERPLANKSLONG) {
@@ -154,27 +128,27 @@ public class CarportCalculator {
             int restLength = (int) (length - STABILIZERPLANKSLONG);
             counterStabilizerLong += BOTHSIDES * STABILIZERPLANKPRWALL;
 
-            counterStabilizerSmall += 1;
+            counterStabilizerSmall += MINIMUMHAVEONEPEICE;
             int currentLength = STABILIZERPLANKSSMALL;
             for (int i = 0; i < BOTHSIDES * STABILIZERPLANKPRWALL; i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterStabilizerSmall += 1;
+                    counterStabilizerSmall += MINIMUMHAVEONEPEICE;
                     currentLength = counterStabilizerSmall - restLength;
                 }
             }
         }
-        c.setCoverStabilizerPlankSmall(counterStabilizerSmall);
-        c.setCoverStabilizerPlanksLong(counterStabilizerLong);
+        carport.setCoverStabilizerPlankSmall(counterStabilizerSmall);
+        carport.setCoverStabilizerPlanksLong(counterStabilizerLong);
         if (!(length <= STABILIZERPLANKSSMALL && length <= STABILIZERPLANKSLONG)) {
-            c.setFlatHinges(c.getFlatHinges() + counterStabilizerSmall);
+            carport.setFlatHinges(carport.getFlatHinges() + counterStabilizerSmall);
         }
-        c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
+        carport.setLHinges(carport.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
 
     }
 
-    private void stabilizerWidth(int width, int counterStabilizerSmall, int counterStabilizerLong, Carport c) {
+    private void stabilizerPlanksWidth(int width, int counterStabilizerSmall, int counterStabilizerLong, Carport carport) {
         if (width <= STABILIZERPLANKSSMALL) {
             counterStabilizerSmall += BOTHSIDES * STABILIZERPLANKPRWALL;
         } else if (width <= STABILIZERPLANKSLONG) {
@@ -184,24 +158,24 @@ public class CarportCalculator {
             int restLength = (int) (width - STABILIZERPLANKSLONG);
             counterStabilizerLong += BOTHSIDES * STABILIZERPLANKPRWALL;
 
-            counterStabilizerSmall += 1;
+            counterStabilizerSmall += MINIMUMHAVEONEPEICE;
             int currentLength = STABILIZERPLANKSSMALL;
             for (int i = 0; i < BOTHSIDES * STABILIZERPLANKPRWALL; i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterStabilizerSmall += 1;
+                    counterStabilizerSmall += MINIMUMHAVEONEPEICE;
                     currentLength = counterStabilizerSmall - restLength;
                 }
             }
         }
         if (!(width <= STABILIZERPLANKSSMALL && width <= STABILIZERPLANKSLONG)) {
-            c.setFlatHinges(c.getFlatHinges() + counterStabilizerSmall);
+            carport.setFlatHinges(carport.getFlatHinges() + counterStabilizerSmall);
         }
-        c.setLHinges(c.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
+        carport.setLHinges(carport.getLHinges() + BOTHSIDES * STABILIZERPLANKPRWALL * LHINGEPRSTABILIZER);
     }
 
-    private void shedPosts(Carport c) {
-        c.setPost(c.getPost() + 3);
+    private void shedPosts(Carport carport) {
+        carport.setPost(carport.getPost() + SHEDPOSTS);
     }
 }

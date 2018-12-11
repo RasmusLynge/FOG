@@ -11,16 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-/**
- * The purpose of UserMapper is to...
- *
- * @author Rasmus
- */
 public class DataMapper {
 
     public static User login(String email, String password) throws LoginException {
@@ -103,7 +96,7 @@ public class DataMapper {
                     + "FROM `Order`\n"
                     + "INNER JOIN `User_Info` ON `Order`.Id_Order = User_Info.fk_Order_Id\n"
                     + "WHERE `State` =?;";
-           PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, state);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -134,7 +127,7 @@ public class DataMapper {
             ps.setInt(5, order.isShed() ? 1 : 0);
             ps.setInt(6, order.getShedLength());
             ps.setString(7, order.getEvt());
-            
+
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -178,8 +171,8 @@ public class DataMapper {
             throw new DMException(ex.getMessage());
         }
     }
-    
- public ArrayList<Material> getMaterials() throws DMException {
+
+    public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();
         try {
             Connection con = Connector.connection();

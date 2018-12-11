@@ -1,23 +1,12 @@
-/*
- * To change this license header, choose Limycense Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer.Calculate;
 
 import DBAccess.DataFacade;
-import java.util.List;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Entity.Carport;
 import java.util.ArrayList;
-import DBAccess.DataMapper;
 import FunctionLayer.Exception.DMException;
 import static FunctionLayer.Rule.Rules.*;
 
-/**
- *
- * @author Magnus
- */
 public class MaterialCalculator {
 
     public ArrayList<Material> materialList(Carport c) throws DMException {
@@ -44,13 +33,13 @@ public class MaterialCalculator {
         } else if (c.getRafterLength() > RAFTERLONG) {
             int restLength = c.getRafterLength() - RAFTERLONG;
             counterRafterLong += c.getRafter();
-            counterRafterSmall += 1;
+            counterRafterSmall += MINIMUMHAVEONEPEICE;
             int currentLength = RAFTERSMALL;
             for (int i = 0; i < c.getRafter(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterRafterSmall += 1;
+                    counterRafterSmall += MINIMUMHAVEONEPEICE;
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
@@ -84,13 +73,13 @@ public class MaterialCalculator {
         } else if (c.getRoofRafterLength() > RAFTERLONG) {
             int restLength = (int) (c.getRoofRafterLength() - RAFTERLONG);
             counterRafterLong += c.getRoofRafter();
-            counterRafterSmall += 1;
+            counterRafterSmall += MINIMUMHAVEONEPEICE;
             int currentLength = RAFTERSMALL;
             for (int i = 0; i < c.getRoofRafter(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterRafterSmall += 1;
+                    counterRafterSmall += MINIMUMHAVEONEPEICE;
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
@@ -123,13 +112,13 @@ public class MaterialCalculator {
         } else if (c.getBeamLength() > BEAMLONG) {
             int restLength = (int) (c.getBeamLength() - BEAMLONG);
             counterBeamLong += c.getBeam();
-            counterBeamSmall += 1;
+            counterBeamSmall += MINIMUMHAVEONEPEICE;
             int currentLength = BEAMSMALL;
             for (int i = 0; i < c.getBeam(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterBeamSmall += 1;
+                    counterBeamSmall += MINIMUMHAVEONEPEICE;
                     currentLength = BEAMSMALL - restLength;
                 }
             }
@@ -161,13 +150,13 @@ public class MaterialCalculator {
         } else if (c.getBeamLength() > BEAMLONG) {
             int restLength = (int) (c.getBeamLength() - BEAMLONG);
             counterBeamLong += c.getRoofBeams();
-            counterBeamSmall += 1;
+            counterBeamSmall += MINIMUMHAVEONEPEICE;
             int currentLength = BEAMSMALL;
             for (int i = 0; i < c.getRoofBeams(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
                 } else {
-                    counterBeamSmall += 1;
+                    counterBeamSmall += MINIMUMHAVEONEPEICE;
                     currentLength = BEAMSMALL - restLength;
                 }
             }

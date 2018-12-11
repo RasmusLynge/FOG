@@ -1,9 +1,3 @@
-<%-- 
-    Document   : orderpage
-    Created on : 10-11-2018, 17:22:36
-    Author     : Rasmu
---%>
-
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

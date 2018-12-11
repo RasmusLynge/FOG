@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer.Entity;
 
-/**
- *
- * @author Mathias
- */
 public class Material {
-    Carport c; 
+    Carport carport; 
     String name; 
     int length;
     int amount;
@@ -23,8 +14,6 @@ public class Material {
         this.price = price;
     }
 
-   
-
     public double getPrice() {
         return price;
     }
@@ -33,12 +22,12 @@ public class Material {
         this.price = price;
     }
 
-    public Carport getC() {
-        return c;
+    public Carport getCarport() {
+        return carport;
     }
 
-    public void setC(Carport c) {
-        this.c = c;
+    public void setCarport(Carport carport) {
+        this.carport = carport;
     }
 
     public String getName() {

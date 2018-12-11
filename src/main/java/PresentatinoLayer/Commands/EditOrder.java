@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Material;
@@ -14,10 +9,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Simon Bojesen
- */
 public class EditOrder extends Command {
 
     @Override
@@ -27,12 +18,14 @@ public class EditOrder extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int roof = Integer.parseInt(request.getParameter("roof"));
         String state = request.getParameter("State");
+        
         if (state.equalsIgnoreCase("ForespÃ¸rgsel")) {
             state = "Forespørgsel";
         }
         if (state.equalsIgnoreCase("Afventer sÃ¦lger")) {
             state = "Afventer sælger";
         }
+
         try {
             LogicFacade lf = new LogicFacade();
             Order o = lf.EditOrder(id, width, length, roof, state);

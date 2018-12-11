@@ -8,8 +8,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 abstract class Command {
 
     private static HashMap<String, Command> commands;
@@ -17,7 +15,6 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("login", new Login());
-//        commands.put("register", new Register());
         commands.put("orderpage", new OrderPage());
         commands.put("employeelogin", new EmployeeLoginPage());
         commands.put("order", new CreateOrder());

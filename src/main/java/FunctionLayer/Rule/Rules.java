@@ -20,7 +20,20 @@ public class Rules {
     public static final int STABILIZERPLANKSSMALL = 240;
     public static final int STABILIZERPLANKPRWALL = 2;
     public static final int LHINGEPRSTABILIZER = 2;
-
+    public static final int DEGREE = 90;
+    public static final int MINLENGTH = 240;
+    public static final int MAXLENGTH = 720;
+    public static final int DOORKNOB = 1;
+    public static final int DOORHINGES = 2;
+    public static final int SPACINGCONVERTEDTOAMOUNT = 1;
+    public static final int MIDDLEROOFBEAM = 1;
+    public static final int MINIMUMHAVEONEPEICE = 1;
+    public static final int SHEDPOSTS = 3;
+    
+    
+    //coverCalc
+    public static final int HALFHEIGHT = 2;
+    
     //priceCalc
     public static final int CMTOMETER = 100;
 
@@ -32,6 +45,8 @@ public class Rules {
     public static final int ROOFBEAMSPACING = 45;
     public static final int TILESWIDTH = 30;
     public static final int OVERLAPTILES = 5;
+    public static final int SCREWSEACHRAFTER = 12;
+    
     //svgSide
     public static final int OUTERFRAMEXPOS = 100;
     public static final int OUTERFRAMEYPOS = 200;
@@ -49,12 +64,12 @@ public class Rules {
     public static final int TEXTBOTTOMLAYER = 30;
     public static final int POSTHEIGHT = 210;
     public static final int CENTEROFPOSTMEASSURE = 7;
-    
+
     //svgTop
     public static final int EXTRAPOSTSPACING = 10;
     public static final int TEXTSPACINGOUTERLAYER = 40;
     public static final int DOORWIDTH = 90;
-    
+
     //roofCover
     public static final int PLANKOVERLAP = 1;
     public static final int PLANKWIDTH = 10;
@@ -66,8 +81,5 @@ public class Rules {
     public static final int RAFTERLONG = 600;
     public static final int BEAMSMALL = 480;
     public static final int BEAMLONG = 600;
-    
-    
-    
 
 }

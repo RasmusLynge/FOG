@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logging;
 
 import java.io.IOException;
@@ -14,10 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-/**
- *
- * @author tha
- */
 public class Logging {
 
     public static final boolean PRODUCTION = false;
@@ -26,7 +17,6 @@ public class Logging {
     public static final String LOG_FILE_PATH_STACK = "C:\\Users\\Rasmu\\Documents\\Datamatiker_2sem\\Modul_2_SQL\\FOG\\FOGStack.txt";
     private static Logger logger;
     private static Logger loggerST;
-    
 
     public static Logger getLogger() {
         if (logger == null) {
@@ -41,66 +31,65 @@ public class Logging {
                 }
             } else {
                 try {
-                    FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP); // see: http://tutorials.jenkov.com/java-logging/handlers.html
+                    FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP); 
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                     getLoggerWithStackTrace();
                 } catch (IOException ex) {
                     Logger.getLogger(Logging.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                }
             }
         }
         return logger;
     }
-    
+
     public static Logger getLoggerWithStackTrace() {
         if (loggerST == null) {
             loggerST = Logger.getLogger("Stack Trace Logger");
             try {
-                    FileHandler handler = new FileHandler(LOG_FILE_PATH_STACK);
-                    handler.setFormatter(new StackTraceFormatter());
-                    logger.addHandler(handler);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } 
+                FileHandler handler = new FileHandler(LOG_FILE_PATH_STACK);
+                handler.setFormatter(new StackTraceFormatter());
+                logger.addHandler(handler);
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
+        }
         return logger;
     }
-    
-    
-    
-    private static class VerySimpleFormatter extends Formatter{
+
+    private static class VerySimpleFormatter extends Formatter {
+
         String datePattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+
         @Override
         public String format(LogRecord record) {
             return String.format(
-                "%1$s %2$-7s %3$s\n",
-                new SimpleDateFormat(datePattern).format(
-                    new Date(record.getMillis())
-                ),
-                record.getLevel().getName(),
-                formatMessage(record)
-            );
-        }
-    }
-    
-    private static class StackTraceFormatter extends Formatter{
-        String datePattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
-        @Override
-        public String format(LogRecord record) {
-            return String.format(
-                "%1$s %2$-7s %3$s %4$s\n",
-                new SimpleDateFormat(datePattern).format(
-                    new Date(record.getMillis())
-                ),
-                record.getLevel().getName(),
-                formatMessage(record),
-                record.getThrown().toString()
+                    "%1$s %2$-7s %3$s\n",
+                    new SimpleDateFormat(datePattern).format(
+                            new Date(record.getMillis())
+                    ),
+                    record.getLevel().getName(),
+                    formatMessage(record)
             );
         }
     }
 
+    private static class StackTraceFormatter extends Formatter {
 
+        String datePattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+
+        @Override
+        public String format(LogRecord record) {
+            return String.format(
+                    "%1$s %2$-7s %3$s %4$s\n",
+                    new SimpleDateFormat(datePattern).format(
+                            new Date(record.getMillis())
+                    ),
+                    record.getLevel().getName(),
+                    formatMessage(record),
+                    record.getThrown().toString()
+            );
+        }
+    }
 
 }
-

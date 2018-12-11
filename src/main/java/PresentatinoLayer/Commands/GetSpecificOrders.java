@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Order;
@@ -15,14 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Rasmu
- */
 public class GetSpecificOrders extends Command {
-
-    public GetSpecificOrders() {
-    }
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
@@ -33,7 +21,6 @@ public class GetSpecificOrders extends Command {
         String state = "";
 
         state = request.getParameter("state");
-        System.out.println("TESSST : " + state);
         if (state.equalsIgnoreCase("ForespÃ¸rgsel")) {
             state = "Forespørgsel";
         }
@@ -41,12 +28,10 @@ public class GetSpecificOrders extends Command {
             state = "Afventer sælger";
         }
         request.setAttribute("state", state);
-        System.out.println("NEW TESSST : " + state);
 
         if ("employee".equals(user.getRole())) {
             ol = lf.getSpecificOrders(state);
             if (ol.isEmpty()) {
-                System.out.println("Tom liste");
                 session.setAttribute("getSpecificOrders", ol);
             } else {
                 session.setAttribute("getSpecificOrders", ol);

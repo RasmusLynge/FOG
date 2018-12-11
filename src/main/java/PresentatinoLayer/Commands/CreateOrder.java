@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package PresentatinoLayer.Commands;
 
 import FunctionLayer.Entity.Carport;
@@ -15,10 +10,7 @@ import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Rasmu
- */
+
 public class CreateOrder extends Command {
 
     @Override
@@ -37,13 +29,7 @@ public class CreateOrder extends Command {
         String measurementtype = request.getParameter("measurements");
 
         boolean highRoof;
-        int roof = Integer.parseInt(request.getParameter("roof"));
-
-        if (roof == 0) {
-            highRoof = false;
-        } else {
-            highRoof = true;
-        }
+        highRoof = roofCheck(request);
 
         boolean isShed;
         int shedLength = 0;
@@ -57,7 +43,21 @@ public class CreateOrder extends Command {
         }
 
         Order o;
+        o = orderCheck(measurementtype, length, width, shedLength, lf, name, email, zip, phone, evt, isShed, highRoof);
+        Carport c = o.getCarport();
+        c.setShedLength(shedLength);
+        String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
+        String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
 
+        request.getSession().setAttribute("svgside", svgSide);
+        request.getSession().setAttribute("svgtop", svgTop);
+        request.getSession().setAttribute("order", o);
+
+        return "singleOrder";
+    }
+
+    private Order orderCheck(String measurementtype, int length, int width, int shedLength, LogicFacade lf, String name, String email, String zip, String phone, String evt, boolean isShed, boolean highRoof) throws MakeOrderException, DMException {
+        Order o;
         if ("outermeasurements".equals(measurementtype) && (length < 325 || width < 310)) {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
         }
@@ -69,15 +69,17 @@ public class CreateOrder extends Command {
         } else {
             o = lf.makeOrder(width, length, name, email, zip, phone, evt, isShed, highRoof, shedLength);
         }
-        Carport c = o.getCarport();
-        c.setShedLength(shedLength);
-        String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
-        String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
+        return o;
+    }
 
-        request.getSession().setAttribute("svgside", svgSide);
-        request.getSession().setAttribute("svgtop", svgTop);
-        request.getSession().setAttribute("order", o);
-
-        return "singleOrder";
+    private boolean roofCheck(HttpServletRequest request) throws NumberFormatException {
+        boolean highRoof;
+        int roof = Integer.parseInt(request.getParameter("roof"));
+        if (roof == 0) {
+            highRoof = false;
+        } else {
+            highRoof = true;
+        }
+        return highRoof;
     }
 }

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : saleslogin
-    Created on : 11-11-2018, 13:43:07
-    Author     : Rasmu
---%>
-
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

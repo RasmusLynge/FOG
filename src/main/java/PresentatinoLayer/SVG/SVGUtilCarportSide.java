@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package PresentatinoLayer.SVG;
 
 import FunctionLayer.Calculate.CarportCalculator;
@@ -11,17 +6,12 @@ import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
 
-/**
- * Skal rykkes til presentation
- *
- * @author Magnus
- */
 public class SVGUtilCarportSide {
 
     public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = POSTHEIGHT + 300;
-        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 "+canvasX+ " " + canvasY +"\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
         return res;
     }
 

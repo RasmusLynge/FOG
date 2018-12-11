@@ -1,11 +1,4 @@
-
 <%@page import="FunctionLayer.Entity.User"%>
-<%-- 
-    Document   : employeepage
-    Created on : 12-11-2018, 11:55:37
-    Author     : Rasmu
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">

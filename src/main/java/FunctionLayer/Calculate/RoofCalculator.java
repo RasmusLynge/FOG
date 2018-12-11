@@ -7,10 +7,10 @@ import static FunctionLayer.Rule.Rules.*;
 public class RoofCalculator {
 
     DataMapper db = new DataMapper();
-    Carport c;
+    Carport carport;
 
-    public RoofCalculator(Carport c) {
-        this.c = c;
+    public RoofCalculator(Carport carport) {
+        this.carport = carport;
     }
 
     public void flatRoof() {
@@ -19,66 +19,62 @@ public class RoofCalculator {
     }
 
     private void flatRoofScrews() {
-        int screwsEachRafter = c.getRafterLength() / 12;
-        int totalScrews = c.getRafter() * screwsEachRafter;
-        c.setScrews(c.getScrews() + totalScrews);
+        int screwsEachRafter = carport.getRafterLength() / SCREWSEACHRAFTER;
+        int totalScrews = carport.getRafter() * screwsEachRafter;
+        carport.setScrews(carport.getScrews() + totalScrews);
     }
 
     private void flatRoofPlastmo() {
         int counterPlastmoSmall = 0;
         int counterPlastmoLong = 0;
-        int counterPlastmoWidth = (int) Math.ceil(c.getOuterWidth() / (double) (PLASTMOWIDTH - OVERLAP));
+        int counterPlastmoWidth = (int) Math.ceil(carport.getOuterWidth() / (double) (PLASTMOWIDTH - OVERLAP));
 
-//If the outerlength is shorter than the length of the small plastmo plate there is 1 small for each counterWidth
-        if (c.getOuterLength() <= PLASTMOLENGTHSMALL) {
+        if (carport.getOuterLength() <= PLASTMOLENGTHSMALL) {
             counterPlastmoSmall += counterPlastmoWidth;
-
-//Otherwise a big plate is used,
         } else {
-            counterPlastmoLong += Math.ceil(((double) c.getOuterLength() / (double) PLASTMOLENGTHLONG)) * counterPlastmoWidth;
+            counterPlastmoLong += Math.ceil(((double) carport.getOuterLength() / (double) PLASTMOLENGTHLONG)) * counterPlastmoWidth;
 
-//If the long plate isnt long enough, the rest is calculated together with the amount of small plates needed 
-            if (c.getOuterLength() > PLASTMOLENGTHLONG) {
-                int restWithOverlap = c.getOuterLength() - PLASTMOLENGTHLONG + OVERLAP;
+            if (carport.getOuterLength() > PLASTMOLENGTHLONG) {
+                int restWithOverlap = carport.getOuterLength() - PLASTMOLENGTHLONG + OVERLAP;
                 int restInSmallLength = PLASTMOLENGTHSMALL / restWithOverlap;
                 counterPlastmoSmall += (counterPlastmoWidth / restInSmallLength);
             }
         }
-        c.setPlastmoLong(counterPlastmoLong);
-        c.setPlastmoSmall(counterPlastmoSmall);
+        carport.setPlastmoLong(counterPlastmoLong);
+        carport.setPlastmoSmall(counterPlastmoSmall);
     }
 
     public void topRoof(int width, int length, int degree) {
 
-        double roofPostHeight = Math.tan(degree) * (c.getOuterWidth() / 2);
-        int roofPost = c.getRafter();
-        c.setRoofPostHeight(roofPostHeight);
-        c.setRoofPost(roofPost);
+        double roofPostHeight = Math.tan(degree) * (carport.getOuterWidth() / 2);
+        int roofPost = carport.getRafter();
+        carport.setRoofPostHeight(roofPostHeight);
+        carport.setRoofPost(roofPost);
         if (roofPostHeight < 0) {
-            c.setRoofPostHeight(roofPostHeight * -1);
+            carport.setRoofPostHeight(roofPostHeight * -1);
         }
 
         //length each side
-        double roofRafterLength = Math.sqrt((roofPostHeight * roofPostHeight) + (c.getOuterWidth() / 2) * (c.getOuterWidth() / 2));
-        int roofRafter = c.getRafter() * BOTHSIDES;
-        c.setRoofRafterLength((int) roofRafterLength);
+        double roofRafterLength = Math.sqrt((roofPostHeight * roofPostHeight) + (carport.getOuterWidth() / 2) * (carport.getOuterWidth() / 2));
+        int roofRafter = carport.getRafter() * BOTHSIDES;
+        carport.setRoofRafterLength((int) roofRafterLength);
 
         //each side
-        c.setRoofRafter(roofRafter);
+        carport.setRoofRafter(roofRafter);
 
         //pr sides
         int roofBeams = (int) (roofRafterLength / ROOFBEAMSPACING);
-        c.setRoofBeams(roofBeams);
+        carport.setRoofBeams(roofBeams);
 
-        int roofTiles = (int) ((c.getRoofRafter() - 1) * (c.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
-        c.setRoofTiles(roofTiles);
+        int roofTiles = (int) ((carport.getRoofRafter() - 1) * (carport.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
+        carport.setRoofTiles(roofTiles);
 
-        int flatHinges = c.getRoofPost() * 2;
-        c.setFlatHinges(c.getFlatHinges() + flatHinges);
+        int flatHinges = carport.getRoofPost() * 2;
+        carport.setFlatHinges(carport.getFlatHinges() + flatHinges);
 
-        int screwsEachRafter = (c.getBeam() * c.getRoofRafter()) * 2;
+        int screwsEachRafter = (carport.getBeam() * carport.getRoofRafter()) * 2;
         int screwsEachFlatHinge = flatHinges * 4;
         int totalScrews = screwsEachRafter + screwsEachFlatHinge;
-        c.setScrews(c.getScrews() + totalScrews);
+        carport.setScrews(carport.getScrews() + totalScrews);
     }
 }
