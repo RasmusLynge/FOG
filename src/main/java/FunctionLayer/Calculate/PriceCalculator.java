@@ -5,8 +5,6 @@ import DBAccess.DataMapper;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.GeneralException;
 import FunctionLayer.Exception.MakeOrderException;
-import java.util.HashMap;
-import static FunctionLayer.Rule.Rules.*;
 import java.util.ArrayList;
 
 public class PriceCalculator {
