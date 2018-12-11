@@ -24,6 +24,7 @@ public class GetOrders extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DMException {
+        LogicFacade lf = new LogicFacade();
         ArrayList<Order> ol = new ArrayList();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -39,7 +40,7 @@ public class GetOrders extends Command {
 //        else
             
             if ("employee".equals(user.getRole())) {
-            ol = LogicFacade.getAllOrders();
+            ol = lf.getAllOrders();
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
             }

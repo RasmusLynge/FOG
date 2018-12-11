@@ -49,9 +49,16 @@ public class RoofCalculator {
     }
 
     public void topRoof(int width, int length, int degree) {
-
-        double roofPostHeight = Math.tan(degree) * (c.getOuterWidth() / 2);
-        int roofPost = c.getRafter();
+        double sideB = c.getOuterWidth() / 2; 
+        double angleA = Math.toRadians(degree);
+        double angleB = Math.toRadians(180-90-degree);
+        double sineA = Math.sin(angleA);
+        double sineB = Math.sin(angleB);
+        double roofPostHeight = (sineA * sideB) / sineB;
+        
+        System.out.println(" roof post height ++++++++++++++"+ roofPostHeight);
+        int roofPost = c.getRafter();   
+        
         c.setRoofPostHeight(roofPostHeight);
         c.setRoofPost(roofPost);
         if (roofPostHeight < 0) {

@@ -31,7 +31,7 @@ public class CarportCalculator {
         cc.setRoofCover();
 
         //skal laves til i JSP
-        int degree = 90;
+        int degree = 15;
 
         if (roof) {
             System.out.println("true med rejst tag");

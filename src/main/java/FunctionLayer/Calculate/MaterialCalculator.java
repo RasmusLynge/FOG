@@ -5,6 +5,7 @@
  */
 package FunctionLayer.Calculate;
 
+import DBAccess.DataFacade;
 import java.util.List;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Entity.Carport;
@@ -20,8 +21,8 @@ import static FunctionLayer.Rule.Rules.*;
 public class MaterialCalculator {
 
     public ArrayList<Material> materialList(Carport c) throws DMException {
-        DataMapper dm = new DataMapper();
-        ArrayList<Material> list = dm.getMaterials();
+        DataFacade df = new DataFacade();
+        ArrayList<Material> list = df.getMaterials();
 
         rafter(c, list);
         roofRafter(c, list);

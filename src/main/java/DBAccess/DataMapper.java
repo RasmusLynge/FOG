@@ -23,24 +23,6 @@ import java.util.HashMap;
  */
 public class DataMapper {
 
-//    public static void createUser(User user) throws DMException {
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
-//            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-//            ps.setString(1, user.getEmail());
-//            ps.setString(2, user.getPassword());
-//            ps.setString(3, user.getRole());
-//            ps.executeUpdate();
-//            ResultSet ids = ps.getGeneratedKeys();
-//            ids.next();
-//            String id = ids.getString(1);
-//            user.setId(id);
-//        } catch (SQLException | ClassNotFoundException ex) {
-//            throw new DMException(ex.getMessage());
-//        }
-//    }
-
     public static User login(String email, String password) throws LoginException {
         try {
             Connection con = Connector.connection();
@@ -64,25 +46,7 @@ public class DataMapper {
         }
     }
 
-    public static HashMap<String, Double> getPrices() throws DMException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "select `name`, `price` from Material";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            HashMap<String, Double> map = new HashMap<>();
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                double price = rs.getDouble("Price");
-                map.put(name, price);
-            }
-            return map;
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new DMException(ex.getMessage());
-        }
-    }
-
-    public static Order getOrderByID(int orderid) throws DMException {
+    public Order getOrderByID(int orderid) throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM `Order` "
@@ -109,7 +73,7 @@ public class DataMapper {
         return null;
     }
 
-    public static ArrayList<Order> getAllOrders() throws DMException {
+    public ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -131,7 +95,7 @@ public class DataMapper {
         }
     }
 
-    public static ArrayList<Order> getSpecificOrders(String state) throws DMException {
+    public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -215,7 +179,7 @@ public class DataMapper {
         }
     }
     
- public static ArrayList<Material> getMaterials() throws DMException {
+ public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();
         try {
             Connection con = Connector.connection();

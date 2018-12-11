@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import DBAccess.DataFacade;
 import FunctionLayer.Exception.DMException;
 import FunctionLayer.Calculate.PriceCalculator;
 import FunctionLayer.Entity.User;
@@ -18,18 +19,19 @@ public class LogicFacade {
 
     PriceCalculator p = new PriceCalculator();
     DataMapper dm = new DataMapper();
+    DataFacade df = new DataFacade();
     
-    public static ArrayList<Order> getSpecificOrders(String state) throws DMException {
-        return DataMapper.getSpecificOrders(state);
+    public ArrayList<Order> getSpecificOrders(String state) throws DMException {
+        return dm.getSpecificOrders(state);
     }
 
-    public static User login(String email, String password) throws LoginException {
+    public User login(String email, String password) throws LoginException {
         return DataMapper.login(email, password);
     }
 
 
-    public static ArrayList<Order> getAllOrders() throws DMException {
-        return DataMapper.getAllOrders();
+    public ArrayList<Order> getAllOrders() throws DMException {
+        return dm.getAllOrders();
     }
 
 //    public static ArrayList<Order> getOrdersByUserID(String id) {
@@ -43,12 +45,12 @@ public class LogicFacade {
         o.setShed(shed);
         o.setShedLength(shedLength);
         o.setFlat_roof(highRoof);
-        dm.createOrder(o);
+        df.makeOrder(o);
         return o;
     }
 
     public Order getOrderByID(int orderid) throws DMException, MakeOrderException {
-        Order o = DataMapper.getOrderByID(orderid);
+        Order o = df.getOrderByID(orderid);
 
         o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
         o.setCarport(p.getCarport());
@@ -56,16 +58,9 @@ public class LogicFacade {
     }
 
     public Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {
-        Order o = dm.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
+        Order o = df.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
         o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
         o.setCarport(p.getCarport());
         return o;
-        
-//    public static User createUser(String email, String password) throws DMException {
-//        User user = new User(email, password, "customer");
-//        DataMapper.createUser(user);
-//        return user;
-//    }
-
     }
 }

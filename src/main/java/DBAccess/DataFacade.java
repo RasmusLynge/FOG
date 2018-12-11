@@ -6,12 +6,14 @@
 package DBAccess;
 
 import FunctionLayer.Calculate.PriceCalculator;
+import FunctionLayer.Entity.Material;
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Entity.User;
 import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Dette skal bruges til at lave lavere kobling 
@@ -22,47 +24,33 @@ public class DataFacade {
     DataMapper dm = new DataMapper();
 
     public ArrayList<Order> getSpecificOrders(String state) throws DMException {
-        return DataMapper.getSpecificOrders(state);
+        return dm.getSpecificOrders(state);
+    }
+    
+    public User login(String email, String password) throws LoginException {
+        return dm.login(email, password);
     }
 
-
-    public static User login(String email, String password) throws LoginException {
-        return DataMapper.login(email, password);
+    public ArrayList<Order> getAllOrders() throws DMException {
+        return dm.getAllOrders();
     }
 
-//    public static User createUser(String email, String password) throws DMException {
-//        User user = new User(email, password, "customer");
-//        DataMapper.createUser(user);
-//        return user;
-//    }
-
-    public static ArrayList<Order> getAllOrders() throws DMException {
-        return DataMapper.getAllOrders();
-    }
-
-//    public static ArrayList<Order> getOrdersByUserID(String id) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-    public Order makeOrder(Order o) throws DMException, MakeOrderException {
-
+    public void makeOrder(Order o) throws DMException, MakeOrderException {
         dm.createOrder(o);
-        return o;
     }
 
     public Order getOrderByID(int orderid) throws DMException, MakeOrderException {
-        Order o = DataMapper.getOrderByID(orderid);
-
-        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
-        o.setCarport(p.getCarport());
-        return o;
+        return dm.getOrderByID(orderid);
+        
     }
 
     public Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {
         Order o = dm.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
-        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
-        o.setCarport(p.getCarport());
         return o;
+    }
+    public ArrayList<Material> getMaterials() throws DMException {
+        ArrayList<Material> list = dm.getMaterials();
+        return list;
     }
 
 }

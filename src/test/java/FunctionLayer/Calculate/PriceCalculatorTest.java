@@ -185,3 +185,4 @@ public class PriceCalculatorTest {
         Assert.assertEquals(expectedPrice, actualPrice, 0.005);
     }
 }
+
