@@ -2,7 +2,7 @@ package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Entity.Material;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import java.util.ArrayList;
 import org.junit.Assert;
@@ -30,7 +30,7 @@ public class PriceCalculatorTest {
     }
 
     @Test
-    public void price240x240() throws GeneralException, MakeOrderException {
+    public void price240x240() throws DMException, MakeOrderException {
         //Arrange
         double actualPrice = 0;
         //Act
@@ -46,7 +46,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void priceTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void priceTopRoof240x240() throws DMException, MakeOrderException {
         //Arrange
         double actualPrice = 0;
         //Act
@@ -62,7 +62,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void priceWithShed240x240() throws GeneralException, MakeOrderException {
+    public void priceWithShed240x240() throws DMException, MakeOrderException {
         //Arrange
         double actualPrice = 0;
         //Act
@@ -78,7 +78,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void priceTopRoof480x480() throws GeneralException, MakeOrderException {
+    public void priceTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -95,7 +95,7 @@ public class PriceCalculatorTest {
         }
     }
     @Test
-    public void priceWithShed480x480() throws GeneralException, MakeOrderException {
+    public void priceWithShed480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -113,7 +113,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void price720x720() throws GeneralException, MakeOrderException {
+    public void price720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -131,7 +131,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void priceTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void priceTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -149,7 +149,7 @@ public class PriceCalculatorTest {
     }
     
     @Test
-    public void priceWithShed720x720() throws GeneralException, MakeOrderException {
+    public void priceWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
