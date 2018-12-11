@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class PriceCalculator {
 
-    DataMapper db = new DataMapper();
     CarportCalculator carportcalculator = new CarportCalculator();
     Carport c; 
 

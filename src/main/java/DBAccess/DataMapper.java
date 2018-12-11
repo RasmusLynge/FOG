@@ -64,7 +64,7 @@ public class DataMapper {
         }
     }
 
-    public static HashMap<String, Double> getPrices() throws DMException {
+    public HashMap<String, Double> getPrices() throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "select `name`, `price` from Material";
@@ -82,7 +82,7 @@ public class DataMapper {
         }
     }
 
-    public static Order getOrderByID(int orderid) throws DMException {
+    public Order getOrderByID(int orderid) throws DMException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM `Order` "
@@ -109,7 +109,7 @@ public class DataMapper {
         return null;
     }
 
-    public static ArrayList<Order> getAllOrders() throws DMException {
+    public ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -131,7 +131,7 @@ public class DataMapper {
         }
     }
 
-    public static ArrayList<Order> getSpecificOrders(String state) throws DMException {
+    public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
             Connection con = Connector.connection();
@@ -215,7 +215,7 @@ public class DataMapper {
         }
     }
     
- public static ArrayList<Material> getMaterials() throws DMException {
+ public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();
         try {
             Connection con = Connector.connection();

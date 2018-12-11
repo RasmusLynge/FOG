@@ -29,7 +29,7 @@ public class GetSpecificOrders extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         ArrayList<Order> ol = new ArrayList();
-
+        LogicFacade lf = new LogicFacade();
         String state = "";
 
         state = request.getParameter("state");
@@ -44,7 +44,7 @@ public class GetSpecificOrders extends Command {
         System.out.println("NEW TESSST : " + state);
 
         if ("employee".equals(user.getRole())) {
-            ol = LogicFacade.getSpecificOrders(state);
+            ol = lf.getSpecificOrders(state);
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
                 session.setAttribute("getSpecificOrders", ol);
