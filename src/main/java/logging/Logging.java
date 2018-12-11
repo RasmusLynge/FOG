@@ -18,6 +18,12 @@ public class Logging {
     private static Logger logger;
     private static Logger loggerST;
 
+    /**
+     *  This method creates a new logger file when the program is used
+     *  The log file will contain the error messages
+     *  The log placement will be determinant by the PRODUCTION boolean if the production is true or false
+     * @return Will return the following log that's produced
+     */
     public static Logger getLogger() {
         if (logger == null) {
             logger = Logger.getLogger("");
@@ -31,7 +37,7 @@ public class Logging {
                 }
             } else {
                 try {
-                    FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP); 
+                    FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP);
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                     getLoggerWithStackTrace();
@@ -43,6 +49,10 @@ public class Logging {
         return logger;
     }
 
+    /**
+     * This method will print the stack trace down in the log file
+     * @return Will return the newly updated logger with stack trace
+     */
     public static Logger getLoggerWithStackTrace() {
         if (loggerST == null) {
             loggerST = Logger.getLogger("Stack Trace Logger");
