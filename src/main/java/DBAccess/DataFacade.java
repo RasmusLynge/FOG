@@ -34,9 +34,6 @@ public class DataFacade {
     public ArrayList<Order> getAllOrders() throws DMException {
         return dm.getAllOrders();
     }
-//        public HashMap<String, Double> getPrices() throws DMException{
-//        return dm.getPrices();
-//    }
 
     public void makeOrder(Order o) throws DMException, MakeOrderException {
         dm.createOrder(o);
