@@ -20,7 +20,7 @@ public class Rules {
     public static final int STABILIZERPLANKSSMALL = 240;
     public static final int STABILIZERPLANKPRWALL = 2;
     public static final int LHINGEPRSTABILIZER = 2;
-    public static final int DEGREE = 90;
+    public static final int DEGREE = 15;
     public static final int MINLENGTH = 240;
     public static final int MAXLENGTH = 720;
     public static final int DOORKNOB = 1;
@@ -46,6 +46,7 @@ public class Rules {
     public static final int TILESWIDTH = 30;
     public static final int OVERLAPTILES = 5;
     public static final int SCREWSEACHRAFTER = 12;
+    public static final int CONVERTTOPOSITIVE = -1;
     
     //svgSide
     public static final int OUTERFRAMEXPOS = 100;

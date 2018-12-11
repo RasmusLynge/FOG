@@ -9,10 +9,17 @@ public class RoofCalculator {
     DataMapper db = new DataMapper();
     Carport carport;
 
+    /**
+     * 
+     * @param carport
+     */
     public RoofCalculator(Carport carport) {
         this.carport = carport;
     }
 
+    /**
+     *
+     */
     public void flatRoof() {
         flatRoofPlastmo();
         flatRoofScrews();
@@ -44,36 +51,47 @@ public class RoofCalculator {
         carport.setPlastmoSmall(counterPlastmoSmall);
     }
 
+    /**
+     *
+     * @param width
+     * @param length
+     * @param degree
+     */
     public void topRoof(int width, int length, int degree) {
+        double sideB = carport.getOuterWidth() / 2;
+        double angleA = Math.toRadians(degree);
+        double angleB = Math.toRadians(180 - 90 - degree);
+        double sineA = Math.sin(angleA);
+        double sineB = Math.sin(angleB);
+        double roofPostHeight = (sineA * sideB) / sineB;
 
-        double roofPostHeight = Math.tan(degree) * (carport.getOuterWidth() / 2);
+        System.out.println(" roof post height ++++++++++++++" + roofPostHeight);
         int roofPost = carport.getRafter();
+
         carport.setRoofPostHeight(roofPostHeight);
         carport.setRoofPost(roofPost);
+
         if (roofPostHeight < 0) {
-            carport.setRoofPostHeight(roofPostHeight * -1);
+            carport.setRoofPostHeight(roofPostHeight * CONVERTTOPOSITIVE);
         }
 
-        //length each side
         double roofRafterLength = Math.sqrt((roofPostHeight * roofPostHeight) + (carport.getOuterWidth() / 2) * (carport.getOuterWidth() / 2));
         int roofRafter = carport.getRafter() * BOTHSIDES;
         carport.setRoofRafterLength((int) roofRafterLength);
 
-        //each side
         carport.setRoofRafter(roofRafter);
 
-        //pr sides
         int roofBeams = (int) (roofRafterLength / ROOFBEAMSPACING);
         carport.setRoofBeams(roofBeams);
 
-        int roofTiles = (int) ((carport.getRoofRafter() - 1) * (carport.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
+        int roofTiles = (int) ((carport.getRoofRafter() - MIDDLEROOFBEAM) * (carport.getRoofRafterLength() / (TILESWIDTH - OVERLAPTILES)));
         carport.setRoofTiles(roofTiles);
 
-        int flatHinges = carport.getRoofPost() * 2;
+        int flatHinges = carport.getRoofPost() * BOTHSIDES;
         carport.setFlatHinges(carport.getFlatHinges() + flatHinges);
 
-        int screwsEachRafter = (carport.getBeam() * carport.getRoofRafter()) * 2;
-        int screwsEachFlatHinge = flatHinges * 4;
+        int screwsEachRafter = (carport.getBeam() * carport.getRoofRafter()) * BOTHSIDES;
+        int screwsEachFlatHinge = flatHinges * SCREWSPERLHINGES;
         int totalScrews = screwsEachRafter + screwsEachFlatHinge;
         carport.setScrews(carport.getScrews() + totalScrews);
     }

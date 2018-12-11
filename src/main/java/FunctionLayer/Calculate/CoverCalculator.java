@@ -9,10 +9,17 @@ public class CoverCalculator {
     DataMapper db = new DataMapper();
     Carport carport;
 
+    /**
+     *
+     * @param carport
+     */
     public CoverCalculator(Carport carport) {
         this.carport = carport;
     }
 
+    /**
+     *
+     */
     public void setShedCover() {
         int width = carport.getWidth();
         int shedLength = carport.getShedLength();
@@ -22,6 +29,9 @@ public class CoverCalculator {
         carport.setPlanks(carport.getPlanks() + amountOfPlanks);
     }
 
+    /**
+     *
+     */
     public void setRoofCover() {
         int width = carport.getWidth();
         int roofHeight = (int) carport.getRoofPostHeight();

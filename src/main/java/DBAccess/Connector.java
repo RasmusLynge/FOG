@@ -12,10 +12,20 @@ public class Connector {
 
     private static Connection singleton;
 
+    /**
+     *
+     * @param con
+     */
     public static void setConnection(Connection con) {
         singleton = con;
     }
 
+    /**
+     *
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static synchronized Connection connection() throws ClassNotFoundException, SQLException {
         if (singleton == null) {
             Class.forName("com.mysql.cj.jdbc.Driver");

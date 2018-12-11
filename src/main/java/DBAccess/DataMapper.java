@@ -14,8 +14,16 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+
 public class DataMapper {
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     * @throws LoginException
+     */
     public static User login(String email, String password) throws LoginException {
         try {
             Connection con = Connector.connection();
@@ -39,6 +47,12 @@ public class DataMapper {
         }
     }
 
+    /**
+     *
+     * @param orderid
+     * @return
+     * @throws DMException
+     */
     public Order getOrderByID(int orderid) throws DMException {
         try {
             Connection con = Connector.connection();
@@ -66,6 +80,11 @@ public class DataMapper {
         return null;
     }
 
+    /**
+     *
+     * @return
+     * @throws DMException
+     */
     public ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
@@ -88,6 +107,12 @@ public class DataMapper {
         }
     }
 
+    /**
+     *
+     * @param state
+     * @return
+     * @throws DMException
+     */
     public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
         try {
@@ -112,6 +137,10 @@ public class DataMapper {
         }
     }
 
+    /**
+     *
+     * @param order
+     */
     public void createOrder(Order order) {
         try {
             Connection con = Connector.connection();
@@ -150,6 +179,16 @@ public class DataMapper {
         }
     }
 
+    /**
+     *
+     * @param orderId
+     * @param desiredLength
+     * @param desiredWidth
+     * @param flatRoof
+     * @param state
+     * @return
+     * @throws DMException
+     */
     public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws DMException {
         try {
             Connection con = Connector.connection();
@@ -172,6 +211,11 @@ public class DataMapper {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws DMException
+     */
     public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();
         try {

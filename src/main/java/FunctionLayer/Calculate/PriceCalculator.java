@@ -11,6 +11,16 @@ public class PriceCalculator {
     CarportCalculator carportcalculator = new CarportCalculator();
     Carport carport;
 
+    /**
+     *
+     * @param length
+     * @param width
+     * @param roof
+     * @param shed
+     * @return
+     * @throws DMException
+     * @throws MakeOrderException
+     */
     public double priceCalculator(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
         double result = 0;
         MaterialCalculator mc = new MaterialCalculator();
@@ -25,6 +35,10 @@ public class PriceCalculator {
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public Carport getCarport() {
         return this.carport;
     }

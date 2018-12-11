@@ -7,6 +7,16 @@ import static FunctionLayer.Rule.Rules.*;
 
 public class CarportCalculator {
 
+    /**
+     *
+     * @param length
+     * @param width
+     * @param roof
+     * @param shed
+     * @return
+     * @throws DMException
+     * @throws MakeOrderException
+     */
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
         if (length < MINLENGTH || length > MAXLENGTH || width < MINLENGTH || width > MAXLENGTH) {
             throw new MakeOrderException("Measurements contain values below or above the limit values");

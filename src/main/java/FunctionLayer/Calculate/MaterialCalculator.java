@@ -9,6 +9,12 @@ import static FunctionLayer.Rule.Rules.*;
 
 public class MaterialCalculator {
 
+    /**
+     *
+     * @param c
+     * @return
+     * @throws DMException
+     */
     public ArrayList<Material> materialList(Carport c) throws DMException {
         DataFacade df = new DataFacade();
         ArrayList<Material> list = df.getMaterials();

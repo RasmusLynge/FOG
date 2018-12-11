@@ -8,6 +8,18 @@ import static FunctionLayer.Rule.Rules.*;
 
 public class SVGUtilCarportTop {
 
+    /**
+     *
+     * @param length
+     * @param width
+     * @param roof
+     * @param shed
+     * @param shedLength
+     * @param shedWidth
+     * @return
+     * @throws DMException
+     * @throws MakeOrderException
+     */
     public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = width + 300;
@@ -16,6 +28,18 @@ public class SVGUtilCarportTop {
         return res;
     }
 
+    /**
+     *
+     * @param length
+     * @param width
+     * @param roof
+     * @param shed
+     * @param shedLength
+     * @param shedWidth
+     * @return
+     * @throws DMException
+     * @throws MakeOrderException
+     */
     public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;

@@ -10,7 +10,6 @@ import PresentatinoLayer.SVG.SVGUtilCarportTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class CreateOrder extends Command {
 
     @Override
