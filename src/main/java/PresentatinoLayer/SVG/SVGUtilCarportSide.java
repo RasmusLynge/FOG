@@ -32,13 +32,13 @@ public class SVGUtilCarportSide {
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;
         int postYPos = OUTERFRAMEYPOS + WOODWIDTH;
-        int roofHeight = 48;
+        int roofHeight = (int) c.getRoofPostHeight();
 
         String res = beamSVG(outerFrameWidth);
         res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed, shedLength);
         res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, c);
         res = linesSVG(res, length, innerFrameXPos, c);
-        if (shed == true) {
+        if (shed) {
             res = shedSVG(res, shedLength, innerFrameXPos, postYPos);
             res = shedLinesSVG(res, shedLength, innerFrameXPos, postYPos);
         }
@@ -88,27 +88,44 @@ public class SVGUtilCarportSide {
     }
 
     private String raftersSvg(String res, int rafterSpaceing, int outerFrameWidth, boolean roof, int roofHeight, Carport c) {
-        //rafter
-        if (roof == true) {
-            res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, OUTERFRAMEYPOS - roofHeight);
-            res += square(roofHeight, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - roofHeight + WOODWIDTH);
-            for (int i = 0; i < c.getRafter(); i++) {
-                res += square(roofHeight, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - roofHeight + WOODWIDTH);
-                rafterSpaceing += c.getRafterSpacing();
-            }
-            for (int i = 10; i < roofHeight; i += 10) {
-                res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, OUTERFRAMEYPOS - i);
-            }
-
-            return res;
+        if (roof) {
+            res = roofBeamsSVG(outerFrameWidth, c, res, rafterSpaceing);
         } else {
-            for (int i = 0; i < c.getRafter(); i++) {
-                res += square(WOODWIDTH, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - WOODWIDTH);
-                rafterSpaceing += c.getRafterSpacing();
-            }
-            res += square(WOODWIDTH, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - WOODWIDTH);
-            return res;
+            res = flatRoofRafters(c, res, rafterSpaceing, outerFrameWidth);
         }
+        return res;
+    }
+
+    private String roofBeamsSVG(int outerFrameWidth, Carport c, String res, int rafterSpaceing) {
+        int yPosSpacingTop = OUTERFRAMEYPOS;
+        int roofBeamSVGSPacing = (outerFrameWidth / BOTHSIDES) / c.getRoofBeams();
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, yPosSpacingTop);
+            yPosSpacingTop -= roofBeamSVGSPacing;
+        }
+        res = roofRaftersSVG(res, outerFrameWidth, c, rafterSpaceing, yPosSpacingTop);
+
+        return res;
+    }
+
+    private String flatRoofRafters(Carport c, String res, int rafterSpaceing, int outerFrameWidth) {
+        for (int i = 0; i < c.getRafter(); i++) {
+            res += square(WOODWIDTH, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - WOODWIDTH);
+            rafterSpaceing += c.getRafterSpacing();
+        }
+        res += square(WOODWIDTH, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - WOODWIDTH);
+        return res;
+    }
+
+    private String roofRaftersSVG(String res, int outerFrameWidth, Carport c, int rafterSpaceing, int yPosSpacingTop) {
+        int heightOfTopBeam = (yPosSpacingTop + WOODWIDTH) * c.getRoofBeams();
+
+        res += square(heightOfTopBeam, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - heightOfTopBeam + WOODWIDTH);
+        for (int i = 0; i < c.getRafter(); i++) {
+            res += square(heightOfTopBeam, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - heightOfTopBeam + WOODWIDTH);
+            rafterSpaceing += c.getRafterSpacing();
+        }
+        return res;
     }
 
     private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c, boolean shed, int shedLength) {

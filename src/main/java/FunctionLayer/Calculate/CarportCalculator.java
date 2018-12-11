@@ -33,7 +33,7 @@ public class CarportCalculator {
         //skal laves til i JSP
         int degree = 90;
 
-        if (roof == true) {
+        if (roof) {
             System.out.println("true med rejst tag");
             calculateRafters(length, width, roof, c);
             rc.topRoof(width, length, degree);
