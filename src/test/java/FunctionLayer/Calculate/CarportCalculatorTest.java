@@ -564,7 +564,7 @@ public class CarportCalculatorTest {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //should be 1
-        int expectedTotalScrewBoxes = 2;
+        int expectedTotalScrewBoxes = 1;
         int actualTotalScrewBoxes = (int) result.getScrewBoxes();
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
