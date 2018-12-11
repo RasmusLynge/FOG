@@ -2,7 +2,7 @@ package PresentatinoLayer.SVG;
 
 import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import static FunctionLayer.Rule.Rules.*;
 
@@ -13,15 +13,15 @@ import static FunctionLayer.Rule.Rules.*;
  */
 public class SVGUtilCarportTop {
 
-    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException, MakeOrderException {
+    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         int canvasX = length + 300;
         int canvasY = width + 300;
-        String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
-
+       // String res = "<SVG width=\"" + canvasX + "\" height=\"" + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
         return res;
     }
 
-    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws GeneralException, MakeOrderException {
+    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
         int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
         int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
@@ -37,7 +37,7 @@ public class SVGUtilCarportTop {
         res = linesSVG(res, length, width, outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, c);
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
         res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
-        if (roof == true) {
+        if (roof) {
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
 
             //Middle beam
@@ -46,15 +46,18 @@ public class SVGUtilCarportTop {
             res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
         }
         res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c, shedLength, shed);
-        if (shed == true) {
-            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerFrameYPos);
-            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), (innerFrameYPos + DOORWIDTH));
-            res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerLayerEntranceCornorYPosForPost);
-            res += line(innerFrameXPos + shedLength, (innerFrameYPos + POSTWIDTH), innerFrameXPos + shedLength - DOORWIDTH + POSTWIDTH, innerFrameYPos - POSTWIDTH + DOORWIDTH);
+        if (shed) {
+            res = shedPostsAndDoor(res, innerFrameXPos, shedLength, innerFrameYPos, innerLayerEntranceCornorYPosForPost);
             res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
         }
-        System.out.println("-----------------------------------------       shed l  " + c.getShedLength());
+        return res;
+    }
 
+    private String shedPostsAndDoor(String res, int innerFrameXPos, int shedLength, int innerFrameYPos, int innerLayerEntranceCornorYPosForPost) {
+        res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerFrameYPos);
+        res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), (innerFrameYPos + DOORWIDTH));
+        res += square(POSTWIDTH, POSTWIDTH, (innerFrameXPos + shedLength - POSTWIDTH), innerLayerEntranceCornorYPosForPost);
+        res += line(innerFrameXPos + shedLength, (innerFrameYPos + POSTWIDTH), innerFrameXPos + shedLength - DOORWIDTH + POSTWIDTH, innerFrameYPos - POSTWIDTH + DOORWIDTH);
         return res;
     }
 
@@ -79,7 +82,6 @@ public class SVGUtilCarportTop {
 
     private String roofMiddleBeamSVG(String res, int outerFrameWidth, int outerFrameYPos, int outerFrameLength) {
         res += square(WOODWIDTH, outerFrameLength, OUTERFRAMEXPOS, outerFrameYPos + outerFrameWidth / BOTHSIDES);
-
         return res;
     }
 
@@ -101,16 +103,14 @@ public class SVGUtilCarportTop {
         res += square(POSTWIDTH, POSTWIDTH, innerFrameXPos, innerLayerEntranceCornorYPosForPost);
         res += square(POSTWIDTH, POSTWIDTH, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost);
 
-        System.out.println("if first stament " + (int) (width / POSTPOSITIONTWO + innerFrameXPos));
-        System.out.println("if second statement " + (int) (shedLength - POSTWIDTH));
         if (shed) {
-            
+
             //carport with 8 posts
             if (c.getPost() >= MAXPOSTS && (shedLength + POSTWIDTH < width / POSTPOSITIONTHREE)) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerLayerEntranceCornorYPosForPost);
             }
-            
+
             System.out.println("1 : " + (shedLength + POSTWIDTH) + " 2 : " + ((int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()));
             if (c.getPost() >= MAXPOSTS && shedLength + POSTWIDTH > (int) (width / POSTPOSITIONONEHALF + innerFrameXPos) - c.getPostSpacing()) {
                 res += square(POSTWIDTH, POSTWIDTH, width / POSTPOSITIONTHREE + innerFrameXPos, innerFrameYPos);
@@ -182,11 +182,6 @@ public class SVGUtilCarportTop {
         return res;
     }
 
-//    private String background() {
-//        String res = "<rect x=\"0\" y=\"0\" height=\"1000\" width=\"1000\"\n"
-//                + "              style=\"stroke:#000000; fill: #f9f9f9\"/>";
-//        return res;
-//    }
     private String square(int height, int width, int xPos, int yPos) {
         String res = "<rect x=\"" + xPos + "\" y=\"" + yPos + "\" height=\"" + height + "\" width=\"" + width + "\"\n"
                 + "              style=\"stroke:#000000; fill: #efede8\"/>";

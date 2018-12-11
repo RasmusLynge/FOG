@@ -6,7 +6,7 @@
 package PresentatinoLayer.Commands;
 
 import PresentatinoLayer.Commands.Command;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class LogOut extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException, MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
         HttpSession session = request.getSession();
         session.invalidate();
         return"index";

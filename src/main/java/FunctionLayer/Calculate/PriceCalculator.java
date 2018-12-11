@@ -3,7 +3,7 @@ package FunctionLayer.Calculate;
 import FunctionLayer.Entity.Carport;
 import DBAccess.DataMapper;
 import FunctionLayer.Entity.Material;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class PriceCalculator {
     CarportCalculator carportcalculator = new CarportCalculator();
     Carport c; 
 
-    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws GeneralException, MakeOrderException{
+    public double priceCalculator(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException{
         double result = 0;
         MaterialCalculator mc = new MaterialCalculator();
         

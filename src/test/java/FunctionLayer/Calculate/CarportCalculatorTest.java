@@ -1,7 +1,7 @@
 package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void postsTest240() throws GeneralException, MakeOrderException {
+    public void postsTest240() throws DMException, MakeOrderException {
         //Arrange
         length = 240;
         //Act
@@ -44,7 +44,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void postsTest400() throws GeneralException, MakeOrderException {
+    public void postsTest400() throws DMException, MakeOrderException {
         //Arrange
         length = 400;
         //Act
@@ -56,7 +56,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void postsTest600() throws GeneralException, MakeOrderException {
+    public void postsTest600() throws DMException, MakeOrderException {
         //Arrange
         length = 600;
         //Act
@@ -69,7 +69,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void postLength() throws GeneralException, MakeOrderException {
+    public void postLength() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Assert
@@ -80,7 +80,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void outerLengthTest240() throws GeneralException, MakeOrderException {
+    public void outerLengthTest240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Outer Length vil altid være 135 cm større end den angivede længde
@@ -91,7 +91,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void outerLengthTest720() throws GeneralException, MakeOrderException {
+    public void outerLengthTest720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         //Act
@@ -104,7 +104,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void outerWidthTest240() throws GeneralException, MakeOrderException {
+    public void outerWidthTest240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Outer width er altid 70 cm længere end den angivede bredde
@@ -115,7 +115,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void outerWidthTest720() throws GeneralException, MakeOrderException {
+    public void outerWidthTest720() throws DMException, MakeOrderException {
         //Arrange
         width = 720;
         //Act
@@ -128,7 +128,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void rafterLengthTest240() throws GeneralException, MakeOrderException {
+    public void rafterLengthTest240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Rafterne er altid lige så lange som den ydre bredde altså 70 cm længere end den indre bredde
@@ -139,7 +139,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void rafterLengthTest720() throws GeneralException, MakeOrderException {
+    public void rafterLengthTest720() throws DMException, MakeOrderException {
         //Arrange
         width = 720;
         //Act
@@ -152,7 +152,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof240() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //minimum 6 rafters og vokser med en pr 60 cm på længden af carporten
@@ -163,7 +163,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof300() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof300() throws DMException, MakeOrderException {
         //Arrange
         length = 300;
         //Act
@@ -176,7 +176,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof360() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof360() throws DMException, MakeOrderException {
         //Arrange
         length = 360;
         //Act
@@ -189,7 +189,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof420() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof420() throws DMException, MakeOrderException {
         //Arrange
         length = 420;
         //Act
@@ -202,7 +202,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof480() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         //Act
@@ -215,7 +215,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof540() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof540() throws DMException, MakeOrderException {
         //Arrange
         length = 540;
         //Act
@@ -228,7 +228,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof600() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof600() throws DMException, MakeOrderException {
         //Arrange
         length = 600;
         //Act
@@ -241,7 +241,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof660() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof660() throws DMException, MakeOrderException {
         //Arrange
         length = 660;
         //Act
@@ -254,7 +254,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersFlatRoof720() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersFlatRoof720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         //Act
@@ -267,7 +267,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersTopRoof240() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersTopRoof240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         //en carport med rejst tag bruger et mindre antal rafters end en med fladt tag
@@ -278,7 +278,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersTopRoof400() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersTopRoof400() throws DMException, MakeOrderException {
         //Arrange
         length = 400;
         //Act
@@ -291,7 +291,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfRaftersTopRoof600() throws GeneralException, MakeOrderException {
+    public void amountOfRaftersTopRoof600() throws DMException, MakeOrderException {
         //Arrange
         length = 600;
         //Act
@@ -304,7 +304,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void testRafterSpacingFlatRoof() throws GeneralException, MakeOrderException {
+    public void testRafterSpacingFlatRoof() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Rafter Spacing på en carport med fladt tag er altid så tæt på 60 som muligt
@@ -315,7 +315,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void testRafterSpacingTopRoof() throws GeneralException, MakeOrderException {
+    public void testRafterSpacingTopRoof() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Rafter Spacing på en carport med fladt tag er altid så tæt på 60 som muligt
@@ -326,7 +326,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void beamLengthTest240() throws GeneralException, MakeOrderException {
+    public void beamLengthTest240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Beamsne er altid lige så lange som den ydre længde altså 135 cm længere end den indre længde
@@ -337,7 +337,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void beamLengthTest720() throws GeneralException, MakeOrderException {
+    public void beamLengthTest720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         //Act
@@ -350,7 +350,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfBeamsFlatRoof240x240() throws GeneralException, MakeOrderException {
+    public void amountOfBeamsFlatRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //mængde af beams vil altid være 2 på en carport med fladt tag
@@ -361,7 +361,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfBeamsFlatRoof720x720() throws GeneralException, MakeOrderException {
+    public void amountOfBeamsFlatRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -375,7 +375,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfBeamsTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void amountOfBeamsTopRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         //mængde af beams vil altid være 3 på en carport med rejst tag
@@ -386,7 +386,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void amountOfBeamsTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void amountOfBeamsTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -400,7 +400,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void totalLHinges240x240() throws GeneralException, MakeOrderException {
+    public void totalLHinges240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         int expectedTotalLHinges = 32;
@@ -410,7 +410,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalLHingesTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void totalLHingesTopRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedTotalLHinges = 20;
@@ -420,7 +420,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalLHinges480x480() throws GeneralException, MakeOrderException {
+    public void totalLHinges480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -433,7 +433,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalLHingesTopRoof480x480() throws GeneralException, MakeOrderException {
+    public void totalLHingesTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -446,7 +446,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalLHinges720x720() throws GeneralException, MakeOrderException {
+    public void totalLHinges720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -459,7 +459,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalLHingesTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void totalLHingesTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -472,7 +472,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void totalScrews240x240() throws GeneralException, MakeOrderException {
+    public void totalScrews240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Skelettets skruer + dem i taget 
@@ -483,7 +483,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewsTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void totalScrewsTopRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         //Skelettets skruer + dem i taget 
@@ -494,7 +494,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrews480x480() throws GeneralException, MakeOrderException {
+    public void totalScrews480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -508,7 +508,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewsTopRoof480x480() throws GeneralException, MakeOrderException {
+    public void totalScrewsTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -522,7 +522,7 @@ public class CarportCalculatorTest {
     }
 
     @Test
-    public void totalScrews720x720() throws GeneralException, MakeOrderException {
+    public void totalScrews720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -536,7 +536,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewsTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void totalScrewsTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -550,7 +550,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxes240x240() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxes240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         int expectedTotalScrewBoxes = 2;
@@ -560,7 +560,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxesTopRoof240x240() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxesTopRoof240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //should be 1
@@ -571,7 +571,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxes480x480() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxes480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -584,7 +584,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxesTopRoof480x480() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxesTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -597,7 +597,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxes720x720() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxes720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -610,7 +610,7 @@ public class CarportCalculatorTest {
     }
     
     @Test
-    public void totalScrewBoxesTopRoof720x720() throws GeneralException, MakeOrderException {
+    public void totalScrewBoxesTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -623,25 +623,25 @@ public class CarportCalculatorTest {
     }
 
     @Test(expected = MakeOrderException.class)
-    public void testLowerLimitLenghtException() throws GeneralException, MakeOrderException {
+    public void testLowerLimitLenghtException() throws DMException, MakeOrderException {
         //Længden skal være over eller = 240 
         cc.calculateAll(200, width, roof, shed);
     }
 
     @Test(expected = MakeOrderException.class)
-    public void testLowerLimitWidthException() throws GeneralException, MakeOrderException {
+    public void testLowerLimitWidthException() throws DMException, MakeOrderException {
         //Bredden skal være over eller = 240 
         cc.calculateAll(length, 200, roof, shed);
     }
 
     @Test(expected = MakeOrderException.class)
-    public void testUpperLimitLenghtException() throws GeneralException, MakeOrderException {
+    public void testUpperLimitLenghtException() throws DMException, MakeOrderException {
         //Længden skal være under eller = 720
         cc.calculateAll(800, width, roof, shed);
     }
 
     @Test(expected = MakeOrderException.class)
-    public void testUpperLimitWidthException() throws GeneralException, MakeOrderException {
+    public void testUpperLimitWidthException() throws DMException, MakeOrderException {
         //Bredden skal være under eller = 720
         cc.calculateAll(length, 800, roof, shed);
     }

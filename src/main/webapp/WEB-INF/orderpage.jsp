@@ -99,8 +99,8 @@
 
                 <% String error = (String) request.getAttribute("error");
                     if (error != null) {
-                        out.println("<h2>Fejl!</h2>");
-                        out.println(error);
+                        out.println("<font size=\"5\"color=\"red\">Prøv igen</font> <br>");
+                        out.println("<font size=\"3\" color=\"red\">" + error + "</font> <br> <br>");
                     }
                 %>
                 <h6>Valg af tag</h6>

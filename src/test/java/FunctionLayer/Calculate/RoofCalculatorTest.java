@@ -6,7 +6,7 @@
 package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class RoofCalculatorTest {
     }
 
     @Test
-    public void flatRoofPlasmoLong240x240() throws GeneralException, MakeOrderException {
+    public void flatRoofPlasmoLong240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         int expectedPlastmoLong = 4;
@@ -45,7 +45,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void flatRoofPlasmoLong480x480() throws GeneralException, MakeOrderException {
+    public void flatRoofPlasmoLong480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -58,7 +58,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void flatRoofPlasmoLong720x720() throws GeneralException, MakeOrderException {
+    public void flatRoofPlasmoLong720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -71,7 +71,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void flatRoofPlastmoSmall240x240() throws GeneralException, MakeOrderException {
+    public void flatRoofPlastmoSmall240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         int expectedPlastmoSmall = 0;
@@ -81,7 +81,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void flatRoofPlastmoSmall480x480() throws GeneralException, MakeOrderException {
+    public void flatRoofPlastmoSmall480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -94,7 +94,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void flatRoofPlastmoSmall720x720() throws GeneralException, MakeOrderException {
+    public void flatRoofPlastmoSmall720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -107,7 +107,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPostHeight240x240() throws GeneralException, MakeOrderException {
+    public void topRoofPostHeight240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofPostHeight = 309;
@@ -117,7 +117,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPostHeight480x480() throws GeneralException, MakeOrderException {
+    public void topRoofPostHeight480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -130,7 +130,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPostHeight720x720() throws GeneralException, MakeOrderException {
+    public void topRoofPostHeight720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -143,7 +143,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPosts240x240() throws GeneralException, MakeOrderException {
+    public void topRoofPosts240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofPost = 3;
@@ -153,7 +153,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPosts480x480() throws GeneralException, MakeOrderException {
+    public void topRoofPosts480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -166,7 +166,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofPosts720x720() throws GeneralException, MakeOrderException {
+    public void topRoofPosts720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -179,7 +179,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafterLength240x240() throws GeneralException, MakeOrderException {
+    public void topRoofRafterLength240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofRafterLength = 345;
@@ -189,7 +189,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafterLength480x480() throws GeneralException, MakeOrderException {
+    public void topRoofRafterLength480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -202,7 +202,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafterLength720x720() throws GeneralException, MakeOrderException {
+    public void topRoofRafterLength720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -215,7 +215,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafters240x240() throws GeneralException, MakeOrderException {
+    public void topRoofRafters240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofRafter = 6;
@@ -225,7 +225,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafters480x480() throws GeneralException, MakeOrderException {
+    public void topRoofRafters480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -238,7 +238,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofRafters720x720() throws GeneralException, MakeOrderException {
+    public void topRoofRafters720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -251,7 +251,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofBeamsPrSide240x240() throws GeneralException, MakeOrderException {
+    public void topRoofBeamsPrSide240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofBeams = 7;
@@ -261,7 +261,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofBeamsPrSide480x480() throws GeneralException, MakeOrderException {
+    public void topRoofBeamsPrSide480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -274,7 +274,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofBeamsPrSide720x720() throws GeneralException, MakeOrderException {
+    public void topRoofBeamsPrSide720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -287,7 +287,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofTiles240x240() throws GeneralException, MakeOrderException {
+    public void topRoofTiles240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedRoofTiles = 69;
@@ -297,7 +297,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofTiles480x480() throws GeneralException, MakeOrderException {
+    public void topRoofTiles480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -310,7 +310,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofTiles720x720() throws GeneralException, MakeOrderException {
+    public void topRoofTiles720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -323,7 +323,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofFlatHinges240x240() throws GeneralException, MakeOrderException {
+    public void topRoofFlatHinges240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         int expectedFlatHinges = 6;
@@ -333,7 +333,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofFlatHinges480x480() throws GeneralException, MakeOrderException {
+    public void topRoofFlatHinges480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -346,7 +346,7 @@ public class RoofCalculatorTest {
     }
     
     @Test
-    public void topRoofFlatHinges720x720() throws GeneralException, MakeOrderException {
+    public void topRoofFlatHinges720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;

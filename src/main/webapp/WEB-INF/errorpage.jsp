@@ -85,7 +85,7 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Hello world!</h2>
+                <h2>Hov! Der skete en fejl </h2>
             </div>
 
 

@@ -7,8 +7,8 @@
 package PresentatinoLayer.Commands;
 
 import PresentatinoLayer.Commands.Command;
-import FunctionLayer.Exception.GeneralException;
-import FunctionLayer.LogicFacade;
+import FunctionLayer.Exception.DMException;
+import Facade.LogicFacade;
 import FunctionLayer.Entity.Order;
 import FunctionLayer.Entity.User;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class GetOrders extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException {
         ArrayList<Order> ol = new ArrayList();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");

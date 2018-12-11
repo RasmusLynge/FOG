@@ -1,9 +1,10 @@
 package PresentatinoLayer.Commands;
 
 import PresentatinoLayer.Commands.Command;
-import FunctionLayer.LogicFacade;
-import FunctionLayer.Exception.GeneralException;
+import Facade.LogicFacade;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Entity.User;
+import FunctionLayer.Exception.LoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
 public class Login extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws GeneralException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = LogicFacade.login(email, password);
@@ -28,7 +29,7 @@ public class Login extends Command {
 
             return "employeepage";
         } else {
-            throw new GeneralException("Du har ikke rettigheder til at logge ind her");
+            throw new LoginException("Du har ikke rettigheder til at logge ind her");
         }
     }
 

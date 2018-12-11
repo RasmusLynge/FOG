@@ -6,7 +6,7 @@
 package FunctionLayer.Calculate;
 
 import FunctionLayer.Entity.Carport;
-import FunctionLayer.Exception.GeneralException;
+import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class CoverCalculatorTest {
     }
 
     @Test
-    public void shedCover240x240() throws GeneralException, MakeOrderException {
+    public void shedCover240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, true); 
         int expectedPlanks = 0;
@@ -45,7 +45,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void shedCover480x480() throws GeneralException, MakeOrderException {
+    public void shedCover480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -58,7 +58,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void shedCover720x720() throws GeneralException, MakeOrderException {
+    public void shedCover720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -71,7 +71,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void flatRoofCoverPlanks240x240() throws GeneralException, MakeOrderException {
+    public void flatRoofCoverPlanks240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed); 
         int expectedCoverPlanks = 60;
@@ -81,7 +81,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void topRoofCoverPlanks240x240() throws GeneralException, MakeOrderException {
+    public void topRoofCoverPlanks240x240() throws DMException, MakeOrderException {
         //Act
         Carport result = cc.calculateAll(length, width, true, shed); 
         int expectedCoverPlanks = 60;
@@ -91,7 +91,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void flatRoofCoverPlanks480x480() throws GeneralException, MakeOrderException {
+    public void flatRoofCoverPlanks480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -104,7 +104,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void topRoofCoverPlanks480x480() throws GeneralException, MakeOrderException {
+    public void topRoofCoverPlanks480x480() throws DMException, MakeOrderException {
         //Arrange
         length = 480;
         width = 480;
@@ -117,7 +117,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void flatRoofCoverPlanks720x720() throws GeneralException, MakeOrderException {
+    public void flatRoofCoverPlanks720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
@@ -130,7 +130,7 @@ public class CoverCalculatorTest {
     }
     
     @Test
-    public void topRoofCoverPlanks720x720() throws GeneralException, MakeOrderException {
+    public void topRoofCoverPlanks720x720() throws DMException, MakeOrderException {
         //Arrange
         length = 720;
         width = 720;
