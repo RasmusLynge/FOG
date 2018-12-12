@@ -13,8 +13,8 @@ public class MaterialCalculator {
      * This method makes a list of the materials in our database. 
      * it calls other methods that lookst at a specific material and calculates howmany we should use of it.
      * @param carport this is the carport that we need to get the specific materials for
-     * @return
-     * @throws DMException
+     * @return returns a list of materials
+     * @throws DMException this exception is thrown if there is a problem with the database.
      */
     public ArrayList<Material> materialList(Carport carport) throws DMException {
         DataFacade df = new DataFacade(); // BURDE DENNE HER IKKE KALDE LOGIC FACADEN??
