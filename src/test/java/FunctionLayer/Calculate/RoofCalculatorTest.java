@@ -1,8 +1,3 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
 //package FunctionLayer.Calculate;
 //
 //import FunctionLayer.Entity.Carport;
@@ -13,15 +8,12 @@
 //import org.junit.BeforeClass;
 //import org.junit.Test;
 //
-///**
-// *
-// * @author Simon
-// */
 //public class RoofCalculatorTest {
+//
 //    CarportCalculator cc = new CarportCalculator();
 //    static int length, width;
 //    static boolean roof, shed;
-//    
+//
 //    @BeforeClass
 //    public static void setUpClass() {
 //        roof = false;
@@ -43,7 +35,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoLong, actualPlastmoLong);
 //    }
-//    
+//
 //    @Test
 //    public void flatRoofPlasmoLong480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -56,7 +48,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoLong, actualPlastmoLong);
 //    }
-//    
+//
 //    @Test
 //    public void flatRoofPlasmoLong720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -69,7 +61,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoLong, actualPlastmoLong);
 //    }
-//    
+//
 //    @Test
 //    public void flatRoofPlastmoSmall240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -79,7 +71,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoSmall, actualPlastmoSmall);
 //    }
-//    
+//
 //    @Test
 //    public void flatRoofPlastmoSmall480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -92,7 +84,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoSmall, actualPlastmoSmall);
 //    }
-//    
+//
 //    @Test
 //    public void flatRoofPlastmoSmall720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -105,7 +97,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedPlastmoSmall, actualPlastmoSmall);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPostHeight240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -115,7 +107,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPostHeight, actualRoofPostHeight);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPostHeight480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -128,7 +120,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPostHeight, actualRoofPostHeight);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPostHeight720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -141,7 +133,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPostHeight, actualRoofPostHeight);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPosts240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -151,7 +143,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPost, actualRoofPost);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPosts480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -164,7 +156,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPost, actualRoofPost);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofPosts720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -177,7 +169,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofPost, actualRoofPost);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafterLength240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -187,7 +179,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafterLength, actualRoofRafterLength);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafterLength480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -200,7 +192,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafterLength, actualRoofRafterLength);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafterLength720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -213,7 +205,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafterLength, actualRoofRafterLength);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafters240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -223,7 +215,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafter, actualRoofRafter);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafters480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -236,7 +228,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafter, actualRoofRafter);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofRafters720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -249,7 +241,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofRafter, actualRoofRafter);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofBeamsPrSide240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -259,7 +251,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofBeams, actualRoofBeams);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofBeamsPrSide480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -272,7 +264,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofBeams, actualRoofBeams);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofBeamsPrSide720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -285,7 +277,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofBeams, actualRoofBeams);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofTiles240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -295,7 +287,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofTiles, actualRoofTiles);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofTiles480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -308,7 +300,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofTiles, actualRoofTiles);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofTiles720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -321,7 +313,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedRoofTiles, actualRoofTiles);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofFlatHinges240x240() throws DMException, MakeOrderException {
 //        //Act
@@ -331,7 +323,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedFlatHinges, actualFlatHinges);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofFlatHinges480x480() throws DMException, MakeOrderException {
 //        //Arrange
@@ -344,7 +336,7 @@
 //        //Assert
 //        Assert.assertEquals(expectedFlatHinges, actualFlatHinges);
 //    }
-//    
+//
 //    @Test
 //    public void topRoofFlatHinges720x720() throws DMException, MakeOrderException {
 //        //Arrange
@@ -358,4 +350,3 @@
 //        Assert.assertEquals(expectedFlatHinges, actualFlatHinges);
 //    }
 //}
-//

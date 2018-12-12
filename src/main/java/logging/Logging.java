@@ -1,5 +1,6 @@
 package logging;
 
+import FunctionLayer.Exception.LoggerException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,12 +20,13 @@ public class Logging {
     private static Logger loggerST;
 
     /**
-     *  This method creates a new logger file when the program is used
-     *  The log file will contain the error messages
-     *  The log placement will be determinant by the PRODUCTION boolean if the production is true or false
+     * This method creates a new logger file when the program is used The log
+     * file will contain the error messages The log placement will be
+     * determinant by the PRODUCTION boolean if the production is true or false
+     *
      * @return Will return the following log that's produced
      */
-    public static Logger getLogger() {
+    public static Logger getLogger() throws LoggerException {
         if (logger == null) {
             logger = Logger.getLogger("");
             if (logging.Logging.PRODUCTION) {
@@ -33,7 +35,7 @@ public class Logging {
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                 } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
+                    throw new LoggerException(ex.getMessage());
                 }
             } else {
                 try {
@@ -51,6 +53,7 @@ public class Logging {
 
     /**
      * This method will print the stack trace down in the log file
+     *
      * @return Will return the newly updated logger with stack trace
      */
     public static Logger getLoggerWithStackTrace() {

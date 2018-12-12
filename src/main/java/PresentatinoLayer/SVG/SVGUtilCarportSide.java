@@ -9,13 +9,15 @@ import static FunctionLayer.Rule.Rules.*;
 public class SVGUtilCarportSide {
 
     /**
-     * This method creates a canvas for SVG to be places on, takes in the length and width
-     * and an additional 300 to make the canvas adjust to the SVG picture
+     * This method creates a canvas for SVG to be places on, takes in the length
+     * and width and an additional 300 to make the canvas adjust to the SVG
+     * picture
+     *
      * @param length Length of carport
      * @param width Width of carport
-     * @param roof  If there is a roof
-     * @param shed  If there is a shed
-     * @param shedLength Length of the 
+     * @param roof If there is a roof
+     * @param shed If there is a shed
+     * @param shedLength Length of the
      * @return retunere canvases til res som former SVG'en
      * @throws DMException
      * @throws MakeOrderException
@@ -28,16 +30,20 @@ public class SVGUtilCarportSide {
     }
 
     /**
-     *  This method creates the different parts of the SVG
-     *  Checks if the roof and shed and will make the SVG code to produce accordingly
+     * This method creates the different parts of the SVG Checks if the roof and
+     * shed and will make the SVG code to produce accordingly
+     *
      * @param length Length of carport
      * @param width Width of carport
-     * @param roof  If there is a roof
-     * @param shed  If there is a shed
-     * @param shedLength Length of the 
-     * @return returns the final string of the SVG code the produce the SVG drawing
-     * @throws DMException Throws when there is an exception in the SQL call to the database
-     * @throws MakeOrderException Throws when there is an error in the creation of an order
+     * @param roof If there is a roof
+     * @param shed If there is a shed
+     * @param shedLength Length of the
+     * @return returns the final string of the SVG code the produce the SVG
+     * drawing
+     * @throws DMException Throws when there is an exception in the SQL call to
+     * the database
+     * @throws MakeOrderException Throws when there is an error in the creation
+     * of an order
      */
     public String caportFromSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);

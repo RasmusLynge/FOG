@@ -14,6 +14,7 @@ public class Connector {
 
     /**
      * This method sets the connection to the one given in the parameter
+     *
      * @param con the connection.
      */
     public static void setConnection(Connection con) {
@@ -21,8 +22,10 @@ public class Connector {
     }
 
     /**
-     * This method checks if there is a connection already, and returns it. If there is not a connection instance already, it makes one and returns it.
+     * This method checks if there is a connection already, and returns it. If
+     * there is not a connection instance already, it makes one and returns it.
      * Method is synchronized so there can never be 2 Connections
+     *
      * @return The connection instance
      * @throws ClassNotFoundException if the connection cannot be instantiated
      * @throws SQLException if there is no connections to the database

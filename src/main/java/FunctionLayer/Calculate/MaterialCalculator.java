@@ -10,11 +10,15 @@ import static FunctionLayer.Rule.Rules.*;
 public class MaterialCalculator {
 
     /**
-     * This method makes a list of the materials in our database. 
-     * it calls other methods that lookst at a specific material and calculates howmany we should use of it.
-     * @param carport this is the carport that we need to get the specific materials for
+     * This method makes a list of the materials in our database. it calls other
+     * methods that lookst at a specific material and calculates howmany we
+     * should use of it.
+     *
+     * @param carport this is the carport that we need to get the specific
+     * materials for
      * @return returns a list of materials
-     * @throws DMException this exception is thrown if there is a problem with the database.
+     * @throws DMException this exception is thrown if there is a problem with
+     * the database.
      */
     public ArrayList<Material> materialList(Carport carport) throws DMException {
         DataFacade df = new DataFacade(); // BURDE DENNE HER IKKE KALDE LOGIC FACADEN??
@@ -50,6 +54,7 @@ public class MaterialCalculator {
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
+
             if (!(carport.getRafterLength() <= RAFTERSMALL && carport.getRafterLength() <= RAFTERLONG)) {
                 carport.setFlatHinges(carport.getFlatHinges() + counterRafterSmall * BOTHSIDES);
             }
@@ -58,13 +63,12 @@ public class MaterialCalculator {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == RAFTERSMALL) {
                 list.get(i).setAmount(list.get(i).getAmount() + counterRafterSmall);
-                System.out.println("amount after set small " + list.get(i).getAmount());
             }
         }
+
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("45x195	spærtræ	ubh.") && list.get(i).getLength() == RAFTERLONG) {
                 list.get(i).setAmount(counterRafterLong);
-                System.out.println("amount after set big " + list.get(i).getAmount());
             }
         }
     }
@@ -90,6 +94,7 @@ public class MaterialCalculator {
                     currentLength = RAFTERSMALL - restLength;
                 }
             }
+
             if (!(carport.getRoofRafterLength() <= RAFTERSMALL && carport.getRoofRafterLength() <= RAFTERLONG)) {
                 carport.setFlatHinges(carport.getFlatHinges() + counterRafterSmall * BOTHSIDES);
             }
@@ -121,6 +126,7 @@ public class MaterialCalculator {
             counterBeamLong += carport.getBeam();
             counterBeamSmall += MINIMUMHAVEONEPEICE;
             int currentLength = BEAMSMALL;
+
             for (int i = 0; i < carport.getBeam(); i++) {
                 if (restLength < currentLength) {
                     currentLength -= restLength;
@@ -139,6 +145,7 @@ public class MaterialCalculator {
                 list.get(i).setAmount(counterBeamSmall * BOTHSIDES);
             }
         }
+
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == BEAMLONG) {
                 list.get(i).setAmount(counterBeamLong * BOTHSIDES);
@@ -167,6 +174,7 @@ public class MaterialCalculator {
                     currentLength = BEAMSMALL - restLength;
                 }
             }
+
             if (!(carport.getBeamLength() <= BEAMSMALL && carport.getBeamLength() <= BEAMLONG)) {
                 carport.setFlatHinges(carport.getFlatHinges() + counterBeamSmall * 2);
             }
@@ -177,6 +185,7 @@ public class MaterialCalculator {
                 list.get(i).setAmount(counterBeamSmall * +list.get(i).getAmount());
             }
         }
+
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals("200x200 mm. bjælke") && list.get(i).getLength() == BEAMLONG) {
                 list.get(i).setAmount(counterBeamLong * 2 + list.get(i).getAmount());
