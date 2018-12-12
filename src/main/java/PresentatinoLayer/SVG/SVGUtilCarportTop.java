@@ -9,7 +9,8 @@ import static FunctionLayer.Rule.Rules.*;
 public class SVGUtilCarportTop {
 
     /**
-     *
+     * Creates the SVG canvas and appends the string created in the method carportFromAbove
+     * 
      * @param length
      * @param width
      * @param roof
@@ -29,7 +30,9 @@ public class SVGUtilCarportTop {
     }
 
     /**
-     *
+     * Calls methods to generate the code for each square and line needed in the full drawing, 
+     * calculated from the carport measurements. 
+     * Appends it all to a string as html that can be viewed in the JSP.
      * @param length
      * @param width
      * @param roof
