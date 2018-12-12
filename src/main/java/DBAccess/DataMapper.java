@@ -146,9 +146,11 @@ public class DataMapper {
      * Takes an order as parameter and inserts the data fromn it into the database with 2 SQL queries,
      * 1 for the `order ` table and 1 for the `user_info`
      * 
-     * @param order the order the method uses
+
+     * @param order
+     * @throws FunctionLayer.Exception.DMException
      */
-    public void createOrder(Order order) {
+    public void createOrder(Order order) throws DMException {
         try {
             Connection con = Connector.connection();
             Date d = new Date();
@@ -180,9 +182,8 @@ public class DataMapper {
             ps2.setString(5, order.getZip());
             ps2.executeUpdate();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Error");
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new DMException(ex.getMessage());
         }
     }
 

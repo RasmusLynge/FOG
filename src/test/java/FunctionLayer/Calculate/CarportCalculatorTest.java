@@ -645,34 +645,4 @@ public class CarportCalculatorTest {
         //Bredden skal være under eller = 720
         cc.calculateAll(length, 800, roof, shed);
     }
-//    @Test
-//    public void TestRightInputException() throws GeneralException {
-//        //act
-//        Carport result = cc.calculateAll(200, 200, roof, shed);
-//        //Assert
-//        exceptionRule.expect(NumberFormatException.class);
-//        String s = Integer.toString(result.getWidth());
-//        //Bliver til 200a hvilket bør give NumberFormatException
-//        s = s + "a";
-//        Integer.parseInt(s);
-//    }
-
-    //    @Test
-//    public void priceTest() throws GeneralException{
-//        //Arrange
-//        PriceCalculator priceCalculator = new PriceCalculator();
-//        int length = 240; 
-//        int width = 240;
-//            //false means flat roof
-//        boolean roof = false;
-//            //false means no shed
-//        boolean shed = false;
-//        //Act
-//        double result = priceCalculator.priceCalculator(length, width, roof, shed);
-//        
-//        //Assert
-//        double expected = 1078.4;
-//        double actual = result;
-//        Assert.assertEquals(expected, actual, 0.005);
-//    }
 }

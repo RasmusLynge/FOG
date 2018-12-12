@@ -8,14 +8,15 @@ import static FunctionLayer.Rule.Rules.*;
 public class CarportCalculator {
 
     /**
-     *
-     * @param length
-     * @param width
-     * @param roof
-     * @param shed
-     * @return
+     * This method creates and calculates all the different parts of the carport
+     * by checking the 4 given parameters and using them to decide the measurements.
+     * @param length int: the length of the carport
+     * @param width int: the width of the carport
+     * @param roof boolean: if true the carport needs a top roof
+     * @param shed boolean: if true the carport needs a shed
+     * @return in the end the method returns a finished carport object to the pricecalculator, so it can figure out the price
      * @throws DMException
-     * @throws MakeOrderException
+     * @throws MakeOrderException if input is out of bounds to the set value limits
      */
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
         if (length < MINLENGTH || length > MAXLENGTH || width < MINLENGTH || width > MAXLENGTH) {

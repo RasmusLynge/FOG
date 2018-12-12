@@ -10,15 +10,17 @@ public class RoofCalculator {
     Carport carport;
 
     /**
-     * 
-     * @param carport
+     * This method simply sets a given carport to this classes empty carport object
+     * @param carport takes the carport object as a parameter
      */
     public RoofCalculator(Carport carport) {
         this.carport = carport;
     }
 
     /**
-     *
+     *This method is run if the carport ordered has a flatroof.
+     * it then calculates how many screws and how much plastic we need for the roof
+     * and sets them on the carport object
      */
     public void flatRoof() {
         flatRoofPlastmo();
@@ -52,10 +54,15 @@ public class RoofCalculator {
     }
 
     /**
-     *
-     * @param width
-     * @param length
-     * @param degree
+     *This method is run if the carport ordered has a top roof
+     * it then calculates everything listed under here 
+     * and sets them on the carport object:
+     * 
+     * roofPostHeight, amount of roof posts, roof rafter length, amount of rafters, amount of roof beams,
+     * amount of roof tiles, amount of flat hinges and lastly amount of screws
+     * @param width the width of the carport
+     * @param length the width of the carport 
+     * @param degree the chosen degree for the top roof
      */
     public void topRoof(int width, int length, int degree) {
         double sideB = carport.getOuterWidth() / 2;
