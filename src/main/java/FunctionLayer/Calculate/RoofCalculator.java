@@ -11,7 +11,7 @@ public class RoofCalculator {
 
     /**
      * This method simply sets a given carport to this classes empty carport object
-     * @param carport
+     * @param carport takes the carport object as a parameter
      */
     public RoofCalculator(Carport carport) {
         this.carport = carport;
@@ -60,9 +60,9 @@ public class RoofCalculator {
      * 
      * roofPostHeight, amount of roof posts, roof rafter length, amount of rafters, amount of roof beams,
      * amount of roof tiles, amount of flat hinges and lastly amount of screws
-     * @param width
-     * @param length
-     * @param degree
+     * @param width the width of the carport
+     * @param length the width of the carport 
+     * @param degree the chosen degree for the top roof
      */
     public void topRoof(int width, int length, int degree) {
         double sideB = carport.getOuterWidth() / 2;
