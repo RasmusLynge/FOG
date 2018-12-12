@@ -100,8 +100,8 @@ public class SVGUtilCarportSide {
 
     private String raftersSvg(String res, int rafterSpaceing, int outerFrameWidth, boolean roof, int roofHeight, Carport c) {
         if (roof) {
-            res = roofBeamsSVG(roofHeight, c, res, outerFrameWidth);
             res = roofRafterSVG(res, roofHeight, outerFrameWidth, c, rafterSpaceing);
+            res = roofBeamsSVG(roofHeight, c, res, outerFrameWidth);
         } else {
             res = flatRoofRafters(c, res, rafterSpaceing, outerFrameWidth);
         }
