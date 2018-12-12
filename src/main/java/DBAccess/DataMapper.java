@@ -18,7 +18,8 @@ import java.util.ArrayList;
 public class DataMapper {
 
     /**
-     *
+     * Takes the login credentials as parameters and checks if there is a corresponding user in the database.
+     * If there is not it throws a login exception. 
      * @param email
      * @param password
      * @return
@@ -48,7 +49,8 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Queries the database for an order with the ID specified in the parameter.
+     * Makes an order instance with the retrieved data and returns it. 
      * @param orderid
      * @return
      * @throws DMException
@@ -81,7 +83,8 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Queries the database for everything in the order table with corresponding user info, 
+     * makes new orders for each and returns them in an ArrayList
      * @return
      * @throws DMException
      */
@@ -108,7 +111,8 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Queries the database for all orders with the state specified in the parameter. 
+     * Makes new order for each and returns them in an ArrayList
      * @param state
      * @return
      * @throws DMException
@@ -138,7 +142,9 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Takes an order as parameter and inserts the data fromn it into the database with 2 SQL queries,
+     * 1 for the `order ` table and 1 for the `user_info`
+     * 
      * @param order
      * @throws FunctionLayer.Exception.DMException
      */
@@ -180,7 +186,9 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Updates an order specified by the ID in the parameter with the values from the other parameters
+     * Returns the new order
+     * 
      * @param orderId
      * @param desiredLength
      * @param desiredWidth
@@ -212,7 +220,8 @@ public class DataMapper {
     }
 
     /**
-     *
+     * Queries the database for all the materials in the table, makes new Material instances for each, and returns them in an ArrayList
+     * 
      * @return
      * @throws DMException
      */
