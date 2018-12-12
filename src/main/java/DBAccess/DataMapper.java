@@ -53,7 +53,7 @@ public class DataMapper {
      * Makes an order instance with the retrieved data and returns it. 
      * @param orderid The id of the order
      * @return Returns the order
-     * @throws DMException Throws DMException if anything goes wrong
+     * @throws DMException Throws DMException if the query fails
      */
     public Order getOrderByID(int orderid) throws DMException {
         try {
@@ -85,8 +85,8 @@ public class DataMapper {
     /**
      * Queries the database for everything in the order table with corresponding user info, 
      * makes new orders for each and returns them in an ArrayList
-     * @return
-     * @throws DMException
+     * @return returns an ArrayList of Orders with the values retrieved from the database
+     * @throws DMException if the query fails
      */
     public ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
@@ -116,7 +116,7 @@ public class DataMapper {
      * @param state the state the database is queried for
      * 
      * @return An ArrayList of orders
-     * @throws DMException
+     * @throws DMException if the query fails
      */
     public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
@@ -147,8 +147,8 @@ public class DataMapper {
      * 1 for the `order ` table and 1 for the `user_info`
      * 
 
-     * @param order
-     * @throws FunctionLayer.Exception.DMException
+     * @param order the order that is inserted in the database
+     * @throws FunctionLayer.Exception.DMException if the query fails
      */
     public void createOrder(Order order) throws DMException {
         try {
@@ -196,7 +196,7 @@ public class DataMapper {
      * @param flatRoof the boolean value the order should be updated to
      * @param state the String state that the order should be updated to
      * @return Returns the new order
-     * @throws DMException
+     * @throws DMException if the query fails
      */
     public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws DMException {
         try {
@@ -224,7 +224,7 @@ public class DataMapper {
      * Queries the database for all the materials in the table, makes new Material instances for each, and returns them in an ArrayList
      * 
      * @return An ArrayList of Material
-     * @throws DMException
+     * @throws DMException if the query fails
      */
     public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();

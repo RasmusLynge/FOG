@@ -11,15 +11,15 @@ public class SVGUtilCarportTop {
     /**
      * Creates the SVG canvas and appends the string created in the method carportFromAbove
      * 
-     * @param length
-     * @param width
-     * @param roof
-     * @param shed
-     * @param shedLength
-     * @param shedWidth
-     * @return
-     * @throws DMException
-     * @throws MakeOrderException
+     * @param length the length of the carport
+     * @param width the width of the carport
+     * @param roof the boolean value for roof of the carport
+     * @param shed the boolean value of the shed for the carport
+     * @param shedLength the length of the shed 
+     * @param shedWidth the width of the shed
+     * @return Returns an HTML string that contains the drawing of the carport from above.
+     * @throws DMException If the query to the database fails
+     * @throws MakeOrderException if it fails to instantiate the carport
      */
     public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         int canvasX = length + 300;
@@ -33,15 +33,15 @@ public class SVGUtilCarportTop {
      * Calls methods to generate the code for each square and line needed in the full drawing, 
      * calculated from the carport measurements. 
      * Appends it all to a string as html that can be viewed in the JSP.
-     * @param length
-     * @param width
-     * @param roof
-     * @param shed
-     * @param shedLength
-     * @param shedWidth
-     * @return
-     * @throws DMException
-     * @throws MakeOrderException
+     * @param length the length of the carport
+     * @param width the width of the carport
+     * @param roof the boolean value for roof of the carport
+     * @param shed the boolean value of the shed for the carport
+     * @param shedLength the length of the shed 
+     * @param shedWidth the width of the shed
+     * @return Returns an HTML string that contains the drawings of the carport from above.
+     * @throws DMException If the query to the database fails
+     * @throws MakeOrderException if it fails to instantiate the carport
      */
     public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
         Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
