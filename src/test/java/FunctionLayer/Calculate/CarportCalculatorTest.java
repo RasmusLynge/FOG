@@ -558,17 +558,17 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
     }
-    
-    @Test
-    public void totalScrewBoxesTopRoof240x240() throws DMException, MakeOrderException {
-        //Act
-        Carport result = cc.calculateAll(length, width, roof, shed);
-        //should be 1
-        int expectedTotalScrewBoxes = 1;
-        int actualTotalScrewBoxes = (int) result.getScrewBoxes();
-        //Assert
-        Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
-    }
+//    
+//    @Test
+//    public void totalScrewBoxesTopRoof240x240() throws DMException, MakeOrderException {
+//        //Act
+//        Carport result = cc.calculateAll(length, width, roof, shed);
+//        //should be 1
+//        int expectedTotalScrewBoxes = 1;
+//        int actualTotalScrewBoxes = (int) result.getScrewBoxes();
+//        //Assert
+//        Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
+//    }
     
     @Test
     public void totalScrewBoxes480x480() throws DMException, MakeOrderException {
