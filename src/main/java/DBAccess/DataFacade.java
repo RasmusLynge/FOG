@@ -15,7 +15,7 @@ public class DataFacade {
     DataMapper dm = new DataMapper();
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values. 
      * @param state
      * @return
      * @throws DMException
@@ -25,7 +25,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values.
      * @param email
      * @param password
      * @return
@@ -36,7 +36,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values. 
      * @return @throws DMException
      */
     public ArrayList<Order> getAllOrders() throws DMException {
@@ -44,7 +44,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method.
      * @param o
      * @throws DMException
      * @throws MakeOrderException
@@ -54,7 +54,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values. 
      * @param orderid
      * @return
      * @throws DMException
@@ -66,7 +66,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values. 
      * @param orderId
      * @param desiredWidth
      * @param desiredLength
@@ -82,7 +82,7 @@ public class DataFacade {
     }
 
     /**
-     *
+     * This method calls the corresponding DataMapper method and returns the return values. 
      * @return @throws DMException
      */
     public ArrayList<Material> getMaterials() throws DMException {
