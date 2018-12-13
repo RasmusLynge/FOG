@@ -24,6 +24,10 @@ abstract class Command {
         commands.put("logout", new LogOut());
         commands.put("listspecificorders", new GetSpecificOrders());
         commands.put("getemployeepage", new GetEmployeePage());
+        commands.put("createemployeeuser", new CreateEmployeeUsers());
+        commands.put("createemployeeuserpage", new GetCreateEmployeeUserPage());
+        commands.put("getemployeeusers", new GetEmployeeUsers());
+        commands.put("deleteemployeeuser", new DeleteUser());
     }
 
     static Command from(HttpServletRequest request) {

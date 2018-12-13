@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,12 +75,24 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
                             </div>
-
-                            <%} else {
-                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
-
-                                }%>                         
                         </li>
+                        <%} else if (user.getRole().equalsIgnoreCase("admin")) {
+                        %> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Gå til admin siden</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%
+                            } else {
+                                out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+
+                            }%>                         
                     </ul>
                 </div>
             </nav>
@@ -94,43 +107,14 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listorders">
-                                <input class="btn btn-primary btn-md"type="submit" value="Se alle ordrer">
+                                <input type="hidden" name="command" value="createemployeeuserpage">
+                                <input class="btn btn-primary btn-md"type="submit" value="Opret bruger til medarbejder">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Forespørgsel" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se Forespørgsler">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Afventer sælger" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se afventende ordre ">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Betalt" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se betalte ordre">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Fragtet" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se fragtede ordre">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Afsluttet uden salg" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se ordre afsluttet uden salg">
+                                <input type="hidden" name="command"  value="getemployeeusers" > 
+                                <input class="btn btn-primary btn-md"type="submit" value="Slet bruger for medarbejder">
                             </form>
                         </li>
                     </ul>
@@ -138,9 +122,42 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Du er logget ind som <%= user.getEmail()%></h2>
+                <h1 class="display-4">Her er alle brugere til medarbejdere: </h1>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Bruger ID</th>
+                            <th scope="col">Email</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
 
-
+                    <%
+                        ArrayList<User> userList = new ArrayList<>();
+                        userList = (ArrayList<User>) session.getAttribute("getAllEmployeeUsers");
+                        if (userList != null) {
+                            for (int i = 0; i < userList.size(); i++) {
+                                String userId = userList.get(i).getId();
+                                String email = userList.get(i).getEmail();
+                    %>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><%out.print(userId);%></th>
+                            <td><%out.print(email);%> </td>
+                            <td>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="deleteemployeeuser">
+                                    <input type="hidden" name="userId" value="<%out.print(userId);%>">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="slet bruger">  
+                                </form> 
+                            </td>
+                        </tr>
+                        <%
+                                }
+                            }
+                        %>
+                </table>
             </div>
 
 

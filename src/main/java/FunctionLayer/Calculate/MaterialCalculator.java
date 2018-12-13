@@ -18,7 +18,7 @@ public class MaterialCalculator {
      */
     public ArrayList<Material> materialList(Carport carport) throws DMException {
         DataFacade df = new DataFacade(); // BURDE DENNE HER IKKE KALDE LOGIC FACADEN??
-        ArrayList<Material> list = df.getMaterials();
+        ArrayList<Material> list = df.getMaterials();   
 
         rafter(carport, list);
         roofRafter(carport, list);

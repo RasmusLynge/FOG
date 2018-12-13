@@ -92,4 +92,8 @@ public class DataFacade {
         return list;
     }
 
+    public void deleteEmployeeUser(int userId) throws DMException {
+        dm.deleteUser(userId);
+    }
+
 }

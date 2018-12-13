@@ -28,7 +28,7 @@ public class EditOrder extends Command {
 
         try {
             LogicFacade lf = new LogicFacade();
-            Order o = lf.EditOrder(id, width, length, roof, state);
+            Order o = lf.editOrder(id, width, length, roof, state);
             ArrayList<Material> materialList;
             materialList = o.getCarport().getList();
             request.setAttribute("order", o);

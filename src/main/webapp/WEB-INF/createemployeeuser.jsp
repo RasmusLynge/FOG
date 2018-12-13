@@ -74,12 +74,24 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
                             </div>
-
-                            <%} else {
-                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
-
-                                }%>                         
                         </li>
+                        <%} else if (user.getRole().equalsIgnoreCase("admin")) {
+                        %> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Gå til admin siden</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%
+                            } else {
+                                out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+
+                            }%>                         
                     </ul>
                 </div>
             </nav>
@@ -94,43 +106,14 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listorders">
-                                <input class="btn btn-primary btn-md"type="submit" value="Se alle ordrer">
+                                <input type="hidden" name="command" value="createemployeeuserpage">
+                                <input class="btn btn-primary btn-md"type="submit" value="Opret bruger til medarbejder">
                             </form>
                         </li>
                         <li class="nav-item">
                             <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Forespørgsel" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se Forespørgsler">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Afventer sælger" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se afventende ordre ">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Betalt" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se betalte ordre">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Fragtet" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se fragtede ordre">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="listspecificorders">
-                                <input type="hidden" name="state" class="form-control"  value="Afsluttet uden salg" > 
-                                <input class="btn btn-primary btn-md"type="submit" value="Se ordre afsluttet uden salg">
+                                <input type="hidden" name="command"  value="getemployeeusers" > 
+                                <input class="btn btn-primary btn-md"type="submit" value="Slet bruger for medarbejder">
                             </form>
                         </li>
                     </ul>
@@ -138,9 +121,23 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Du er logget ind som <%= user.getEmail()%></h2>
-
-
+                <h2>Lav en ny bruger til en medarbejder: </h2>
+                <br>
+                <div class="form-group">
+                    <form name="register" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="createemployeeuser">
+                        Indtast Email:<br>
+                        <input class="form-control" type="text" name="email" placeholder="Email *" value="" required/>
+                        <br>
+                        Indtast adgangskode:<br>
+                        <input class="form-control" type="password" name="password1" placeholder="Adgangskode *" value="" required/>
+                        <br>
+                        Indtast adgangskode igen:<br>
+                        <input class="form-control" type="password" name="password2" placeholder="Skriv adgangskode igen *" value="" required/>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Opret bruger">
+                    </form>
+                </div>
             </div>
 
 

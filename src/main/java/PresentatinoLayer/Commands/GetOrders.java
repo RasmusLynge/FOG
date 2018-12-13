@@ -23,6 +23,7 @@ public class GetOrders extends Command {
             ol = lf.getAllOrders();
             if (ol.isEmpty()) {
                 System.out.println("Tom liste");
+                //Burde kaste en exception f.eks. "Not logged in exception
             } else {
                 session.setAttribute("getAllOrders", ol);
             }

@@ -14,16 +14,18 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-
 public class DataMapper {
 
     /**
-     * Takes the login credentials as parameters and checks if there is a corresponding user in the database.
-     * 
+     * Takes the login credentials as parameters and checks if there is a
+     * corresponding user in the database.
+     *
      * @param email the email of the user
      * @param password the password of the user
-     * @return Returns the user created from the retrieved values in the database.
-     * @throws LoginException If there is not a matching user it throws a login exception. 
+     * @return Returns the user created from the retrieved values in the
+     * database.
+     * @throws LoginException If there is not a matching user it throws a login
+     * exception.
      */
     public static User login(String email, String password) throws LoginException {
         try {
@@ -49,8 +51,35 @@ public class DataMapper {
     }
 
     /**
+     * Creates a user with the given password and email.
+     *
+     * @param email the email of the user
+     * @param password the password of the user
+     * @throws LoginException If there is not a matching user it throws a login
+     * exception.
+     */
+    public static void createUser(User user) throws DMException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            String id = ids.getString(1);
+            user.setId(id);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+    /**
      * Queries the database for an order with the ID specified in the parameter.
-     * Makes an order instance with the retrieved data and returns it. 
+     * Makes an order instance with the retrieved data and returns it.
+     *
      * @param orderid The id of the order
      * @return Returns the order
      * @throws DMException Throws DMException if the query fails
@@ -83,9 +112,11 @@ public class DataMapper {
     }
 
     /**
-     * Queries the database for everything in the order table with corresponding user info, 
-     * makes new orders for each and returns them in an ArrayList
-     * @return returns an ArrayList of Orders with the values retrieved from the database
+     * Queries the database for everything in the order table with corresponding
+     * user info, makes new orders for each and returns them in an ArrayList
+     *
+     * @return returns an ArrayList of Orders with the values retrieved from the
+     * database
      * @throws DMException if the query fails
      */
     public ArrayList<Order> getAllOrders() throws DMException {
@@ -111,10 +142,11 @@ public class DataMapper {
     }
 
     /**
-     * Queries the database for all orders with the state specified in the parameter. 
-     * Makes new order for each and returns them in an ArrayList
+     * Queries the database for all orders with the state specified in the
+     * parameter. Makes new order for each and returns them in an ArrayList
+     *
      * @param state the state the database is queried for
-     * 
+     *
      * @return An ArrayList of orders
      * @throws DMException if the query fails
      */
@@ -143,10 +175,11 @@ public class DataMapper {
     }
 
     /**
-     * Takes an order as parameter and inserts the data fromn it into the database with 2 SQL queries,
-     * 1 for the `order ` table and 1 for the `user_info`
-     * 
-
+     * Takes an order as parameter and inserts the data fromn it into the
+     * database with 2 SQL queries, 1 for the `order ` table and 1 for the
+     * `user_info`
+     *
+     *
      * @param order the order that is inserted in the database
      * @throws FunctionLayer.Exception.DMException if the query fails
      */
@@ -188,8 +221,9 @@ public class DataMapper {
     }
 
     /**
-     * This method updates an order specified by the ID in the parameter with the values from the other parameters
-     * 
+     * This method updates an order specified by the ID in the parameter with
+     * the values from the other parameters
+     *
      * @param orderId The ID of the order that is to be edited
      * @param desiredLength the length the order should be updated to
      * @param desiredWidth the width the order should be updated to
@@ -221,8 +255,9 @@ public class DataMapper {
     }
 
     /**
-     * Queries the database for all the materials in the table, makes new Material instances for each, and returns them in an ArrayList
-     * 
+     * Queries the database for all the materials in the table, makes new
+     * Material instances for each, and returns them in an ArrayList
+     *
      * @return An ArrayList of Material
      * @throws DMException if the query fails
      */
@@ -242,6 +277,39 @@ public class DataMapper {
             }
             return ml;
         } catch (ClassNotFoundException | SQLException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+    public ArrayList<User> getAllEmployeeUsers() throws DMException {
+        ArrayList<User> userl = new ArrayList();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT `email`, `User_Id`"
+                    + "FROM `User_Login`"
+                    + "WHERE `Role` = 'employee';";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User(rs.getString("Email"), "123", "employee");
+                user.setId(String.valueOf(rs.getInt("User_Id")));
+
+                userl.add(user);
+            }
+            return userl;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+    void deleteUser(int userId) throws DMException{
+        try {
+            Connection con = Connector.connection();
+            String SQL = "DELETE FROM `User_Login` WHERE `User_Id` = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
             throw new DMException(ex.getMessage());
         }
     }
