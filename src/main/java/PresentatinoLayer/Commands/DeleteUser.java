@@ -21,10 +21,11 @@ public class DeleteUser extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DMException {
-        LogicFacade lf = new LogicFacade();
-        ArrayList<User> userl = new ArrayList();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        
+        LogicFacade lf = new LogicFacade();
+        ArrayList<User> userl = new ArrayList();
         int userId = Integer.parseInt(request.getParameter("userId"));
 
         lf.deleteUser(userId);

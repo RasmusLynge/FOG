@@ -115,10 +115,10 @@ public class LogicFacade {
      * @throws MakeOrderException casts this if the input for lenght or width isnt in the right range of numbers
      */
     public Order editOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {
-        Order o = df.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
-        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
-        o.setCarport(p.getCarport());
-        return o;
+        Order order = df.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
+        order.setPrice(p.priceCalculator(order.getLength(), order.getWidth(), order.isShed(), order.isFlat_roof()));
+        order.setCarport(p.getCarport());
+        return order;
     }
 
     public ArrayList<User> getAllEmployeeUsers() throws DMException {

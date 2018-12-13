@@ -1,7 +1,7 @@
 package PresentatinoLayer.Commands;
 
-import FunctionLayer.Exception.DMException;
-import FunctionLayer.Exception.MakeOrderException;
+import FunctionLayer.Entity.User;
+import FunctionLayer.Exception.NotLoggedInException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,15 +12,14 @@ public class GetEmployeePage extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws NotLoggedInException{
         HttpSession session = request.getSession();
-        if (session.getAttribute("user").equals(null)) {
-            throw new DMException("Du har ikke rettigheder til at logge ind her");
-        }
-        if (!session.getAttribute("user").equals(null)) {
-            return "employeepage";
-        } else {
-            throw new DMException("Du har ikke rettigheder til at logge ind her");
+        User user = (User) session.getAttribute("user");
+
+        if (!user.equals(null)) {
+                return "employeepage";
+            } else {
+                throw new NotLoggedInException("Log ind igen");
+            }
         }
     }
-}
