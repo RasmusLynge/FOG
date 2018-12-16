@@ -84,7 +84,7 @@
                     </ul>
                 </div>
             </nav>
-            <% Order o = (Order) request.getSession().getAttribute("order");%>
+            <% Order o = (Order) request.getAttribute("order");%>
             <div class="jumbotron">
                 <h2>Din ordre:</h2>
 
@@ -107,13 +107,13 @@
                 <h2>Skitse af Carport:</h2>
                 <p> Her er en skitse af carporten set fra toppen 
                 <p> Bilen skal her køre ind fra højre side
-                    <% String svgTop = (String) request.getSession().getAttribute("svgtop");%>
+                    <% String svgTop = (String) request.getAttribute("svgtop");%>
                     <%= svgTop%>
                 </p>
 
                 <p> Her er en skitse af carporten set fra siden 
                 <p> Bilen skal her køre ind fra højre side
-                    <% String svgSide = (String) request.getSession().getAttribute("svgside");%>
+                    <% String svgSide = (String) request.getAttribute("svgside");%>
                     <%= svgSide%>
                 </p>
 

@@ -49,9 +49,9 @@ public class CreateOrder extends Command {
         String svgTop = svgStringTop.printCarportTop(c);
         String svgSide = svgStringSide.printCarportSide(c);
 
-        request.getSession().setAttribute("svgside", svgSide);
-        request.getSession().setAttribute("svgtop", svgTop);
-        request.getSession().setAttribute("order", o);
+        request.setAttribute("svgside", svgSide);
+        request.setAttribute("svgtop", svgTop);
+        request.setAttribute("order", o);
         
         return "singleOrder";
     }
