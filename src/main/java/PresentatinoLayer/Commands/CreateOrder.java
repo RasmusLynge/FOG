@@ -43,15 +43,16 @@ public class CreateOrder extends Command {
 
         Order o;
         o = orderCheck(measurementtype, length, width, shedLength, lf, name, email, zip, phone, evt, isShed, highRoof);
+        o.getCarport().setShed(isShed);
+        o.getCarport().setShedLength(shedLength);
         Carport c = o.getCarport();
-        c.setShedLength(shedLength);
-        String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
-        String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
+        String svgTop = svgStringTop.printCarportTop(c);
+        String svgSide = svgStringSide.printCarportSide(c);
 
         request.getSession().setAttribute("svgside", svgSide);
         request.getSession().setAttribute("svgtop", svgTop);
         request.getSession().setAttribute("order", o);
-
+        
         return "singleOrder";
     }
 

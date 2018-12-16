@@ -22,10 +22,10 @@ public class SVGUtilCarportSide {
      * @throws DMException
      * @throws MakeOrderException
      */
-    public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
-        int canvasX = length + 300;
+    public String printCarportSide(Carport car) throws DMException, MakeOrderException {
+        int canvasX = car.getLength() + 300;
         int canvasY = POSTHEIGHT + 300;
-        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(car) + "</SVG>";
         return res;
     }
 
@@ -45,19 +45,23 @@ public class SVGUtilCarportSide {
      * @throws MakeOrderException Throws when there is an error in the creation
      * of an order
      */
-    public String caportFromSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
-        Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
+    public String caportFromSide(Carport car) throws DMException, MakeOrderException {
+        int length = car.getLength();
+        int width = car.getWidth();
+        boolean roof = car.isRoof();
+        boolean shed = car.isShed();
+        int shedLength = car.getShedLength();
 
         int outerFrameWidth = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;
         int postYPos = OUTERFRAMEYPOS + WOODWIDTH;
-        int roofHeight = (int) c.getRoofPostHeight();
+        int roofHeight = (int) car.getRoofPostHeight();
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed, shedLength);
-        res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, c);
-        res = linesSVG(res, length, innerFrameXPos, c);
+        res = postsSVG(res, length, innerFrameXPos, postYPos, car, shed, shedLength);
+        res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, car);
+        res = linesSVG(res, length, innerFrameXPos, car);
 
         if (shed) {
             res = shedSVG(res, shedLength, innerFrameXPos, postYPos);

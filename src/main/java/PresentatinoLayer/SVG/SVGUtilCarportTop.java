@@ -23,10 +23,10 @@ public class SVGUtilCarportTop {
      * @throws DMException If the query to the database fails
      * @throws MakeOrderException if it fails to instantiate the carport
      */
-    public String printCarportTop(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
-        int canvasX = length + 300;
-        int canvasY = width + 300;
-        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromAbove(length, width, roof, shed, shedLength, shedWidth) + "</SVG>";
+    public String printCarportTop(Carport car) throws DMException, MakeOrderException {
+        int canvasX = car.getLength() + 300;
+        int canvasY = car.getWidth() + 300;
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromAbove(car) + "</SVG>";
         return res;
     }
 
@@ -46,33 +46,33 @@ public class SVGUtilCarportTop {
      * @throws DMException If the query to the database fails
      * @throws MakeOrderException if it fails to instantiate the carport
      */
-    public String caportFromAbove(int length, int width, boolean roof, boolean shed, int shedLength, int shedWidth) throws DMException, MakeOrderException {
-        Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
-        int outerFrameWidth = width + HANGOUTONESIDE * BOTHSIDES;
-        int outerFrameLength = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
+    public String caportFromAbove(Carport car) throws DMException, MakeOrderException {
+        int outerFrameWidth = car.getWidth() + HANGOUTONESIDE * BOTHSIDES;
+        int outerFrameLength = car.getLength() + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int innerFrameYPos = OUTERFRAMEYPOS + HANGOUTONESIDE;
-        int innerLayerBottomYPos = innerFrameYPos + width - WOODWIDTH;
+        int innerLayerBottomYPos = innerFrameYPos + car.getWidth() - WOODWIDTH;
         int innerLayerEntranceCornorYPosForPost = innerLayerBottomYPos - EXTRAPOSTSPACING;
-        int innerLayerEntranceCornorXPosForPost = innerFrameXPos + length - POSTWIDTH;
+        int innerLayerEntranceCornorXPosForPost = innerFrameXPos + car.getLength() - POSTWIDTH;
         double rafterSpacing = OUTERFRAMEXPOS;
 
-        String res = framesSVG(length, width, outerFrameWidth, outerFrameLength, innerFrameXPos, innerFrameYPos);
-        res = textSVG(res, length, width, outerFrameLength, innerFrameXPos, outerFrameWidth, innerFrameYPos, c);
-        res = linesSVG(res, length, width, outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, c);
+        String res = framesSVG(car.getLength(), car.getWidth(), outerFrameWidth, outerFrameLength, innerFrameXPos, innerFrameYPos);
+        res = textSVG(res, car.getLength(), car.getWidth(), outerFrameLength, innerFrameXPos, outerFrameWidth, innerFrameYPos, car);
+        res = linesSVG(res, car.getLength(), car.getWidth(), outerFrameLength, innerFrameXPos, innerFrameYPos, outerFrameWidth, car);
         res = beamsSVG(res, outerFrameLength, innerFrameYPos, innerLayerBottomYPos);
-        res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, c);
+        res = raftersSVG(res, outerFrameWidth, rafterSpacing, outerFrameLength, car);
 
-        if (roof) {
+        if (car.isRoof()) {
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
             res = roofMiddleBeamSVG(res, outerFrameWidth, OUTERFRAMEYPOS, outerFrameLength);
-            res = roofBeamSVG(outerFrameWidth, c, res, outerFrameLength);
+            res = roofBeamSVG(outerFrameWidth, car, res, outerFrameLength);
         }
 
-        res = postsSVG(res, length, width, innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, c, shedLength, shed);
-        if (shed) {
-            res = shedPostsAndDoor(res, innerFrameXPos, shedLength, innerFrameYPos, innerLayerEntranceCornorYPosForPost);
-            res = res += transSquare(shedWidth, shedLength, innerFrameXPos, innerFrameYPos);
+        res = postsSVG(res, car.getLength(), car.getWidth(), innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, car, car.getShedLength(), car.isShed());
+        System.out.println("");
+        if (car.isShed()) {
+            res = shedPostsAndDoor(res, innerFrameXPos, car.getShedLength(), innerFrameYPos, innerLayerEntranceCornorYPosForPost);
+            res = res += transSquare(car.getWidth(), car.getShedLength(), innerFrameXPos, innerFrameYPos);
         }
         return res;
     }

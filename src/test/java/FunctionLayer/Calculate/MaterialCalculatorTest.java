@@ -257,7 +257,7 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("FladtBeslag")) {
-                int expectedFlatHingesAmount = 14;
+                int expectedFlatHingesAmount = 12;
                 int actualFlatHingesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedFlatHingesAmount, actualFlatHingesAmount);
@@ -314,7 +314,7 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("FladtBeslag")) {
-                int expectedFlatHingesAmount = 80;
+                int expectedFlatHingesAmount = 40;
                 int actualFlatHingesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedFlatHingesAmount, actualFlatHingesAmount);
@@ -366,7 +366,7 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 69;
+                int expectedRoofTilesAmount = 32;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
@@ -385,7 +385,7 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 171;
+                int expectedRoofTilesAmount = 79;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
@@ -404,7 +404,7 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 317;
+                int expectedRoofTilesAmount = 146;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
