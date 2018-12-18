@@ -27,7 +27,7 @@ public class CarportCalculator {
             throw new MakeOrderException("Measurements contain values below or above the limit values");
         }
 
-        Carport carport = new Carport(length, width, roof, shed);
+        Carport carport = new Carport(width, length, roof, shed);
         RoofCalculator roofCalc = new RoofCalculator(carport);
         CoverCalculator coverCalc = new CoverCalculator(carport);
         outerMessurement(carport);
