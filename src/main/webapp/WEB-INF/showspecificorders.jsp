@@ -182,7 +182,7 @@
                         </tr>
                         <%
                             }
-                        } else if (orderList.isEmpty()){
+                        } else if (orderList.isEmpty()) {
                         %>
                     <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
                     <%

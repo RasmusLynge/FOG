@@ -68,7 +68,7 @@ public class RoofCalculator {
      * @param length the width of the carport
      * @param degree the chosen degree for the top roof
      */
-    public void topRoof(int width, int length, int degree) {
+    public void topRoof(int degree) {
         double sideB = carport.getOuterWidth() / 2;
         double angleA = Math.toRadians(degree);
         double angleB = Math.toRadians(180 - 90 - degree);
