@@ -34,7 +34,7 @@ public class GetSpecificOrders extends Command {
 
             ol = lf.getSpecificOrders(state);
             session.setAttribute("getSpecificOrders", ol);
-            return "showspecificorders";
+            return "showfilteredorders";
         } else {
             throw new NotLoggedInException("Log ind igen");
         }

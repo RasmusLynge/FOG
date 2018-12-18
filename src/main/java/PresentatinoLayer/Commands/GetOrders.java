@@ -25,7 +25,7 @@ public class GetOrders extends Command {
             if (!ol.isEmpty()) {
                 session.setAttribute("getAllOrders", ol);
             }
-                return "showorders";
+                return "showallorders";
         } else {
             throw new NotLoggedInException("Log ind igen");
         }
