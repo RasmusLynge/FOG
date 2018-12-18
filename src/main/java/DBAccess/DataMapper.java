@@ -218,6 +218,28 @@ public class DataMapper {
             throw new DMException(ex.getMessage());
         }
     }
+    
+//    public double EditPrice(int materialId, double desiredPrice) throws DMException {
+//        try {
+//            Connection con = Connector.connection();
+//            String SQL = "Update `Order`\n"
+//                    + "SET Length = ?, Width = ?, Flat_Roof = ?, State = ?\n"
+//                    + "WHERE `Id_Order` = ?;";
+//            PreparedStatement ps = con.prepareStatement(SQL);
+//            ps.setInt(1, desiredLength);
+//            ps.setInt(2, desiredWidth);
+//            ps.setInt(3, flatRoof);
+//            ps.setString(4, state);
+//            ps.setInt(5, orderId);
+//            ps.executeUpdate();
+//
+//            Order o = getOrderByID(orderId);
+//            return o;
+//
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            throw new DMException(ex.getMessage());
+//        }
+//    }
 
     /**
      * Queries the database for all the materials in the table, makes new Material instances for each, and returns them in an ArrayList

@@ -14,7 +14,6 @@ public class CreateOrder extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DMException, MakeOrderException {
-        LogicFacade lf = new LogicFacade();
         SVGUtilCarportTop svgStringTop = new SVGUtilCarportTop();
         SVGUtilCarportSide svgStringSide = new SVGUtilCarportSide();
 
@@ -42,7 +41,7 @@ public class CreateOrder extends Command {
         }
 
         Order o;
-        o = orderCheck(measurementtype, length, width, shedLength, lf, name, email, zip, phone, evt, isShed, highRoof);
+        o = orderCheck(measurementtype, length, width, shedLength, name, email, zip, phone, evt, isShed, highRoof);
         Carport c = o.getCarport();
         c.setShedLength(shedLength);
         String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
@@ -55,7 +54,8 @@ public class CreateOrder extends Command {
         return "singleOrder";
     }
 
-    private Order orderCheck(String measurementtype, int length, int width, int shedLength, LogicFacade lf, String name, String email, String zip, String phone, String evt, boolean isShed, boolean highRoof) throws MakeOrderException, DMException {
+    private Order orderCheck(String measurementtype, int length, int width, int shedLength, String name, String email, String zip, String phone, String evt, boolean isShed, boolean highRoof) throws MakeOrderException, DMException {
+        LogicFacade lf = new LogicFacade();
         Order o;
         if ("outermeasurements".equals(measurementtype) && (length < 325 || width < 310)) {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
