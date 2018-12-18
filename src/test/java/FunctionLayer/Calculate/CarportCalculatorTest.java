@@ -8,10 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author Magnus
- */
 public class CarportCalculatorTest {
 
     CarportCalculator cc = new CarportCalculator();
@@ -408,7 +404,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalLHinges, actualTotalLHinges);
     }
-    
+
     @Test
     public void totalLHingesTopRoof240x240() throws DMException, MakeOrderException {
         //Act
@@ -418,7 +414,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalLHinges, actualTotalLHinges);
     }
-    
+
     @Test
     public void totalLHinges480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -431,7 +427,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalLHinges, actualTotalLHinges);
     }
-    
+
     @Test
     public void totalLHingesTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -444,7 +440,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalLHinges, actualTotalLHinges);
     }
-    
+
     @Test
     public void totalLHinges720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -457,7 +453,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalLHinges, actualTotalLHinges);
     }
-    
+
     @Test
     public void totalLHingesTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -481,7 +477,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrews, actualTotalScrews);
     }
-    
+
     @Test
     public void totalScrewsTopRoof240x240() throws DMException, MakeOrderException {
         //Act
@@ -492,7 +488,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrews, actualTotalScrews);
     }
-    
+
     @Test
     public void totalScrews480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -506,7 +502,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrews, actualTotalScrews);
     }
-    
+
     @Test
     public void totalScrewsTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -534,7 +530,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrews, actualTotalScrews);
     }
-    
+
     @Test
     public void totalScrewsTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -548,7 +544,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrews, actualTotalScrews);
     }
-    
+
     @Test
     public void totalScrewBoxes240x240() throws DMException, MakeOrderException {
         //Act
@@ -569,7 +565,7 @@ public class CarportCalculatorTest {
 //        //Assert
 //        Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
 //    }
-    
+
     @Test
     public void totalScrewBoxes480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -582,7 +578,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
     }
-    
+
     @Test
     public void totalScrewBoxesTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -595,7 +591,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
     }
-    
+
     @Test
     public void totalScrewBoxes720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -608,7 +604,7 @@ public class CarportCalculatorTest {
         //Assert
         Assert.assertEquals(expectedTotalScrewBoxes, actualTotalScrewBoxes);
     }
-    
+
     @Test
     public void totalScrewBoxesTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange

@@ -1,8 +1,9 @@
 package FunctionLayer.Entity;
 
 public class Material {
-    Carport carport; 
-    String name; 
+
+    Carport carport;
+    String name;
     int length;
     int amount;
     double price;
@@ -53,7 +54,5 @@ public class Material {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
-    
-    
+
 }

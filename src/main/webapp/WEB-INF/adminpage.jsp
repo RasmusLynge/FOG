@@ -82,8 +82,6 @@
                                 <%= user.getEmail()%>
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Gå til admin siden</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
                             </div>
                         </li>

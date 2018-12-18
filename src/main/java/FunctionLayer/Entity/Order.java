@@ -1,13 +1,13 @@
 package FunctionLayer.Entity;
 
 public class Order {
-    
+
     private int width, length, shedLength;
     private double price;
     private String id, name, email, zip, phone, evt, orderdate, state;
     private boolean flat_roof, shed;
     Carport carport;
-         
+
     public Order(int width, int length, String name, String email, String zip, String phone, String evt) {
         this.width = width;
         this.length = length;
@@ -25,7 +25,6 @@ public class Order {
     public void setShedLength(int shedLength) {
         this.shedLength = shedLength;
     }
-    
 
     public boolean isShed() {
         return shed;
@@ -34,7 +33,6 @@ public class Order {
     public void setShed(boolean shed) {
         this.shed = shed;
     }
-    
 
     public Carport getCarport() {
         return carport;
@@ -51,12 +49,10 @@ public class Order {
     public void setPrice(double price) {
         this.price = price;
     }
-    
 
     public String getId() {
         return id;
     }
-    
 
     public int getWidth() {
         return width;
@@ -141,6 +137,5 @@ public class Order {
     public void setState(String state) {
         this.state = state;
     }
-    
-    
+
 }

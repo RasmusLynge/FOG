@@ -15,7 +15,9 @@ public class DataFacade {
     DataMapper dm = new DataMapper();
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values. 
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @param state the state of the order
      * @return Returns an arraylist of orders with the corresponding state
      * @throws DMException if the query fails
@@ -25,7 +27,9 @@ public class DataFacade {
     }
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values.
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @param email email of the user
      * @param password password of the user
      * @return returns the user if found
@@ -36,7 +40,9 @@ public class DataFacade {
     }
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values. 
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @return ArrayList of orders from the query
      * @throws DMException if the query fails
      */
@@ -46,6 +52,7 @@ public class DataFacade {
 
     /**
      * This method calls the corresponding DataMapper method.
+     *
      * @param order the order that is to be inserted in the database
      * @throws DMException if the query fails
      * @throws MakeOrderException if it fails to make the order
@@ -55,7 +62,9 @@ public class DataFacade {
     }
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values. 
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @param orderid the ID of the order
      * @return Returns the order with the specified ID
      * @throws DMException if the query fails
@@ -67,11 +76,13 @@ public class DataFacade {
     }
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values. 
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @param orderId the ID of the order
      * @param desiredWidth the new width of the order
      * @param desiredLength the new length of the order
-     * @param flatRoof the new boolean value for roof 
+     * @param flatRoof the new boolean value for roof
      * @param state the new String state
      * @return returns the order after it has been updated in the database
      * @throws DMException if the query fails
@@ -83,7 +94,9 @@ public class DataFacade {
     }
 
     /**
-     * This method calls the corresponding DataMapper method and returns the return values. 
+     * This method calls the corresponding DataMapper method and returns the
+     * return values.
+     *
      * @return returns an ArrayList of Materials
      * @throws DMException if the query fails
      */
@@ -94,6 +107,10 @@ public class DataFacade {
 
     public void deleteEmployeeUser(int userId) throws DMException {
         dm.deleteUser(userId);
+    }
+    
+        public ArrayList<User> getAllEmployeeUsers() throws DMException {
+        return dm.getAllEmployeeUsers();
     }
 
 }

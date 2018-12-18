@@ -9,19 +9,24 @@ public class CarportCalculator {
 
     /**
      * This method creates and calculates all the different parts of the carport
-     * by checking the 4 given parameters and using them to decide the measurements.
+     * by checking the 4 given parameters and using them to decide the
+     * measurements.
+     *
      * @param length int: the length of the carport
      * @param width int: the width of the carport
      * @param roof boolean: if true the carport needs a top roof
      * @param shed boolean: if true the carport needs a shed
-     * @return in the end the method returns a finished carport object to the pricecalculator, so it can figure out the price
+     * @return in the end the method returns a finished carport object to the
+     * pricecalculator, so it can figure out the price
      * @throws DMException
-     * @throws MakeOrderException if input is out of bounds to the set value limits
+     * @throws MakeOrderException if input is out of bounds to the set value
+     * limits
      */
     public Carport calculateAll(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
         if (length < MINLENGTH || length > MAXLENGTH || width < MINLENGTH || width > MAXLENGTH) {
             throw new MakeOrderException("Measurements contain values below or above the limit values");
         }
+
         Carport carport = new Carport(length, width, roof, false);
         RoofCalculator roofCalc = new RoofCalculator(carport);
         CoverCalculator coverCalc = new CoverCalculator(carport);
@@ -138,8 +143,8 @@ public class CarportCalculator {
 
             int restLength = (int) (length - STABILIZERPLANKSLONG);
             counterStabilizerLong += BOTHSIDES * STABILIZERPLANKPRWALL;
-
             counterStabilizerSmall += MINIMUMHAVEONEPEICE;
+
             int currentLength = STABILIZERPLANKSSMALL;
             for (int i = 0; i < BOTHSIDES * STABILIZERPLANKPRWALL; i++) {
                 if (restLength < currentLength) {
@@ -150,8 +155,10 @@ public class CarportCalculator {
                 }
             }
         }
+
         carport.setCoverStabilizerPlankSmall(counterStabilizerSmall);
         carport.setCoverStabilizerPlanksLong(counterStabilizerLong);
+
         if (!(length <= STABILIZERPLANKSSMALL && length <= STABILIZERPLANKSLONG)) {
             carport.setFlatHinges(carport.getFlatHinges() + counterStabilizerSmall);
         }
@@ -168,8 +175,8 @@ public class CarportCalculator {
 
             int restLength = (int) (width - STABILIZERPLANKSLONG);
             counterStabilizerLong += BOTHSIDES * STABILIZERPLANKPRWALL;
-
             counterStabilizerSmall += MINIMUMHAVEONEPEICE;
+
             int currentLength = STABILIZERPLANKSSMALL;
             for (int i = 0; i < BOTHSIDES * STABILIZERPLANKPRWALL; i++) {
                 if (restLength < currentLength) {
@@ -180,6 +187,7 @@ public class CarportCalculator {
                 }
             }
         }
+
         if (!(width <= STABILIZERPLANKSSMALL && width <= STABILIZERPLANKSLONG)) {
             carport.setFlatHinges(carport.getFlatHinges() + counterStabilizerSmall);
         }
