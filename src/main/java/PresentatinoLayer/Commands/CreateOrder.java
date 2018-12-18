@@ -41,16 +41,19 @@ public class CreateOrder extends Command {
         }
 
         Order o;
+
         o = orderCheck(measurementtype, length, width, shedLength, name, email, zip, phone, evt, isShed, highRoof);
+        o.getCarport().setShed(isShed);
+        o.getCarport().setShedLength(shedLength);
+
         Carport c = o.getCarport();
-        c.setShedLength(shedLength);
-        String svgTop = svgStringTop.printCarportTop(length, width, highRoof, isShed, shedLength, width);
-        String svgSide = svgStringSide.printCarportSide(length, width, highRoof, isShed, shedLength);
+        String svgTop = svgStringTop.printCarportTop(c);
+        String svgSide = svgStringSide.printCarportSide(c);
 
         request.getSession().setAttribute("svgside", svgSide);
         request.getSession().setAttribute("svgtop", svgTop);
         request.getSession().setAttribute("order", o);
-
+        
         return "singleOrder";
     }
 
@@ -60,7 +63,7 @@ public class CreateOrder extends Command {
         if ("outermeasurements".equals(measurementtype) && (length < 325 || width < 310)) {
             throw new MakeOrderException("Længden eller bredden på din carports indre mål er under 240.");
         }
-        if(shedLength > length) {
+        if (shedLength > length) {
             throw new MakeOrderException("Skurret kan ikke være større end carporten");
         }
         if ("outermeasurements".equals(measurementtype)) {

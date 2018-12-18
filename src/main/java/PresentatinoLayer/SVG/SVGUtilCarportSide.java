@@ -8,26 +8,61 @@ import static FunctionLayer.Rule.Rules.*;
 
 public class SVGUtilCarportSide {
 
-    public String printCarportSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
-        int canvasX = length + 300;
+    /**
+     * This method creates a canvas for SVG to be places on, takes in the length
+     * and width and an additional 300 to make the canvas adjust to the SVG
+     * picture
+     *
+     * @param length Length of carport
+     * @param width Width of carport
+     * @param roof If there is a roof
+     * @param shed If there is a shed
+     * @param shedLength Length of the
+     * @return retunere canvases til res som former SVG'en
+     * @throws DMException
+     * @throws MakeOrderException
+     */
+    public String printCarportSide(Carport car) throws DMException, MakeOrderException {
+        int canvasX = car.getLength() + 300;
         int canvasY = POSTHEIGHT + 300;
-        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(length, width, roof, shed, shedLength) + "</SVG>";
+        String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(car) + "</SVG>";
         return res;
     }
 
-    public String caportFromSide(int length, int width, boolean roof, boolean shed, int shedLength) throws DMException, MakeOrderException {
-        Carport c = new CarportCalculator().calculateAll(length, width, roof, shed);
+    /**
+     * This method creates the different parts of the SVG Checks if the roof and
+     * shed and will make the SVG code to produce accordingly
+     *
+     * @param length Length of carport
+     * @param width Width of carport
+     * @param roof If there is a roof
+     * @param shed If there is a shed
+     * @param shedLength Length of the
+     * @return returns the final string of the SVG code the produce the SVG
+     * drawing
+     * @throws DMException Throws when there is an exception in the SQL call to
+     * the database
+     * @throws MakeOrderException Throws when there is an error in the creation
+     * of an order
+     */
+    public String caportFromSide(Carport car) throws DMException, MakeOrderException {
+        int length = car.getLength();
+        int width = car.getWidth();
+        boolean roof = car.isRoof();
+        boolean shed = car.isShed();
+        int shedLength = car.getShedLength();
 
         int outerFrameWidth = length + HANGOUTONESIDE * BOTHSIDES + ENTRANCEHANGOUT;
         int innerFrameXPos = OUTERFRAMEXPOS + HANGOUTONESIDE;
         int rafterSpaceing = OUTERFRAMEXPOS;
         int postYPos = OUTERFRAMEYPOS + WOODWIDTH;
-        int roofHeight = (int) c.getRoofPostHeight();
+        int roofHeight = (int) car.getRoofPostHeight();
 
         String res = beamSVG(outerFrameWidth);
-        res = postsSVG(res, length, innerFrameXPos, postYPos, c, shed, shedLength);
-        res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, c);
-        res = linesSVG(res, length, innerFrameXPos, c);
+        res = postsSVG(res, length, innerFrameXPos, postYPos, car, shed, shedLength);
+        res = raftersSvg(res, rafterSpaceing, outerFrameWidth, roof, roofHeight, car);
+        res = linesSVG(res, length, innerFrameXPos, car);
+
         if (shed) {
             res = shedSVG(res, shedLength, innerFrameXPos, postYPos);
             res = shedLinesSVG(res, shedLength, innerFrameXPos, postYPos);
@@ -49,52 +84,58 @@ public class SVGUtilCarportSide {
     }
 
     private String textSVG(String res, int innerFrameXPos, int messurement) {
-        //Post spacing text
         res += text(innerFrameXPos + CENTEROFPOSTMEASSURE + TEXTBOTTOMLAYER, OUTERFRAMEYPOS + POSTHEIGHT + TEXTBOTTOMLAYER, messurement);
-        //Post height text
         res += textRotated(OUTERFRAMEXPOS - TEXTSPACINGINNERLAYER, OUTERFRAMEYPOS + TEXTSPACINGINNERLAYER + POSTHEIGHT / 2, POSTHEIGHT);
         return res;
     }
 
     private String linesSVG(String res, int length, int innerFrameXPos, Carport c) {
-        //Post spacing lines with 4 posts
         if (c.getPost() == MINIMUMPOSTS) {
             res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length + innerFrameXPos - CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
             res = textSVG(res, innerFrameXPos, length);
         }
-        //Post spacing lines with 6 posts
+
         if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
             res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length / POSTPOSITIONTWO + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
             res = textSVG(res, innerFrameXPos, length / POSTPOSITIONTWO);
         }
-        //Post spacing lines with 8 posts
+
         if (c.getPost() >= MAXPOSTS) {
             res += line(innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER, length / POSTPOSITIONTHREE + innerFrameXPos + CENTEROFPOSTMEASSURE, OUTERFRAMEYPOS + POSTHEIGHT + LINESPACINGINNERLAYER);
-            res = textSVG(res, innerFrameXPos, length / 3);
+            res = textSVG(res, innerFrameXPos, length / POSTPOSITIONTHREE);
         }
-        //Post height lines
         res += line(OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + WOODWIDTH, OUTERFRAMEXPOS - LINESPACINGINNERLAYER, OUTERFRAMEYPOS + POSTHEIGHT + WOODWIDTH);
         return res;
     }
 
     private String raftersSvg(String res, int rafterSpaceing, int outerFrameWidth, boolean roof, int roofHeight, Carport c) {
         if (roof) {
-            res = roofBeamsSVG(outerFrameWidth, c, res, rafterSpaceing);
+            res = roofRafterSVG(res, roofHeight, outerFrameWidth, c, rafterSpaceing);
+            res = roofBeamsSVG(roofHeight, c, res, outerFrameWidth);
         } else {
             res = flatRoofRafters(c, res, rafterSpaceing, outerFrameWidth);
         }
         return res;
     }
 
-    private String roofBeamsSVG(int outerFrameWidth, Carport c, String res, int rafterSpaceing) {
-        int yPosSpacingTop = OUTERFRAMEYPOS;
-        int roofBeamSVGSPacing = (outerFrameWidth / BOTHSIDES) / c.getRoofBeams();
-        for (int i = 0; i < c.getRoofBeams(); i++) {
-            res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, yPosSpacingTop);
-            yPosSpacingTop -= roofBeamSVGSPacing;
-        }
-        res = roofRaftersSVG(res, outerFrameWidth, c, rafterSpaceing, yPosSpacingTop);
+    private String roofBeamsSVG(int roofHeight, Carport c, String res, int outerFrameWidth) {
+        double spacingCalculat = (double) Math.ceil((double) roofHeight / c.getRoofBeams());
+        int svgRoofBeamSpacing = (int) spacingCalculat;
+        int count = OUTERFRAMEYPOS - roofHeight;
 
+        for (int i = 0; i < c.getRoofBeams(); i++) {
+            res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, count);
+            count += svgRoofBeamSpacing;
+        }
+        return res;
+    }
+
+    private String roofRafterSVG(String res, int roofHeight, int outerFrameWidth, Carport c, int rafterSpaceing) {
+        res += square(roofHeight + WOODWIDTH, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - roofHeight);
+        for (int i = 0; i < c.getRafter(); i++) {
+            res += square(roofHeight + WOODWIDTH, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - roofHeight);
+            rafterSpaceing += c.getRafterSpacing();
+        }
         return res;
     }
 
@@ -107,34 +148,18 @@ public class SVGUtilCarportSide {
         return res;
     }
 
-    private String roofRaftersSVG(String res, int outerFrameWidth, Carport c, int rafterSpaceing, int yPosSpacingTop) {
-        int heightOfTopBeam = (yPosSpacingTop + WOODWIDTH) * c.getRoofBeams();
-
-        res += square(heightOfTopBeam, WOODWIDTH, OUTERFRAMEXPOS + outerFrameWidth - WOODWIDTH, OUTERFRAMEYPOS - heightOfTopBeam + WOODWIDTH);
-        for (int i = 0; i < c.getRafter(); i++) {
-            res += square(heightOfTopBeam, WOODWIDTH, rafterSpaceing, OUTERFRAMEYPOS - heightOfTopBeam + WOODWIDTH);
-            rafterSpaceing += c.getRafterSpacing();
-        }
-        return res;
-    }
-
     private String postsSVG(String res, int length, int innerFrameXPos, int postYPos, Carport c, boolean shed, int shedLength) {
-        //Post
         if (!shed) {
             res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos, postYPos);
         }
 
         res += square(POSTHEIGHT, POSTWIDTH, innerFrameXPos + length - POSTWIDTH, postYPos);
-        //carport with 6 posts
-        if (c.getPost() > MINIMUMPOSTS && c.getPost() < MAXPOSTS) {
-            // res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTWO + innerFrameXPos, postYPos);
-        }
-
-        //carport with 8 posts
         if (c.getPost() >= MAXPOSTS) {
+
             if (shedLength < length / POSTPOSITIONTHREE) {
                 res += square(POSTHEIGHT, POSTWIDTH, length / POSTPOSITIONTHREE + innerFrameXPos, postYPos);
             }
+
             if (shedLength < length / POSTPOSITIONONEHALF) {
                 res += square(POSTHEIGHT, POSTWIDTH, (int) (length / POSTPOSITIONONEHALF + innerFrameXPos - POSTWIDTH), postYPos);
             }
@@ -144,14 +169,7 @@ public class SVGUtilCarportSide {
 
     private String beamSVG(int outerFrameWidth) {
         String res = "";
-        //Beam
         res += square(WOODWIDTH, outerFrameWidth, OUTERFRAMEXPOS, OUTERFRAMEYPOS);
-        return res;
-    }
-
-    private String background() {
-        String res = "<rect x=\"0\" y=\"0\" height=\"1000\" width=\"1000\"\n"
-                + "              style=\"stroke:#000000; fill: #f9f9f9\"/>";
         return res;
     }
 

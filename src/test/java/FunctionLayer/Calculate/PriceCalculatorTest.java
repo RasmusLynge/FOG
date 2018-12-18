@@ -49,7 +49,7 @@ public class PriceCalculatorTest {
     public void priceTopRoof240x240() throws DMException, MakeOrderException {
         //Arrange
         double actualPrice = 0;
-        double expectedPrice = 3033.0;
+        double expectedPrice = 2176.0;
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -101,7 +101,7 @@ public class PriceCalculatorTest {
         length = 480;
         width = 480;
         double actualPrice = 0;
-        double expectedPrice = 5628.0;
+        double expectedPrice = 3897.0;
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -155,7 +155,7 @@ public class PriceCalculatorTest {
         length = 720;
         width = 720;
         double actualPrice = 0;
-        double expectedPrice = 11347.0;
+        double expectedPrice = 7000.0;
         //Act
         Carport result = cc.calculateAll(length, width, true, shed);
         result.setList(mc.materialList(result));
@@ -185,4 +185,3 @@ public class PriceCalculatorTest {
         Assert.assertEquals(expectedPrice, actualPrice, 0.005);
     }
 }
-

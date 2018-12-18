@@ -14,16 +14,18 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-
 public class DataMapper {
 
     /**
-     * Takes the login credentials as parameters and checks if there is a corresponding user in the database.
-     * If there is not it throws a login exception. 
-     * @param email
-     * @param password
-     * @return
-     * @throws LoginException
+     * Takes the login credentials as parameters and checks if there is a
+     * corresponding user in the database.
+     *
+     * @param email the email of the user
+     * @param password the password of the user
+     * @return Returns the user created from the retrieved values in the
+     * database.
+     * @throws LoginException If there is not a matching user it throws a login
+     * exception.
      */
     public static User login(String email, String password) throws LoginException {
         try {
@@ -50,10 +52,11 @@ public class DataMapper {
 
     /**
      * Queries the database for an order with the ID specified in the parameter.
-     * Makes an order instance with the retrieved data and returns it. 
-     * @param orderid
-     * @return
-     * @throws DMException
+     * Makes an order instance with the retrieved data and returns it.
+     *
+     * @param orderid The id of the order
+     * @return Returns the order
+     * @throws DMException Throws DMException if the query fails
      */
     public Order getOrderByID(int orderid) throws DMException {
         try {
@@ -83,10 +86,12 @@ public class DataMapper {
     }
 
     /**
-     * Queries the database for everything in the order table with corresponding user info, 
-     * makes new orders for each and returns them in an ArrayList
-     * @return
-     * @throws DMException
+     * Queries the database for everything in the order table with corresponding
+     * user info, makes new orders for each and returns them in an ArrayList
+     *
+     * @return returns an ArrayList of Orders with the values retrieved from the
+     * database
+     * @throws DMException if the query fails
      */
     public ArrayList<Order> getAllOrders() throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
@@ -111,11 +116,13 @@ public class DataMapper {
     }
 
     /**
-     * Queries the database for all orders with the state specified in the parameter. 
-     * Makes new order for each and returns them in an ArrayList
-     * @param state
-     * @return
-     * @throws DMException
+     * Queries the database for all orders with the state specified in the
+     * parameter. Makes new order for each and returns them in an ArrayList
+     *
+     * @param state the state the database is queried for
+     *
+     * @return An ArrayList of orders
+     * @throws DMException if the query fails
      */
     public ArrayList<Order> getSpecificOrders(String state) throws DMException {
         ArrayList<Order> ol = new ArrayList<>();
@@ -142,11 +149,13 @@ public class DataMapper {
     }
 
     /**
-     * Takes an order as parameter and inserts the data fromn it into the database with 2 SQL queries,
-     * 1 for the `order ` table and 1 for the `user_info`
-     * 
-     * @param order
-     * @throws FunctionLayer.Exception.DMException
+     * Takes an order as parameter and inserts the data fromn it into the
+     * database with 2 SQL queries, 1 for the `order ` table and 1 for the
+     * `user_info`
+     *
+     *
+     * @param order the order that is inserted in the database
+     * @throws FunctionLayer.Exception.DMException if the query fails
      */
     public void createOrder(Order order) throws DMException {
         try {
@@ -186,16 +195,16 @@ public class DataMapper {
     }
 
     /**
-     * Updates an order specified by the ID in the parameter with the values from the other parameters
-     * Returns the new order
-     * 
-     * @param orderId
-     * @param desiredLength
-     * @param desiredWidth
-     * @param flatRoof
-     * @param state
-     * @return
-     * @throws DMException
+     * This method updates an order specified by the ID in the parameter with
+     * the values from the other parameters
+     *
+     * @param orderId The ID of the order that is to be edited
+     * @param desiredLength the length the order should be updated to
+     * @param desiredWidth the width the order should be updated to
+     * @param flatRoof the boolean value the order should be updated to
+     * @param state the String state that the order should be updated to
+     * @return Returns the new order
+     * @throws DMException if the query fails
      */
     public Order EditOrder(int orderId, int desiredLength, int desiredWidth, int flatRoof, String state) throws DMException {
         try {
@@ -242,10 +251,11 @@ public class DataMapper {
 //    }
 
     /**
-     * Queries the database for all the materials in the table, makes new Material instances for each, and returns them in an ArrayList
-     * 
-     * @return
-     * @throws DMException
+     * Queries the database for all the materials in the table, makes new
+     * Material instances for each, and returns them in an ArrayList
+     *
+     * @return An ArrayList of Material
+     * @throws DMException if the query fails
      */
     public ArrayList<Material> getMaterials() throws DMException {
         ArrayList<Material> ml = new ArrayList<>();

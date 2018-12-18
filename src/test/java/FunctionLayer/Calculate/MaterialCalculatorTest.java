@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer.Calculate;
 
-import static FunctionLayer.Calculate.CoverCalculatorTest.roof;
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Entity.Material;
 import FunctionLayer.Exception.DMException;
@@ -19,17 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author Simon
- *
- */
 public class MaterialCalculatorTest {
+
     MaterialCalculator mc = new MaterialCalculator();
     CarportCalculator cc = new CarportCalculator();
     static int length, width;
     static boolean roof, shed;
-    
+
     @BeforeClass
     public static void setUpClass() {
         roof = false;
@@ -58,7 +48,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoLongAmountFlatRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -78,7 +68,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoLongAmountFlatRoof720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -98,7 +88,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoLongAmountTopRoof() throws DMException, MakeOrderException {
         //Act
@@ -132,7 +122,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoSmallAmountFlatRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -152,7 +142,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoSmallAmountFlatRoof720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -172,7 +162,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void plastmoSmallAmountTopRoof() throws DMException, MakeOrderException {
         Carport result = cc.calculateAll(length, width, true, shed);
@@ -204,7 +194,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountTopRoof240x240() throws DMException, MakeOrderException {
         //Act
@@ -220,7 +210,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountWithShed240x240() throws DMException, MakeOrderException {
         //Act
@@ -236,7 +226,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmount480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -255,7 +245,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountTopRoof480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -267,14 +257,14 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("FladtBeslag")) {
-                int expectedFlatHingesAmount = 14;
+                int expectedFlatHingesAmount = 12;
                 int actualFlatHingesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedFlatHingesAmount, actualFlatHingesAmount);
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountWithShed480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -293,7 +283,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmount720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -312,7 +302,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountTopRoof720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -324,14 +314,14 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("FladtBeslag")) {
-                int expectedFlatHingesAmount = 80;
+                int expectedFlatHingesAmount = 40;
                 int actualFlatHingesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedFlatHingesAmount, actualFlatHingesAmount);
             }
         }
     }
-    
+
     @Test
     public void flatHingesAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -367,7 +357,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void topRoofTilesAmount240x240() throws DMException, MakeOrderException {
         //Act
@@ -376,14 +366,14 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 69;
+                int expectedRoofTilesAmount = 32;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
             }
         }
     }
-    
+
     @Test
     public void topRoofTilesAmount480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -395,14 +385,14 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 171;
+                int expectedRoofTilesAmount = 79;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
             }
         }
     }
-    
+
     @Test
     public void topRoofTilesAmount720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -414,14 +404,14 @@ public class MaterialCalculatorTest {
         ArrayList<Material> l = result.getList();
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i).getName().equals("Tegl")) {
-                int expectedRoofTilesAmount = 317;
+                int expectedRoofTilesAmount = 146;
                 int actualRoofTilesAmount = l.get(i).getAmount();
                 //Assert
                 Assert.assertEquals(expectedRoofTilesAmount, actualRoofTilesAmount);
             }
         }
     }
-    
+
     @Test
     public void planksAmount240x240() throws DMException, MakeOrderException {
         //Act
@@ -456,7 +446,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void planksAmount720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -492,7 +482,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void coverStabilizerPlankSmallAmountWithShed240x240() throws DMException, MakeOrderException {
         //act
@@ -508,7 +498,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void coverStabilizerPlankSmallAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange
@@ -544,7 +534,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void coverStabilizerPlanksLongAmountWithShed240x240() throws DMException, MakeOrderException {
         //Act
@@ -560,7 +550,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void coverStabilizerPlanksLongAmountWithShed480x480() throws DMException, MakeOrderException {
         //Arrange
@@ -579,7 +569,7 @@ public class MaterialCalculatorTest {
             }
         }
     }
-    
+
     @Test
     public void coverStabilizerPlanksLongAmountWithShed720x720() throws DMException, MakeOrderException {
         //Arrange

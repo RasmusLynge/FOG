@@ -1,6 +1,7 @@
 package FunctionLayer.Rule;
 
 public class Rules {
+
     //carportCalc
     public static final int NEWPOSTLENGTH = 200; //how many centimeters to make a new post necessary
     public static final int TWOPOSTLENGTH = 200; //subtracted from side length because corner posts are shared
@@ -28,11 +29,10 @@ public class Rules {
     public static final int MIDDLEROOFBEAM = 1;
     public static final int MINIMUMHAVEONEPEICE = 1;
     public static final int SHEDPOSTS = 3;
-    
-    
+
     //coverCalc
     public static final int HALFHEIGHT = 2;
-    
+
     //priceCalc
     public static final int CMTOMETER = 100;
 
@@ -46,7 +46,7 @@ public class Rules {
     public static final int OVERLAPTILES = 5;
     public static final int SCREWSEACHRAFTER = 12;
     public static final int CONVERTTOPOSITIVE = -1;
-    
+
     //svgSide
     public static final int OUTERFRAMEXPOS = 100;
     public static final int OUTERFRAMEYPOS = 200;

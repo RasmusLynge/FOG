@@ -18,7 +18,7 @@ public class EditOrder extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int roof = Integer.parseInt(request.getParameter("roof"));
         String state = request.getParameter("State");
-        
+
         if (state.equalsIgnoreCase("ForespÃ¸rgsel")) {
             state = "Forespørgsel";
         }
@@ -37,7 +37,6 @@ public class EditOrder extends Command {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("Error");
         }
         return "showorderdetails";
     }
