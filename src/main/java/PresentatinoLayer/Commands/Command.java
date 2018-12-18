@@ -4,6 +4,7 @@ import PresentatinoLayer.Commands.CreateOrder;
 import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
+import FunctionLayer.Exception.NotLoggedInException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,10 @@ abstract class Command {
         commands.put("logout", new LogOut());
         commands.put("listspecificorders", new GetSpecificOrders());
         commands.put("getemployeepage", new GetEmployeePage());
+        commands.put("createemployeeuser", new CreateEmployeeUsers());
+        commands.put("createemployeeuserpage", new GetCreateEmployeeUserPage());
+        commands.put("getemployeeusers", new GetEmployeeUsers());
+        commands.put("deleteemployeeuser", new DeleteUser());
     }
 
     static Command from(HttpServletRequest request) {
@@ -35,5 +40,5 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws DMException, MakeOrderException, LoginException;
+            throws DMException, MakeOrderException, LoginException, NotLoggedInException;
 }

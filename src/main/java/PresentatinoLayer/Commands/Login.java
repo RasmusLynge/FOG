@@ -24,6 +24,8 @@ public class Login extends Command {
         if (user.getRole().equals("employee")) {
 
             return "employeepage";
+        } if (user.getRole().equals("admin")) {
+            return "adminpage";
         } else {
             throw new LoginException("Du har ikke rettigheder til at logge ind her");
         }

@@ -1,4 +1,6 @@
+<%@page import="FunctionLayer.Entity.Order"%>
 <%@page import="FunctionLayer.Entity.User"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -84,6 +86,7 @@
                 </div>
             </nav>
 
+
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
@@ -138,8 +141,60 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Du er logget ind som <%= user.getEmail()%></h2>
+                <%
+                    if (user != null && "employee".equals(user.getRole())) {
+                        String state = (String) request.getAttribute("state");
+                        ArrayList<Order> orderList = new ArrayList<>();
+                        orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
+                        if (orderList != null && !orderList.isEmpty()) {
+                %>
 
+                <h1 class="display-5">Her er alle ordre med status "<%=state%>" : </h1>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Dato</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+
+                    <%
+                        for (int i = 0; i < orderList.size(); i++) {
+                            String orderID = orderList.get(i).getId();
+                            String orderDate = orderList.get(i).getOrderdate();
+                            String orderState = orderList.get(i).getState();
+                    %>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><%out.print(orderID);%></th>
+                            <td><%out.print(orderDate);%> </td>
+                            <td> <%out.print(orderState);%> </td>
+                            <td>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="showOrderDetails">
+                                    <input type="hidden" name="orderID" value="<%out.print(orderID);%>">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Se ordre detaljer">  
+                                </form> 
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        } else if (orderList.isEmpty()){
+                        %>
+                    <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
+                    <%
+                        }
+                    %>       
+                    </tbody>
+                </table>                
+
+
+                <%
+                    }
+                %>
 
             </div>
 
@@ -157,3 +212,4 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
+

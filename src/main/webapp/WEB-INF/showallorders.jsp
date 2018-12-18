@@ -11,7 +11,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Bootstrap 4 Starter Template</title>
+        <title>Fog Carporte</title>
 
         <title>Bootstrap 4 Layout</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -143,13 +143,9 @@
             <div class="jumbotron">
                 <%
                     if (user != null && "employee".equals(user.getRole())) {
-                        String state = (String) request.getAttribute("state");
-                        ArrayList<Order> orderList = new ArrayList<>();
-                        orderList = (ArrayList<Order>) session.getAttribute("getSpecificOrders");
-                        if (orderList != null && !orderList.isEmpty()) {
                 %>
 
-                <h1 class="display-5">Her er alle ordre med status "<%=state%>" : </h1>
+                <h1 class="display-4">Her er alle tidligere ordre: </h1>
                 <br>
                 <table class="table">
                     <thead>
@@ -162,10 +158,13 @@
                     </thead>
 
                     <%
-                        for (int i = 0; i < orderList.size(); i++) {
-                            String orderID = orderList.get(i).getId();
-                            String orderDate = orderList.get(i).getOrderdate();
-                            String orderState = orderList.get(i).getState();
+                        ArrayList<Order> orderList = new ArrayList<>();
+                        orderList = (ArrayList<Order>) session.getAttribute("getAllOrders");
+                        if (orderList != null) {
+                            for (int i = 0; i < orderList.size(); i++) {
+                                String orderID = orderList.get(i).getId();
+                                String orderDate = orderList.get(i).getOrderdate();
+                                String orderState = orderList.get(i).getState();
                     %>
                     <tbody>
                         <tr>
@@ -181,13 +180,9 @@
                             </td>
                         </tr>
                         <%
+                                }
                             }
-                        } else if (orderList.isEmpty()){
-                        %>
-                    <h1 class="display-5">Der er ingen ordre med status "<%=state%>" : </h1>
-                    <%
-                        }
-                    %>       
+                        %>       
                     </tbody>
                 </table>                
 
@@ -212,4 +207,3 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
-

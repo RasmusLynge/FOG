@@ -5,6 +5,7 @@ import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.LoggerException;
 import FunctionLayer.Exception.LoginException;
 import FunctionLayer.Exception.MakeOrderException;
+import FunctionLayer.Exception.NotLoggedInException;
 import logging.Logging;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -48,8 +49,13 @@ public class FrontController extends HttpServlet {
             request.setAttribute("error", LoginEx.getMessage());
             LoginEx.printStackTrace();
             request.getRequestDispatcher("/WEB-INF/employeelogin.jsp").forward(request, response);
+        } catch (NotLoggedInException Ex) {
+            Logging.getLogger().log(Level.SEVERE, Ex.getMessage(), Ex);
+            request.setAttribute("error", Ex.getMessage());
+            Ex.printStackTrace();
+            request.getRequestDispatcher("/WEB-INF/errorpage.jsp").forward(request, response);
         }
-    }
+    }   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

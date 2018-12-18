@@ -45,6 +45,13 @@ public class LogicFacade {
     public User login(String email, String password) throws LoginException {
         return DataMapper.login(email, password);
     }
+    
+    public User createEmployeeUser(String email, String password) throws DMException {
+        User user = new User(email, password, "employee");
+        DataMapper.createUser(user);
+        return user;
+    }
+    
 
     /**
      * This method simply takes all orders in the system and puts them in an
@@ -126,10 +133,18 @@ public class LogicFacade {
      * @throws MakeOrderException casts this if the input for lenght or width
      * isnt in the right range of numbers
      */
-    public Order EditOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {
-        Order o = df.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
-        o.setPrice(p.priceCalculator(o.getLength(), o.getWidth(), o.isShed(), o.isFlat_roof()));
-        o.setCarport(p.getCarport());
-        return o;
+    public Order editOrder(int orderId, int desiredWidth, int desiredLength, int flatRoof, String state) throws DMException, MakeOrderException {
+        Order order = df.EditOrder(orderId, desiredLength, desiredWidth, flatRoof, state);
+        order.setPrice(p.priceCalculator(order.getLength(), order.getWidth(), order.isShed(), order.isFlat_roof()));
+        order.setCarport(p.getCarport());
+        return order;
+    }
+
+    public ArrayList<User> getAllEmployeeUsers() throws DMException {
+        return df.getAllEmployeeUsers();
+    }
+
+    public void deleteUser(int userId) throws DMException {
+        df.deleteEmployeeUser(userId);
     }
 }
