@@ -105,4 +105,12 @@ public class DataFacade {
         return list;
     }
 
+    public void deleteEmployeeUser(int userId) throws DMException {
+        dm.deleteUser(userId);
+    }
+    
+        public ArrayList<User> getAllEmployeeUsers() throws DMException {
+        return dm.getAllEmployeeUsers();
+    }
+
 }

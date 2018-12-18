@@ -1,6 +1,6 @@
 <%@page import="FunctionLayer.Entity.User"%>
-<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -8,8 +8,8 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-        <title>Bootstrap 4 Starter Template</title>
+ 
+        <title>Fog Carport</title>
 
         <title>Bootstrap 4 Layout</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,7 +49,6 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
-                                <a class="dropdown-item" href="#">Uden skur</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
@@ -64,52 +63,89 @@
                             <% User user = (User) session.getAttribute("user");
                                 if (user == null) {
                                     out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=employeelogin\">Log ind</a>");
-                                } else {
-                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
-                                }%>                         
+                                } else if (user.getRole().equalsIgnoreCase("employee")) {%>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/FOG/FrontController?command=getemployeepage">Gå til medarbejder siden</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%} else if (user.getRole().equalsIgnoreCase("admin")) {
+                        %> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%
+                            } else {
+                                out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+
+                            }%>                         
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="createemployeeuserpage">
+                                <input class="btn btn-primary btn-md"type="submit" value="Opret bruger til medarbejder">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command"  value="getemployeeusers" > 
+                                <input class="btn btn-primary btn-md"type="submit" value="Slet bruger for medarbejder">
+                            </form>
                         </li>
                     </ul>
                 </div>
             </nav>
 
             <div class="jumbotron">
-                <h2>TEST SIDEN!</h2>
-                <%= request.getAttribute("carporttop")%>
-                <%= request.getAttribute("carportside")%>
-            </div>
-
-            <div class="jumbotron">
-                <div class="col-md-12 register-right">
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Uden skur</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Med skur</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        </div>
-                        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row register-form">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="Vælg bredde på skur *" value="" />
-                                        <input type="number" class="form-control" placeholder="Vælg længde på skur *" value="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h2>Lav en ny bruger til en medarbejder: </h2>
+                <br>
+                <div class="form-group">
+                    <form name="register" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="createemployeeuser">
+                        Indtast Email:<br>
+                        <input class="form-control" type="text" name="email" placeholder="Email *" value="" required/>
+                        <br>
+                        Indtast adgangskode:<br>
+                        <input class="form-control" type="password" name="password1" placeholder="Adgangskode *" value="" required/>
+                        <br>
+                        Indtast adgangskode igen:<br>
+                        <input class="form-control" type="password" name="password2" placeholder="Skriv adgangskode igen *" value="" required/>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Opret bruger">
+                    </form>
                 </div>
             </div>
-                <nav class="navbar bottom navbar-dark bg-dark">
-                    <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
-                    <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
-                    </li>
-                </nav>
 
+
+            <nav class="navbar bottom navbar-dark bg-dark">
+                <a class="navbar-brand" >Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby - CVR-nr. 16314439</a>
+                <a class="navbar-brand" style="float: right" >Alle priser er inkl. moms</a>
+                </li>
+            </nav>
+
+        </div>
 
         <script src="/js/jquery.min.js"></script>
         <script src="/js/popper.min.js"></script>

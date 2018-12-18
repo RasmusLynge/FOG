@@ -1,15 +1,16 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="FunctionLayer.Entity.User"%>
-<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+ 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Fog Carporte</title>
+        <title>Fog Carport</title>
 
         <title>Bootstrap 4 Layout</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -74,18 +75,87 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
                             </div>
+                        </li>
+                        <%} else if (user.getRole().equalsIgnoreCase("admin")) {
+                        %> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%
+                            } else {
+                                out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
 
-                            <%} else {
-                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                            }%>                         
+                    </ul>
+                </div>
+            </nav>
 
-                                }%>                         
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="createemployeeuserpage">
+                                <input class="btn btn-primary btn-md"type="submit" value="Opret bruger til medarbejder">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command"  value="getemployeeusers" > 
+                                <input class="btn btn-primary btn-md"type="submit" value="Slet bruger for medarbejder">
+                            </form>
                         </li>
                     </ul>
                 </div>
             </nav>
 
             <div class="jumbotron">
-                <h2>Hov! Der skete en fejl </h2>
+                <h1 class="display-4">Her er alle brugere til medarbejdere: </h1>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Bruger ID</th>
+                            <th scope="col">Email</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+
+                    <%
+                        ArrayList<User> userList = new ArrayList<>();
+                        userList = (ArrayList<User>) session.getAttribute("getAllEmployeeUsers");
+                        if (userList != null) {
+                            for (int i = 0; i < userList.size(); i++) {
+                                String userId = userList.get(i).getId();
+                                String email = userList.get(i).getEmail();
+                    %>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><%out.print(userId);%></th>
+                            <td><%out.print(email);%> </td>
+                            <td>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="deleteemployeeuser">
+                                    <input type="hidden" name="userId" value="<%out.print(userId);%>">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="slet bruger">  
+                                </form> 
+                            </td>
+                        </tr>
+                        <%
+                                }
+                            }
+                        %>
+                </table>
             </div>
 
 
