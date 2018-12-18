@@ -12,7 +12,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema FOG
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `FOG` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `FOG` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema FOG
 -- -----------------------------------------------------
@@ -20,7 +20,7 @@ CREATE SCHEMA IF NOT EXISTS `FOG` DEFAULT CHARACTER SET latin1 ;
 -- -----------------------------------------------------
 -- Schema FOG
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `FOG` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `FOG` DEFAULT CHARACTER SET utf8 ;
 USE `FOG` ;
 USE `FOG` ;
 
@@ -35,7 +35,13 @@ CREATE TABLE IF NOT EXISTS `FOG`.`User_Login` (
   PRIMARY KEY (`User_Id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `User_Login`
+VALUES
+(1, 'jeger@admin.com', '123', 'admin'),
+(2, 'jeger@kunde.com', '123', 'customer'),
+(4, 'jeger@employee.com', '123', 'employee');
 
 
 -- -----------------------------------------------------
@@ -43,10 +49,12 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
   `Id_Order` INT NOT NULL AUTO_INCREMENT,
-  `fk_User_Id` INT(11) NULL,
   `Length` INT(11) NOT NULL,
   `Width` INT(11) NOT NULL,
   `Flat_Roof` TINYINT(1) NULL DEFAULT NULL,
+  `Shed` tinyint(1) null default null,
+  `ShedLength` int null default null,
+  `Evt` VARCHAR(500) NULL DEFAULT NULL,
   `Date` DATETIME NULL,
   `State` VARCHAR(20) NOT NULL default 'Forespørgsel',
   PRIMARY KEY (`Id_Order`),
@@ -56,7 +64,11 @@ CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
     REFERENCES `FOG`.`User_Login` (`User_Id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `Order` (`Width`, `Length`, `Flat_Roof`, `Date`)
+VALUES
+(280, 270, 1, '2018-11-11 11:11:11');
 
 
 -- -----------------------------------------------------
@@ -74,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `FOG`.`User_Info` (
     REFERENCES `FOG`.`Order` (`Id_Order`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -83,34 +95,43 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `FOG`.`Material` (
   `Material_Id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
+  `Length` INT(4) NULL,
   `Price` DOUBLE NOT NULL,
-  `Length` DOUBLE NOT NULL,  
   `Price_Type` VARCHAR(45) NULL,
   PRIMARY KEY (`Material_Id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO `User_Login`
-VALUES
-(1, 'jeger@admin.com', '123', 'employee'),
-(2, 'jens@somewhere.com', 'jensen', 'customer'),
-(3, 'Customer@lego.com', 'lego', 'customer');
 
 INSERT INTO `Material`
 VALUES
-(1, 'Rafter', '10.00', 'meter'),
-(2, 'Beam', '10.00', 'meter'),
-(3, 'Post', '12.70', 'meter'),
-(4, 'Cover', '9.50', 'meter'),
-(5, 'Screws', '75.00', 'box'),
-(6, 'Hinge', '17.00', 'stk'),
-(NULL, 'Tile', '20.00', 'perSingle'),
-(NULL, 'PlastmoLong', '175.00', 'perSingle'),
-(NULL, 'PlastmoSmall', '100.00', 'perSingle'),
-(NULL, 'FlatHinge', '20.00', 'perSingle');
+-- træ
+(null, '25x150	mm.	trykimp. Bræt', '480', '10.00', 'stk'),
+(null, '200x200 mm. bjælke', '600', '9.50', 'sæt af 8 stk'),
+(null, '200x200 mm. bjælke', '480', '9.50', 'sæt af 8 stk'),
+(null, '97x97	mm.	trykimp. Stolpe', '300', '75.00', 'stk'),
+(null, '45x195	spærtræ	ubh.', '480', '17.00', 'stk'),
+(null, '45x95 Reglar ubh.', '240', '17.00', 'stk'),
+(null, '45x95 Reglar ubh.', '360', '17.00', 'stk'),
+(null, '45x195	spærtræ	ubh.', '600', '17.00', 'stk'),
+(null, '45x195	spærtræ	ubh.', '480', '17.00', 'stk'),
+
+-- tagpakke (fladt tag)
+(null, 'Plastmo Ecolite blåtonet', '600', '17.00', 'stk'),
+(null, 'Plastmo Ecolite blåtonet', '360', '17.00', 'stk'),
+
+
+-- beslag skuer
+(null, 'LBeslag', '0', '17.00', 'stk'),
+(null, 'FladtBeslag', '0', '17.00', 'stk'),
+(null, 'Skruer 200 stk.', '0', '17.00', 'stk'),
+
+-- dør materialer til shed
+(null, 'Tegl', '1', '17.00', 'stk'),
+(null, 'Dør hængsel', '2', '17.00', 'stk');

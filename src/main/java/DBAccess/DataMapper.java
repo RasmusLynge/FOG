@@ -281,6 +281,12 @@ public class DataMapper {
         }
     }
 
+     /**
+     * Creates a list of all users from the database.
+     * 
+     * @return An ArrayList of User
+     * @throws DMException If the query fails
+     */
     public ArrayList<User> getAllEmployeeUsers() throws DMException {
         ArrayList<User> userl = new ArrayList();
         try {
@@ -302,6 +308,12 @@ public class DataMapper {
         }
     }
 
+     /**
+     * Creates a list of all users from the database.
+     * 
+     * @param userId the user_Id og the user that should be deleted
+     * @throws DMException If the query fails
+     */
     void deleteUser(int userId) throws DMException{
         try {
             Connection con = Connector.connection();
