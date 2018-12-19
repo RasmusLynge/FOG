@@ -64,8 +64,6 @@ public class RoofCalculator {
      * rafters, amount of roof beams, amount of roof tiles, amount of flat
      * hinges and lastly amount of screws
      *
-     * @param width the width of the carport
-     * @param length the width of the carport
      * @param degree the chosen degree for the top roof
      */
     public void topRoof(int degree) {

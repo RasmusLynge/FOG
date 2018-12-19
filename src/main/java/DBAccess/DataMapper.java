@@ -53,9 +53,7 @@ public class DataMapper {
     /**
      * Creates a user with the given password and email.
      *
-     * @param email the email of the user
-     * @param password the password of the user
-     * @throws LoginException If there is not a matching user it throws a login
+     * @throws DMException If there is not a matching user it throws a login
      * exception.
      */
     public static void createUser(User user) throws DMException {

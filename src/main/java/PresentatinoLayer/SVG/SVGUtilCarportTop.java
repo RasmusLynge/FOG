@@ -12,12 +12,7 @@ public class SVGUtilCarportTop {
      * Creates the SVG canvas and appends the string created in the method
      * carportFromAbove
      *
-     * @param length the length of the carport
-     * @param width the width of the carport
-     * @param roof the boolean value for roof of the carport
-     * @param shed the boolean value of the shed for the carport
-     * @param shedLength the length of the shed
-     * @param shedWidth the width of the shed
+     * @param car The carport the SVG will be made from
      * @return Returns an HTML string that contains the drawing of the carport
      * from above.
      * @throws DMException If the query to the database fails
@@ -35,12 +30,7 @@ public class SVGUtilCarportTop {
      * full drawing, calculated from the carport measurements. Appends it all to
      * a string as html that can be viewed in the JSP.
      *
-     * @param length the length of the carport
-     * @param width the width of the carport
-     * @param roof the boolean value for roof of the carport
-     * @param shed the boolean value of the shed for the carport
-     * @param shedLength the length of the shed
-     * @param shedWidth the width of the shed
+     * @param car The carport the SVG will be made from
      * @return Returns an HTML string that contains the drawings of the carport
      * from above.
      * @throws DMException If the query to the database fails
@@ -69,7 +59,6 @@ public class SVGUtilCarportTop {
         }
 
         res = postsSVG(res, car.getLength(), car.getWidth(), innerFrameXPos, innerFrameYPos, innerLayerEntranceCornorXPosForPost, innerLayerEntranceCornorYPosForPost, car, car.getShedLength(), car.isShed());
-        System.out.println("");
         if (car.isShed()) {
             res = shedPostsAndDoor(res, innerFrameXPos, car.getShedLength(), innerFrameYPos, innerLayerEntranceCornorYPosForPost);
             res = res += transSquare(car.getWidth(), car.getShedLength(), innerFrameXPos, innerFrameYPos);

@@ -49,6 +49,7 @@ VALUES
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
   `Id_Order` INT NOT NULL AUTO_INCREMENT,
+  `fk_User_Id` INT(11) NULL,
   `Length` INT(11) NOT NULL,
   `Width` INT(11) NOT NULL,
   `Flat_Roof` TINYINT(1) NULL DEFAULT NULL,
@@ -57,11 +58,7 @@ CREATE TABLE IF NOT EXISTS `FOG`.`Order` (
   `Evt` VARCHAR(500) NULL DEFAULT NULL,
   `Date` DATETIME NULL,
   `State` VARCHAR(20) NOT NULL default 'Forespørgsel',
-  PRIMARY KEY (`Id_Order`),
-  INDEX `fk_Order_User1_idx` (`fk_User_Id` ASC),
-  CONSTRAINT `fk_Order_User`
-    FOREIGN KEY (`fk_User_Id`)
-    REFERENCES `FOG`.`User_Login` (`User_Id`))
+  PRIMARY KEY (`Id_Order`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;

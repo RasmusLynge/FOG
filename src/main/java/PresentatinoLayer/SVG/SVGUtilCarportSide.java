@@ -1,6 +1,5 @@
 package PresentatinoLayer.SVG;
 
-import FunctionLayer.Calculate.CarportCalculator;
 import FunctionLayer.Entity.Carport;
 import FunctionLayer.Exception.DMException;
 import FunctionLayer.Exception.MakeOrderException;
@@ -13,12 +12,8 @@ public class SVGUtilCarportSide {
      * and width and an additional 300 to make the canvas adjust to the SVG
      * picture
      *
-     * @param length Length of carport
-     * @param width Width of carport
-     * @param roof If there is a roof
-     * @param shed If there is a shed
-     * @param shedLength Length of the
-     * @return retunere canvases til res som former SVG'en
+     * @param car the carport the svg will be made from
+     * @return Returns the string which the svg will be appended to
      * @throws DMException
      * @throws MakeOrderException
      */
@@ -33,11 +28,7 @@ public class SVGUtilCarportSide {
      * This method creates the different parts of the SVG Checks if the roof and
      * shed and will make the SVG code to produce accordingly
      *
-     * @param length Length of carport
-     * @param width Width of carport
-     * @param roof If there is a roof
-     * @param shed If there is a shed
-     * @param shedLength Length of the
+     * @param car the carport the svg will be made from
      * @return returns the final string of the SVG code the produce the SVG
      * drawing
      * @throws DMException Throws when there is an exception in the SQL call to
