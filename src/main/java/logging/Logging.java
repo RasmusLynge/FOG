@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class Logging {
 
-    public static final boolean PRODUCTION = false;
+    public static final boolean PRODUCTION = true;
     public static final String LOG_FILE_PATH = "/var/log/tomcat8/Fog.log";
     public static final String LOG_FILE_PATH_DEVELOP = "C:\\Users\\Rasmu\\Documents\\Datamatiker_2sem\\Modul_2_SQL\\FOG\\FOGLog.log";
     public static final String LOG_FILE_PATH_STACK = "C:\\Users\\Rasmu\\Documents\\Datamatiker_2sem\\Modul_2_SQL\\FOG\\FOGStack.txt";
