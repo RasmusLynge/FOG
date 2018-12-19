@@ -51,6 +51,32 @@ public class DataMapper {
     }
 
     /**
+     * Creates a user with the given password and email.
+     *
+     * @param email the email of the user
+     * @param password the password of the user
+     * @throws LoginException If there is not a matching user it throws a login
+     * exception.
+     */
+    public static void createUser(User user) throws DMException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO User_Login (Email, Password, Role) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            String id = ids.getString(1);
+            user.setId(id);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+    /**
      * Queries the database for an order with the ID specified in the parameter.
      * Makes an order instance with the retrieved data and returns it.
      *
@@ -251,6 +277,51 @@ public class DataMapper {
             }
             return ml;
         } catch (ClassNotFoundException | SQLException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+     /**
+     * Creates a list of all users from the database.
+     * 
+     * @return An ArrayList of User
+     * @throws DMException If the query fails
+     */
+    public ArrayList<User> getAllEmployeeUsers() throws DMException {
+        ArrayList<User> userl = new ArrayList();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT `email`, `User_Id`"
+                    + "FROM `User_Login`"
+                    + "WHERE `Role` = 'employee';";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User(rs.getString("Email"), "123", "employee");
+                user.setId(String.valueOf(rs.getInt("User_Id")));
+
+                userl.add(user);
+            }
+            return userl;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new DMException(ex.getMessage());
+        }
+    }
+
+     /**
+     * Creates a list of all users from the database.
+     * 
+     * @param userId the user_Id og the user that should be deleted
+     * @throws DMException If the query fails
+     */
+    void deleteUser(int userId) throws DMException{
+        try {
+            Connection con = Connector.connection();
+            String SQL = "DELETE FROM `User_Login` WHERE `User_Id` = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
             throw new DMException(ex.getMessage());
         }
     }

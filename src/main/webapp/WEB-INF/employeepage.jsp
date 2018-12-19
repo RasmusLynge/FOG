@@ -9,7 +9,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Bootstrap 4 Starter Template</title>
+        <title>Fog Carporte</title>
 
         <title>Bootstrap 4 Layout</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -138,7 +138,7 @@
             </nav>
 
             <div class="jumbotron">
-                <h2>Du er nu logget ind som <%= user.getEmail()%></h2>
+                <h2>Du er logget ind som <%= user.getEmail()%></h2>
 
 
             </div>

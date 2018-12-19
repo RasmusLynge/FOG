@@ -117,6 +117,8 @@ public class CarportCalculatorTest {
         //Act
         Carport result = cc.calculateAll(length, width, roof, shed);
         //Outer width er altid 70 cm længere end den angivede bredde
+        System.out.println(" car port width: "+ result.getWidth());
+        System.out.println(" car port length: "+ result.getLength());
         int expectedOuterWidth = 790;
         int actualOuterWidth = result.getOuterWidth();
         //Assert

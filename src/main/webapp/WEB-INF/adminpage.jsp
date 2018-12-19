@@ -1,4 +1,3 @@
-<%@page import="FunctionLayer.Entity.Order"%>
 <%@page import="FunctionLayer.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+ 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -75,47 +74,53 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
                             </div>
-
-                            <%} else {
-                                    out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
+                        </li>
+                        <%} else if (user.getRole().equalsIgnoreCase("admin")) {
+                        %> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <%= user.getEmail()%>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/FOG/FrontController?command=logout">Log ud</a>
+                            </div>
+                        </li>
+                        <%
+                            } else {
+                                out.print("<a class=\"nav-link\" href=\"/FOG/FrontController?command=logout\">Log ud</a>");
 
                                 }%>                         
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="createemployeeuserpage">
+                                <input class="btn btn-primary btn-md"type="submit" value="Opret bruger til medarbejder">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command"  value="getemployeeusers" > 
+                                <input class="btn btn-primary btn-md"type="submit" value="Slet bruger for medarbejder">
+                            </form>
                         </li>
                     </ul>
                 </div>
             </nav>
-            <% Order o = (Order) request.getAttribute("order");%>
+
             <div class="jumbotron">
-                <h2>Din ordre:</h2>
+                <h2>Du er logget ind som <%= user.getEmail()%></h2>
 
-                <h6>Indre mål:</h6>
-                <p> Længde: <%=o.getLength()%> <br>
-                    Bredde: <%=o.getWidth()%> <br>
-                </p>
-                <h6>Ydre mål:</h6>
-                <p> Længde: <%=o.getLength() + 85%> <br>
-                    Bredde: <%=o.getWidth() + 70%> <br>
-                    <br>
-                </p>
-                <b>Pris: <%=o.getPrice()%></b> <br>
-                Vejledende Pris: <%=o.getPrice()%> dkk <br>
-
-                </p>
-
-            </div>
-            <div class="jumbotron">
-                <h2>Skitse af Carport:</h2>
-                <p> Her er en skitse af carporten set fra toppen 
-                <p> Bilen skal her køre ind fra højre side
-                    <% String svgTop = (String) request.getAttribute("svgtop");%>
-                    <%= svgTop%>
-                </p>
-
-                <p> Her er en skitse af carporten set fra siden 
-                <p> Bilen skal her køre ind fra højre side
-                    <% String svgSide = (String) request.getAttribute("svgside");%>
-                    <%= svgSide%>
-                </p>
 
             </div>
 
@@ -133,4 +138,3 @@
         <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
-
