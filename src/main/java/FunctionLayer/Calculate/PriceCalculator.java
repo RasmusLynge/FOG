@@ -31,17 +31,17 @@ public class PriceCalculator {
      * @throws MakeOrderException
      */
     public double priceCalculator(int length, int width, boolean roof, boolean shed) throws DMException, MakeOrderException {
-        double result = 0;
+        double price = 0;
         MaterialCalculator materialCalc = new MaterialCalculator();
         Carport carport = carportcalculator.calculateAll(length, width, roof, shed);
         carport.setList(materialCalc.materialList(carport));
         
         ArrayList<Material> list = carport.getList();
         for (int i = 0; i < list.size(); i++) {
-            result += list.get(i).getAmount() * list.get(i).getPrice();
+            price += list.get(i).getAmount() * list.get(i).getPrice();
         }
         this.carport = carport;
-        return result;
+        return price;
     }
 
     /**
