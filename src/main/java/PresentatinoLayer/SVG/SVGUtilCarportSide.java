@@ -24,7 +24,7 @@ public class SVGUtilCarportSide {
      */
     public String printCarportSide(Carport car) throws DMException, MakeOrderException {
         int canvasX = car.getLength() + 300;
-        int canvasY = POSTHEIGHT + 300;
+        int canvasY = POSTHEIGHT+100;
         String res = "<SVG width=\"" + 500 + "\" height=\"" + 500 + "\" viewBox=\"0 0 " + canvasX + " " + canvasY + "\">" + caportFromSide(car) + "</SVG>";
         return res;
     }

@@ -49,7 +49,7 @@
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Carport med egne mål</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
@@ -103,19 +103,24 @@
                 </p>
 
             </div>
+                
             <div class="jumbotron">
-                <h2>Skitse af Carport:</h2>
-                <p> Her er en skitse af carporten set fra toppen 
-                <p> Bilen skal her køre ind fra højre side
-                    <% String svgTop = (String) request.getAttribute("svgtop");%>
-                    <%= svgTop%>
-                </p>
+                <h2 class="centerSVG">Skitse af Carport:</h2>
+                <p class="centerSVG"> Dette er en skitse, som viser skelettet af carporten: </p>
+                <br>
+                <br>
 
-                <p> Her er en skitse af carporten set fra siden 
-                <p> Bilen skal her køre ind fra højre side
+                <p class="centerSVG">
+                    <% String svgTop = (String) request.getAttribute("svgtop");%>
+                    <%= svgTop%> </p>
+                <p class="centerSVG"> Denne skitse viser carporten set fra toppen </p>
+                <p class="centerSVG"> Bilen skal køre ind fra højre side</p>
+
+                <p class="centerSVG">
                     <% String svgSide = (String) request.getAttribute("svgside");%>
-                    <%= svgSide%>
-                </p>
+                    <%= svgSide%> </p>
+                <p class="centerSVG"> Denne skitse viser carporten set fra siden </p>
+                <p class="centerSVG"> Bilen skal køre ind fra højre side</p>
 
             </div>
 

@@ -31,3 +31,8 @@ and open the template in the editor.
 .farve {
     background-color:#e9ecef;
 }
+.centerSVG {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}

@@ -48,7 +48,7 @@
                                 Design Carport
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Med skur</a>
+                                <a class="dropdown-item" href="/FOG/FrontController?command=orderpage">Carport med egne mål</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://www.johannesfog.dk/byggecenter/landingpages/carporte/">Standart Carporte</a>
                             </div>
